@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/1 | 张伯伯的BLOG</title>
+  <title>centos云端搭建mongodb环境 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="哪里有幸福可借">
-<meta property="og:type" content="website">
-<meta property="og:title" content="张伯伯的BLOG">
-<meta property="og:url" content="http://yoursite.com/archives/2017/01/index.html">
+  <meta name="description" content="1.下载安装包下载完成后解压缩压缩包 tar zxf mongodb-linux-i686-1.8.2.tgz 2.安装准备将mongodb移动到/usr/local/server/mongdb文件夹 1mv mongodb-linux-i686-1.8.2 /usr/local/mongodb">
+<meta name="keywords" content="mongodb,centos">
+<meta property="og:type" content="article">
+<meta property="og:title" content="centos云端搭建mongodb环境">
+<meta property="og:url" content="http://yoursite.com/2017/01/19/centos云端搭建mongodb环境/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="哪里有幸福可借">
+<meta property="og:description" content="1.下载安装包下载完成后解压缩压缩包 tar zxf mongodb-linux-i686-1.8.2.tgz 2.安装准备将mongodb移动到/usr/local/server/mongdb文件夹 1mv mongodb-linux-i686-1.8.2 /usr/local/mongodb">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-07-30T09:57:39.641Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="张伯伯的BLOG">
-<meta name="twitter:description" content="哪里有幸福可借">
+<meta name="twitter:title" content="centos云端搭建mongodb环境">
+<meta name="twitter:description" content="1.下载安装包下载完成后解压缩压缩包 tar zxf mongodb-linux-i686-1.8.2.tgz 2.安装准备将mongodb移动到/usr/local/server/mongdb文件夹 1mv mongodb-linux-i686-1.8.2 /usr/local/mongodb">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -146,36 +148,62 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-centos云端搭建mongodb环境" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/19/centos云端搭建mongodb环境/" class="archive-article-date">
-  	<time datetime="2017-01-19T08:19:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-19</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/19/centos云端搭建mongodb环境/">centos云端搭建mongodb环境</a>
+    <h1 class="article-title" itemprop="name">
+      centos云端搭建mongodb环境
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/01/19/centos云端搭建mongodb环境/" class="archive-article-date">
+  	<time datetime="2017-01-19T08:19:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1-下载安装包"><a href="#1-下载安装包" class="headerlink" title="1.下载安装包"></a>1.下载<a href="http://fastdl.mongodb.org/linux/mongodb-linux-i686-1.8.2.tgz" target="_blank" rel="external">安装包</a></h4><p>下载完成后解压缩压缩包</p>
+<p>tar zxf mongodb-linux-i686-1.8.2.tgz</p>
+<h4 id="2-安装准备"><a href="#2-安装准备" class="headerlink" title="2.安装准备"></a>2.安装准备</h4><p>将mongodb移动到/usr/local/server/mongdb文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mv mongodb-linux-i686-1.8.2 /usr/local/mongodb</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>创建数据库文件夹与日志文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir /usr/local/mongodb/data</div><div class="line"></div><div class="line">touch /usr/local/mongodb/logs</div></pre></td></tr></table></figure>
+<h4 id="3-设置开机自启动"><a href="#3-设置开机自启动" class="headerlink" title="3.设置开机自启动"></a>3.设置开机自启动</h4><p>将mongodb启动项目追加入rc.local保证mongodb在服务器开机时启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo &quot;/usr/local/server/mongodb/bin/mongod --dbpath=/usr/local/server/mongodb/data –logpath=/usr/local/server/mongodb/logs –logappend  --auth –port=27017&quot; &gt;&gt; /etc/rc.local</div></pre></td></tr></table></figure>
+<p>也可直接去修改/etc/rc.local文件<br>在后面添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/server/mongodb/bin/mongod --dbpath=/usr/local/server/mongodb/data –logpath=/usr/local/server/mongodb/logs –logappend  --auth –port=27017</div></pre></td></tr></table></figure>
+<h4 id="4-启动mongodb"><a href="#4-启动mongodb" class="headerlink" title="4.启动mongodb"></a>4.启动mongodb</h4><p>cd到mongodb目录下的bin文件夹启动mongodb<br>（启动失败请设置环境变量）<br>//下面这个是需要权限的登录方式, 用户连接需要用户名和密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/server/mongodb/bin/mongod --dbpath=/usr/local/server/mongodb/data --logpath=/usr/local/server/mongodb/logs --logappend  --auth  --port=27017 --fork</div></pre></td></tr></table></figure>
+<p>//这个是不需要密码的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/server/mongodb/bin/mongod --dbpath=/usr/local/server/mongodb/data --logpath=/usr/local/server/mongodb/logs --logappend  --port=27017 --fork</div></pre></td></tr></table></figure>
+<h4 id="5-参数解释-–dbpath-数据库路径-数据文件"><a href="#5-参数解释-–dbpath-数据库路径-数据文件" class="headerlink" title="5.参数解释: –dbpath 数据库路径(数据文件)"></a>5.参数解释: –dbpath 数据库路径(数据文件)</h4><p>复制代码</p>
+<p>–logpath 日志文件路径<br>–master 指定为主机器<br>–slave 指定为从机器<br>–source 指定主机器的IP地址<br>–pologSize 指定日志文件大小不超过64M.因为resync是非常操作量大且耗时，最好通过设置一个足够大的oplogSize来避免resync(默认的 oplog大小是空闲磁盘大小的5%)。<br>–logappend 日志文件末尾添加<br>–port 启用端口号<br>–fork 在后台运行<br>–only 指定只复制哪一个数据库<br>–slavedelay 指从复制检测的时间间隔<br>–auth 是否需要验证权限登录(用户名和密码)</p>
+<p>-h [ –help ]             show this usage information<br>–version                 show version information<br>-f [ –config ] arg       configuration file specifying additional options<br>–port arg                specify port number<br>–bind_ip arg             local ip address to bind listener - all local ips<br>                           bound by default<br>-v [ –verbose ]          be more verbose (include multiple times for more<br>                           verbosity e.g. -vvvvv)<br>–dbpath arg (=/data/db/) directory for datafiles    指定数据存放目录<br>–quiet                   quieter output   静默模式<br>–logpath arg             file to send all output to instead of stdout   指定日志存放目录<br>–logappend               appnd to logpath instead of over-writing 指定日志是以追加还是以覆盖的方式写入日志文件<br>–fork                    fork server process   以创建子进程的方式运行<br>–cpu                     periodically show cpu and iowait utilization 周期性的显示cpu和io的使用情况<br>–noauth                  run without security 无认证模式运行<br>–auth                    run with security 认证模式运行<br>–objcheck                inspect client data for validity on receipt 检查客户端输入数据的有效性检查<br>–quota                   enable db quota management   开始数据库配额的管理<br>–quotaFiles arg          number of files allower per db, requires –quota 规定每个数据库允许的文件数<br>–appsrvpath arg          root directory for the babble app server<br>–nocursors               diagnostic/debugging option 调试诊断选项<br>–nohints                 ignore query hints 忽略查询命中率<br>–nohttpinterface         disable http interface 关闭http接口，默认是28017<br>–noscripting             disable scripting engine 关闭脚本引擎<br>–noprealloc              disable data file preallocation 关闭数据库文件大小预分配<br>–smallfiles              use a smaller default file size 使用较小的默认文件大小<br>–nssize arg (=16)        .ns file size (in MB) for new databases 新数据库ns文件的默认大小<br>–diaglog arg             0=off 1=W 2=R 3=both 7=W+some reads 提供的方式，是只读，只写，还是读写都行，还是主要写+部分的读模式<br>–sysinfo                 print some diagnostic system information 打印系统诊断信息<br>–upgrade                 upgrade db if needed 如果需要就更新数据库<br>–repair                  run repair on all dbs 修复所有的数据库<br>–notablescan             do not allow table scans 不运行表扫描<br>–syncdelay arg (=60)     seconds between disk syncs (0 for never) 系统同步刷新磁盘的时间，默认是60s</p>
+<p>Replication options:<br>–master              master mode 主复制模式<br>–slave               slave mode 从复制模式<br>–source arg          when slave: specify master as <server:port> 当为从时，指定主的地址和端口<br>–only arg            when slave: specify a single database to replicate 当为从时，指定需要从主复制的单一库<br>–pairwith arg        address of server to pair with<br>–arbiter arg         address of arbiter server 仲裁服务器，在主主中和pair中用到<br>–autoresync          automatically resync if slave data is stale 自动同步从的数据<br>–oplogSize arg       size limit (in MB) for op log 指定操作日志的大小<br>–opIdMem arg         size limit (in bytes) for in memory storage of op ids指定存储操作日志的内存大小</server:port></p>
+<p>Sharding options:<br>–configsvr           declare this is a config db of a cluster 指定shard中的配置服务器<br>–shardsvr            declare this is a shard db of a cluster 指定shard服务器</p>
+<p>复制代码</p>
+<h4 id="6-进入数据库的CLI管理界面"><a href="#6-进入数据库的CLI管理界面" class="headerlink" title="6.进入数据库的CLI管理界面"></a>6.进入数据库的CLI管理界面</h4><p>cd到mongodb目录下的bin文件夹，执行命令./mongo<br>运行如下：</p>
+<p>[root@namenode mongodb]# ./bin/mongo<br>MongoDB shell version: 1.8.2<br>connecting to: test</p>
+<blockquote>
+<p>use test;<br>switched to db test</p>
+</blockquote>
+<p>若数据库出现如不能连上，则是一个data目录下的mongod.lock文件的问题，可以用如下的修复的命令，</p>
+<p>mongod –repair</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -191,57 +219,126 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/01/19/centos云端搭建mongodb环境/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/01/2017承上启下的总结文档/" class="archive-article-date">
-  	<time datetime="2017-01-01T07:20:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-01</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2017/06/21/Eslint入门/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Eslint入门
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/01/2017承上启下的总结文档/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2017承上启下的总结文档</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/01/2017承上启下的总结文档/">2017承上启下的总结文档</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">心爱的人</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-下载安装包"><span class="toc-number">1.</span> <span class="toc-text">1.下载安装包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-安装准备"><span class="toc-number">2.</span> <span class="toc-text">2.安装准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-设置开机自启动"><span class="toc-number">3.</span> <span class="toc-text">3.设置开机自启动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-启动mongodb"><span class="toc-number">4.</span> <span class="toc-text">4.启动mongodb</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-参数解释-–dbpath-数据库路径-数据文件"><span class="toc-number">5.</span> <span class="toc-text">5.参数解释: –dbpath 数据库路径(数据文件)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-进入数据库的CLI管理界面"><span class="toc-number">6.</span> <span class="toc-text">6.进入数据库的CLI管理界面</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -275,8 +372,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -42,7 +42,7 @@
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
       
-<div class="overlay" style="background-image: url(8.jpg);background-repeat: no-repeat;background-size: cover;"></div>
+<div class="overlay" style="background-image: url(http://otw7po22v.bkt.clouddn.com/8.jpg);background-repeat: no-repeat;background-size:cover;"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
@@ -65,6 +65,8 @@
 		</nav>
 		<nav class="header-smart-menu">
     		
+    			
+            
     			
     			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
     			
@@ -153,19 +155,24 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/30/H5plus软键盘弹出问题/">H5plus软键盘弹出问题</a>
+      <a class="article-title" href="/2017/06/22/H5plus软键盘弹出问题/">H5plus软键盘弹出问题</a>
     </h1>
   
 
         
-        <a href="/2017/07/30/H5plus软键盘弹出问题/" class="archive-article-date">
-  	<time datetime="2017-07-30T08:20:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-30</time>
+        <a href="/2017/06/22/H5plus软键盘弹出问题/" class="archive-article-date">
+  	<time datetime="2017-06-22T08:20:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
+        <p>当input有焦点的时候且软键盘关闭时，点击a标签（如下）也会导致软键盘弹出一次</p>
+<p><img src="http://otw7po22v.bkt.clouddn.com/h51.png" alt="img"></p>
+<p>解决办法如下：因此当键盘收起时使input失去焦点即可，获取键盘收起事件如下：（可以通过监听屏幕高度的变化来判断。<br>键盘弹出和收回会触发js标准的onresize事件，因为软键盘弹出时会压缩屏幕高度）</p>
+        
+          <a class="article-more-a" href="/2017/06/22/H5plus软键盘弹出问题/#more">more >></a>
         
       
 
@@ -174,11 +181,22 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">html5plus</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/30/H5plus软键盘弹出问题/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/22/H5plus软键盘弹出问题/">展开全文 >></a>
         </p>
       
 
@@ -215,13 +233,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/30/Eslint入门/">Eslint入门</a>
+      <a class="article-title" href="/2017/06/21/Eslint入门/">Eslint入门</a>
     </h1>
   
 
         
-        <a href="/2017/07/30/Eslint入门/" class="archive-article-date">
-  	<time datetime="2017-07-30T08:19:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-30</time>
+        <a href="/2017/06/21/Eslint入门/" class="archive-article-date">
+  	<time datetime="2017-06-21T08:19:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-21</time>
 </a>
         
       </header>
@@ -234,195 +252,9 @@
 </blockquote>
 <p>&emsp;&emsp;至此,在 webstorm内,eslint已经不工作了. Webstorm不再自动提示 eslint指出的代码问题.</p>
 <p>&emsp;&emsp;如果要开启eslint提示，请勾选enable。</p>
-<p>&emsp;&emsp;过了一个小时我觉得还是搞搞Eslint比较好，于是有了这个文档记录：</p>
-<p>&emsp;&emsp;南方老师的规则配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line"></div><div class="line">    &quot;env&quot;: &#123;</div><div class="line"></div><div class="line">        &quot;browser&quot;: true,</div><div class="line"></div><div class="line">        &quot;commonjs&quot;: true,</div><div class="line"></div><div class="line">        &quot;es6&quot;: true,</div><div class="line"></div><div class="line">        &quot;node&quot;: **true</div><div class="line"></div><div class="line">    **&#125;,</div><div class="line"></div><div class="line">    &quot;extends&quot;: &quot;eslint:recommended&quot;,//通用规则，此处可继承其他规则。</div><div class="line"></div><div class="line">    &quot;rules&quot;: &#123;</div><div class="line"></div><div class="line">        &quot;indent&quot;: [           //空格数</div><div class="line"></div><div class="line">            &quot;error&quot;,</div><div class="line"></div><div class="line">            4</div><div class="line"></div><div class="line">        ],</div><div class="line"></div><div class="line">        &quot;linebreak-style&quot;: [      // 换行</div><div class="line"></div><div class="line">            &quot;error&quot;,</div><div class="line"></div><div class="line">            **&quot;windows&quot;</div><div class="line"></div><div class="line">        **],</div><div class="line"></div><div class="line">        &quot;quotes&quot;: [               //字符串引号类型</div><div class="line"></div><div class="line">            &quot;error&quot;,               //包含es6的反引号:``</div><div class="line"></div><div class="line">            **&quot;double&quot;</div><div class="line"></div><div class="line">        **],</div><div class="line"></div><div class="line">        &quot;semi&quot;: [                 </div><div class="line"></div><div class="line">//每句末尾的分号，never为禁用</div><div class="line"></div><div class="line">            &quot;error&quot;,               //always为必用</div><div class="line"></div><div class="line">            **&quot;always&quot;</div><div class="line"></div><div class="line">        **],</div><div class="line"></div><div class="line">        &quot;no-console&quot;: [&quot;error&quot;, &#123; allow: [&quot;warn&quot;, &quot;error&quot;] &#125;]</div><div class="line"></div><div class="line"> </div><div class="line"></div><div class="line">     //禁用console控制台，但允许console.warn和console.error</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>&emsp;&emsp;下面是别人写的入门教程，为防止网页失效，我先粘<a href="http://morning.work/page/maintainable-nodejs/getting-started-with-eslint.html" target="_blank" rel="external">网址</a>再粘内容：</p>
-<h2 id="手把手入门"><a href="#手把手入门" class="headerlink" title="手把手入门"></a>手把手入门</h2><p>在开始使用ESLint之前，我们需要通过NPM来安装它：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g eslint</div></pre></td></tr></table></figure>
-<p>我从Gist上找到了自己几年前写的一个小函数，将其保存为文件<code>merge.js</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">function merge () &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var ret = &#123;&#125;;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">for (var i in arguments) &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var m = arguments[i];</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">for (var j in m) ret[j] = m[j];</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">return ret;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"> </div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(merge(&#123;a: 123&#125;, &#123;b: 456&#125;));</div></pre></td></tr></table></figure>
-<p>然后执行<code>nodemerge.js</code>确保它是可以正确运行的（输出结果为<code>{ a: 123, b:456 }</code>）。</p>
-<p>接着我们执行以下命令来使用ESLint检查：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ eslint merge.js</div></pre></td></tr></table></figure>
-<p>可以看到，没有任何输出结果。这是因为我们没有指定任何的配置，除非这个文件是有语法错误，否则应该是不会有任何提示的。现在我们先使用内置的<code>eslint:recommended</code>配置，它包含了一系列核心规则，能报告一些常见的问题。</p>
-<p>首先新建ESLint配置文件<code>.eslintrc.js</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">extends: &apos;eslint:recommended&apos;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>重新执行<code>eslintmerge.js</code>可以看到输出了2个错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/example/merge.js</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">10:1  error  Unexpected console statement  no-console</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">10:1  error  &apos;console&apos; is not defined      no-undef</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"> </div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">✖ 2 problem (2 error, 0 warnings)</div></pre></td></tr></table></figure>
-<p>这两条提示信息还是足够我们搞清楚是怎么回事的：</p>
-<p>·       <strong>Unexpected consolestatement no-console</strong> - 不能使用<code>console</code></p>
-<p>·       <strong>‘console’ is not definedno-undef</strong> - <code>console</code>变量未定义，不能使用未定义的变量</p>
-<p>针对第1条提示，我们可以禁用<code>no-console</code>规则。将配置文件<code>.eslintrc.js</code>改为这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">extends: &apos;eslint:recommended&apos;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rules: &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;no-console&apos;: &apos;off&apos;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>说明：配置规则写在<code>rules</code>对象里面，<code>key</code>表示规则名称，<code>value</code>表示规则的配置，具体说明见下文。</p>
-<p>重新执行检查还是提示<code>no-undef</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/example/merge.js</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">10:1  error  &apos;console&apos; is not defined  no-undef</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"> </div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">✖ 1 problem (1 error, 0 warnings)</div></pre></td></tr></table></figure>
-<p>这是因为JavaScript有很多种运行环境，比如常见的有浏览器和Node.js，另外还有很多软件系统使用JavaScript作为其脚本引擎，比如PostgreSQL就支持使用JavaScript来编写存储引擎，而这些运行环境可能并不存在<code>console</code>这个对象。另外在浏览器环境下会有<code>window</code>对象，而Node.js下没有；在Node.js下会有<code>process</code>对象，而浏览器环境下没有。</p>
-<p>所以在配置文件中我们还需要指定程序的目标环境：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">extends: &apos;eslint:recommended&apos;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">env: &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node: true,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rules: &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;no-console&apos;: &apos;off&apos;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>再重新执行检查时，已经没有任何提示输出了，说明<code>merge.js</code>已经完全通过了检查。</p>
-<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>ESLint还可以在项目的<code>package.json</code>文件中指定配置，直接将上文中的<code>module.exports</code>的值写到<code>eslintConfig</code>里面即可：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;name&quot;: &quot;my-package&quot;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;version&quot;: &quot;0.0.1&quot;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;eslintConfig&quot;: &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;extends&quot;: &quot;eslint:recommended&quot;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;env&quot;: &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;node&quot;: true</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;rules&quot;: &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;no-console&quot;: &quot;off&quot;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>另外还可以在执行<code>eslint</code>命令时通过命令行参数来指定，详细文档可以参考这里：<a href="http://eslint.cn/docs/user-guide/configuring" target="_blank" rel="external">Configuring ESLint - 配置</a></p>
-<h3 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h3><p>每条规则有3个等级：<code>off</code>、<code>warn</code>和<code>error</code>。<code>off</code>表示禁用这条规则，<code>warn</code>表示仅给出警告，并不会导致检查不通过，而<code>error</code>则会导致检查不通过。</p>
-<p>有些规则还带有可选的参数，比如<code>comma-dangle</code>可以写成<code>[&quot;error&quot;, &quot;always-multiline&quot; ]</code>；<code>no-multi-spaces</code>可以写成<code>[&quot;error&quot;, { exceptions: { &quot;ImportDeclaration&quot;: true }}]</code>。</p>
-<p>规则的详细说明文档可以参考这里：<a href="http://eslint.cn/docs/rules/" target="_blank" rel="external">Rules - 规则</a></p>
-<h2 id="使用共享的配置文件"><a href="#使用共享的配置文件" class="headerlink" title="使用共享的配置文件"></a>使用共享的配置文件</h2><p>上文我们以<code>eslint:recommended</code>为基础配置，然后在此之上修改<code>no-console</code>这条规则。而在大多数时候，我们可能会根据自己个人或团队的习惯，定制更多的规则，比如限定缩进是2个空格和使用单引号的字符串等。而如果每一个项目都要这样写到<code>.eslintrc.js</code>文件上，管理起来会比较麻烦。</p>
-<p>我们可以将定义好规则的<code>.eslintrc.js</code>文件存储到一个公共的位置，比如<code>public-eslintrc.js</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">extends: &apos;eslint:recommended&apos;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">env: &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node: true,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rules: &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;no-console&apos;: &apos;off&apos;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;indent&apos;: [ &apos;error&apos;, 2 ],</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;quotes&apos;: [ &apos;error&apos;, &apos;single&apos; ],</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>然后将原来的<code>.eslintrc.js</code>文件改成这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">extends: &apos;./public-eslintrc.js&apos;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>为了验证这样的修改是否生效，将<code>merge.js</code>中的<code>var ret ={};</code>这一行前面多加一个空格，再执行ESLint检查：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/example/merge.js</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2:4  error  Expected indentation of 2 space characters but found 3  indent</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"> </div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">✖ 1 problem (1 error, 0 warnings)</div></pre></td></tr></table></figure>
-<p>这时候提示的是缩进只能为2个空格，而文件的第2行却发现了3个空格，说明公共配置文件<code>public-eslintrc.js</code>已经生效了。</p>
-<p>我们还可以使用已经发布到NPM上的ESLint配置，这些配置的模块名一般以<code>eslint-config-</code>为前缀，比如我在学习ESLint时自己编写的一个配置名为<code>eslint-config-lei</code>。要使用这个配置，先执行以下命令安装它：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g eslint-config-lei</div></pre></td></tr></table></figure>
-<p><strong>注意：用于我们的</strong><code>**eslint**</code><strong>命令是全局安装的，所有用到的</strong><code>**eslint-config-\***</code><strong>模块也必须全局安装，否则将无法正确载入。这是一个已知的**</strong>Bug<strong>**，参考这里：</strong><a href="https://github.com/eslint/eslint/issues/4822#issuecomment-167600953" target="_blank" rel="external"><strong>Error: Cannot read config package for shareable config usingglobal eslint #4822</strong></a></p>
-<p>然后将<code>.eslintrc.js</code>文件改成这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">extends: &apos;lei&apos;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>再执行ESLint检查，可以看到输出如下的提示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/example/merge.js</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1:15  warning  Unexpected space before function parentheses  space-before-function-paren</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2:3   error    Unexpected var, use let or const instead      no-var</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">3:8   error    Unexpected var, use let or const instead      no-var</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">4:5   error    Unexpected var, use let or const instead      no-var</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">5:10  error    Unexpected var, use let or const instead      no-var</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">10:19  warning  A space is required after &apos;&#123;&apos;                 object-curly-spacing</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">10:26  warning  A space is required before &apos;&#125;&apos;                object-curly-spacing</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">10:29  warning  A space is required after &apos;&#123;&apos;                 object-curly-spacing</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">10:36  warning  A space is required before &apos;&#125;&apos;                object-curly-spacing</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"> </div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">✖ 9 problems (4 errors, 5 warnings)</div></pre></td></tr></table></figure>
-<p>ESLint配置文件中的<code>extends</code>还可以用来指定各种来源的配置引用，具体说明可以参考以下链接：</p>
-<p>·       <a href="http://eslint.cn/docs/user-guide/configuring#using-a-shareable-configuration-package" target="_blank" rel="external">Using a shareable configuration package - 使用共享的模块</a></p>
-<p>·       <a href="http://eslint.cn/docs/user-guide/configuring#using-the-configuration-from-a-plugin" target="_blank" rel="external">Using the configuration from a plugin - 使用插件</a></p>
-<p>·       <a href="http://eslint.cn/docs/user-guide/configuring#using-a-configuration-file" target="_blank" rel="external">Using a configuration file - 使用配置文件</a></p>
-<p>·       <a href="http://eslint.cn/docs/user-guide/configuring#using-eslintall" target="_blank" rel="external">Using “eslint:all” - 使用”eslint:all”</a></p>
-<h2 id="代码格式化"><a href="#代码格式化" class="headerlink" title="代码格式化"></a>代码格式化</h2><p>在<a href="http://eslint.cn/docs/rules/" target="_blank" rel="external">ESLint规则列表</a>页面，我们发现有些规则的旁边会带有一个<strong>橙色扳手图标</strong>，表示在执行<code>eslint</code>命令时指定<code>--fix</code>参数可以<strong>自动修复</strong>该问题。</p>
-<p>接着上文使用<code>eslint-config-lei</code>配置的检查，我们尝试在执行检查时添加<code>--fix</code>参数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ eslint merge.js --fix</div></pre></td></tr></table></figure>
-<p>执行完毕，没有发现任何提示。再打开<code>merge.js</code>文件发现已经变成了这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">function merge() &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">const ret = &#123;&#125;;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">for (const i in arguments) &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">const m = arguments[i];</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">for (const j in m) ret[j] = m[j];</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">return ret;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"> </div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(merge(&#123; a: 123 &#125;, &#123; b: 456 &#125;));</div></pre></td></tr></table></figure>
-<p>主要的变化有以下三部分：</p>
-<p>·       声明函数时，函数名与参数列表的空格不见了：<code>merge ()</code>修改为<code>merge()</code></p>
-<p>·       <code>var</code>声明的变量变成了<code>const</code>声明：<code>var ret = {}</code>修改为<code>const ret ={}</code></p>
-<p>·       对象的内容与花括号之间增加了空格：<code>{a: 123}</code>修改为<code>{ a: 123 }</code></p>
-<p>我们可以利用这个特性来自动格式化项目代码，这样就可以保证代码书写风格的统一。</p>
-<h2 id="发布自己的配置"><a href="#发布自己的配置" class="headerlink" title="发布自己的配置"></a>发布自己的配置</h2><p>前文关于「共享的配置文件」一小节已经提到，可以在<code>extends</code>中指定一个文件名，或者一个<code>eslint-config-</code>开头的模块名。为了便于共享，一般推荐将其发布成一个NPM模块。</p>
-<p>其原理就是在载入模块时输出原来<code>.eslintrc.js</code>的数据。比如我们可以创建一个模块<code>eslint-config-my</code>用于测试。</p>
-<p>新建文件<code>eslint-config-my/index.js</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">extends: &apos;eslint:recommended&apos;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">env: &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node: true,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">es6: true,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rules: &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;no-console&apos;: &apos;off&apos;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;indent&apos;: [ &apos;error&apos;, 2 ],</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;quotes&apos;: [ &apos;error&apos;, &apos;single&apos; ],</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>再新建文件<code>eslint-config-my/package.json</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;name&quot;: &quot;eslint-config-my&quot;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;version&quot;: &quot;0.0.1&quot;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;main&quot;: &quot;index.js&quot;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>为了能让<code>eslint</code>正确载入这个模块，我们需要执行<code>npm link</code>将这个模块链接到本地全局位置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm link eslint-config-my</div></pre></td></tr></table></figure>
-<p>然后将文件<code>.eslintrc.js</code>改成这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">extends: &apos;my&apos;,</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>说明：在<code>extends</code>中，<code>eslint-config-my</code>可简写为<code>my</code>。</p>
-<p>在执行<code>eslintmerge.js</code>检查，可看到没有任何错误提示信息，说明<code>eslint</code>已经成功载入了<code>eslint-config-my</code>的配置。如果我们使用<code>npm publish</code>将其发布到NPM上，那么其他人通过<code>npm installeslint-config-my</code>即可使用我们共享的这个配置。</p>
-<p>另外可以参考我自己写的一个ESLint配置模块：<a href="https://github.com/leizongmin/eslint-config-lei" target="_blank" rel="external">eslint-config-lei</a></p>
-<p>关于共享ESLint配置的详细文档可参考：<a href="http://eslint.cn/docs/developer-guide/shareable-configs" target="_blank" rel="external">Shareable Configs - 可共享的配置</a></p>
-<h2 id="例外情况"><a href="#例外情况" class="headerlink" title="例外情况"></a>例外情况</h2><p>尽管我们在编码时怀着<strong>严格遵守规则</strong>的美好愿景，而<strong>凡事总有例外</strong>。定立ESLint规则的初衷是为了避免自己犯错，但是我们也要避免不顾实际情况而将其搞得太过于形式化，本末倒置。</p>
-<p>ESLint提供了多种临时禁用规则的方式，比如我们可以通过一条<code>eslint-disable-next-line</code>备注来使得下一行可以跳过检查：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">// eslint-disable-next-line</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var a = 123;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var b = 456;</div></pre></td></tr></table></figure>
-<p>在上面的示例代码中，<code>var a = 123</code>不会受到检查，而<code>var b = 456</code>则右恢复检查，在上文我们使用的<code>eslint-config-lei</code>的配置规则下，由于不允许使用<code>var</code>声明变量，则<code>var b</code>这一行会报告一个<code>error</code>。</p>
-<p>我们还可以通过成对的<code>eslint-enable</code>和<code>eslint-disable</code>备注来禁用对某一段代码的检查，但是稍不小心少写了一个<code>eslint-disable</code>就可能会导致后面所有文件的检查都被禁用，所以我并不推荐使用。</p>
-<p>详细使用方法可以参考文档：<a href="http://eslint.cn/docs/user-guide/configuring#disabling-rules-with-inline-comments" target="_blank" rel="external">Disabling Rules with Inline Comments - 使用行内注释禁用规则</a></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>刚开始接触ESLint时觉得太难，是因为过太过于<strong>迷信权威</strong>。比如Airbnb公司的JavaScript风格，在GitHub上受到了很大的好评，其实我自己也非常认可这样的编码风格。但每个团队都会根据自己的的<strong>实际情况</strong>来<strong>定制</strong>不同的东西，我们并<strong>不能随便照搬</strong>过来。所以当使用<code>eslint-config-airbnb</code>这个配置进行ESLint检查时，满屏都是<code>error</code>和<code>warning</code>，从而觉得这东西根本没啥卵用。</p>
-<p>另外我也犯了「大忌」：直接使用<code>eslint-config-airbnb</code>这种某个公司高度定制化的配置，而不是<code>eslint:recommended</code>这样保守的。而且是直接用来检查整个项目好几十个JS文件，可想而知那是怎样的画面（本文最后版本的<code>merge.js</code>文件使用<code>airbnb</code>的配置，总共12行的代码就提示了8个问题：<em>✖**8 problems (7 errors, 1 warning)</em>）。</p>
-<p>本文的目的是让读者以一个比较低的姿态开始接触ESLint，先学会简单地配置规则，如果要更深入地定制自己的规则，建议阅读「相关链接」中的ESLint文档。</p>
-<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p>·       <a href="https://csspod.com/getting-started-with-eslint/" target="_blank" rel="external">ESLint使用入门</a></p>
-<p>·       <a href="http://eslint.cn/" target="_blank" rel="external">ESLinit中文版文档</a></p>
-
+        
+          <a class="article-more-a" href="/2017/06/21/Eslint入门/#more">more >></a>
+        
       
 
       
@@ -445,7 +277,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/30/Eslint入门/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/21/Eslint入门/">展开全文 >></a>
         </p>
       
 
@@ -482,19 +314,25 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/30/centos云端搭建mongodb环境/">centos云端搭建mongodb环境</a>
+      <a class="article-title" href="/2017/01/19/centos云端搭建mongodb环境/">centos云端搭建mongodb环境</a>
     </h1>
   
 
         
-        <a href="/2017/07/30/centos云端搭建mongodb环境/" class="archive-article-date">
-  	<time datetime="2017-07-30T08:19:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-30</time>
+        <a href="/2017/01/19/centos云端搭建mongodb环境/" class="archive-article-date">
+  	<time datetime="2017-01-19T08:19:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
+        <h4 id="1-下载安装包"><a href="#1-下载安装包" class="headerlink" title="1.下载安装包"></a>1.下载<a href="http://fastdl.mongodb.org/linux/mongodb-linux-i686-1.8.2.tgz" target="_blank" rel="external">安装包</a></h4><p>下载完成后解压缩压缩包</p>
+<p>tar zxf mongodb-linux-i686-1.8.2.tgz</p>
+<h4 id="2-安装准备"><a href="#2-安装准备" class="headerlink" title="2.安装准备"></a>2.安装准备</h4><p>将mongodb移动到/usr/local/server/mongdb文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mv mongodb-linux-i686-1.8.2 /usr/local/mongodb</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/01/19/centos云端搭建mongodb环境/#more">more >></a>
         
       
 
@@ -503,11 +341,26 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mongodb</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">centos</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/30/centos云端搭建mongodb环境/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/01/19/centos云端搭建mongodb环境/">展开全文 >></a>
         </p>
       
 
@@ -559,56 +412,9 @@
       
         <p><img src="http://otw7po22v.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20170730153351.jpg" alt="nana"></p>
 <h3 id="2017年进化指南："><a href="#2017年进化指南：" class="headerlink" title="2017年进化指南："></a>2017年进化指南：</h3><h5 id="1-承上启下（凑凑样子）的2016总结："><a href="#1-承上启下（凑凑样子）的2016总结：" class="headerlink" title="1.承上启下（凑凑样子）的2016总结："></a>1.承上启下（凑凑样子）的2016总结：</h5><p>&emsp;&emsp;2016年我做了什么？大概主要是从一个学生变成一个工人的转变，三年不痛不痒的大学生活结束了，如果能重来,可能我会安排的更好些，那么现在也会轻松些，这个世界不是一个舞台，我也不是一个歌者，越来越多的风聚集在这里，我也不能偏安一隅。好了，说些实在的，2016年签订了我的第一份合同，那就是花费算利息大　概一万六的贷款，来中软做培训，方向是现在也不知道对错的web前端，从忐忑变得从容，大概花了一个多月的时间，我开始发现学的东西基本都可以掌握，自己的脑力可以应付这个行业，所以剩下的时间都很愉快，而这其中的愉悦，来自知识的进步和她。</p>
-<p>&emsp;&emsp;开始来的时候，泡面哥很快找到了自己人生中的第一段爱情，我和病友们都说他培训这钱花的很值得，就当他和他的新女友分分合合的时候，有一个人闯进了我的生命，她就是当时坐在我斜对角，这会儿躺在我身后安静的睡着了的女生，我亲爱的女神，连睡觉觉都那么美。那会她坐在我和老李的连线上，所以我上课的时候总是装作看老李而偷偷看她，或者趁着我们小组组员填写身份信息的时候偷偷记了她电话号码，或者每天在她那里蹲很久帮她解决问题，哈哈，还好她笨，经常不会写代码。咳咳，好了，话题收一收：收获了这个至宝之后，就开始面临就业问题，世界果然给我们年轻的生命上了一课，人员饱和以及恐怖的九十加的培训学校名单，像无底洞一样吞噬了我们一个月的时间，她先找到了工作，在中软烟草线，做前端实习生，日薪120，每月有400元补助，随后我也找到了一份月薪4000的工作，在平中软件，一个为统计局做事的新公司，因为我们两个都没有毕业，所以只能是实习生，在霍营租了房子，二百平米七个人住，每人每月八百多，优点在地方大，且所有的人都是同学，人品信得过，缺点在于离公司不近每天平均要一个半小时的车程才能到公司，过多的我就不表述了，这其中的滋味应该很久我都会记得。</p>
-<p>&emsp;&emsp;总之经过了这些事，我变成了一个开发人员，靠领工资活着，要养活自己，要养活媳妇，要回报父母，还要记得梦。    </p>
-<h5 id="2-指南正篇"><a href="#2-指南正篇" class="headerlink" title="2.指南正篇"></a>2.指南正篇</h5><p>先总结下我目前掌握的技术栈：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"><strong>语言</strong></th>
-<th style="text-align:center"><strong>html</strong></th>
-<th style="text-align:center">css</th>
-<th style="text-align:center">javascript</th>
-<th style="text-align:center">node.js</th>
-<th style="text-align:center">mongodb</th>
-<th style="text-align:center">jquery</th>
-<th style="text-align:center">bootstrap</th>
-<th style="text-align:center">dhtmlx</th>
-<th style="text-align:center">angular2</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><strong>水准</strong></td>
-<td style="text-align:center">中级</td>
-<td style="text-align:center">中级</td>
-<td style="text-align:center">中级</td>
-<td style="text-align:center">初级</td>
-<td style="text-align:center">新手村</td>
-<td style="text-align:center">初中级</td>
-<td style="text-align:center">初级</td>
-<td style="text-align:center">初中级</td>
-<td style="text-align:center">新手村</td>
-</tr>
-</tbody>
-</table>
-<p>​    好了，小半年的IT入门就掌握了这些，下面开始进化指南：</p>
-<ul>
-<li>每天的扇贝打卡</li>
-<li>实战中积累html和css知识，看完《js高程》一书，强行提高js基础</li>
-<li>看完阮一峰的网络日志，学习ecma6，以及vue+nodejs</li>
-<li>学习并深入一种数据库</li>
-<li>交通时间看完java视频，最后找几段开源代码读，做到可以看懂</li>
-</ul>
-<ul>
-<li>入门python，做到可以写简单爬虫</li>
-<li>不要停止学习</li>
-</ul>
-<h5 id="3-结束语："><a href="#3-结束语：" class="headerlink" title="3.结束语："></a>3.结束语：</h5><p>&emsp;这个行当不进则退，不过也不要给自己太大压力，这一年我还要学会盲打，以及换一台笔记本，目前的想法就这些，那么，不和你多bb， move move！</p>
-<blockquote>
-<p>本文编辑于2017年元旦，一个安和的下午</p>
-</blockquote>
-
+        
+          <a class="article-more-a" href="/2017/01/01/2017承上启下的总结文档/#more">more >></a>
+        
       
 
       
@@ -702,7 +508,7 @@
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
-		innerArchive: false,
+		innerArchive: true,
 		showTags: false
 	}
 </script>
@@ -726,22 +532,105 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
       
     
+      
+      
+      
+    
     
 
     <ul style="width: 70%">
     
     
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive"> </a></li>
       
         
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
   </div>
   <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">html5plus</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、请确保node版本大于6.2<br/>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            3、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: false
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
     
 
     
@@ -761,7 +650,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">一周重复一周&lt;br&gt;&lt;br&gt;只有一些浅薄的博客&lt;br&gt;&lt;br&gt;记录了我的生活</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">一周重复一周,&lt;br&gt;&lt;br&gt;只有一些浅薄的博客,和一个&lt;br&gt;&lt;br&gt;美丽端庄高尚睿智勤劳秀外慧&lt;br&gt;中兰心慧质典雅袅娜知书达理&lt;br&gt;耳聪目明绰约多姿百里挑一&lt;br&gt;&lt;br&gt;的人,&lt;br&gt;&lt;br&gt;点亮了我的生活</div>
   	  	
     	</section>
     

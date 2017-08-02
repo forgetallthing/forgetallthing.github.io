@@ -6,20 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Express使用html模板 | 张伯伯的BLOG</title>
+  <title>张伯伯的BLOG构建指南 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="express默认使用jade模板，可以配置让其支持使用ejs或html模板。  第一条：若出现返回的html模板不渲染却直接装进pre标签里显示在页面上，可尝试更改端口，不能用8080；我也不知道为什么，  1.安装ejs1npm install ejs 2.引入ejs">
-<meta name="keywords" content="express">
+  <meta name="description" content="写在前面&amp;emsp;&amp;emsp;记录blog搭建过程的文章有很多，我本来以为既然有这么多文章写过，而且不难所以不需要记录下来，可是随着踩得坑越来越多，犹豫十秒钟之后我还是决定写吧，毕竟健忘癌晚期。 技术点 hexo markdown github coding 域名  正篇关于域名解析：在我欢欢喜喜的搭建好github page的时候，我了解到百度蜘蛛抓取不了github构建的网页，原因大体是百度">
+<meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Express使用html模板">
-<meta property="og:url" content="http://yoursite.com/2017/03/10/Express使用html模板/index.html">
+<meta property="og:title" content="张伯伯的BLOG构建指南">
+<meta property="og:url" content="http://yoursite.com/2017/08/02/张伯伯的BLOG构建指南/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="express默认使用jade模板，可以配置让其支持使用ejs或html模板。  第一条：若出现返回的html模板不渲染却直接装进pre标签里显示在页面上，可尝试更改端口，不能用8080；我也不知道为什么，  1.安装ejs1npm install ejs 2.引入ejs">
+<meta property="og:description" content="写在前面&amp;emsp;&amp;emsp;记录blog搭建过程的文章有很多，我本来以为既然有这么多文章写过，而且不难所以不需要记录下来，可是随着踩得坑越来越多，犹豫十秒钟之后我还是决定写吧，毕竟健忘癌晚期。 技术点 hexo markdown github coding 域名  正篇关于域名解析：在我欢欢喜喜的搭建好github page的时候，我了解到百度蜘蛛抓取不了github构建的网页，原因大体是百度">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-01T07:58:36.086Z">
+<meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5.png">
+<meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/coding%E8%A7%A3%E6%9E%90.png">
+<meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/coding%E6%8A%93%E5%8F%96.png">
+<meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/baidu1.png">
+<meta property="og:updated_time" content="2017-08-02T04:04:11.340Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Express使用html模板">
-<meta name="twitter:description" content="express默认使用jade模板，可以配置让其支持使用ejs或html模板。  第一条：若出现返回的html模板不渲染却直接装进pre标签里显示在页面上，可尝试更改端口，不能用8080；我也不知道为什么，  1.安装ejs1npm install ejs 2.引入ejs">
+<meta name="twitter:title" content="张伯伯的BLOG构建指南">
+<meta name="twitter:description" content="写在前面&amp;emsp;&amp;emsp;记录blog搭建过程的文章有很多，我本来以为既然有这么多文章写过，而且不难所以不需要记录下来，可是随着踩得坑越来越多，犹豫十秒钟之后我还是决定写吧，毕竟健忘癌晚期。 技术点 hexo markdown github coding 域名  正篇关于域名解析：在我欢欢喜喜的搭建好github page的时候，我了解到百度蜘蛛抓取不了github构建的网页，原因大体是百度">
+<meta name="twitter:image" content="http://otw7po22v.bkt.clouddn.com/%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5.png">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -150,52 +155,64 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Express使用html模板" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-张伯伯的BLOG构建指南" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Express使用html模板
+      张伯伯的BLOG构建指南
     </h1>
   
 
         
-        <a href="/2017/03/10/Express使用html模板/" class="archive-article-date">
-  	<time datetime="2017-03-10T07:30:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-10</time>
+        <a href="/2017/08/02/张伯伯的BLOG构建指南/" class="archive-article-date">
+  	<time datetime="2017-08-02T02:18:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>express默认使用jade模板，可以配置让其支持使用ejs或html模板。</p>
+        <h4 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h4><p>&emsp;&emsp;记录blog搭建过程的文章有很多，我本来以为既然有这么多文章写过，而且不难所以不需要记录下来，可是随着踩得坑越来越多，犹豫十秒钟之后我还是决定写吧，毕竟健忘癌晚期。</p>
+<h4 id="技术点"><a href="#技术点" class="headerlink" title="技术点"></a>技术点</h4><ul>
+<li>hexo</li>
+<li>markdown</li>
+<li>github</li>
+<li>coding</li>
+<li>域名</li>
+</ul>
+<h4 id="正篇"><a href="#正篇" class="headerlink" title="正篇"></a>正篇</h4><p>关于域名解析：在我欢欢喜喜的搭建好github page的时候，我了解到百度蜘蛛抓取不了github构建的网页，原因大体是百度蜘蛛的恐怖抓取给github用户造成影响，所以封禁了，目前也没有要解封的意思，百度药丸啊。</p>
+<p>在百度站长工具上测试：<img src="http://otw7po22v.bkt.clouddn.com/%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5.png" alt="">解决百度不能收录的问题主要有两个思路：</p>
+<ol>
+<li>利用免费的CDN搞网站镜像或者自己搭建vps。（待更。。。）</li>
+<li>使用coding page（gitcafe被coding收购）搭建有一个网站镜像，设置域名解析即可。</li>
+</ol>
+<p>为避免额外开销，我选择第二种方法：</p>
+<h5 id="开启coding-page服务"><a href="#开启coding-page服务" class="headerlink" title="开启coding page服务"></a>开启coding page服务</h5><p>在coding.net上注册后，创建一个与用户名相同的项目，如用户名是cloudroc，则项目名称也是cloudroc。创建项目后，在项目的Pages页面里，修改Pages服务的关联分支为master，然后开启Pages服务,可能需要完善注册信息升级到银牌会员。再填入你要绑定的域名。注意项目类型我这里设置的是共有。</p>
+<h5 id="在本机建立coding-net的ssh-key，"><a href="#在本机建立coding-net的ssh-key，" class="headerlink" title="在本机建立coding.net的ssh key，"></a>在本机建立coding.net的ssh key，</h5><p>首先本地需要安装git客户端，在任意路径右键-&gt;git bash here</p>
+<p>输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;yourmail@domain.com&quot;</div></pre></td></tr></table></figure>
+<p>可以一路按enter键，然后可在C:\Users\主机名.ssh下找到，文件名：id_rsa(私钥)，id_rsa.pub(公钥)</p>
+<p>最后在coding.net，刚建立的pages项目中登记这个公钥即可。</p>
+<h5 id="修改hexo目录的-config-yml，设置多个仓库同步"><a href="#修改hexo目录的-config-yml，设置多个仓库同步" class="headerlink" title="修改hexo目录的_config.yml，设置多个仓库同步"></a>修改hexo目录的_config.yml，设置多个仓库同步</h5><p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: </div><div class="line">    github: https://github.com/cloudroc/cloudroc.github.io.git</div><div class="line">    coding: git@git.coding.net:cloudroc/cloudroc.git</div><div class="line">  branch: master</div><div class="line">  message: a little works</div></pre></td></tr></table></figure>
+<h5 id="为域名设置CNAME"><a href="#为域名设置CNAME" class="headerlink" title="为域名设置CNAME"></a>为域名设置CNAME</h5><p>需要将你的域名cname到pages.coding.me然后，在「Pages 服务」设置页中的自定义域名栏目输入您欲绑定的域名，点击「保存」即可通过自定义域名访问您的网站。</p>
+<p><img src="http://otw7po22v.bkt.clouddn.com/coding%E8%A7%A3%E6%9E%90.png" alt=""></p>
+<p>在百度站长工具上测试：</p>
+<p><img src="http://otw7po22v.bkt.clouddn.com/coding%E6%8A%93%E5%8F%96.png" alt=""></p>
+<p>至此可以安心等待百度收录了。</p>
+<p>在百度搜索 <em>site：你的站点</em> 即可查看收录情况：</p>
+<p><img src="http://otw7po22v.bkt.clouddn.com/baidu1.png" alt=""></p>
+<p>点击提交网址可以加快百度收录速度。</p>
+<p><strong>推荐或者使用<a href="http://tool.chinaz.com/baidu/" target="_blank" rel="external">站长工具</a>查询收录情况</strong></p>
+<p>coding上说</p>
 <blockquote>
-<p>第一条：若出现返回的html模板不渲染却直接装进pre标签里显示在页面上，可尝试更改端口，不能用8080；我也不知道为什么，</p>
+<p>银牌会员的 Coding Pages 在访问时默认会先加载 Pages 跳转页，您可选择在网站首页任意位置放置「Hosted by Coding Pages」的文字版或图片版，然后勾选下方的「已放置 Hosted by Coding Pages」选项，通过审核后您的 Pages 将不会显示跳转页。请务必将「Hosted by Coding Pages」持续保留在网站首页，撤掉后跳转页会再次出现。</p>
 </blockquote>
-<h3 id="1-安装ejs"><a href="#1-安装ejs" class="headerlink" title="1.安装ejs"></a>1.安装ejs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install ejs</div></pre></td></tr></table></figure>
-<h3 id="2-引入ejs"><a href="#2-引入ejs" class="headerlink" title="2.引入ejs"></a>2.引入ejs</h3><a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var ejs = require(&apos;ejs&apos;);</div></pre></td></tr></table></figure>
-<h3 id="3-设置html引擎"><a href="#3-设置html引擎" class="headerlink" title="3.设置html引擎"></a>3.设置html引擎</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">app.engine(<span class="string">'html'</span>, ejs.__express);</div><div class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'html'</span>);<span class="comment">//设置视图引擎</span></div></pre></td></tr></table></figure>
-<p>保存后重启服务，即可访问html文件。</p>
-<h3 id="4-解释说明"><a href="#4-解释说明" class="headerlink" title="4.解释说明"></a>4.解释说明</h3><p>先看一下.engine()这个方法。<br>app.engine(ext, callback);</p>
-<p>Express默认使用jade模板。如果你尝试加载 “foo.jade” 文件，Express内部会调用如下操作。</p>
-<p>app.engine(‘jade’, require(‘jade’).__express);</p>
-<p>如果要使用其他模板引擎，如：将EJS模板映射至”.html”文件：</p>
-<p>app.engine(‘html’, require(‘ejs’).__express);</p>
-<p>这行代码中，实际调用了EJS的.renderFile()方法，ejs.__express是该方法在EJS内部的另一个名字。</p>
-<p>因为加载的模板引擎后调用的是同一个方法.__express，所以如果使用的是ejs模板，不用配置该项。</p>
-<p>总结：使用html模板，需增加  app.engine(‘html’, require(‘ejs’).__express);使用EJS模板，不用配置该项。</p>
-<p>此时如果在views文件夹里创建index.html文件或index.ejs文件，访问的仍然是默认的index.jade文件。这是为什么呢？这里要说的就是上面提到的第二项设置app.set(‘view engine’, ‘html’);</p>
-<p>app.set(name, value);</p>
-<p>在.set()方法的参数中，有一项是’view engine’，表示没有指定文件模板格式时，默认使用的引擎插件。如果这里设置为html文件，设置路由指定文件时，只需写文件名，就会找对应的html文件。于此，脑洞大开，试了一下在views中创建3个文件test.jade、test.ejs、test.html。路由设置如下。访问正常！每个路由都指向对应的文件。当然这种写法是完全不被建议也不符合现实的。</p>
-<p>router.get(‘/test/‘,function(req, res, next){<br>  res.render(‘test’, {title: ‘HTML’});<br>});</p>
-<p>router.get(‘/test1/‘,function(req, res, next){<br>  res.render(‘test.ejs’, {title: ‘EJS’});<br>});</p>
-<p>router.get(‘/test2/‘,function(req, res, next){<br>  res.render(‘test.jade’, {title: ‘jade});<br>});</p>
-<blockquote>
-<p>PS：原文地址找不到了，再次感谢作者的辛苦劳作</p>
-</blockquote>
+<p>这个就自己弄吧，毕竟不充钱是不会变强的。</p>
+<p>（待更）</p>
 
       
 
@@ -209,7 +226,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">express</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
         		</li>
       		
 		</ul>
@@ -265,7 +282,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyoulife.cn/2017/03/10/Express使用html模板/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyoulife.cn/2017/08/02/张伯伯的BLOG构建指南/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -279,18 +296,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/03/27/bat小应用/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          bat小应用
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/01/28/jquery懒加载示例视频/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">jquery懒加载示例视频</div>
+    <a href="/2017/06/26/网卡版本回退/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">网卡版本回退</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -317,7 +325,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装ejs"><span class="toc-number">1.</span> <span class="toc-text">1.安装ejs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-引入ejs"><span class="toc-number">2.</span> <span class="toc-text">2.引入ejs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-设置html引擎"><span class="toc-number">3.</span> <span class="toc-text">3.设置html引擎</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-解释说明"><span class="toc-number">4.</span> <span class="toc-text">4.解释说明</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#技术点"><span class="toc-number">2.</span> <span class="toc-text">技术点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正篇"><span class="toc-number">3.</span> <span class="toc-text">正篇</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#开启coding-page服务"><span class="toc-number">3.1.</span> <span class="toc-text">开启coding page服务</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#在本机建立coding-net的ssh-key，"><span class="toc-number">3.2.</span> <span class="toc-text">在本机建立coding.net的ssh key，</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#修改hexo目录的-config-yml，设置多个仓库同步"><span class="toc-number">3.3.</span> <span class="toc-text">修改hexo目录的_config.yml，设置多个仓库同步</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#为域名设置CNAME"><span class="toc-number">3.4.</span> <span class="toc-text">为域名设置CNAME</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

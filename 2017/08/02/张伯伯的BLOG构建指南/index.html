@@ -16,16 +16,17 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="写在前面&amp;emsp;&amp;emsp;记录blog搭建过程的文章有很多，我本来以为既然有这么多文章写过，而且不难所以不需要记录下来，可是随着踩得坑越来越多，犹豫十秒钟之后我还是决定写吧，毕竟健忘癌晚期。 用到了什么 hexo  markdown  github  coding  域名  yilia  七牛云">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%9C%80%E7%BB%88%E7%89%88.png">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5.png">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/coding%E8%A7%A3%E6%9E%90.png">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/coding%E6%8A%93%E5%8F%96.png">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/baidu1.png">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%9C%80%E7%BB%88%E7%89%88.png">
-<meta property="og:updated_time" content="2017-08-05T12:58:15.701Z">
+<meta property="og:updated_time" content="2017-08-07T03:39:15.271Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="张伯伯的BLOG构建指南">
 <meta name="twitter:description" content="写在前面&amp;emsp;&amp;emsp;记录blog搭建过程的文章有很多，我本来以为既然有这么多文章写过，而且不难所以不需要记录下来，可是随着踩得坑越来越多，犹豫十秒钟之后我还是决定写吧，毕竟健忘癌晚期。 用到了什么 hexo  markdown  github  coding  域名  yilia  七牛云">
-<meta name="twitter:image" content="http://otw7po22v.bkt.clouddn.com/%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5.png">
+<meta name="twitter:image" content="http://otw7po22v.bkt.clouddn.com/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%9C%80%E7%BB%88%E7%89%88.png">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -213,19 +214,36 @@
 </li>
 </ul>
 <h4 id="2-hexo的安装"><a href="#2-hexo的安装" class="headerlink" title="2.hexo的安装"></a>2.hexo的安装</h4><ul>
-<li><p>安装 Hexo : <code>$npm install -g hexo</code></p>
+<li>安装 Hexo : <code>$npm install -g hexo</code> ；</li>
+<li>新建博客文件夹：cd到该文件夹，执行<code>$hexo init</code>；</li>
+<li>安装依赖包： <code>$npm install</code> ；</li>
+<li>blog生成完成之后，在根目录的<strong>_config.yml</strong>文件中配置你的网站参数。注意 ：每一项的填写，其<code>:</code>后面都要保留一个空格。主要更改网站基本信息即可，其他采用默认；</li>
+<li>在博客根目录运行<code>hexo clean</code>  <code>hexo  g</code>  <code>hexo s</code>随后打开浏览器访问提示中的本地4000端口，你期盼已久的BLOG页面出现啦；</li>
+</ul>
+<h4 id="3-yilia主题的安装"><a href="#3-yilia主题的安装" class="headerlink" title="3.yilia主题的安装"></a>3.yilia主题的安装</h4><ul>
+<li><a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external">yilia</a>是litten写的hexo主题，很是简洁漂亮，移动适配也不错，所以我选择这款主题渲染我的blog；</li>
+<li>在github中下载该主题；</li>
+<li>复制并粘贴在blog\themes文件夹下；</li>
+<li>修改根目录中_config.yml中的theme为yilia；</li>
+<li>运行<code>hexo clean</code>  <code>hexo  g</code>  <code>hexo s</code>后可看到yilia主题更换成功；</li>
+<li>其他的一些yilia配置在blog\themes\yilia目录下的_config.yml中，详细修改可见<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external">yilia</a>中的说明文字；</li>
+</ul>
+<h4 id="3-域名解析"><a href="#3-域名解析" class="headerlink" title="3.域名解析"></a>3.域名解析</h4><ul>
+<li><p>运行<code>hexo clean</code>  <code>hexo  g</code>  <code>hexo d</code>后即可使用发布成功后可在浏览器中使用<code>你的github名.github.io</code>进入你的博客；</p>
 </li>
-<li><p>新建博客文件夹：cd到该文件夹，执行<code>$hexo init</code></p>
+<li><p>要是想用自己的域名访问blog的话，首先注册一个域名，把域名解析到你的blog地址即可；</p>
 </li>
-<li><p>安装依赖包： <code>$npm install</code></p>
+<li><p>在blog根目录添加CNAME文件，注意没有后缀名，windows环境下可以输入CNAME.来创建无后缀名文件，在文件中输入你的域名，如ipromiseyourlife.com。使用<code>hexo clean</code>  <code>hexo  g</code>  <code>hexo d</code>命令更新到github上，可以在你的github中查看：你的blog库-settings-GitHub Pages，出现绿色的 Your site is published at <a href="http://ipromiseyourlife.com/" target="_blank" rel="external">http://ipromiseyourlife.com/</a>即为成功；</p>
 </li>
-<li><p>blog生成完成之后，在根目录的<strong>_config.yml</strong>文件中配置你的网站参数。注意 ：每一项的填写，其<code>:</code>后面都要保留一个空格。</p>
+<li><p>打开命令行工具，使用<code>ping 你的github名.github.io</code>获取你的博客ip（因为A类型的记录只能添加ip），仿照下图红框中的解析方法解析你的域名，记得更改记录值哦；</p>
+<p><img src="http://otw7po22v.bkt.clouddn.com/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%9C%80%E7%BB%88%E7%89%88.png" alt=""></p>
 </li>
-<li><p>​</p>
-<p>​</p>
+<li><p>等待十分钟左右DNS解析生效，就可以使用你的域名访问你的blog啦；</p>
+</li>
+<li><p>如果访问不了，记得查看你的域名状态是否因为没有实名注册而被冻结；</p>
 </li>
 </ul>
-<h4 id="3-yilia主题的安装"><a href="#3-yilia主题的安装" class="headerlink" title="3.yilia主题的安装"></a>3.yilia主题的安装</h4><h4 id="3-域名解析"><a href="#3-域名解析" class="headerlink" title="3.域名解析"></a>3.域名解析</h4><h4 id="4-写一篇BLOG"><a href="#4-写一篇BLOG" class="headerlink" title="4.写一篇BLOG"></a>4.写一篇BLOG</h4><p>typora</p>
+<h4 id="4-写一篇BLOG"><a href="#4-写一篇BLOG" class="headerlink" title="4.写一篇BLOG"></a>4.写一篇BLOG</h4><p>typora</p>
 <h4 id="5-使用七牛云图床"><a href="#5-使用七牛云图床" class="headerlink" title="5.使用七牛云图床"></a>5.使用七牛云图床</h4><h4 id="6-修改你的BLOG样式"><a href="#6-修改你的BLOG样式" class="headerlink" title="6.修改你的BLOG样式"></a>6.修改你的BLOG样式</h4><h4 id="7-番外-百度收录问题解决办法"><a href="#7-番外-百度收录问题解决办法" class="headerlink" title="7.番外:百度收录问题解决办法"></a>7.番外:百度收录问题解决办法</h4><p>&emsp;&emsp;在我欢欢喜喜的搭建好github page的时候，我了解到百度蜘蛛抓取不了github构建的网页，原因大体是百度蜘蛛的恐怖抓取给github用户造成影响，所以封禁了，目前也没有要解封的意思，百度药丸啊。</p>
 <p>在百度站长工具上测试：<img src="http://otw7po22v.bkt.clouddn.com/%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5.png" alt="">解决百度不能收录的问题主要有两个思路：</p>
 <ol>
@@ -495,18 +513,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
@@ -515,19 +521,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">html5plus</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -536,6 +546,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

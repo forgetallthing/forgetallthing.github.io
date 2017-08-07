@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/coding%E6%8A%93%E5%8F%96.png">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/baidu1.png">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%9C%80%E7%BB%88%E7%89%88.png">
-<meta property="og:updated_time" content="2017-08-07T03:39:15.271Z">
+<meta property="og:updated_time" content="2017-08-07T03:54:29.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="张伯伯的BLOG构建指南">
 <meta name="twitter:description" content="写在前面&amp;emsp;&amp;emsp;记录blog搭建过程的文章有很多，我本来以为既然有这么多文章写过，而且不难所以不需要记录下来，可是随着踩得坑越来越多，犹豫十秒钟之后我还是决定写吧，毕竟健忘癌晚期。 用到了什么 hexo  markdown  github  coding  域名  yilia  七牛云">
@@ -243,44 +243,45 @@
 <li><p>如果访问不了，记得查看你的域名状态是否因为没有实名注册而被冻结；</p>
 </li>
 </ul>
-<h4 id="4-写一篇BLOG"><a href="#4-写一篇BLOG" class="headerlink" title="4.写一篇BLOG"></a>4.写一篇BLOG</h4><p>typora</p>
-<h4 id="5-使用七牛云图床"><a href="#5-使用七牛云图床" class="headerlink" title="5.使用七牛云图床"></a>5.使用七牛云图床</h4><h4 id="6-修改你的BLOG样式"><a href="#6-修改你的BLOG样式" class="headerlink" title="6.修改你的BLOG样式"></a>6.修改你的BLOG样式</h4><h4 id="7-番外-百度收录问题解决办法"><a href="#7-番外-百度收录问题解决办法" class="headerlink" title="7.番外:百度收录问题解决办法"></a>7.番外:百度收录问题解决办法</h4><p>&emsp;&emsp;在我欢欢喜喜的搭建好github page的时候，我了解到百度蜘蛛抓取不了github构建的网页，原因大体是百度蜘蛛的恐怖抓取给github用户造成影响，所以封禁了，目前也没有要解封的意思，百度药丸啊。</p>
-<p>在百度站长工具上测试：<img src="http://otw7po22v.bkt.clouddn.com/%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5.png" alt="">解决百度不能收录的问题主要有两个思路：</p>
+<h4 id="4-写一篇BLOG"><a href="#4-写一篇BLOG" class="headerlink" title="4.写一篇BLOG"></a>4.写一篇BLOG</h4><p>&emsp;&emsp;写博客使用markdown语法，这是最简单的标记语言，花个十分钟入门吧，使用<code>hexo new &quot;文章名字&quot;</code>新建一篇博客，然后在blog\source\_posts中即可找到新建的.md文件，然后编辑你的markdown文件，我使用的是typora编辑器，写好后保存，blog根目录运行<code>hexo  g</code>  <code>hexo d</code>即可同步到github page。</p>
+<h4 id="5-使用七牛云图床"><a href="#5-使用七牛云图床" class="headerlink" title="5.使用七牛云图床"></a>5.使用七牛云图床</h4><p>&emsp;&emsp;七牛云是个免费10g空间，每月10g流量的存储平台，非常适合我这种没几个人看的博客使用，注册登录后新建对象储存，即可上传你的图片和视频，复制外链之后就可以在blog中使用，亲测速度不错哦。</p>
+<h4 id="6-修改你的BLOG样式"><a href="#6-修改你的BLOG样式" class="headerlink" title="6.修改你的BLOG样式"></a>6.修改你的BLOG样式</h4><h4 id="7-番外-百度收录问题解决办法"><a href="#7-番外-百度收录问题解决办法" class="headerlink" title="7.番外:百度收录问题解决办法"></a>7.番外:百度收录问题解决办法</h4><p>&emsp;&emsp;在我欢欢喜喜的搭建好github page的时候，我了解到百度蜘蛛抓取不了github构建的网页，原因大体是百度蜘蛛的恐怖抓取给github用户造成影响，所以封禁了，目前也没有要解封的意思，百度药丸啊。</p>
+<p>在百度站长工具上测试：<img src="http://otw7po22v.bkt.clouddn.com/%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5.png" alt="">&emsp;&emsp;解决百度不能收录的问题主要有两个思路：</p>
 <ol>
 <li>利用免费的CDN搞网站镜像或者自己搭建vps。（待更。。。）</li>
 <li>使用coding page（gitcafe被coding收购）搭建有一个网站镜像，设置域名解析即可。</li>
 </ol>
-<p>为避免额外开销，我选择第二种方法：</p>
-<h5 id="开启coding-page服务"><a href="#开启coding-page服务" class="headerlink" title="开启coding page服务"></a>开启coding page服务</h5><p>在coding.net上注册后，创建一个与用户名相同的项目，如用户名是cloudroc，则项目名称也是cloudroc。创建项目后，在项目的Pages页面里，修改Pages服务的关联分支为master，然后开启Pages服务,可能需要完善注册信息升级到银牌会员。再填入你要绑定的域名。注意项目类型我这里设置的是共有。</p>
-<h5 id="在本机建立coding-net的ssh-key，"><a href="#在本机建立coding-net的ssh-key，" class="headerlink" title="在本机建立coding.net的ssh key，"></a>在本机建立coding.net的ssh key，</h5><p>首先本地需要安装git客户端，在任意路径右键-&gt;git bash here</p>
+<p>&emsp;&emsp;为避免额外开销，我选择第二种方法：</p>
+<h5 id="开启coding-page服务"><a href="#开启coding-page服务" class="headerlink" title="开启coding page服务"></a>开启coding page服务</h5><p>&emsp;&emsp;在coding.net上注册后，创建一个与用户名相同的项目，如用户名是cloudroc，则项目名称也是cloudroc。创建项目后，在项目的Pages页面里，修改Pages服务的关联分支为master，然后开启Pages服务,可能需要完善注册信息升级到银牌会员。再填入你要绑定的域名。注意项目类型我这里设置的是共有。</p>
+<h5 id="在本机建立coding-net的ssh-key，"><a href="#在本机建立coding-net的ssh-key，" class="headerlink" title="在本机建立coding.net的ssh key，"></a>在本机建立coding.net的ssh key，</h5><p>&emsp;&emsp;首先本地需要安装git客户端，在任意路径右键-&gt;git bash here</p>
 <p>输入：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;yourmail@domain.com&quot;</div></pre></td></tr></table></figure>
-<p>可以一路按enter键，然后可在C:\Users\主机名.ssh下找到，文件名：id_rsa(私钥)，id_rsa.pub(公钥)</p>
+<p>&emsp;&emsp;可以一路按enter键，然后可在C:\Users\主机名.ssh下找到，文件名：id_rsa(私钥)，id_rsa.pub(公钥)</p>
 <p>最后在coding.net，刚建立的pages项目中登记这个公钥即可。添加后，在git bash命令输入：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@git.coding.net</div></pre></td></tr></table></figure>
-<p>检测公钥是否添加成功。</p>
+<p>&emsp;&emsp;检测公钥是否添加成功。</p>
 <h5 id="修改hexo目录的-config-yml，设置多个仓库同步"><a href="#修改hexo目录的-config-yml，设置多个仓库同步" class="headerlink" title="修改hexo目录的_config.yml，设置多个仓库同步"></a>修改hexo目录的_config.yml，设置多个仓库同步</h5><p>示例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: </div><div class="line">    github: https://github.com/cloudroc/cloudroc.github.io.git</div><div class="line">    coding: git@git.coding.net:cloudroc/cloudroc.git</div><div class="line">  branch: master</div><div class="line">  message: a little works</div></pre></td></tr></table></figure>
-<p>这里coding的ssh提交不可用，推荐都使用https地址进行配置。提交时可能需要登录coding，在本机配置即可：</p>
-<p>参考：<a href="https://coding.net/help/faq/git/git.html#push-" target="_blank" rel="external">怎样在每次 Push 时不用重复输入密码？</a></p>
-<h5 id="为域名设置CNAME"><a href="#为域名设置CNAME" class="headerlink" title="为域名设置CNAME"></a>为域名设置CNAME</h5><p>需要将你的域名cname到pages.coding.me然后，在「Pages 服务」设置页中的自定义域名栏目输入您欲绑定的域名，点击「保存」即可通过自定义域名访问您的网站。</p>
+<p>&emsp;&emsp;这里coding的ssh提交不可用，推荐都使用https地址进行配置。提交时可能需要登录coding，在本机配置即可：</p>
+<p>&emsp;&emsp;参考：<a href="https://coding.net/help/faq/git/git.html#push-" target="_blank" rel="external">怎样在每次 Push 时不用重复输入密码？</a></p>
+<h5 id="为域名设置CNAME"><a href="#为域名设置CNAME" class="headerlink" title="为域名设置CNAME"></a>为域名设置CNAME</h5><p>&emsp;&emsp;需要将你的域名cname到pages.coding.me然后，在「Pages 服务」设置页中的自定义域名栏目输入您欲绑定的域名，点击「保存」即可通过自定义域名访问您的网站。</p>
 <p><img src="http://otw7po22v.bkt.clouddn.com/coding%E8%A7%A3%E6%9E%90.png" alt=""></p>
-<p>在百度站长工具上测试：</p>
+<p>&emsp;&emsp;在百度站长工具上测试：</p>
 <p><img src="http://otw7po22v.bkt.clouddn.com/coding%E6%8A%93%E5%8F%96.png" alt=""></p>
-<p>至此可以安心等待百度收录了。</p>
-<p>在百度搜索 <em>site：你的站点</em> 即可查看收录情况：</p>
+<p>&emsp;&emsp;至此可以安心等待百度收录了。</p>
+<p>&emsp;&emsp;在百度搜索 <em>site：你的站点</em> 即可查看收录情况：</p>
 <p><img src="http://otw7po22v.bkt.clouddn.com/baidu1.png" alt=""></p>
-<p>点击提交网址可以加快百度收录速度。</p>
+<p>&emsp;&emsp;点击提交网址可以加快百度收录速度。</p>
 <p><strong>推荐或者使用<a href="http://tool.chinaz.com/baidu/" target="_blank" rel="external">站长工具</a>查询收录情况</strong></p>
-<p>coding上说</p>
+<p>&emsp;&emsp;coding上说</p>
 <blockquote>
 <p>银牌会员的 Coding Pages 在访问时默认会先加载 Pages 跳转页，您可选择在网站首页任意位置放置「Hosted by Coding Pages」的文字版或图片版，然后勾选下方的「已放置 Hosted by Coding Pages」选项，通过审核后您的 Pages 将不会显示跳转页。请务必将「Hosted by Coding Pages」持续保留在网站首页，撤掉后跳转页会再次出现。</p>
 </blockquote>
-<p>这个就自己弄吧，毕竟不充钱是不会变强的。</p>
+<p>&emsp;&emsp;这个就自己弄吧，毕竟不充钱是不会变强的。</p>
 <hr>
-<p>好了，我等了一天，百度也没有收录我的网站，记得在站长平台里检测网站评分有接近九十分。对于我来说，百度收录与否是无所谓的事情，只要百度蜘蛛能抓取到，收录只是时间的问题。好啦，这条路已经打通了，但是我并不喜欢这条路，于是我把域名解析改了回来，博客只托管在github page上，最终解析如下：</p>
+<p>&emsp;&emsp;好了，我等了一天，百度也没有收录我的网站，记得在站长平台里检测网站评分有接近九十分。对于我来说，百度收录与否是无所谓的事情，只要百度蜘蛛能抓取到，收录只是时间的问题。好啦，这条路已经打通了，但是我并不喜欢这条路，于是我把域名解析改了回来，博客只托管在github page上，最终解析如下：</p>
 <p><img src="http://otw7po22v.bkt.clouddn.com/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%9C%80%E7%BB%88%E7%89%88.png" alt=""></p>
-<p>红色为blog地址解析，蓝色为百度站长认证解析，黄色为腾讯域名邮箱解析（zhangwang@ipromiseyourlife.com）。</p>
+<p>&emsp;&emsp;红色为blog地址解析，蓝色为百度站长认证解析，黄色为腾讯域名邮箱解析（zhangwang@ipromiseyourlife.com）。</p>
 <p>（待更）</p>
 
       
@@ -517,11 +518,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">html5plus</a>
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -529,11 +530,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+                <a href="javascript:void(0)" class="js-tag color5">html5plus</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -549,11 +550,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
             
             <div class="clearfix"></div>

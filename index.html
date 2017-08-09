@@ -500,12 +500,12 @@
 <ol>
 <li>字符代码在000000 – 00007F之间的，用一个字节编码；</li>
 <li>000080 – 0007FF之间的字符用两个字节；</li>
-<li>000800 –     00D7FF 和 00E000 – 00FFFF之间的用三个字节，注: Unicode在范围 D800-DFFF 中不存在任何字符；</li>
-<li>010000 –     10FFFF之间的用4个字节。</li>
+<li>000800 – 00D7FF 和 00E000 – 00FFFF之间的用三个字节，注: Unicode在范围 D800-DFFF 中不存在任何字符；</li>
+<li>010000 – 10FFFF之间的用4个字节。</li>
 </ol>
 <p>而<a href="http://zh.wikipedia.org/zh-cn/UTF-16" target="_blank" rel="external">UTF-16</a> 则是定长的字符编码，大部分字符使用两个字节编码，字符代码超出 65535 的使用四个字节，如下：</p>
 <ol>
-<li>000000 –     00FFFF 两个字节；</li>
+<li>000000 – 00FFFF 两个字节；</li>
 <li>010000 –     10FFFF 四个字节。</li>
 </ol>
 <p>一开始认为既然页面用的是UTF-8编码，那么存入localStorage的字符串，应该也是用UTF-8编码的。但后来测试发现，明明计算出的 size是不到5MB，存入localStorage却抛异常了。想了想，页面的编码是可以改的。如果localStorage按照页面的编码存字符串,不就乱套了？浏览器应该都是使用UTF-16编码的。用UTF-16编码计算出5MB的字符串，果然顺利写进去了。超过则失败了。</p>
@@ -1080,6 +1080,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
@@ -1088,7 +1092,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1105,10 +1109,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>mui底部选项卡（webview模式）渲染问题 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题： ​">
+  <meta name="description" content="&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.1.2出现除了第一个子页面外的其他子页面渲染问题，标题栏会消失">
 <meta name="keywords" content="mui">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mui底部选项卡（webview模式）渲染问题">
 <meta property="og:url" content="http://yoursite.com/2017/08/10/mui底部选项卡（webview模式）渲染问题/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题： ​">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.1.2出现除了第一个子页面外的其他子页面渲染问题，标题栏会消失">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-10T02:42:31.898Z">
+<meta property="og:updated_time" content="2017-08-10T02:55:16.685Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mui底部选项卡（webview模式）渲染问题">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题： ​">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.1.2出现除了第一个子页面外的其他子页面渲染问题，标题栏会消失">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -170,8 +170,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&emsp;&emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：</p>
-<video id="video" controls preload="none" poster="http://otw7po22v.bkt.clouddn.com/%E7%8C%B4%E5%AD%90.jpg" style="width:40%;"><br>​      <source id="wmv" src="http://otw7po22v.bkt.clouddn.com/muibug.webm" type="video/webm"><br>  </video>
+        <p>&emsp;&emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.1.2出现除了第一个子页面外的其他子页面渲染问题，标题栏会消失再出现，如视频所示，但是点击过一次后渲染正常。</p>
+<a id="more"></a>
+<video id="video" controls preload="none" poster="http://otw7po22v.bkt.clouddn.com/%E7%8C%B4%E5%AD%90.jpg" style="width:30%;"><br>​      <source id="wmv" src="http://otw7po22v.bkt.clouddn.com/muibug.webm" type="video/webm"><br>  </video>
+
+<p>&emsp;&emsp;后来发现问题在这里：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//选项卡点击事件</span></div><div class="line">			mui(<span class="string">'.mui-bar-tab'</span>).on(<span class="string">'tap'</span>, <span class="string">'a'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">				<span class="keyword">var</span> targetTab = <span class="keyword">this</span>.getAttribute(<span class="string">'href'</span>);</div><div class="line">				<span class="keyword">if</span>(targetTab == activeTab) &#123;</div><div class="line">					<span class="keyword">return</span>;</div><div class="line">				&#125;</div><div class="line">				<span class="comment">//更换标题</span></div><div class="line">				title.innerHTML = <span class="keyword">this</span>.querySelector(<span class="string">'.mui-tab-label'</span>).innerHTML;</div><div class="line">				<span class="comment">//显示目标选项卡</span></div><div class="line">				<span class="comment">//若为iOS平台或非首次显示，则直接显示</span></div><div class="line">				<span class="keyword">if</span>(mui.os.ios || aniShow[targetTab]) &#123;</div><div class="line">					plus.webview.show(targetTab);</div><div class="line">				&#125; <span class="keyword">else</span> &#123;</div><div class="line">					<span class="comment">//否则，使用fade-in动画，且保存变量</span></div><div class="line">					<span class="keyword">var</span> temp = &#123;&#125;;</div><div class="line">					temp[targetTab] = <span class="string">"true"</span>;</div><div class="line">					mui.extend(aniShow, temp);</div><div class="line">					plus.webview.show(targetTab, <span class="string">"fade-in"</span>, <span class="number">300</span>); <span class="comment">//** 问题所在。**</span></div><div class="line">				&#125;</div><div class="line">				<span class="comment">//隐藏当前;</span></div><div class="line">				plus.webview.hide(activeTab);</div><div class="line">				<span class="comment">//更改当前活跃的选项卡</span></div><div class="line">				activeTab = targetTab;</div><div class="line">			&#125;);</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;安卓5以下不支持这里的fade-in，此句直接改为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">plus.webview.show(targetTab);</div></pre></td></tr></table></figure>
+<p>就可以正常显示。也可以使用<code>plus.os.version;</code>获取系统版本信息，然后进行优化显示。</p>
+
       
 
       
@@ -402,11 +410,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -418,23 +426,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">bat</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">mongod</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -446,7 +446,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
             
             <div class="clearfix"></div>

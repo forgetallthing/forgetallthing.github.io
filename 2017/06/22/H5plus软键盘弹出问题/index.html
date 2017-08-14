@@ -17,7 +17,7 @@
 <meta property="og:description" content="###点击锚点软键盘弹出问题 当input有焦点的时候且软键盘关闭时，点击a标签（如下）也会导致软键盘弹出一次  解决办法如下：因此当键盘收起时使input失去焦点即可，获取键盘收起事件如下：（可以通过监听屏幕高度的变化来判断。键盘弹出和收回会触发js标准的onresize事件，因为软键盘弹出时会压缩屏幕高度）">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/h51.png">
-<meta property="og:updated_time" content="2017-08-14T03:12:18.035Z">
+<meta property="og:updated_time" content="2017-08-14T03:28:45.814Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="H5plus软键盘弹出问题">
 <meta name="twitter:description" content="###点击锚点软键盘弹出问题 当input有焦点的时候且软键盘关闭时，点击a标签（如下）也会导致软键盘弹出一次  解决办法如下：因此当键盘收起时使input失去焦点即可，获取键盘收起事件如下：（可以通过监听屏幕高度的变化来判断。键盘弹出和收回会触发js标准的onresize事件，因为软键盘弹出时会压缩屏幕高度）">
@@ -182,6 +182,9 @@
 <p>只有通过点击键盘上的下箭头关闭软键盘时才会使input保留焦点，所以我最开始想监听点击下箭头的keycode，但是貌似没有这个的keycode，以后找到了再更新。</p>
 <h3 id="focus-软键盘弹出瞬间又收起问题"><a href="#focus-软键盘弹出瞬间又收起问题" class="headerlink" title="focus()软键盘弹出瞬间又收起问题"></a>focus()软键盘弹出瞬间又收起问题</h3><p>在写登录注册页面时，校验用户输入不合规范时，给相应input触发focus事件，可以使input获取焦点并使软键盘弹出，但是在h5+中出现input获取焦点又失去焦点的情况，无论是<code>$(&quot;#s_un&quot;).focus()</code>,还是使用原生的写法，或者mui的写法：<code>mui.focus(document.getElementById(&quot;s_un&quot;))</code>都是一样的bug，软键盘弹出又消失。无奈只好强制弹出软键盘，再给input获取焦点，这时input的焦点就不会失去了</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> nativeWebview, imm, InputMethodManager;</div><div class="line"><span class="keyword">var</span> initNativeObjects = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (mui.os.android) &#123;</div><div class="line">        <span class="keyword">var</span> main = plus.android.runtimeMainActivity();</div><div class="line">        <span class="keyword">var</span> Context = plus.android.importClass(<span class="string">"android.content.Context"</span>);</div><div class="line">        InputMethodManager = plus.android.importClass(<span class="string">"android.view.inputmethod.InputMethodManager"</span>);</div><div class="line">        imm = main.getSystemService(Context.INPUT_METHOD_SERVICE);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        nativeWebview = plus.webview.currentWebview().nativeInstanceObject();</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> showSoftInput = <span class="function"><span class="keyword">function</span>(<span class="params">i</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (mui.os.android) &#123;</div><div class="line">        imm.toggleSoftInput(<span class="number">0</span>, InputMethodManager.SHOW_FORCED);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        nativeWebview.plusCallMethod(&#123;</div><div class="line">            <span class="string">"setKeyboardDisplayRequiresUserAction"</span>: <span class="literal">false</span></div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">       <span class="comment">//此处可写具体逻辑设置获取焦点的input</span></div><div class="line">       <span class="keyword">var</span> inputElem = <span class="built_in">document</span>.getElementById(i);</div><div class="line">              inputElem.focus(); </div><div class="line">    &#125;, <span class="number">100</span>);</div><div class="line">&#125;; </div><div class="line">initNativeObjects();</div><div class="line">showSoftInput(<span class="string">"s_un"</span>);</div></pre></td></tr></table></figure>
+<p>又找到一个方法，给focus()设置延时执行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">				$(<span class="string">"#s_un"</span>).focus();</div><div class="line">			&#125;, <span class="number">300</span>)</div></pre></td></tr></table></figure>
+<p>这种在安卓5.1.1测试可用，然而4.2.2失效，能获取焦点但是不能弹软键盘。</p>
 
       
 
@@ -426,11 +429,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -438,11 +437,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -454,7 +453,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -462,11 +469,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

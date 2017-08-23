@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="踩坑全纪录  &amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.1.2出现除了第一个子页面外的其他子页面渲染问">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-22T05:42:46.887Z">
+<meta property="og:updated_time" content="2017-08-23T10:53:04.093Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mui底部选项卡（webview模式）渲染问题">
 <meta name="twitter:description" content="踩坑全纪录  &amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.1.2出现除了第一个子页面外的其他子页面渲染问">
@@ -183,14 +183,15 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">plus.webview.show(targetTab);</div></pre></td></tr></table></figure>
 <p>就可以正常显示。也可以使用<code>plus.os.version;</code>获取系统版本信息，然后进行优化显示。</p>
 <blockquote>
-<p>下面会记载一些安卓低版本的坑：</p>
+<p>下面会记载一些安卓低版本以及mui的坑：</p>
 </blockquote>
 <ul>
 <li>三个pad均不支持 <code>console.time(&quot;wocao&quot;) 与 console.timeEnd(&quot;wocao&quot;)</code>；</li>
 <li>chrome调试需要使用Android4.4以上的设备(chrome://inspect/#devices)；</li>
 <li>Andiord4.1和4.2在websql执行成功的回调函数中，需使用<code>result.rows.item(n)</code>方法获取结果，5.1以上可使用<code>result.rows[0]</code>直接获取第一行数据；</li>
+<li>点击返回键时需要进行自己的逻辑处理的时候，请使用原生写法触发自己的逻辑，否则会报错<code>Cannot read property &#39;srcElement&#39; of undefined</code>,</li>
 </ul>
-
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//方式一(可行)</span></div><div class="line">plus.key.removeEventListener(<span class="string">"backbutton"</span>,mui.back);<span class="comment">//解绑mui.back</span></div><div class="line">plus.key.addEventListener(<span class="string">"backbutton"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//重新绑定逻辑</span></div><div class="line">	<span class="built_in">document</span>.getElementById(<span class="string">"subm"</span>).click();<span class="comment">//触发自己需要的函数</span></div><div class="line">    plus.webview.getWebviewById(<span class="string">"ZSDC.html"</span>).show();<span class="comment">//返回到指定页面</span></div><div class="line">&#125;);</div><div class="line"><span class="comment">//方式二(报错)</span></div><div class="line">mui.back = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//修改默认的mui.back事件</span></div><div class="line">	$(<span class="string">"#subm"</span>).click()<span class="comment">//触发自己需要的函数</span></div><div class="line">    plus.webview.getWebviewById(<span class="string">"ZSDC.html"</span>).show();<span class="comment">//返回到指定页面</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//方式三(简洁可行)</span></div><div class="line">mui.back = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//修改默认的mui.back事件</span></div><div class="line">	<span class="built_in">document</span>.getElementById(<span class="string">"subm"</span>).click();<span class="comment">//触发自己需要的函数</span></div><div class="line">    plus.webview.getWebviewById(<span class="string">"ZSDC.html"</span>).show();<span class="comment">//返回到指定页面</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
 
       
@@ -434,19 +435,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -458,15 +451,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">

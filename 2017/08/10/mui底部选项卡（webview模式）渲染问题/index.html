@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="踩坑全纪录  &amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.1.2出现除了第一个子页面外的其他子页面渲染问">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-23T10:53:04.093Z">
+<meta property="og:updated_time" content="2017-08-24T10:23:11.621Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mui底部选项卡（webview模式）渲染问题">
 <meta name="twitter:description" content="踩坑全纪录  &amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.1.2出现除了第一个子页面外的其他子页面渲染问">
@@ -192,6 +192,10 @@
 <li>点击返回键时需要进行自己的逻辑处理的时候，请使用原生写法触发自己的逻辑，否则会报错<code>Cannot read property &#39;srcElement&#39; of undefined</code>,</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//方式一(可行)</span></div><div class="line">plus.key.removeEventListener(<span class="string">"backbutton"</span>,mui.back);<span class="comment">//解绑mui.back</span></div><div class="line">plus.key.addEventListener(<span class="string">"backbutton"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//重新绑定逻辑</span></div><div class="line">	<span class="built_in">document</span>.getElementById(<span class="string">"subm"</span>).click();<span class="comment">//触发自己需要的函数</span></div><div class="line">    plus.webview.getWebviewById(<span class="string">"ZSDC.html"</span>).show();<span class="comment">//返回到指定页面</span></div><div class="line">&#125;);</div><div class="line"><span class="comment">//方式二(报错)</span></div><div class="line">mui.back = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//修改默认的mui.back事件</span></div><div class="line">	$(<span class="string">"#subm"</span>).click()<span class="comment">//触发自己需要的函数</span></div><div class="line">    plus.webview.getWebviewById(<span class="string">"ZSDC.html"</span>).show();<span class="comment">//返回到指定页面</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//方式三(简洁可行)</span></div><div class="line">mui.back = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//修改默认的mui.back事件</span></div><div class="line">	<span class="built_in">document</span>.getElementById(<span class="string">"subm"</span>).click();<span class="comment">//触发自己需要的函数</span></div><div class="line">    plus.webview.getWebviewById(<span class="string">"ZSDC.html"</span>).show();<span class="comment">//返回到指定页面</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>使用FileReader读取文件内容时，此处行政区划代码大小为34mb，pad卡死无反应哈哈，最后只好把行政区划码按省分成一个一个小的csv文件，写一个队列依次读取。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">entry.getFile(<span class="string">'xzqh.csv'</span>, &#123;</div><div class="line">		<span class="attr">create</span>: <span class="literal">false</span></div><div class="line">	&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">fileEntry</span>) </span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">"获取csv文件"</span>)</div><div class="line">		fileEntry.file(<span class="function"><span class="keyword">function</span>(<span class="params">file</span>) </span>&#123;</div><div class="line">			<span class="keyword">var</span> fileReader = <span class="keyword">new</span> plus.io.FileReader();</div><div class="line">			fileReader.readAsText(file, <span class="string">'utf-8'</span>);</div><div class="line">			fileReader.onloadstart = <span class="function"><span class="keyword">function</span>(<span class="params">evt</span>) </span>&#123;</div><div class="line">				<span class="built_in">console</span>.log(<span class="string">"csv开始读取"</span>)</div><div class="line">			&#125;</div><div class="line">			fileReader.onloadend = <span class="function"><span class="keyword">function</span>(<span class="params">evt</span>) </span>&#123;</div><div class="line">				<span class="keyword">var</span> rule_content = evt.target.result;</div><div class="line">				<span class="built_in">console</span>.log(rule_content)</div><div class="line">			&#125;</div><div class="line">			fileReader.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">				<span class="built_in">console</span>.log(<span class="string">"error"</span>)</div><div class="line">				<span class="built_in">console</span>.log(e.message)</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">	&#125;);</div></pre></td></tr></table></figure>
       
 
       
@@ -435,11 +439,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -451,7 +455,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -459,7 +467,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -476,10 +484,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">

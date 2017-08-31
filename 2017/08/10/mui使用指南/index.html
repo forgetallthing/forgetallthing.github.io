@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="踩坑全纪录  mui底部选项卡（webview模式）渲染问题&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-31T07:16:45.575Z">
+<meta property="og:updated_time" content="2017-08-31T07:20:41.785Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mui使用指南">
 <meta name="twitter:description" content="踩坑全纪录  mui底部选项卡（webview模式）渲染问题&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.">
@@ -198,9 +198,7 @@
 <p>&emsp;&emsp;得到的返回值依旧是设备的meid，查找资料发现：getDeviceId()返回唯一的设备ID，例如对于GSM手机返回IMEI，对于CDMA手机返回MEID，不过既然<code>plus.device.imei</code>就可以用作安卓设备唯一码，我们就采用这个来绑定设备了。</p>
 <p>&emsp;&emsp;ps_1：拨号键盘输入*#06#可以查看设备imei、meid。亲测E人一本返回的只有imei码，而其他的两者都能返回。华为的平板还返回了PESN码。</p>
 <p>&emsp;&emsp;ps_2：鉴于imei码对于不能插卡的平板来说是不存在的，各位在自己的项目中酌情使用。</p>
-<h4 id="mui读文件速度问题"><a href="#mui读文件速度问题" class="headerlink" title="mui读文件速度问题"></a>mui读文件速度问题</h4><p>&emsp;&emsp;使用<code>plus.io.FileReader()</code>获取读文件对象后，设置</p>
-<p><code>fileReader.readAsText(file, &#39;utf-8&#39;)</code></p>
-<p>&emsp;&emsp;把文件内容以文本类型读出速度较慢(当文件超过500kb时，安卓版本5.1以下耗时5秒以上)，于是采用</p>
+<h4 id="mui读文件速度问题"><a href="#mui读文件速度问题" class="headerlink" title="mui读文件速度问题"></a>mui读文件速度问题</h4><p>&emsp;&emsp;使用<code>plus.io.FileReader()</code>获取读文件对象后，设置<code>fileReader.readAsText(file, &#39;utf-8&#39;)</code>把文件内容以文本类型读出速度较慢(当文件超过500kb时，安卓版本5.1以下耗时5秒以上)，于是采用</p>
 <p><code>fileReader.readAsDataURL(file, &#39;utf-8&#39;)</code>以base64编码格式读出，再使用base64进行解码即可，</p>
 <p>时间消耗上平均可以节省一半耗时。</p>
 
@@ -443,7 +441,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -451,23 +449,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -483,15 +473,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">

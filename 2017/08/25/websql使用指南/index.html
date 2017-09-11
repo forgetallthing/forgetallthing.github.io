@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>websql使用指南 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言本篇博客将记录我在项目中实操websql的一些经验，争取记录的都是干货，下面开始 js语句1.架子：12345myDB.db.transaction(function(tx) &amp;#123;	tx.executeSql(&apos;&apos;, [], function(tx, result) &amp;#123;&amp;#125;, function(tx, error) &amp;#123;	console.log(error);">
+  <meta name="description" content="前言本篇博客将记录我在项目中实操websql的一些经验，争取记录的都是干货，下面开始 js语句1.架子：1234567891011var myDB = &amp;#123;	name: &apos;formData&apos;,	version: 1,	db: null&amp;#125;;myDB.db = openDatabase(myDB.name, myDB.version, &apos;test&apos;, 100 * 1024 * 102">
 <meta name="keywords" content="websql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="websql使用指南">
 <meta property="og:url" content="http://yoursite.com/2017/08/25/websql使用指南/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="前言本篇博客将记录我在项目中实操websql的一些经验，争取记录的都是干货，下面开始 js语句1.架子：12345myDB.db.transaction(function(tx) &amp;#123;	tx.executeSql(&apos;&apos;, [], function(tx, result) &amp;#123;&amp;#125;, function(tx, error) &amp;#123;	console.log(error);">
+<meta property="og:description" content="前言本篇博客将记录我在项目中实操websql的一些经验，争取记录的都是干货，下面开始 js语句1.架子：1234567891011var myDB = &amp;#123;	name: &apos;formData&apos;,	version: 1,	db: null&amp;#125;;myDB.db = openDatabase(myDB.name, myDB.version, &apos;test&apos;, 100 * 1024 * 102">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-07T03:27:40.677Z">
+<meta property="og:updated_time" content="2017-09-11T02:46:21.627Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="websql使用指南">
-<meta name="twitter:description" content="前言本篇博客将记录我在项目中实操websql的一些经验，争取记录的都是干货，下面开始 js语句1.架子：12345myDB.db.transaction(function(tx) &amp;#123;	tx.executeSql(&apos;&apos;, [], function(tx, result) &amp;#123;&amp;#125;, function(tx, error) &amp;#123;	console.log(error);">
+<meta name="twitter:description" content="前言本篇博客将记录我在项目中实操websql的一些经验，争取记录的都是干货，下面开始 js语句1.架子：1234567891011var myDB = &amp;#123;	name: &apos;formData&apos;,	version: 1,	db: null&amp;#125;;myDB.db = openDatabase(myDB.name, myDB.version, &apos;test&apos;, 100 * 1024 * 102">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -171,9 +171,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇博客将记录我在项目中实操websql的一些经验，争取记录的都是干货，下面开始</p>
-<h2 id="js语句"><a href="#js语句" class="headerlink" title="js语句"></a>js语句</h2><h4 id="1-架子："><a href="#1-架子：" class="headerlink" title="1.架子："></a>1.架子：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">myDB.db.transaction(<span class="function"><span class="keyword">function</span>(<span class="params">tx</span>) </span>&#123;</div><div class="line">	tx.executeSql(<span class="string">''</span>, [], <span class="function"><span class="keyword">function</span>(<span class="params">tx, result</span>) </span>&#123;&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">tx, error</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(error);</div><div class="line">	&#125;);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="js语句"><a href="#js语句" class="headerlink" title="js语句"></a>js语句</h2><h4 id="1-架子："><a href="#1-架子：" class="headerlink" title="1.架子："></a>1.架子：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myDB = &#123;</div><div class="line">	<span class="attr">name</span>: <span class="string">'formData'</span>,</div><div class="line">	<span class="attr">version</span>: <span class="number">1</span>,</div><div class="line">	<span class="attr">db</span>: <span class="literal">null</span></div><div class="line">&#125;;</div><div class="line">myDB.db = openDatabase(myDB.name, myDB.version, <span class="string">'test'</span>, <span class="number">100</span> * <span class="number">1024</span> * <span class="number">1024</span>);</div><div class="line">myDB.db.transaction(<span class="function"><span class="keyword">function</span>(<span class="params">tx</span>) </span>&#123;</div><div class="line">	tx.executeSql(<span class="string">''</span>, [], <span class="function"><span class="keyword">function</span>(<span class="params">tx, result</span>) </span>&#123;&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">tx, error</span>) </span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(error);</div><div class="line">	&#125;);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <a id="more"></a>
-<h2 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h2><p>本周末更新23333~</p>
+<h2 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h2><figure class="highlight sql"><figcaption><span>lite</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//新建表</div><div class="line">'<span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> 表名 (列名称<span class="number">1</span> PRIMARY <span class="keyword">KEY</span>,列名称<span class="number">2</span> <span class="keyword">UNIQUE</span> ,列名称<span class="number">3</span>)<span class="string">'</span></div><div class="line">//删除表</div><div class="line">'<span class="keyword">DROP</span> <span class="keyword">TABLE</span> 表名<span class="string">'</span></div><div class="line">//清空表</div><div class="line">'<span class="keyword">DELETE</span> <span class="keyword">FROM</span> 表名<span class="string">'</span></div><div class="line">//删除一条</div><div class="line">'<span class="keyword">DELETE</span> <span class="keyword">FROM</span> 表名 <span class="keyword">WHERE</span> 列名称<span class="number">1</span> = ? <span class="keyword">and</span> 列名称<span class="number">2</span> = ?<span class="string">'</span></div><div class="line"> //新增一条</div><div class="line">'<span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名 <span class="keyword">VALUES</span> (?,?,?,?,?,?,?)<span class="string">'//为所有列添加值</span></div><div class="line">'<span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名 (列名称<span class="number">2</span>,列名称<span class="number">4</span>,列名称<span class="number">6</span>) <span class="keyword">VALUES</span> (?,?,?)<span class="string">'//为指定列添加值</span></div></pre></td></tr></table></figure>
 <p>##附录</p>
 <p>测试安卓4.1以上sqlite3语法可用</p>
 
@@ -407,15 +407,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -427,23 +431,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -455,7 +447,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -463,7 +455,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
             
             <div class="clearfix"></div>

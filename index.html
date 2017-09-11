@@ -171,7 +171,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇博客将记录我在项目中实操websql的一些经验，争取记录的都是干货，下面开始</p>
-<h2 id="js语句"><a href="#js语句" class="headerlink" title="js语句"></a>js语句</h2><h4 id="1-架子："><a href="#1-架子：" class="headerlink" title="1.架子："></a>1.架子：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">myDB.db.transaction(<span class="function"><span class="keyword">function</span>(<span class="params">tx</span>) </span>&#123;</div><div class="line">	tx.executeSql(<span class="string">''</span>, [], <span class="function"><span class="keyword">function</span>(<span class="params">tx, result</span>) </span>&#123;&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">tx, error</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(error);</div><div class="line">	&#125;);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="js语句"><a href="#js语句" class="headerlink" title="js语句"></a>js语句</h2><h4 id="1-架子："><a href="#1-架子：" class="headerlink" title="1.架子："></a>1.架子：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myDB = &#123;</div><div class="line">	<span class="attr">name</span>: <span class="string">'formData'</span>,</div><div class="line">	<span class="attr">version</span>: <span class="number">1</span>,</div><div class="line">	<span class="attr">db</span>: <span class="literal">null</span></div><div class="line">&#125;;</div><div class="line">myDB.db = openDatabase(myDB.name, myDB.version, <span class="string">'test'</span>, <span class="number">100</span> * <span class="number">1024</span> * <span class="number">1024</span>);</div><div class="line">myDB.db.transaction(<span class="function"><span class="keyword">function</span>(<span class="params">tx</span>) </span>&#123;</div><div class="line">	tx.executeSql(<span class="string">''</span>, [], <span class="function"><span class="keyword">function</span>(<span class="params">tx, result</span>) </span>&#123;&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">tx, error</span>) </span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(error);</div><div class="line">	&#125;);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
         
           <a class="article-more-a" href="/2017/08/25/websql使用指南/#more">more >></a>
         
@@ -1061,15 +1061,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1081,23 +1085,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1109,7 +1101,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1117,7 +1109,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
             
             <div class="clearfix"></div>

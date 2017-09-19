@@ -6,20 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Express使用html模板 | 张伯伯的BLOG</title>
+  <title>Archives: 2017/9 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="express默认使用jade模板，可以配置让其支持使用ejs或html模板。  第一条：若出现返回的html模板不渲染却直接装进pre标签里显示在页面上，可尝试更改端口，不能用8080；我也不知道为什么，  1.安装ejs1npm install ejs 2.引入ejs">
-<meta name="keywords" content="express">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Express使用html模板">
-<meta property="og:url" content="http://yoursite.com/2017/03/10/Express使用html模板/index.html">
+  <meta name="description" content="哪里有幸福可借">
+<meta property="og:type" content="website">
+<meta property="og:title" content="张伯伯的BLOG">
+<meta property="og:url" content="http://yoursite.com/archives/2017/09/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="express默认使用jade模板，可以配置让其支持使用ejs或html模板。  第一条：若出现返回的html模板不渲染却直接装进pre标签里显示在页面上，可尝试更改端口，不能用8080；我也不知道为什么，  1.安装ejs1npm install ejs 2.引入ejs">
+<meta property="og:description" content="哪里有幸福可借">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-01T07:58:36.086Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Express使用html模板">
-<meta name="twitter:description" content="express默认使用jade模板，可以配置让其支持使用ejs或html模板。  第一条：若出现返回的html模板不渲染却直接装进pre标签里显示在页面上，可尝试更改端口，不能用8080；我也不知道为什么，  1.安装ejs1npm install ejs 2.引入ejs">
+<meta name="twitter:title" content="张伯伯的BLOG">
+<meta name="twitter:description" content="哪里有幸福可借">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -150,191 +148,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Express使用html模板" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Express使用html模板
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/09/19/前端相关知识整理/" class="archive-article-date">
+  	<time datetime="2017-09-19T02:14:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-19</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/09/19/前端相关知识整理/">前端相关知识整理</a>
     </h1>
   
 
-        
-        <a href="/2017/03/10/Express使用html模板/" class="archive-article-date">
-  	<time datetime="2017-03-10T07:30:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>express默认使用jade模板，可以配置让其支持使用ejs或html模板。</p>
-<blockquote>
-<p>第一条：若出现返回的html模板不渲染却直接装进pre标签里显示在页面上，可尝试更改端口，不能用8080；我也不知道为什么，</p>
-</blockquote>
-<h3 id="1-安装ejs"><a href="#1-安装ejs" class="headerlink" title="1.安装ejs"></a>1.安装ejs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install ejs</div></pre></td></tr></table></figure>
-<h3 id="2-引入ejs"><a href="#2-引入ejs" class="headerlink" title="2.引入ejs"></a>2.引入ejs</h3><a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var ejs = require(&apos;ejs&apos;);</div></pre></td></tr></table></figure>
-<h3 id="3-设置html引擎"><a href="#3-设置html引擎" class="headerlink" title="3.设置html引擎"></a>3.设置html引擎</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">app.engine(<span class="string">'html'</span>, ejs.__express);</div><div class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'html'</span>);<span class="comment">//设置视图引擎</span></div></pre></td></tr></table></figure>
-<p>保存后重启服务，即可访问html文件。</p>
-<h3 id="4-解释说明"><a href="#4-解释说明" class="headerlink" title="4.解释说明"></a>4.解释说明</h3><p>先看一下.engine()这个方法。<br>app.engine(ext, callback);</p>
-<p>Express默认使用jade模板。如果你尝试加载 “foo.jade” 文件，Express内部会调用如下操作。</p>
-<p>app.engine(‘jade’, require(‘jade’).__express);</p>
-<p>如果要使用其他模板引擎，如：将EJS模板映射至”.html”文件：</p>
-<p>app.engine(‘html’, require(‘ejs’).__express);</p>
-<p>这行代码中，实际调用了EJS的.renderFile()方法，ejs.__express是该方法在EJS内部的另一个名字。</p>
-<p>因为加载的模板引擎后调用的是同一个方法.__express，所以如果使用的是ejs模板，不用配置该项。</p>
-<p>总结：使用html模板，需增加  app.engine(‘html’, require(‘ejs’).__express);使用EJS模板，不用配置该项。</p>
-<p>此时如果在views文件夹里创建index.html文件或index.ejs文件，访问的仍然是默认的index.jade文件。这是为什么呢？这里要说的就是上面提到的第二项设置app.set(‘view engine’, ‘html’);</p>
-<p>app.set(name, value);</p>
-<p>在.set()方法的参数中，有一项是’view engine’，表示没有指定文件模板格式时，默认使用的引擎插件。如果这里设置为html文件，设置路由指定文件时，只需写文件名，就会找对应的html文件。于此，脑洞大开，试了一下在views中创建3个文件test.jade、test.ejs、test.html。路由设置如下。访问正常！每个路由都指向对应的文件。当然这种写法是完全不被建议也不符合现实的。</p>
-<p>router.get(‘/test/‘,function(req, res, next){<br>  res.render(‘test’, {title: ‘HTML’});<br>});</p>
-<p>router.get(‘/test1/‘,function(req, res, next){<br>  res.render(‘test.ejs’, {title: ‘EJS’});<br>});</p>
-<p>router.get(‘/test2/‘,function(req, res, next){<br>  res.render(‘test.jade’, {title: ‘jade});<br>});</p>
-<blockquote>
-<p>PS：原文地址找不到了，再次感谢作者的辛苦劳作</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">express</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2017/03/10/Express使用html模板/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2017/03/27/bat小应用/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          bat小应用
-        
-      </div>
-    </a>
   
   
-    <a href="/2017/01/28/jquery懒加载示例视频/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">jquery懒加载示例视频</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装ejs"><span class="toc-number">1.</span> <span class="toc-text">1.安装ejs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-引入ejs"><span class="toc-number">2.</span> <span class="toc-text">2.引入ejs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-设置html引擎"><span class="toc-number">3.</span> <span class="toc-text">3.设置html引擎</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-解释说明"><span class="toc-number">4.</span> <span class="toc-text">4.解释说明</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
+    
 
 
           </div>
@@ -368,8 +235,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

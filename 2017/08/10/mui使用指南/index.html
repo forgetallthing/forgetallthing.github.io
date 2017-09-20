@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="踩坑全纪录  mui底部选项卡（webview模式）渲染问题&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-20T02:38:13.244Z">
+<meta property="og:updated_time" content="2017-09-20T02:46:47.856Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mui使用指南">
 <meta name="twitter:description" content="踩坑全纪录  mui底部选项卡（webview模式）渲染问题&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.">
@@ -182,7 +182,7 @@
 <p>&emsp;&emsp;安卓5以下不支持这里的fade-in，此句直接改为：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">plus.webview.show(targetTab);</div></pre></td></tr></table></figure>
 <p>&emsp;&emsp;就可以正常显示。也可以使用<code>plus.os.version;</code>获取系统版本信息，然后进行优化显示。</p>
-<p>&emsp;&emsp;ps：</p>
+<p>&emsp;&emsp;ps：webview选项卡的子页面会先加载出来，然后显示第一页，其他隐藏，后来发现在安卓5.1.1中，隐藏的子页面使用<code>document.documentElement.clientHeight</code>之类的接口获取页面显示高度或者宽度时，结果均为0，使用jq，或者给html,body加css：宽高100%，结果依旧，但安卓4.2.2和4.1.2却可以正常获取到值。各位在开发中应避开此坑。</p>
 <blockquote>
 <p>下面会记载一些安卓低版本以及mui的坑：</p>
 </blockquote>
@@ -467,6 +467,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -475,11 +483,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -504,10 +508,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
             
             <div class="clearfix"></div>

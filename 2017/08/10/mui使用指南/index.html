@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="踩坑全纪录  mui底部选项卡（webview模式）渲染问题&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-19T08:26:36.284Z">
+<meta property="og:updated_time" content="2017-09-20T02:34:45.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mui使用指南">
 <meta name="twitter:description" content="踩坑全纪录  mui底部选项卡（webview模式）渲染问题&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.">
@@ -205,7 +205,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> old_back = mui.back;</div><div class="line">mui.back = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// 获取目标口窗口对象</span></div><div class="line">    <span class="keyword">var</span> target = plus.webview.getWebviewById(<span class="string">'目标口窗口对象的id'</span>);</div><div class="line">    <span class="comment">// 执行相应的事件</span></div><div class="line">    mui.fire(target, <span class="string">'customEvent'</span>, &#123;&#125;);</div><div class="line">    <span class="comment">// 执行关闭</span></div><div class="line">    old_back();</div><div class="line">&#125;;</div><div class="line">上一级页面（目标窗口）</div><div class="line"></div><div class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'customEvent'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">    <span class="comment">// mui.fire()传过来的额外的参数，在event.detail中；</span></div><div class="line">    <span class="keyword">var</span> detail = event.detail;</div><div class="line">    <span class="comment">// var param = detail.param;</span></div><div class="line">    <span class="comment">// 执行相应的ajax或者操作DOM等操作</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h4 id="getDirectory创建或打开子目录bug"><a href="#getDirectory创建或打开子目录bug" class="headerlink" title="getDirectory创建或打开子目录bug"></a>getDirectory创建或打开子目录bug</h4><p>使用<code>entry.getDirectory( path, flag, succesCB, errorCB)</code>时，最开始fs_name传的是“D”，fss是_documents（plus.io.PUBLIC_DOCUMENTS）目录对象，可以正常工作，但在另一处操作过对应的”D“文件夹后导致下面的创建函数报错：<code>code：10,message:&quot;执行出错&quot;</code>,经过反复debug，解决办法为：fs_name传值改为_documents/D即可。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">create_folder</span>(<span class="params">fss, fs_name, index_data, BJR_data, BJR_s_data, BJR_hu_data, callback</span>) </span>&#123;</div><div class="line">	fss.root.getDirectory(fs_name, &#123;</div><div class="line">		<span class="attr">create</span>: <span class="literal">true</span></div><div class="line">	&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">entry</span>) </span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">"create_folder ok"</span>)</div><div class="line">		callback(entry, index_data, BJR_data, BJR_s_data, BJR_hu_data);</div><div class="line">	&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(error) </div><div class="line">	&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="www下的文件夹"><a href="#www下的文件夹" class="headerlink" title="www下的文件夹"></a>www下的文件夹</h4><p>如果要自定义个文件夹里面放一些随文件打包的压缩包什么的，所建立的文件夹不要叫res，因为那个已经被占用了，里面有什么images文件…，而你存在里面的文件是读取不出来的，虽然明明存在。</p>
+<h4 id="www下的文件夹"><a href="#www下的文件夹" class="headerlink" title="_www下的文件夹"></a>_www下的文件夹</h4><p>如果在应用根目录要自定义个文件夹里面放一些打算随安装包打包的压缩包什么的，所建立的文件夹不要叫res，因为那个已经被占用了，里面有什么images文件…，而你存在里面的文件是读取不出来的，虽然明明存在。</p>
 
       
 
@@ -327,7 +327,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#mui底部选项卡（webview模式）渲染问题"><span class="toc-number">1.</span> <span class="toc-text">mui底部选项卡（webview模式）渲染问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安卓低版本打印时间"><span class="toc-number">2.</span> <span class="toc-text">安卓低版本打印时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于chrome调试"><span class="toc-number">3.</span> <span class="toc-text">关于chrome调试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#websql成功回调获取结果"><span class="toc-number">4.</span> <span class="toc-text">websql成功回调获取结果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mui自定义返回键事件"><span class="toc-number">5.</span> <span class="toc-text">mui自定义返回键事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FileReader读取文件"><span class="toc-number">6.</span> <span class="toc-text">FileReader读取文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mui获取设备唯一标志（imei、meid）"><span class="toc-number">7.</span> <span class="toc-text">mui获取设备唯一标志（imei、meid）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mui读文件速度问题"><span class="toc-number">8.</span> <span class="toc-text">mui读文件速度问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#回到上级页面时刷新上级页面"><span class="toc-number">9.</span> <span class="toc-text">回到上级页面时刷新上级页面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#getDirectory创建或打开子目录bug"><span class="toc-number">10.</span> <span class="toc-text">getDirectory创建或打开子目录bug</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#www下的文件夹"><span class="toc-number">11.</span> <span class="toc-text">www下的文件夹</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#mui底部选项卡（webview模式）渲染问题"><span class="toc-number">1.</span> <span class="toc-text">mui底部选项卡（webview模式）渲染问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安卓低版本打印时间"><span class="toc-number">2.</span> <span class="toc-text">安卓低版本打印时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于chrome调试"><span class="toc-number">3.</span> <span class="toc-text">关于chrome调试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#websql成功回调获取结果"><span class="toc-number">4.</span> <span class="toc-text">websql成功回调获取结果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mui自定义返回键事件"><span class="toc-number">5.</span> <span class="toc-text">mui自定义返回键事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FileReader读取文件"><span class="toc-number">6.</span> <span class="toc-text">FileReader读取文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mui获取设备唯一标志（imei、meid）"><span class="toc-number">7.</span> <span class="toc-text">mui获取设备唯一标志（imei、meid）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mui读文件速度问题"><span class="toc-number">8.</span> <span class="toc-text">mui读文件速度问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#回到上级页面时刷新上级页面"><span class="toc-number">9.</span> <span class="toc-text">回到上级页面时刷新上级页面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#getDirectory创建或打开子目录bug"><span class="toc-number">10.</span> <span class="toc-text">getDirectory创建或打开子目录bug</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#www下的文件夹"><span class="toc-number">11.</span> <span class="toc-text">_www下的文件夹</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -446,10 +446,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
@@ -458,7 +454,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -478,6 +474,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -486,15 +486,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">

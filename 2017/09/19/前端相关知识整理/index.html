@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="样式效果particles.js粒子效果particles.js好用的背景粒子效果，比如知乎登录背景： github:https://github.com/VincentGarreau/particles.js 教程:http://blog.csdn.net/csdn_yudong/article/details/53128570 canvas-nest.js随鼠标聚集的背景效果：github:h">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-28T02:36:58.613Z">
+<meta property="og:updated_time" content="2017-09-28T02:39:00.969Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="样式效果particles.js粒子效果particles.js好用的背景粒子效果，比如知乎登录背景： github:https://github.com/VincentGarreau/particles.js 教程:http://blog.csdn.net/csdn_yudong/article/details/53128570 canvas-nest.js随鼠标聚集的背景效果：github:h">
@@ -195,7 +195,7 @@
 <p>上述方法移动端测试后发现可以输入汉字(九键)，正确的解决方案：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input <span class="class"><span class="keyword">class</span></span>=<span class="string">"sign_up_username"</span> id=<span class="string">"tel"</span> type=<span class="string">"number"</span> onkeyup=<span class="string">"this.value=this.value.replace(/\D/g,'')"</span> oninput=<span class="string">"if(value.length&gt;11)value=value.slice(0,11)"</span> name=<span class="string">""</span> value=<span class="string">""</span> /&gt;</div></pre></td></tr></table></figure>
 <h4 id="获取对象属性和长度"><a href="#获取对象属性和长度" class="headerlink" title="获取对象属性和长度"></a>获取对象属性和长度</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在javascript中获取一个对象内属性的个数</span></div><div class="line"><span class="keyword">var</span> foo = &#123;<span class="attr">a1</span>:<span class="string">'1'</span>,<span class="attr">a2</span>:<span class="string">'2'</span>,<span class="attr">a3</span>:<span class="string">'3'</span>&#125;;</div><div class="line"><span class="comment">//获得对象所有属性的数组</span></div><div class="line"><span class="built_in">Object</span>.getOwnPropertyNames(foo);</div><div class="line"><span class="comment">//[ 'a1', 'a2', 'a3' ]</span></div><div class="line"><span class="comment">//获取对象属性的个数</span></div><div class="line"><span class="built_in">Object</span>.getOwnPropertyNames(foo).length;</div><div class="line"><span class="comment">//3</span></div></pre></td></tr></table></figure>
-
+<h4 id="获取屏幕尺寸函数"><a href="#获取屏幕尺寸函数" class="headerlink" title="获取屏幕尺寸函数"></a>获取屏幕尺寸函数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_wh</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="built_in">document</span>.write(</div><div class="line">			<span class="string">"屏幕分辨率为："</span> + screen.width + <span class="string">"*"</span> + screen.height +</div><div class="line">			<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">			<span class="string">"屏幕可用大小："</span> + screen.availWidth + <span class="string">"*"</span> + screen.availHeight +</div><div class="line">			<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">			<span class="string">"网页可见区域宽："</span> + <span class="built_in">document</span>.body.clientWidth +</div><div class="line">			<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">			<span class="string">"网页可见区域高："</span> + <span class="built_in">document</span>.body.clientHeight +</div><div class="line">			<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">			<span class="string">"网页可见区域宽(包括边线的宽)："</span> + <span class="built_in">document</span>.body.offsetWidth +</div><div class="line">			<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">			<span class="string">"网页可见区域高(包括边线的宽)："</span> + <span class="built_in">document</span>.body.offsetHeight +</div><div class="line">			<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">			<span class="string">"网页正文全文宽："</span> + <span class="built_in">document</span>.body.scrollWidth +</div><div class="line">			<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">			<span class="string">"网页正文全文高："</span> + <span class="built_in">document</span>.body.scrollHeight +</div><div class="line">			<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">			<span class="string">"网页被卷去的高："</span> + <span class="built_in">document</span>.body.scrollTop +</div><div class="line">			<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">			<span class="string">"网页被卷去的左："</span> + <span class="built_in">document</span>.body.scrollLeft +</div><div class="line">			<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">			<span class="string">"网页正文部分上："</span> + <span class="built_in">window</span>.screenTop +</div><div class="line">			<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">			<span class="string">"网页正文部分左："</span> + <span class="built_in">window</span>.screenLeft +</div><div class="line">			<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">			<span class="string">"屏幕分辨率的高："</span> + <span class="built_in">window</span>.screen.height +</div><div class="line">			<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">			<span class="string">"屏幕分辨率的宽："</span> + <span class="built_in">window</span>.screen.width +</div><div class="line">			<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">			<span class="string">"屏幕可用工作区高度："</span> + <span class="built_in">window</span>.screen.availHeight +</div><div class="line">			<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">			<span class="string">"屏幕可用工作区宽度："</span> + <span class="built_in">window</span>.screen.availWidth</div><div class="line">		);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
       
 
       
@@ -307,7 +307,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#样式效果"><span class="toc-number">1.</span> <span class="toc-text">样式效果</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#particles-js粒子效果"><span class="toc-number">1.0.1.</span> <span class="toc-text">particles.js粒子效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#canvas-nest-js随鼠标聚集的背景效果："><span class="toc-number">1.0.2.</span> <span class="toc-text">canvas-nest.js随鼠标聚集的背景效果：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用color"><span class="toc-number">1.0.3.</span> <span class="toc-text">常用color:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用函数"><span class="toc-number">2.</span> <span class="toc-text">常用函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#计算生肖"><span class="toc-number">2.0.1.</span> <span class="toc-text">计算生肖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#计算星座"><span class="toc-number">2.0.2.</span> <span class="toc-text">计算星座</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组去重"><span class="toc-number">2.0.3.</span> <span class="toc-text">数组去重</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#input限制输入"><span class="toc-number">2.0.4.</span> <span class="toc-text">input限制输入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取对象属性和长度"><span class="toc-number">2.0.5.</span> <span class="toc-text">获取对象属性和长度</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#样式效果"><span class="toc-number">1.</span> <span class="toc-text">样式效果</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#particles-js粒子效果"><span class="toc-number">1.0.1.</span> <span class="toc-text">particles.js粒子效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#canvas-nest-js随鼠标聚集的背景效果："><span class="toc-number">1.0.2.</span> <span class="toc-text">canvas-nest.js随鼠标聚集的背景效果：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用color"><span class="toc-number">1.0.3.</span> <span class="toc-text">常用color:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用函数"><span class="toc-number">2.</span> <span class="toc-text">常用函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#计算生肖"><span class="toc-number">2.0.1.</span> <span class="toc-text">计算生肖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#计算星座"><span class="toc-number">2.0.2.</span> <span class="toc-text">计算星座</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组去重"><span class="toc-number">2.0.3.</span> <span class="toc-text">数组去重</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#input限制输入"><span class="toc-number">2.0.4.</span> <span class="toc-text">input限制输入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取对象属性和长度"><span class="toc-number">2.0.5.</span> <span class="toc-text">获取对象属性和长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取屏幕尺寸函数"><span class="toc-number">2.0.6.</span> <span class="toc-text">获取屏幕尺寸函数</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -430,19 +430,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -454,6 +446,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -462,7 +462,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -471,10 +471,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -487,6 +483,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
             
             <div class="clearfix"></div>

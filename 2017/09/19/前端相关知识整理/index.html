@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="样式效果particles.js粒子效果particles.js好用的背景粒子效果，比如知乎登录背景： github:https://github.com/VincentGarreau/particles.js 教程:http://blog.csdn.net/csdn_yudong/article/details/53128570 canvas-nest.js随鼠标聚集的背景效果：github:h">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-10-09T09:33:48.245Z">
+<meta property="og:updated_time" content="2017-10-09T09:40:29.154Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="样式效果particles.js粒子效果particles.js好用的背景粒子效果，比如知乎登录背景： github:https://github.com/VincentGarreau/particles.js 教程:http://blog.csdn.net/csdn_yudong/article/details/53128570 canvas-nest.js随鼠标聚集的背景效果：github:h">
@@ -206,6 +206,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;aRbRcRRd&quot;.replace(/([a-z])R/g,&quot;$1r&quot;); //&quot;arbrcrRd&quot;</div></pre></td></tr></table></figure>
 <h4 id="动态构建正则表达式"><a href="#动态构建正则表达式" class="headerlink" title="动态构建正则表达式"></a>动态构建正则表达式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> className = <span class="string">"high"</span>;</div><div class="line"><span class="keyword">var</span> regex = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|\\s)"</span> + className + <span class="string">"(\\s|$)"</span>);</div><div class="line"><span class="built_in">console</span>.log( regex.source )</div><div class="line"><span class="comment">// =&gt; (^|\s)high(\s|$) 即字符串"(^|\\s)high(\\s|$)"</span></div></pre></td></tr></table></figure>
 <p>使用eval也可以将字符串转化为正则表达式。</p>
+<p>用于正则操作的方法，共有 6 个，字符串实例 4 个，正则实例 2 个:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String#search</div><div class="line">String#split</div><div class="line">String#match</div><div class="line">String#replace</div><div class="line">RegExp#test</div><div class="line">RegExp#exec</div></pre></td></tr></table></figure>
+<p>正则实例的 lastIndex 属性，表示尝试匹配时，从字符串的 lastIndex 位开始去匹配。而字符串的四个方法，每次匹配时，都是从 0 开始的，即 lastIndex 属性始终不变。</p>
+<p>也就是说，正则实例的两个方法 exec、test，当正则是全局匹配时，每一次匹配完成后，都会修改 lastIndex。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> regex = <span class="regexp">/a/g</span>;</div><div class="line"><span class="built_in">console</span>.log( regex.test(<span class="string">"a"</span>), regex.lastIndex );</div><div class="line"><span class="built_in">console</span>.log( regex.test(<span class="string">"aba"</span>), regex.lastIndex );</div><div class="line"><span class="built_in">console</span>.log( regex.test(<span class="string">"ababc"</span>), regex.lastIndex );</div><div class="line"><span class="comment">// =&gt; true 1</span></div><div class="line"><span class="comment">// =&gt; true 3</span></div><div class="line"><span class="comment">// =&gt; false 0</span></div></pre></td></tr></table></figure>
+<p>如果没有 g，自然都是从字符串第 0 个字符处开始尝试匹配：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> regex = <span class="regexp">/a/</span>;</div><div class="line"><span class="built_in">console</span>.log( regex.test(<span class="string">"a"</span>), regex.lastIndex );</div><div class="line"><span class="built_in">console</span>.log( regex.test(<span class="string">"aba"</span>), regex.lastIndex );</div><div class="line"><span class="built_in">console</span>.log( regex.test(<span class="string">"ababc"</span>), regex.lastIndex );</div><div class="line"><span class="comment">// =&gt; true 0</span></div><div class="line"><span class="comment">// =&gt; true 0</span></div><div class="line"><span class="comment">// =&gt; true 0</span></div></pre></td></tr></table></figure>
 <h2 id="node-js相关"><a href="#node-js相关" class="headerlink" title="node.js相关"></a>node.js相关</h2><h4 id="配置跨域"><a href="#配置跨域" class="headerlink" title="配置跨域"></a>配置跨域</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"><span class="comment">//设置跨域访问</span></div><div class="line">app.all(<span class="string">'*'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    res.header(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</div><div class="line">    res.header(<span class="string">"Access-Control-Allow-Headers"</span>, <span class="string">"X-Requested-With"</span>);</div><div class="line">    res.header(<span class="string">"Access-Control-Allow-Methods"</span>,<span class="string">"PUT,POST,GET,DELETE,OPTIONS"</span>);</div><div class="line">    res.header(<span class="string">"X-Powered-By"</span>,<span class="string">' 3.2.1'</span>)</div><div class="line">    res.header(<span class="string">"Content-Type"</span>, <span class="string">"application/json;charset=utf-8"</span>);</div><div class="line">    next();</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.get(<span class="string">'/auth/:id/:password'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">    res.send(&#123;<span class="attr">id</span>:req.params.id, <span class="attr">name</span>: req.params.password&#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.listen(<span class="number">3000</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'Listening on port 3000...'</span>);</div></pre></td></tr></table></figure>
 <h4 id="时间转换"><a href="#时间转换" class="headerlink" title="时间转换"></a>时间转换</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> curTime = <span class="keyword">new</span> <span class="built_in">Date</span>().toLocaleString();</div><div class="line"><span class="keyword">let</span> greenTime = <span class="keyword">new</span> <span class="built_in">Date</span>(curTime).getTime();</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>());</div><div class="line"><span class="built_in">console</span>.log(curTime);</div><div class="line"><span class="built_in">console</span>.log(greenTime);</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>(greenTime).toLocaleString());</div><div class="line"><span class="comment">//2017-04-17T09:13:04.603Z</span></div><div class="line"><span class="comment">//2017-04-17 17:13:04</span></div><div class="line"><span class="comment">//1492420384000</span></div><div class="line"><span class="comment">//2017-04-17 17:13:04</span></div></pre></td></tr></table></figure>
       
@@ -438,15 +445,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -454,7 +453,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -478,7 +485,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -486,7 +497,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -494,11 +505,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

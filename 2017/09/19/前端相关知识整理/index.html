@@ -182,7 +182,7 @@
 <h4 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> re, arr = [<span class="string">"11"</span>, <span class="string">"new"</span>, <span class="string">"old"</span>, <span class="string">"new"</span>, <span class="string">"11"</span>, <span class="string">"9090"</span>, <span class="string">"onlay"</span>, <span class="string">"11"</span>, <span class="string">"onlay"</span>];</div><div class="line">re = arr.filter(<span class="function"><span class="keyword">function</span>(<span class="params">value, index, array</span>) </span>&#123;</div><div class="line">	<span class="keyword">return</span> array.indexOf(value) === index;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <h4 id="input限制输入"><a href="#input限制输入" class="headerlink" title="input限制输入"></a>input限制输入</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input type=<span class="string">"number"</span> name=<span class="string">"points"</span> min=<span class="string">"1"</span> max=<span class="string">"10"</span> /&gt;</div></pre></td></tr></table></figure>
 <p>使用这句话时，输入框只能输入整数，要想输入小数，我们可以这样修改：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;input type=<span class="string">"number"</span> value=<span class="string">"1"</span>  min=<span class="string">"0.0"</span> step=<span class="string">"0.1"</span>&gt;</div><div class="line">&lt;input type="number" name="points" min="0.0" step="0.1" max="3" /&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;input type=<span class="string">"number"</span> value=<span class="string">"1"</span>  min=<span class="string">"0.0"</span> step=<span class="string">"0.1"</span>&gt;</div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"number"</span> <span class="attr">name</span>=<span class="string">"points"</span> <span class="attr">min</span>=<span class="string">"0.0"</span> <span class="attr">step</span>=<span class="string">"0.1"</span> <span class="attr">max</span>=<span class="string">"3"</span> /&gt;</span></span></div></pre></td></tr></table></figure>
 <p>例如上句，最小值为0，每一步步长为0.1，既可以输入0.1 0.2 0.3等等。则实现了既能输入整数，又能输入一位小数的输入框验证，如果多位小数，可以再把步长缩小，如0.01等等。</p>
 <p>input step属性最小可以设置0.000000000000000001，小数位再多一位step就会失效。</p>
 <p>number类型的input设置没有maxlength属性，可以使用max限制长度，也可以采用以下方法：</p>
@@ -450,7 +450,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -462,23 +474,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -498,15 +502,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

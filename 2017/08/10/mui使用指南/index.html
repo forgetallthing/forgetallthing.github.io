@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="踩坑全纪录  mui底部选项卡（webview模式）渲染问题&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-10-20T03:08:26.178Z">
+<meta property="og:updated_time" content="2017-10-21T08:30:51.458Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mui使用指南">
 <meta name="twitter:description" content="踩坑全纪录  mui底部选项卡（webview模式）渲染问题&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.">
@@ -202,7 +202,7 @@
 <h4 id="mui读文件速度问题"><a href="#mui读文件速度问题" class="headerlink" title="mui读文件速度问题"></a>mui读文件速度问题</h4><p>&emsp;&emsp;使用<code>plus.io.FileReader()</code>获取读文件对象后，设置<code>fileReader.readAsText(file, &#39;utf-8&#39;)</code>把文件内容以文本类型读出速度较慢(当文件超过500kb时，安卓版本5.1以下耗时5秒以上)，于是采用</p>
 <p><code>fileReader.readAsDataURL(file, &#39;utf-8&#39;)</code>以base64编码格式读出，再使用base64进行解码即可，</p>
 <p>时间消耗上平均可以节省一半耗时。</p>
-<h4 id="回到上级页面时刷新上级页面"><a href="#回到上级页面时刷新上级页面" class="headerlink" title="回到上级页面时刷新上级页面"></a>回到上级页面时刷新上级页面</h4><p>在父webview中有列表项，点击列表项进入子webview填写报表数据，返回父webview时重新加载列表项，我本来的想法是返回时触发父webview的reload()，但是页面明显闪烁，最后采用下面的自定义事件的方法：</p>
+<h4 id="回到上级页面时刷新上级页面"><a href="#回到上级页面时刷新上级页面" class="headerlink" title="回到上级页面时刷新上级页面"></a>回到上级页面时刷新上级页面</h4><p>&emsp;&emsp;在父webview中有列表项，点击列表项进入子webview填写报表数据，返回父webview时重新加载列表项，我本来的想法是返回时触发父webview的reload()，但是页面明显闪烁，最后采用下面的自定义事件的方法：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> old_back = mui.back;</div><div class="line">mui.back = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// 获取目标口窗口对象</span></div><div class="line">    <span class="keyword">var</span> target = plus.webview.getWebviewById(<span class="string">'目标口窗口对象的id'</span>);</div><div class="line">    <span class="comment">// 执行相应的事件</span></div><div class="line">    mui.fire(target, <span class="string">'customEvent'</span>, &#123;&#125;);</div><div class="line">    <span class="comment">// 执行关闭</span></div><div class="line">    old_back();</div><div class="line">&#125;;</div><div class="line"></div><div class="line">上一级页面（目标窗口）</div><div class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'customEvent'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">    <span class="comment">// mui.fire()传过来的额外的参数，在event.detail中；</span></div><div class="line">    <span class="keyword">var</span> detail = event.detail;</div><div class="line">    <span class="comment">// var param = detail.param;</span></div><div class="line">    <span class="comment">// 执行相应的ajax或者操作DOM等操作</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h4 id="getDirectory创建或打开子目录bug"><a href="#getDirectory创建或打开子目录bug" class="headerlink" title="getDirectory创建或打开子目录bug"></a>getDirectory创建或打开子目录bug</h4><p>使用<code>entry.getDirectory( path, flag, succesCB, errorCB)</code>时，最开始fs_name传的是“D”，fss是_documents（plus.io.PUBLIC_DOCUMENTS）目录对象，可以正常工作，但在另一处操作过对应的”D“文件夹后导致下面的创建函数报错：<code>code：10,message:&quot;执行出错&quot;</code>,经过反复debug，解决办法为：fs_name传值改为_documents/D即可。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">create_folder</span>(<span class="params">fss, fs_name, index_data, BJR_data, BJR_s_data, BJR_hu_data, callback</span>) </span>&#123;</div><div class="line">	fss.root.getDirectory(fs_name, &#123;</div><div class="line">		<span class="attr">create</span>: <span class="literal">true</span></div><div class="line">	&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">entry</span>) </span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">"create_folder ok"</span>)</div><div class="line">		callback(entry, index_data, BJR_data, BJR_s_data, BJR_hu_data);</div><div class="line">	&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(error) </div><div class="line">	&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -457,7 +457,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -465,15 +465,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -482,6 +478,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -505,11 +505,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -517,7 +513,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
             
             <div class="clearfix"></div>

@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="踩坑全纪录  mui底部选项卡（webview模式）渲染问题&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-10-21T08:30:51.458Z">
+<meta property="og:updated_time" content="2017-10-23T01:17:33.289Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mui使用指南">
 <meta name="twitter:description" content="踩坑全纪录  mui底部选项卡（webview模式）渲染问题&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓4.2.2和4.">
@@ -216,7 +216,7 @@
 <h4 id="下拉刷新时页面不滚动，且直接触发了下拉刷新事件bug解决办法"><a href="#下拉刷新时页面不滚动，且直接触发了下拉刷新事件bug解决办法" class="headerlink" title="下拉刷新时页面不滚动，且直接触发了下拉刷新事件bug解决办法"></a>下拉刷新时页面不滚动，且直接触发了下拉刷新事件bug解决办法</h4><p>使用mui的下拉刷新时，遇到了如题的问题：当列表滚动到最底部时，下拉首先应该是列表向下滚动，如果滚动到顶部，再下拉会触发下拉刷新事件。出现的bug是在列表底部下拉会直接触发下拉刷新事件，且页面无法滚动。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"pullrefresh"</span> <span class="attr">class</span>=<span class="string">"mui-content"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"OA_task_1"</span> <span class="attr">class</span>=<span class="string">"mui-table-view mui-table-view-chevron"</span>&gt;</span></div><div class="line">     //列表</div><div class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">mui.init(&#123;</div><div class="line">  <span class="attr">pullRefresh</span>: &#123;</div><div class="line">	<span class="attr">container</span>: <span class="string">'#pullrefresh'</span>,</div><div class="line">	<span class="attr">down</span>: &#123;</div><div class="line">	  <span class="attr">height</span>: <span class="string">'50px'</span>, <span class="comment">//可选,默认50px.下拉刷新控件的高度,</span></div><div class="line">	  range: <span class="string">'100px'</span>, <span class="comment">//可选 默认100px,控件可下拉拖拽的范围</span></div><div class="line">	  offset: <span class="string">'0px'</span>, <span class="comment">//可选 默认0px,下拉刷新控件的起始位置</span></div><div class="line">	  style: <span class="string">'circle'</span>,</div><div class="line">	  <span class="attr">callback</span>: pulldownRefresh</div><div class="line">     &#125;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>解决办法：经调试发现是给html,body,.mui-content设置了与组件冲突的css导致，去掉如下设置即可恢复正常：</p>
+<p>解决办法:经调试发现是给html,body,.mui-content设置了与组件冲突的css导致，去掉如下设置即可恢复正常：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">html</span>,</div><div class="line"><span class="selector-tag">body</span> &#123;</div><div class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">  <span class="attribute">overflow-x</span>: hidden;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.mui-content</span> &#123;</div><div class="line">  <span class="attribute">height</span>: <span class="number">100%</span> <span class="meta">!important</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
 
@@ -457,18 +457,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
@@ -481,7 +469,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -493,10 +493,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
@@ -505,7 +501,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -517,7 +517,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

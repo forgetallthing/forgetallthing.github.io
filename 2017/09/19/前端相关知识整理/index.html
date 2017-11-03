@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="样式效果particles.js粒子效果particles.js好用的背景粒子效果，比如知乎登录背景： github:https://github.com/VincentGarreau/particles.js 教程:http://blog.csdn.net/csdn_yudong/article/details/53128570 canvas-nest.js随鼠标聚集的背景效果：github:h">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-11-03T05:41:19.785Z">
+<meta property="og:updated_time" content="2017-11-03T07:33:00.398Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="样式效果particles.js粒子效果particles.js好用的背景粒子效果，比如知乎登录背景： github:https://github.com/VincentGarreau/particles.js 教程:http://blog.csdn.net/csdn_yudong/article/details/53128570 canvas-nest.js随鼠标聚集的背景效果：github:h">
@@ -215,7 +215,7 @@
 <li>通过修改document.domain来跨子域</li>
 <li>使用window.name来进行跨域</li>
 </ul>
-<p><em>　使用HTML5中新引进的window.postMessage方法来跨域传送数据（ie 67 不支持）
+<p><em>　使用HTML5中新引进的window.postMessage方法来跨域传送数据（ie 6/7 不支持）
 </em>　CORS 需要服务器设置header ：Access-Control-Allow-Origin。</p>
 <h4 id="简易图片预览"><a href="#简易图片预览" class="headerlink" title="简易图片预览"></a>简易图片预览</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"file"</span> <span class="attr">onchange</span>=<span class="string">"showPreview(this)"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"portrait"</span> <span class="attr">src</span>=<span class="string">""</span> <span class="attr">width</span>=<span class="string">"70"</span> <span class="attr">height</span>=<span class="string">"75"</span>&gt;</span></div></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">showPreview</span>(<span class="params">source</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> file = source.files[<span class="number">0</span>];</div><div class="line">  <span class="keyword">if</span>(<span class="built_in">window</span>.FileReader) &#123;</div><div class="line">      <span class="keyword">var</span> fr = <span class="keyword">new</span> FileReader();</div><div class="line">      fr.onloadend = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">        <span class="built_in">document</span>.getElementById(<span class="string">"portrait"</span>).src = e.target.result;</div><div class="line">      &#125;;</div><div class="line">      fr.readAsDataURL(file);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -464,11 +464,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -476,11 +476,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -492,11 +496,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,11 +516,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

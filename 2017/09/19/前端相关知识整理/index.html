@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="样式效果particles.js粒子效果particles.js好用的背景粒子效果，比如知乎登录背景： github:https://github.com/VincentGarreau/particles.js 教程:http://blog.csdn.net/csdn_yudong/article/details/53128570 canvas-nest.js随鼠标聚集的背景效果：github:h">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-11-03T07:33:50.370Z">
+<meta property="og:updated_time" content="2017-11-03T07:34:04.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="样式效果particles.js粒子效果particles.js好用的背景粒子效果，比如知乎登录背景： github:https://github.com/VincentGarreau/particles.js 教程:http://blog.csdn.net/csdn_yudong/article/details/53128570 canvas-nest.js随鼠标聚集的背景效果：github:h">
@@ -203,7 +203,7 @@
 <p>垃圾编码，毁我青春</p>
 <h4 id="匹配关键字高亮"><a href="#匹配关键字高亮" class="headerlink" title="匹配关键字高亮"></a>匹配关键字高亮</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//显示容器</span></div><div class="line"><span class="keyword">var</span> oBox= <span class="built_in">document</span>.getElementById(<span class="string">"box"</span>);  </div><div class="line"><span class="comment">//记录初始文本内容</span></div><div class="line"><span class="keyword">var</span> oCont=oBox.innerHTML;</div><div class="line"><span class="comment">//关键字</span></div><div class="line"><span class="keyword">var</span> oTxt=<span class="built_in">document</span>.getElementById(<span class="string">"txt"</span>);</div><div class="line"><span class="comment">//点击按钮，获取关键字，显示高亮内容    </span></div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"btn"</span>).onclick= <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> val=oTxt.value;</div><div class="line">  <span class="comment">//根据关键字分割字符串成数组</span></div><div class="line">  <span class="keyword">var</span> fen=oCont.split(val);</div><div class="line">  <span class="comment">//join把数组转成字符串，使用附加了span标签的关键字连接</span></div><div class="line">  oBox.innerHTML = fen.join(<span class="string">'&lt;span style="background:#cfc;"&gt;'</span> + val + <span class="string">'&lt;/span&gt; '</span>);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <h4 id="replace中的-1与-0"><a href="#replace中的-1与-0" class="headerlink" title="replace中的$1与$0"></a>replace中的<code>$1</code>与<code>$0</code></h4><p><code>String.prototype.replace</code> 第一个参数可以是正则表达式。<br>在第二个参数里面<code>$0</code>表示匹配的值，<code>$1</code>表示匹配子表达式对应的值，这样<code>$</code>就成了特殊字符。<br>所以要输入<code>&quot;$&quot;</code>就要写 <code>&quot;$$&quot;</code><br>例如把小写字母后的<code>R</code>替换成<code>r</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"aRbRcRRd"</span>.replace(<span class="regexp">/([a-z])R/g</span>,<span class="string">"$1r"</span>);  <span class="comment">//"arbrcrRd"</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"aRbRcRRd"</span>.replace(<span class="regexp">/([a-z])R/g</span>,<span class="string">"$1r"</span>); <span class="comment">//"arbrcrRd"</span></div></pre></td></tr></table></figure>
 <p>相关属性描述：<br><code>$1,$2,…,$99</code> 匹配第 1-99个 分组里捕获的文本<br><code>$&amp;</code> 匹配到的子串文本<br><code>$</code> 匹配到的子串的左边文本<br><code>$&#39;</code> 匹配到的子串的右边文本<br><code>$$</code> 美元符号</p>
 <h4 id="object深度复制"><a href="#object深度复制" class="headerlink" title="object深度复制"></a>object深度复制</h4><ul>
 <li>使用jq的$.extend(true, target, obj)</li>
@@ -460,7 +460,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -472,23 +472,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -500,7 +488,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -509,6 +505,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">

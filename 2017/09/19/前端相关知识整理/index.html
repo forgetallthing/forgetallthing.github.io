@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="样式效果particles.js粒子效果particles.js好用的背景粒子效果，比如知乎登录背景： github:https://github.com/VincentGarreau/particles.js 教程:http://blog.csdn.net/csdn_yudong/article/details/53128570 canvas-nest.js随鼠标聚集的背景效果：github:h">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-11-09T09:47:11.025Z">
+<meta property="og:updated_time" content="2017-11-09T09:52:21.505Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="样式效果particles.js粒子效果particles.js好用的背景粒子效果，比如知乎登录背景： github:https://github.com/VincentGarreau/particles.js 教程:http://blog.csdn.net/csdn_yudong/article/details/53128570 canvas-nest.js随鼠标聚集的背景效果：github:h">
@@ -221,9 +221,9 @@
 <h4 id="简易图片预览"><a href="#简易图片预览" class="headerlink" title="简易图片预览"></a>简易图片预览</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"file"</span> <span class="attr">onchange</span>=<span class="string">"showPreview(this)"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"portrait"</span> <span class="attr">src</span>=<span class="string">""</span> <span class="attr">width</span>=<span class="string">"70"</span> <span class="attr">height</span>=<span class="string">"75"</span>&gt;</span></div></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">showPreview</span>(<span class="params">source</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> file = source.files[<span class="number">0</span>];</div><div class="line">  <span class="keyword">if</span>(<span class="built_in">window</span>.FileReader) &#123;</div><div class="line">      <span class="keyword">var</span> fr = <span class="keyword">new</span> FileReader();</div><div class="line">      fr.onloadend = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">        <span class="built_in">document</span>.getElementById(<span class="string">"portrait"</span>).src = e.target.result;</div><div class="line">      &#125;;</div><div class="line">      fr.readAsDataURL(file);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="字符串转数字类型的细节"><a href="#字符串转数字类型的细节" class="headerlink" title="字符串转数字类型的细节"></a>字符串转数字类型的细节</h4><p>众所周知，js中字符转数字常用的方法为<code>parseInt()</code> 、<code>parseFloat()</code>和<code>Number()</code>，他们之间有趣的细节如下:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">alert(<span class="built_in">parseInt</span>(<span class="string">"1s1"</span>))<span class="comment">//弹出1</span></div><div class="line">alert(<span class="built_in">parseInt</span>(<span class="string">"s11"</span>))<span class="comment">//弹出NaN</span></div><div class="line">alert(<span class="built_in">parseInt</span>(<span class="string">"11s"</span>))<span class="comment">//弹出11</span></div><div class="line">alert(<span class="built_in">parseInt</span>(<span class="string">"1.1"</span>))<span class="comment">//弹出1</span></div><div class="line">alert(<span class="built_in">parseFloat</span>(<span class="string">"1"</span>))<span class="comment">//弹出1</span></div><div class="line">alert(<span class="built_in">parseFloat</span>(<span class="string">"1.1ff"</span>))<span class="comment">//弹出1.1</span></div><div class="line">alert(<span class="built_in">parseFloat</span>(<span class="string">"1s.1"</span>))<span class="comment">//弹出1</span></div><div class="line">alert(<span class="built_in">parseFloat</span>(<span class="string">"1.s1"</span>))<span class="comment">//弹出1</span></div><div class="line">alert(<span class="built_in">parseFloat</span>(<span class="string">"s1.1"</span>))<span class="comment">//弹出NaN</span></div><div class="line">alert(<span class="built_in">Number</span>(<span class="string">"1s1"</span>))<span class="comment">//弹出NaN</span></div><div class="line">alert(<span class="built_in">Number</span>(<span class="string">"s11"</span>))<span class="comment">//弹出NaN</span></div><div class="line">alert(<span class="built_in">Number</span>(<span class="string">"11s"</span>))<span class="comment">//弹出NaN</span></div><div class="line">alert(<span class="built_in">Number</span>(<span class="string">"1"</span>))<span class="comment">//弹出1</span></div><div class="line">alert(<span class="built_in">Number</span>(<span class="string">"1.1"</span>))<span class="comment">//弹出1.1</span></div></pre></td></tr></table></figure>
-<p>另外，+ string和Number(string)效果一致</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alert(<span class="string">"B"</span> + <span class="string">"a"</span> + + <span class="string">"B"</span> + <span class="string">"a"</span>)<span class="comment">//弹出BaNaNa</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">alert(<span class="built_in">parseInt</span>(<span class="string">"1s1"</span>))<span class="comment">//弹出1</span></div><div class="line">alert(<span class="built_in">parseInt</span>(<span class="string">"s11"</span>))<span class="comment">//弹出NaN</span></div><div class="line">alert(<span class="built_in">parseInt</span>(<span class="string">"11s"</span>))<span class="comment">//弹出11</span></div><div class="line">alert(<span class="built_in">parseInt</span>(<span class="string">"1.1"</span>))<span class="comment">//弹出1</span></div><div class="line">alert(<span class="built_in">parseInt</span>(<span class="string">"-11"</span>))<span class="comment">//弹出-11</span></div><div class="line">alert(<span class="built_in">parseInt</span>(<span class="string">"+11"</span>))<span class="comment">//弹出11</span></div><div class="line"></div><div class="line">alert(<span class="built_in">parseFloat</span>(<span class="string">"1"</span>))<span class="comment">//弹出1</span></div><div class="line">alert(<span class="built_in">parseFloat</span>(<span class="string">"1.1ff"</span>))<span class="comment">//弹出1.1</span></div><div class="line">alert(<span class="built_in">parseFloat</span>(<span class="string">"1s.1"</span>))<span class="comment">//弹出1</span></div><div class="line">alert(<span class="built_in">parseFloat</span>(<span class="string">"1.s1"</span>))<span class="comment">//弹出1</span></div><div class="line">alert(<span class="built_in">parseFloat</span>(<span class="string">"s1.1"</span>))<span class="comment">//弹出NaN</span></div><div class="line">alert(<span class="built_in">parseFloat</span>(<span class="string">"-1.1"</span>))<span class="comment">//弹出-1.1</span></div><div class="line">alert(<span class="built_in">parseFloat</span>(<span class="string">"+1.1"</span>))<span class="comment">//弹出1.1</span></div><div class="line">alert(<span class="built_in">Number</span>(<span class="string">"1s1"</span>))<span class="comment">//弹出NaN</span></div><div class="line">alert(<span class="built_in">Number</span>(<span class="string">"s11"</span>))<span class="comment">//弹出NaN</span></div><div class="line">alert(<span class="built_in">Number</span>(<span class="string">"11s"</span>))<span class="comment">//弹出NaN</span></div><div class="line">alert(<span class="built_in">Number</span>(<span class="string">"1"</span>))<span class="comment">//弹出1</span></div><div class="line">alert(<span class="built_in">Number</span>(<span class="string">"1.1"</span>))<span class="comment">//弹出1.1</span></div><div class="line">alert(<span class="built_in">Number</span>(<span class="string">"-11"</span>))<span class="comment">//弹出-11</span></div><div class="line">alert(<span class="built_in">Number</span>(<span class="string">"+11"</span>))<span class="comment">//弹出11</span></div></pre></td></tr></table></figure>
+<p>另外，+/- string和Number(string)效果一致</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">alert(+ <span class="string">"1.1"</span>)<span class="comment">//弹出1.1</span></div><div class="line">alert(<span class="string">"B"</span> + <span class="string">"a"</span> + + <span class="string">"B"</span> + <span class="string">"a"</span>)<span class="comment">//弹出BaNaNa</span></div><div class="line">alert(- <span class="string">"1.1"</span>)<span class="comment">//弹出-1.1</span></div></pre></td></tr></table></figure>
 <h2 id="正则表达式相关"><a href="#正则表达式相关" class="headerlink" title="正则表达式相关"></a>正则表达式相关</h2><h4 id="动态构建正则表达式"><a href="#动态构建正则表达式" class="headerlink" title="动态构建正则表达式"></a>动态构建正则表达式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> className = <span class="string">"high"</span>;</div><div class="line"><span class="keyword">var</span> regex = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|\\s)"</span> + className + <span class="string">"(\\s|$)"</span>);</div><div class="line"><span class="built_in">console</span>.log( regex.source )</div><div class="line"><span class="comment">// =&gt; (^|\s)high(\s|$) 即字符串"(^|\\s)high(\\s|$)"</span></div></pre></td></tr></table></figure>
 <p>使用eval也可以将字符串转化为正则表达式。</p>
 <h4 id="正则表达式中的g对js-api的影响"><a href="#正则表达式中的g对js-api的影响" class="headerlink" title="正则表达式中的g对js api的影响"></a>正则表达式中的g对js api的影响</h4><p>用于正则操作的方法，共有 6 个，字符串实例 4 个，正则实例 2 个:</p>
@@ -473,27 +473,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -505,15 +493,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">

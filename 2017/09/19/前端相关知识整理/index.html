@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具,github上有九千多star，简洁好用: 官网：http://www.browsersync.cn/ 如果你不用Gulp、Grunt的话，你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quot; 动">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-11-16T03:16:46.137Z">
+<meta property="og:updated_time" content="2017-11-16T03:18:09.406Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具,github上有九千多star，简洁好用: 官网：http://www.browsersync.cn/ 如果你不用Gulp、Grunt的话，你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quot; 动">
@@ -186,7 +186,7 @@
 <p>教程:<a href="http://www.cnblogs.com/zeoblog/p/6373173.html" target="_blank" rel="external">http://www.cnblogs.com/zeoblog/p/6373173.html</a></p>
 <h4 id="css-icon"><a href="#css-icon" class="headerlink" title="css icon"></a>css icon</h4><p>纯用css写的图标库,用起来很方便：</p>
 <p>官网：<a href="http://cssicon.space" target="_blank" rel="external">http://cssicon.space</a></p>
-<h4 id="species-in-pieces"><a href="#species-in-pieces" class="headerlink" title="species-in-pieces"></a>species-in-pieces</h4><p>30个动物，30种变换，主要就是使用css3的<code>clip-path</code> <code>polygon</code>实现，去浏览一下放松心情吧：</p>
+<h4 id="species-in-pieces"><a href="#species-in-pieces" class="headerlink" title="species-in-pieces"></a>species-in-pieces</h4><p>30种动物，30种变换，主要就是使用css3的<code>clip-path</code> <code>polygon</code>实现，去浏览一下放松心情吧：</p>
 <p>网址：<a href="http://species-in-pieces.com/" target="_blank" rel="external">http://species-in-pieces.com/</a></p>
 <h2 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h2><h4 id="计算生肖"><a href="#计算生肖" class="headerlink" title="计算生肖"></a>计算生肖</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* *</span></div><div class="line">*  计算生肖</div><div class="line">*  支持简写生日，比如01，转换为2001，89转换为1989；</div><div class="line">*  支持任何可以进行时间转换的格式，如'1989/01/01','1989 01'等</div><div class="line">* */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getShengXiao</span>(<span class="params">birth</span>) </span>&#123;</div><div class="line">   birth += <span class="string">''</span>;</div><div class="line">   <span class="keyword">var</span> len = birth.length;</div><div class="line">   <span class="keyword">if</span> (len &lt; <span class="number">4</span> &amp;&amp; len != <span class="number">2</span>) &#123;</div><div class="line">       <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">if</span> (len == <span class="number">2</span>) &#123;</div><div class="line">       birth - <span class="number">0</span> &gt; <span class="number">30</span> ? birth = <span class="string">'19'</span> + birth : birth = <span class="string">'20'</span> + birth;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">var</span> year = (<span class="keyword">new</span> <span class="built_in">Date</span>(birth)).getFullYear();</div><div class="line">   <span class="keyword">var</span> arr = [<span class="string">'猴'</span>, <span class="string">'鸡'</span>, <span class="string">'狗'</span>, <span class="string">'猪'</span>, <span class="string">'鼠'</span>, <span class="string">'牛'</span>, <span class="string">'虎'</span>, <span class="string">'兔'</span>, <span class="string">'龙'</span>, <span class="string">'蛇'</span>, <span class="string">'马'</span>, <span class="string">'羊'</span>];</div><div class="line">   <span class="keyword">return</span> <span class="regexp">/^\d&#123;4&#125;$/</span>.test(year) ? arr[year % <span class="number">12</span>] : <span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="计算星座"><a href="#计算星座" class="headerlink" title="计算星座"></a>计算星座</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* *</span></div><div class="line"> * 计算星座</div><div class="line"> * 支持传递[月日]，[月,日]，[年月日]等格式</div><div class="line"> * console.log(getAstro('102'));       //01-02</div><div class="line"> * console.log(getAstro('0102'));      //01-02</div><div class="line"> * console.log(getAstro('1023'));      //10-22</div><div class="line"> * console.log(getAstro('890102'));    //01-01</div><div class="line"> * console.log(getAstro('19890102'));  //01-01</div><div class="line"> * console.log(getAstro(1, 2));        //01-02</div><div class="line"> * console.log(getAstro(01, 22));      //01-22</div><div class="line"> * */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAstro</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> params = &#123;&#125;;</div><div class="line">	<span class="keyword">var</span> c = <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="built_in">parseInt</span>(d, <span class="number">10</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">switch</span>(<span class="built_in">arguments</span>.length) &#123;</div><div class="line">		<span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">			<span class="keyword">var</span> s = <span class="built_in">arguments</span>[<span class="number">0</span>] + <span class="string">''</span>,</div><div class="line">				b = s.length;</div><div class="line">			<span class="keyword">if</span>(b &lt; <span class="number">3</span> || b &gt; <span class="number">8</span>) &#123;</div><div class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span>(b == <span class="number">3</span>) &#123;</div><div class="line">				params[<span class="string">'mouth'</span>] = c(s.slice(<span class="number">0</span>, <span class="number">1</span>));</div><div class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span>(b == <span class="number">4</span>) &#123;</div><div class="line">				params[<span class="string">'mouth'</span>] = c(s.slice(<span class="number">0</span>, <span class="number">2</span>));</div><div class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span>(b == <span class="number">6</span>) &#123;</div><div class="line">				params[<span class="string">'mouth'</span>] = c(s.slice(<span class="number">2</span>, <span class="number">4</span>));</div><div class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span>(b == <span class="number">8</span>) &#123;</div><div class="line">				params[<span class="string">'mouth'</span>] = c(s.slice(<span class="number">4</span>, <span class="number">6</span>));</div><div class="line">			&#125;</div><div class="line">			params[<span class="string">'day'</span>] = c(s.slice(<span class="number">-2</span>));</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> <span class="number">2</span>:</div><div class="line">			params[<span class="string">'month'</span>] = c(<span class="built_in">arguments</span>[<span class="number">0</span>]);</div><div class="line">			params[<span class="string">'day'</span>] = c(<span class="built_in">arguments</span>[<span class="number">1</span>]);</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">default</span>:</div><div class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="string">"魔羯水瓶双鱼牡羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯"</span>.substr(params[<span class="string">'month'</span>] * <span class="number">2</span> - (params[<span class="string">'day'</span>] &lt; [<span class="number">20</span>, <span class="number">19</span>, <span class="number">21</span>, <span class="number">21</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>, <span class="number">23</span>, <span class="number">23</span>, <span class="number">23</span>, <span class="number">22</span>, <span class="number">22</span>][params[<span class="string">'month'</span>] - <span class="number">1</span>] ? <span class="number">2</span> : <span class="number">0</span>), <span class="number">2</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -477,15 +477,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -517,10 +517,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
@@ -529,7 +525,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -538,6 +534,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
             
             <div class="clearfix"></div>

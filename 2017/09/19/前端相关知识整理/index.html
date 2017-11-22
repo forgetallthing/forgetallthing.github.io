@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具,github上有九千多star，简洁好用: 官网：http://www.browsersync.cn/ 如果你不用Gulp、Grunt的话，你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quot; 动">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-11-22T03:50:23.583Z">
+<meta property="og:updated_time" content="2017-11-22T03:50:45.260Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具,github上有九千多star，简洁好用: 官网：http://www.browsersync.cn/ 如果你不用Gulp、Grunt的话，你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quot; 动">
@@ -209,7 +209,7 @@
 <h4 id="获取屏幕尺寸函数"><a href="#获取屏幕尺寸函数" class="headerlink" title="获取屏幕尺寸函数"></a>获取屏幕尺寸函数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_wh</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="built_in">document</span>.write(</div><div class="line">		<span class="string">"屏幕分辨率为："</span> + screen.width + <span class="string">"*"</span> + screen.height +</div><div class="line">		<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">		<span class="string">"屏幕可用大小："</span> + screen.availWidth + <span class="string">"*"</span> + screen.availHeight +</div><div class="line">		<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">		<span class="string">"网页可见区域宽："</span> + <span class="built_in">document</span>.body.clientWidth +</div><div class="line">		<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">		<span class="string">"网页可见区域高："</span> + <span class="built_in">document</span>.body.clientHeight +</div><div class="line">		<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">		<span class="string">"网页可见区域宽(包括边线的宽)："</span> + <span class="built_in">document</span>.body.offsetWidth +</div><div class="line">		<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">		<span class="string">"网页可见区域高(包括边线的宽)："</span> + <span class="built_in">document</span>.body.offsetHeight +</div><div class="line">		<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">		<span class="string">"网页正文全文宽："</span> + <span class="built_in">document</span>.body.scrollWidth +</div><div class="line">		<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">		<span class="string">"网页正文全文高："</span> + <span class="built_in">document</span>.body.scrollHeight +</div><div class="line">		<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">		<span class="string">"网页被卷去的高："</span> + <span class="built_in">document</span>.body.scrollTop +</div><div class="line">		<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">		<span class="string">"网页被卷去的左："</span> + <span class="built_in">document</span>.body.scrollLeft +</div><div class="line">		<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">		<span class="string">"网页正文部分上："</span> + <span class="built_in">window</span>.screenTop +</div><div class="line">		<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">		<span class="string">"网页正文部分左："</span> + <span class="built_in">window</span>.screenLeft +</div><div class="line">		<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">		<span class="string">"屏幕分辨率的高："</span> + <span class="built_in">window</span>.screen.height +</div><div class="line">		<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">		<span class="string">"屏幕分辨率的宽："</span> + <span class="built_in">window</span>.screen.width +</div><div class="line">		<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">		<span class="string">"屏幕可用工作区高度："</span> + <span class="built_in">window</span>.screen.availHeight +</div><div class="line">		<span class="string">"&lt;br /&gt;"</span> +</div><div class="line">		<span class="string">"屏幕可用工作区宽度："</span> + <span class="built_in">window</span>.screen.availWidth</div><div class="line">	);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="echarts地图配置"><a href="#echarts地图配置" class="headerlink" title="echarts地图配置"></a>echarts地图配置</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">series: [&#123;</div><div class="line">    type: <span class="string">'map'</span>,</div><div class="line">    map: <span class="string">'北京'</span></div><div class="line">&#125;]</div></pre></td></tr></table></figure>
 <p>map的值为中国地图 要用”china”，省份的地图用汉字。</p>
-<h4 id="关于恼人的编码问题"><a href="#关于恼人的编码问题" class="headerlink" title="关于恼人的编码问题"></a>关于恼人的编码问题</h4><p>编码乱码问题很烦人，今天在webstorm上写electron项目遇到了在webstorm上直接chroom打开时，页面出现中文乱码问题，但是直接从文件夹中打开正常，而Firefox两者都是乱码，于是在webstorm上调整编码格式都为utf-8也不好使，用notepad++把代码编码格式转为utf-8也不好使，哈哈哈原来是html文件少打了个</p>
+<h4 id="关于恼人的编码问题"><a href="#关于恼人的编码问题" class="headerlink" title="关于恼人的编码问题"></a>关于恼人的编码问题</h4><p>编码乱码问题很恼人，今天在webstorm上写electron项目遇到了在webstorm上直接chroom打开时，页面出现中文乱码问题，但是直接从文件夹中打开正常，而Firefox两者都是乱码，于是在webstorm上调整编码格式都为utf-8也不好使，用notepad++把代码编码格式转为utf-8也不好使，哈哈哈原来是html文件少打了个</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</div></pre></td></tr></table></figure>
 <p>垃圾编码，毁我青春</p>
 <h4 id="匹配关键字高亮"><a href="#匹配关键字高亮" class="headerlink" title="匹配关键字高亮"></a>匹配关键字高亮</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//显示容器</span></div><div class="line"><span class="keyword">var</span> oBox= <span class="built_in">document</span>.getElementById(<span class="string">"box"</span>);  </div><div class="line"><span class="comment">//记录初始文本内容</span></div><div class="line"><span class="keyword">var</span> oCont=oBox.innerHTML;</div><div class="line"><span class="comment">//关键字</span></div><div class="line"><span class="keyword">var</span> oTxt=<span class="built_in">document</span>.getElementById(<span class="string">"txt"</span>);</div><div class="line"><span class="comment">//点击按钮，获取关键字，显示高亮内容    </span></div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"btn"</span>).onclick= <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> val=oTxt.value;</div><div class="line">  <span class="comment">//根据关键字分割字符串成数组</span></div><div class="line">  <span class="keyword">var</span> fen=oCont.split(val);</div><div class="line">  <span class="comment">//join把数组转成字符串，使用附加了span标签的关键字连接</span></div><div class="line">  oBox.innerHTML = fen.join(<span class="string">'&lt;span style="background:#cfc;"&gt;'</span> + val + <span class="string">'&lt;/span&gt; '</span>);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
@@ -487,15 +487,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -508,14 +516,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">mongod</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">

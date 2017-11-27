@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="踩坑全纪录（持续更新中…）  mui底部选项卡（webview模式）渲染问题&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-11-27T08:09:10.612Z">
+<meta property="og:updated_time" content="2017-11-27T08:09:40.386Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mui使用指南">
 <meta name="twitter:description" content="踩坑全纪录（持续更新中…）  mui底部选项卡（webview模式）渲染问题&amp;emsp;&amp;emsp;做人口普查项目需要适配调查员手里的三款pad，它们的安卓版本分别为5.1.1、4.2.2、4.1.2。所以遇到了一些不兼容问题，比如安卓5以下不支持vw、vh等css单位。于是我使用rem进行屏幕适配，但是在写 mui底部选项卡（webview模式）的时候，出现了以下问题：在首次打开app时，安卓">
@@ -223,7 +223,7 @@
 <p>亲测在单webview模式下此api只能禁用上拉加载，无法停用下拉刷新。</p>
 <h4 id="popover中的滚动"><a href="#popover中的滚动" class="headerlink" title="popover中的滚动"></a>popover中的滚动</h4><p>popover中的滚动必须使用mui-scroll实现，必须给popover设置固定高度才能正常显示popover样式，mui-scroll中的<code>ul</code>样式设定推荐使用官方例子中的（安卓低版本不支持<code>div</code>滚动）：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.mui-popover</span> &#123;</div><div class="line">	<span class="attribute">height</span>: <span class="number">300px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;div id="topPopover" class="mui-popover"&gt;</div><div class="line">	&lt;div class="mui-popover-arrow"&gt;&lt;/div&gt;    </div><div class="line">	&lt;div class="mui-scroll-wrapper"&gt;</div><div class="line">        &lt;div class="mui-scroll"&gt;</div><div class="line">            &lt;ul class="mui-table-view"&gt;</div><div class="line">                &lt;li class="mui-table-view-cell"&gt;&lt;a href="#"&gt;Item9&lt;/a&gt;</div><div class="line">                &lt;/li&gt;</div><div class="line">                &lt;li class="mui-table-view-cell"&gt;&lt;a href="#"&gt;Item10&lt;/a&gt;</div><div class="line">                &lt;/li&gt;</div><div class="line">            &lt;/ul&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;div id="topPopover" class="mui-popover"&gt;</div><div class="line">	&lt;div class="mui-popover-arrow"&gt;&lt;/div&gt;    </div><div class="line">	&lt;div class="mui-scroll-wrapper"&gt;</div><div class="line">        &lt;div class="mui-scroll"&gt;</div><div class="line">            &lt;ul class="mui-table-view"&gt;</div><div class="line">                &lt;li class="mui-table-view-cell"&gt;&lt;a href="#"&gt;Item1&lt;/a&gt;</div><div class="line">                &lt;/li&gt;</div><div class="line">                &lt;li class="mui-table-view-cell"&gt;&lt;a href="#"&gt;Item2&lt;/a&gt;</div><div class="line">                &lt;/li&gt;</div><div class="line">            &lt;/ul&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
 <p>动态添加<code>li</code>数量的话，可以根据<code>li</code>数量自行控制<code>popover</code>高度即可。</p>
 
       
@@ -483,10 +483,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">bat</a>
               </li>
              
@@ -507,6 +503,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
@@ -515,15 +515,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">

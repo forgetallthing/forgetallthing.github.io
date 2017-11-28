@@ -177,18 +177,18 @@
 <a id="more"></a>
 <p>使用方法<br>引用jquery和jquery.lazyload.js到你的页面</p>
 <p>html图片调用</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"jquery-1.11.0.min.js"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script src=<span class="string">"jquery.lazyload.js?v=1.9.1"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"jquery-1.11.0.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div><div class="line">&lt;script src=<span class="string">"jquery.lazyload.js?v=1.9.1"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure>
 <p>方法<br>为图片加入样式lazy  图片路径引用方法用data-original</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;img <span class="class"><span class="keyword">class</span></span>=<span class="string">"lazy"</span> data-original=<span class="string">"img/bmw_m1_hood.jpg"</span>&gt;</div><div class="line"></div><div class="line">&lt;img class="lazy" data-original="img/bmw_m1_side.jpg"&gt;</div><div class="line"></div><div class="line">&lt;img class="lazy" data-original="img/viper_1.jpg"&gt;</div><div class="line"></div><div class="line">&lt;img class="lazy" data-original="img/viper_corner.jpg"&gt;</div><div class="line"></div><div class="line">&lt;img class="lazy" data-original="img/bmw_m3_gt.jpg"&gt;</div><div class="line"></div><div class="line">&lt;img class="lazy" data-original="img/corvette_pitstop.jpg"&gt;</div></pre></td></tr></table></figure>
-<p>js出始化lazyload并设置图片显示方式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span> charset=<span class="string">"utf-8"</span>&gt;</div><div class="line"></div><div class="line">  $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">      $(<span class="string">"img.lazy"</span>).lazyload(&#123;<span class="attr">effect</span>: <span class="string">"fadeIn"</span>&#125;);</div><div class="line"></div><div class="line">  &#125;);</div><div class="line"></div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>js出始化lazyload并设置图片显示方式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span> charset=<span class="string">"utf-8"</span>&gt;</div><div class="line"></div><div class="line">  $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">      $(<span class="string">"img.lazy"</span>).lazyload(&#123;<span class="attr">effect</span>: <span class="string">"fadeIn"</span>&#125;);</div><div class="line"></div><div class="line">  &#125;);</div><div class="line"></div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure></p>
 <p>在图片中也可以不使用 class=”lazy”，初始化时使用：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img"</span>).lazyload(&#123;<span class="attr">effect</span>: <span class="string">"fadeIn"</span>&#125;);</div></pre></td></tr></table></figure>
 <p>这样就可以对全局的图片都有效！</p>
 <p>如果想提载入图片，可以使用 threshold 进行设置，</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img.lazy"</span>).lazyload(&#123; <span class="attr">threshold</span> :<span class="number">180</span>&#125;);</div></pre></td></tr></table></figure>
 <p>以上实例的含义是：在图片距离屏幕180px时提前载入：<br>​    </p>
-<p>引入<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"jquery-1.11.0.min.js"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script src=<span class="string">"jquery.lazyload.js?v=1.9.1"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure></p>
-<p>路径依据实际目录来确定。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span> charset=<span class="string">"utf-8"</span>&gt;</div><div class="line"></div><div class="line">  $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">      $(<span class="string">"img.lazy"</span>).lazyload(&#123;<span class="attr">effect</span>: <span class="string">"fadeIn"</span>&#125;);</div><div class="line"></div><div class="line">  &#125;);</div><div class="line"></div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>引入<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"jquery-1.11.0.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div><div class="line">&lt;script src=<span class="string">"jquery.lazyload.js?v=1.9.1"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure></p>
+<p>路径依据实际目录来确定。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span> charset=<span class="string">"utf-8"</span>&gt;</div><div class="line"></div><div class="line">  $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">      $(<span class="string">"img.lazy"</span>).lazyload(&#123;<span class="attr">effect</span>: <span class="string">"fadeIn"</span>&#125;);</div><div class="line"></div><div class="line">  &#125;);</div><div class="line"></div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure></p>
 <p>图片引用lazyload 方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;img class=&quot;lazy&quot; data-original=&quot;img/bmw_m1_hood.jpg&quot;  /&gt;</div></pre></td></tr></table></figure></p>
 <p>参数设置<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img.lazy"</span>).lazyload(&#123;</div><div class="line"></div><div class="line">  <span class="attr">placeholder</span> : <span class="string">"img/grey.gif"</span>, <span class="comment">//用图片提前占位</span></div><div class="line"></div><div class="line">    <span class="comment">// placeholder,值为某一图片路径.此图片用来占据将要加载的图片的位置,待图片加载时,占位图则会隐藏</span></div><div class="line"></div><div class="line">  effect: <span class="string">"fadeIn"</span>, <span class="comment">// 载入使用何种效果</span></div><div class="line"></div><div class="line">    <span class="comment">// effect(特效),值有show(直接显示),fadeIn(淡入),slideDown(下拉)等,常用fadeIn</span></div><div class="line"></div><div class="line">  threshold: <span class="number">200</span>, <span class="comment">// 提前开始加载</span></div><div class="line"></div><div class="line">    <span class="comment">// threshold,值为数字,代表页面高度.如设置为200,表示滚动条在离目标位置还有200的高度时就开始加载图片,可以做到不让用户察觉</span></div><div class="line"></div><div class="line">  event: <span class="string">'click'</span>,  <span class="comment">// 事件触发时才加载</span></div><div class="line"></div><div class="line">    <span class="comment">// event,值有click(点击),mouseover(鼠标划过),sporty(运动的),foobar(…).可以实现鼠标莫过或点击图片才开始加载,后两个值未测试…</span></div><div class="line"></div><div class="line">  container: $(<span class="string">"#container"</span>),  <span class="comment">// 对某容器中的图片实现效果</span></div><div class="line"></div><div class="line">    <span class="comment">// container,值为某容器.lazyload默认在拉动浏览器滚动条时生效,这个参数可以让你在拉动某DIV的滚动条时依次加载其中的图片</span></div><div class="line"></div><div class="line">  failurelimit : <span class="number">10</span> <span class="comment">// 图片排序混乱时</span></div><div class="line"></div><div class="line">     <span class="comment">// failurelimit,值为数字.lazyload默认在找到第一张不在可见区域里的图片时则不再继续加载,但当HTML容器混乱的时候可能出现可见区域内图片并没加载出来的情况,failurelimit意在加载N张可见区域外的图片,以避免出现这个问题.</span></div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 
@@ -437,15 +437,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -457,19 +457,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -481,19 +477,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
             
             <div class="clearfix"></div>

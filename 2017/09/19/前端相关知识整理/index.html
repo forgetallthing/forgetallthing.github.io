@@ -17,7 +17,7 @@
 <meta property="og:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具,github上有九千多star，简洁好用: 官网：http://www.browsersync.cn/ 如果你不用Gulp、Grunt的话，你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quot; 动">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/Video_2017-11-27_103235%2000_00_05-00_00_09.gif">
-<meta property="og:updated_time" content="2017-12-08T01:59:39.443Z">
+<meta property="og:updated_time" content="2017-12-11T02:35:49.677Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具,github上有九千多star，简洁好用: 官网：http://www.browsersync.cn/ 如果你不用Gulp、Grunt的话，你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quot; 动">
@@ -195,7 +195,7 @@
 <h4 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> re, arr = [<span class="string">"11"</span>, <span class="string">"new"</span>, <span class="string">"old"</span>, <span class="string">"new"</span>, <span class="string">"11"</span>, <span class="string">"909090"</span>, <span class="string">"only"</span>, <span class="string">"111"</span>, <span class="string">"onlay"</span>];</div><div class="line">re = arr.filter(<span class="function"><span class="keyword">function</span>(<span class="params">value, index, array</span>) </span>&#123;</div><div class="line">	<span class="keyword">return</span> array.indexOf(value) === index;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <h4 id="input限制输入"><a href="#input限制输入" class="headerlink" title="input限制输入"></a>input限制输入</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input type=<span class="string">"number"</span> name=<span class="string">"points"</span> min=<span class="string">"1"</span> max=<span class="string">"10"</span> /&gt;</div></pre></td></tr></table></figure>
 <p>使用这句话时，输入框只能输入整数，要想输入小数，我们可以这样修改：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;input type=<span class="string">"number"</span> value=<span class="string">"1"</span>  min=<span class="string">"0.0"</span> step=<span class="string">"0.1"</span>&gt;</div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"number"</span> <span class="attr">name</span>=<span class="string">"points"</span> <span class="attr">min</span>=<span class="string">"0.0"</span> <span class="attr">step</span>=<span class="string">"0.1"</span> <span class="attr">max</span>=<span class="string">"3"</span> /&gt;</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;input type=<span class="string">"number"</span> value=<span class="string">"1"</span>  min=<span class="string">"0.0"</span> step=<span class="string">"0.1"</span>&gt;</div><div class="line">&lt;input type="number" name="points" min="0.0" step="0.1" max="3" /&gt;</div></pre></td></tr></table></figure>
 <p>例如上句，最小值为0，每一步步长为0.1，既可以输入0.1 0.2 0.3等等。则实现了既能输入整数，又能输入一位小数的输入框验证，如果多位小数，可以再把步长缩小，如0.01等等。</p>
 <p>input step属性最小可以设置0.000000000000000001，小数位再多一位step就会失效。</p>
 <p>number类型的input设置没有maxlength属性，可以使用max限制长度，也可以采用以下方法：</p>
@@ -242,6 +242,12 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.point</span> &#123;</div><div class="line">	<span class="attribute">position</span>: absolute;</div><div class="line">	<span class="attribute">width</span>: <span class="number">100px</span>;</div><div class="line">	<span class="attribute">height</span>: <span class="number">100px</span>;</div><div class="line">	<span class="attribute">transform</span>: <span class="built_in">rotate</span>(45deg);</div><div class="line">	<span class="comment">/*animation: circleProgressLoad_point 5s linear ;*/</span>	</div><div class="line">&#125;</div><div class="line">@<span class="keyword">keyframes</span> circleProgressLoad_point &#123;&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//js设置角度</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">stop_point</span>(<span class="params">deg</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> cssRule = getRule(<span class="string">"circleProgressLoad_point"</span>);</div><div class="line">	cssRule.appendRule(<span class="string">"0% &#123; transform: rotate(45deg) "</span>);</div><div class="line">	cssRule.appendRule(<span class="string">"100% &#123; transform: rotate("</span> + deg + <span class="string">"deg)"</span>);</div><div class="line">	$(<span class="string">".point"</span>).css(<span class="string">'animation'</span>, <span class="string">" circleProgressLoad_point 1s linear"</span>);</div><div class="line">	$(<span class="string">".point"</span>).css(<span class="string">'animation-fill-mode'</span>, <span class="string">"forwards"</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//获取cssRule</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRule</span>(<span class="params">rule_name</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> rule;</div><div class="line">	<span class="keyword">var</span> ss = <span class="built_in">document</span>.styleSheets;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; ss.length; ++i) &#123;</div><div class="line">		<span class="comment">// loop through all the rules!</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> x = <span class="number">0</span>; x &lt; ss[i].cssRules.length; ++x) &#123;</div><div class="line">			rule = ss[i].cssRules[x];</div><div class="line">			<span class="keyword">if</span>(rule.name == rule_name &amp;&amp; rule.type == CSSRule.KEYFRAMES_RULE)&#123;</div><div class="line">				<span class="keyword">return</span> cssRule = rule;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//传入由数据计算得来的旋转角度</span></div><div class="line">stop_point(<span class="number">180</span>)</div></pre></td></tr></table></figure>
 <p><img src="http://otw7po22v.bkt.clouddn.com/Video_2017-11-27_103235%2000_00_05-00_00_09.gif" alt=""></p>
+<h4 id="相对路径中的-与-和"><a href="#相对路径中的-与-和" class="headerlink" title="相对路径中的./与../和/"></a>相对路径中的./与../和/</h4><p>“./“：代表目前所在的目录。</p>
+<p>“../“：代表上一层目录。</p>
+<p>以”/“开头：代表根目录。</p>
+<p>比如在express中使用<code>app.use(express.static(path.join(__dirname, &#39;public&#39;)))</code>指定了静态资源位置后，html页面中的静态资源链接应写为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"/css/404.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/js/404.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"rotating"</span> <span class="attr">src</span>=<span class="string">"/svg/spaceman.svg"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p> 这样在访问<code>http://localhost:3000/index/</code>  时，会生成正确的的静态资源链接<code>http://localhost:3000/svg/spaceman.svg</code> ，如果使用”./“，链接则变为<code>http://localhost:3000/index/svg/spaceman.svg</code></p>
 <h2 id="正则表达式相关"><a href="#正则表达式相关" class="headerlink" title="正则表达式相关"></a>正则表达式相关</h2><h4 id="动态构建正则表达式"><a href="#动态构建正则表达式" class="headerlink" title="动态构建正则表达式"></a>动态构建正则表达式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> className = <span class="string">"high"</span>;</div><div class="line"><span class="keyword">var</span> regex = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|\\s)"</span> + className + <span class="string">"(\\s|$)"</span>);</div><div class="line"><span class="built_in">console</span>.log(regex.source)</div><div class="line"><span class="comment">// =&gt; (^|\s)high(\s|$) 即字符串"(^|\\s)high(\\s|$)"</span></div></pre></td></tr></table></figure>
 <p>使用eval也可以将字符串转化为正则表达式。</p>
 <h4 id="正则表达式中的g对js-api的影响"><a href="#正则表达式中的g对js-api的影响" class="headerlink" title="正则表达式中的g对js api的影响"></a>正则表达式中的g对js api的影响</h4><p>用于正则操作的方法，共有 6 个，字符串实例 4 个，正则实例 2 个:</p>
@@ -364,7 +370,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#各类库和工具收藏："><span class="toc-number">1.</span> <span class="toc-text">各类库和工具收藏：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Browsersync"><span class="toc-number">1.0.1.</span> <span class="toc-text">Browsersync</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#particles-js"><span class="toc-number">1.0.2.</span> <span class="toc-text">particles.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#canvas-nest-js："><span class="toc-number">1.0.3.</span> <span class="toc-text">canvas-nest.js：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#css-icon"><span class="toc-number">1.0.4.</span> <span class="toc-text">css icon</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#species-in-pieces"><span class="toc-number">1.0.5.</span> <span class="toc-text">species-in-pieces</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用函数"><span class="toc-number">2.</span> <span class="toc-text">常用函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#计算生肖"><span class="toc-number">2.0.1.</span> <span class="toc-text">计算生肖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#计算星座"><span class="toc-number">2.0.2.</span> <span class="toc-text">计算星座</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组去重"><span class="toc-number">2.0.3.</span> <span class="toc-text">数组去重</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#input限制输入"><span class="toc-number">2.0.4.</span> <span class="toc-text">input限制输入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取对象属性和长度"><span class="toc-number">2.0.5.</span> <span class="toc-text">获取对象属性和长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取屏幕尺寸函数"><span class="toc-number">2.0.6.</span> <span class="toc-text">获取屏幕尺寸函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#echarts地图配置"><span class="toc-number">2.0.7.</span> <span class="toc-text">echarts地图配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于恼人的编码问题"><span class="toc-number">2.0.8.</span> <span class="toc-text">关于恼人的编码问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#匹配关键字高亮"><span class="toc-number">2.0.9.</span> <span class="toc-text">匹配关键字高亮</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#replace中的-1与-0"><span class="toc-number">2.0.10.</span> <span class="toc-text">replace中的$1与$0</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#object深度复制"><span class="toc-number">2.0.11.</span> <span class="toc-text">object深度复制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#跨域的几种方式"><span class="toc-number">2.0.12.</span> <span class="toc-text">跨域的几种方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#简易图片预览"><span class="toc-number">2.0.13.</span> <span class="toc-text">简易图片预览</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串转数字类型的细节"><span class="toc-number">2.0.14.</span> <span class="toc-text">字符串转数字类型的细节</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用cssRule改变-keyframes内容"><span class="toc-number">2.0.15.</span> <span class="toc-text">使用cssRule改变@keyframes内容</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正则表达式相关"><span class="toc-number">3.</span> <span class="toc-text">正则表达式相关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#动态构建正则表达式"><span class="toc-number">3.0.1.</span> <span class="toc-text">动态构建正则表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正则表达式中的g对js-api的影响"><span class="toc-number">3.0.2.</span> <span class="toc-text">正则表达式中的g对js api的影响</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#node-js相关"><span class="toc-number">4.</span> <span class="toc-text">node.js相关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置跨域"><span class="toc-number">4.0.1.</span> <span class="toc-text">配置跨域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间转换"><span class="toc-number">4.0.2.</span> <span class="toc-text">时间转换</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#各类库和工具收藏："><span class="toc-number">1.</span> <span class="toc-text">各类库和工具收藏：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Browsersync"><span class="toc-number">1.0.1.</span> <span class="toc-text">Browsersync</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#particles-js"><span class="toc-number">1.0.2.</span> <span class="toc-text">particles.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#canvas-nest-js："><span class="toc-number">1.0.3.</span> <span class="toc-text">canvas-nest.js：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#css-icon"><span class="toc-number">1.0.4.</span> <span class="toc-text">css icon</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#species-in-pieces"><span class="toc-number">1.0.5.</span> <span class="toc-text">species-in-pieces</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用函数"><span class="toc-number">2.</span> <span class="toc-text">常用函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#计算生肖"><span class="toc-number">2.0.1.</span> <span class="toc-text">计算生肖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#计算星座"><span class="toc-number">2.0.2.</span> <span class="toc-text">计算星座</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组去重"><span class="toc-number">2.0.3.</span> <span class="toc-text">数组去重</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#input限制输入"><span class="toc-number">2.0.4.</span> <span class="toc-text">input限制输入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取对象属性和长度"><span class="toc-number">2.0.5.</span> <span class="toc-text">获取对象属性和长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取屏幕尺寸函数"><span class="toc-number">2.0.6.</span> <span class="toc-text">获取屏幕尺寸函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#echarts地图配置"><span class="toc-number">2.0.7.</span> <span class="toc-text">echarts地图配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于恼人的编码问题"><span class="toc-number">2.0.8.</span> <span class="toc-text">关于恼人的编码问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#匹配关键字高亮"><span class="toc-number">2.0.9.</span> <span class="toc-text">匹配关键字高亮</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#replace中的-1与-0"><span class="toc-number">2.0.10.</span> <span class="toc-text">replace中的$1与$0</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#object深度复制"><span class="toc-number">2.0.11.</span> <span class="toc-text">object深度复制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#跨域的几种方式"><span class="toc-number">2.0.12.</span> <span class="toc-text">跨域的几种方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#简易图片预览"><span class="toc-number">2.0.13.</span> <span class="toc-text">简易图片预览</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串转数字类型的细节"><span class="toc-number">2.0.14.</span> <span class="toc-text">字符串转数字类型的细节</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用cssRule改变-keyframes内容"><span class="toc-number">2.0.15.</span> <span class="toc-text">使用cssRule改变@keyframes内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#相对路径中的-与-和"><span class="toc-number">2.0.16.</span> <span class="toc-text">相对路径中的./与../和/</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正则表达式相关"><span class="toc-number">3.</span> <span class="toc-text">正则表达式相关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#动态构建正则表达式"><span class="toc-number">3.0.1.</span> <span class="toc-text">动态构建正则表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正则表达式中的g对js-api的影响"><span class="toc-number">3.0.2.</span> <span class="toc-text">正则表达式中的g对js api的影响</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#node-js相关"><span class="toc-number">4.</span> <span class="toc-text">node.js相关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置跨域"><span class="toc-number">4.0.1.</span> <span class="toc-text">配置跨域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间转换"><span class="toc-number">4.0.2.</span> <span class="toc-text">时间转换</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -485,19 +491,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -509,11 +507,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -525,19 +523,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -546,6 +532,26 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
             
             <div class="clearfix"></div>

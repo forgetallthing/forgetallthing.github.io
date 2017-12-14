@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="本来css部分也写在前端知识整理里，但随着css相关日益增多，还是单独开个文章专门记录，会比较琐碎，请多担待。  响应式网页中，如何只用CSS实现div的高和宽保持固定比例具体请看原文链接:响应式网页中，如何只用CSS实现div的高和宽保持固定比例  &amp;lt;img&amp;gt; 只设置宽度即可自动保持固定宽高比；  使用媒体查询： 123456789101112@media only screen">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-14T03:13:49.484Z">
+<meta property="og:updated_time" content="2017-12-14T03:16:35.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS细节整理">
 <meta name="twitter:description" content="本来css部分也写在前端知识整理里，但随着css相关日益增多，还是单独开个文章专门记录，会比较琐碎，请多担待。  响应式网页中，如何只用CSS实现div的高和宽保持固定比例具体请看原文链接:响应式网页中，如何只用CSS实现div的高和宽保持固定比例  &amp;lt;img&amp;gt; 只设置宽度即可自动保持固定宽高比；  使用媒体查询： 123456789101112@media only screen">
@@ -210,6 +210,9 @@
 <p>实现原理：原理：利用inline-block的vertical-align: middle去对齐after伪元素，after伪元素的高度与父对象一样，就实现了高度方向的对齐。方案5实现效果更加好，居中块的尺寸可以做包裹性、自适应内容，兼容性也相当好。缺点是水平居中需要考虑inline-block间隔中的留白（代码换行符遗留问题,下面的例子中使用font-size:0来清除留白）。居中块可以设置 max-height、max-width，而且居中块是可以具有水平垂直两个方向的自适应。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="css"></span></div><div class="line"><span class="selector-class">.wrp5</span> &#123;</div><div class="line">  <span class="attribute">text-align</span>: center;</div><div class="line">  <span class="attribute">font-size</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">-webkit-text-size-adjust</span>: none;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.box5</span> &#123;</div><div class="line">  <span class="attribute">display</span>: inline-block;</div><div class="line">  <span class="attribute">vertical-align</span>: middle;</div><div class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.wrp5</span><span class="selector-pseudo">:after</span> &#123;</div><div class="line">  <span class="attribute">content</span>: <span class="string">''</span>;</div><div class="line">  <span class="attribute">display</span>: inline-block;</div><div class="line">  <span class="attribute">vertical-align</span>: middle;</div><div class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrp wrp5"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box box5"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
 </li>
+<li><p>display:flex-box</p>
+<p>实现原理： flexbox布局。此乃布局终极魔盒大法，专治各种布局定位难题！优点：能解决各种排列布局问题，实现方式符合人类认知。缺点：PC端某些旧浏览器支持度不高。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="css"></span></div><div class="line"><span class="selector-class">.wrp6</span> &#123;</div><div class="line">    <span class="attribute">display</span>: -webkit-flex;</div><div class="line">    <span class="attribute">display</span>: -moz-box;</div><div class="line">    <span class="attribute">display</span>: -ms-flexbox;</div><div class="line">    <span class="attribute">display</span>: -webkit-box;</div><div class="line">    <span class="attribute">display</span>: flex;</div><div class="line">    <span class="attribute">-webkit-box-align</span>: center;</div><div class="line">    <span class="attribute">-moz-box-align</span>: center;</div><div class="line">    <span class="attribute">-ms-flex-align</span>: center;</div><div class="line">    <span class="attribute">-webkit-align-items</span>: center;</div><div class="line">    <span class="attribute">align-items</span>: center;</div><div class="line">    <span class="attribute">-webkit-box-pack</span>: center;</div><div class="line">    <span class="attribute">-moz-box-pack</span>: center;</div><div class="line">    <span class="attribute">-ms-flex-pack</span>: center;</div><div class="line">    <span class="attribute">-webkit-justify-content</span>: center;</div><div class="line">    <span class="attribute">justify-content</span>: center;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.box6</span> &#123;</div><div class="line">    <span class="attribute">width</span>: auto;</div><div class="line">    <span class="attribute">height</span>: auto;</div><div class="line">    <span class="attribute">max-width</span>: <span class="number">90%</span>;</div><div class="line">    <span class="attribute">max-height</span>: <span class="number">90%</span>;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrp wrp6"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box box6"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></li>
 </ol>
 
       
@@ -452,15 +455,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -468,11 +467,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -484,7 +479,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -496,19 +503,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

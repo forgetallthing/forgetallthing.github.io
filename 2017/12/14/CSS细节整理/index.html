@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="本来css部分也写在前端知识整理里，但随着css相关日益增多，还是单独开个文章专门记录，会比较琐碎，请多担待。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-14T07:28:59.602Z">
+<meta property="og:updated_time" content="2017-12-14T07:32:03.355Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS细节整理">
 <meta name="twitter:description" content="本来css部分也写在前端知识整理里，但随着css相关日益增多，还是单独开个文章专门记录，会比较琐碎，请多担待。">
@@ -183,6 +183,8 @@
 <li>calc()函数使用标准的数学运算优先级规则；</li>
 <li>IE9及以上支持；</li>
 </ul>
+<h4 id="重复指定box-shadow"><a href="#重复指定box-shadow" class="headerlink" title="重复指定box-shadow"></a>重复指定box-shadow</h4><p>重复指定box-shadow需要写在一行方能生效，以多重边框为例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span> &#123;</div><div class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0, 0, 0, 0.2), <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">12px</span> <span class="built_in">rgba</span>(0, 0, 0, 0.2), <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">18px</span> <span class="built_in">rgba</span>(0, 0, 0, 0.2), <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">24px</span> <span class="built_in">rgba</span>(0, 0, 0, 0.2);</div><div class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</div><div class="line">    <span class="attribute">margin</span>: <span class="number">50px</span> auto;</div><div class="line">    <span class="attribute">width</span>: <span class="number">400px</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="响应式网页中，如何只用CSS实现div的高和宽保持固定比例"><a href="#响应式网页中，如何只用CSS实现div的高和宽保持固定比例" class="headerlink" title="响应式网页中，如何只用CSS实现div的高和宽保持固定比例"></a>响应式网页中，如何只用CSS实现div的高和宽保持固定比例</h4><p>具体请看原文链接:<a href="http://www.cnblogs.com/xjnotxj/p/5517651.html" target="_blank" rel="external">响应式网页中，如何只用CSS实现div的高和宽保持固定比例</a></p>
 <ul>
 <li><code>&lt;img&gt;</code> 只设置宽度即可自动保持固定宽高比；</li>
@@ -345,7 +347,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用calc做简单运算"><span class="toc-number">1.</span> <span class="toc-text">使用calc做简单运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#响应式网页中，如何只用CSS实现div的高和宽保持固定比例"><span class="toc-number">2.</span> <span class="toc-text">响应式网页中，如何只用CSS实现div的高和宽保持固定比例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#元素垂直水平居中"><span class="toc-number">3.</span> <span class="toc-text">元素垂直水平居中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#去除inline-block元素间间距"><span class="toc-number">4.</span> <span class="toc-text">去除inline-block元素间间距</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用calc做简单运算"><span class="toc-number">1.</span> <span class="toc-text">使用calc做简单运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重复指定box-shadow"><span class="toc-number">2.</span> <span class="toc-text">重复指定box-shadow</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#响应式网页中，如何只用CSS实现div的高和宽保持固定比例"><span class="toc-number">3.</span> <span class="toc-text">响应式网页中，如何只用CSS实现div的高和宽保持固定比例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#元素垂直水平居中"><span class="toc-number">4.</span> <span class="toc-text">元素垂直水平居中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#去除inline-block元素间间距"><span class="toc-number">5.</span> <span class="toc-text">去除inline-block元素间间距</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -466,7 +468,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -474,11 +476,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -498,6 +500,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -506,7 +512,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -518,19 +524,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

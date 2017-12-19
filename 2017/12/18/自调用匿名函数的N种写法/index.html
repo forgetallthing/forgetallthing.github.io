@@ -17,7 +17,7 @@
 <meta property="og:description" content="孔乙己自己知道不能和他们谈天，便只好向孩子说话。有一回对我说道，“你读过JavaScript高程么？”我略略点一点头。他说，“读过书，……我便考一考。自调用匿名函数，怎样写的？”我想，讨饭一样的人，也配考我么？便回过脸去，不再理会。孔乙己等了许久，很恳切的说道，“不能写罢？……我教给你，记着！这些写法应该记着。将来做架构师的时候，写代码要用。”我暗想我和架构师的等级还很远呢，而且我们架构师也从不">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/TIM%E5%9B%BE%E7%89%8720171218172625.png">
-<meta property="og:updated_time" content="2017-12-19T07:38:55.647Z">
+<meta property="og:updated_time" content="2017-12-19T08:19:13.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自调用匿名函数的N种写法">
 <meta name="twitter:description" content="孔乙己自己知道不能和他们谈天，便只好向孩子说话。有一回对我说道，“你读过JavaScript高程么？”我略略点一点头。他说，“读过书，……我便考一考。自调用匿名函数，怎样写的？”我想，讨饭一样的人，也配考我么？便回过脸去，不再理会。孔乙己等了许久，很恳切的说道，“不能写罢？……我教给你，记着！这些写法应该记着。将来做架构师的时候，写代码要用。”我暗想我和架构师的等级还很远呢，而且我们架构师也从不">
@@ -284,6 +284,10 @@
 <p>以下的代码在Chrome和Firefox中的运行结果为：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sayTruth() <span class="comment">//Uncaught TypeError: sayTruth is not a function</span></div><div class="line"><span class="keyword">if</span>(<span class="number">1</span>) &#123;</div><div class="line">	sayTruth() <span class="comment">//m is handsome</span></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">sayTruth</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		alert(<span class="string">'m is handsome'</span>)</div><div class="line">	&#125;;</div><div class="line">&#125;</div><div class="line">sayTruth() <span class="comment">//m is handsome</span></div></pre></td></tr></table></figure>
 <p>号外部分摘自<a href="http://www.cnblogs.com/myvin/" target="_blank" rel="external">myvin</a> 的<a href="http://www.cnblogs.com/myvin/p/4621231.html" target="_blank" rel="external">函数声明和函数表达式——函数声明的声明提前</a></p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><blockquote>
+<p>中秋过后，秋风是一天凉比一天，看看将近初冬；我整天的靠着火，也须穿上棉袄了。一天的下半天，没有一个项目，我正合了眼坐着。忽然间听得一个声音，“兄弟买挂么。”这声音虽然极低，却很耳熟。看时又全没有人。站起来向外一望，那孔乙己便在服务器下对了门槛坐着。他脸上黑而且瘦，已经不成样子；穿一件破夹袄，盘着两腿，下面垫一个蒲包，用草绳在肩上挂住；见了我，又说道，“兄弟买挂么。”项目经理也伸出头去，一面说，“孔乙己么？你还有十九个bug没改呢！”孔乙己很颓唐的仰面答道，“这……下回再改罢。这一回卖的是大罗金仙挂，比斗圣挂要好。”项目经理仍然同平常一样，笑着对他说，“孔乙己，你又写了bug了！”但他这回却不十分分辩，单说了一句“不要取笑！”“取笑？要是不写bug，怎么会打断腿？”孔乙己低声说道，“跌断，跌，跌……”他的眼色，很像恳求项目经理，不要再提。此时已经聚集了几个人，便和架构师都笑了。我温了酒，端出去，放在门槛上。他从破衣袋里摸出四文大钱，放在我手里，见他满手是泥，原来他便用这手走来的。不一会，他喝完酒，便又在旁人的说笑声中，坐着用这手慢慢走去了。</p>
+</blockquote>
+<p>至此，自调用匿名函数的知识点就交代的差不多了，本文完。</p>
 
       
 
@@ -396,7 +400,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数声明和函数表达式"><span class="toc-number">1.</span> <span class="toc-text">函数声明和函数表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用写法"><span class="toc-number">2.</span> <span class="toc-text">常用写法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#格式"><span class="toc-number">2.0.1.</span> <span class="toc-text">格式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#传参"><span class="toc-number">2.0.2.</span> <span class="toc-text">传参</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小用法：用自执行表达式保存状态"><span class="toc-number">3.</span> <span class="toc-text">小用法：用自执行表达式保存状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#号外：函数的声明提前"><span class="toc-number">4.</span> <span class="toc-text">号外：函数的声明提前</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#var声明提前"><span class="toc-number">4.1.</span> <span class="toc-text">var声明提前</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数声明提前"><span class="toc-number">4.2.</span> <span class="toc-text">函数声明提前</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数表达式为什么不能声明提前"><span class="toc-number">4.3.</span> <span class="toc-text">函数表达式为什么不能声明提前</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数声明提前的实例分析"><span class="toc-number">4.4.</span> <span class="toc-text">函数声明提前的实例分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#不被遵守的函数声明规范"><span class="toc-number">4.5.</span> <span class="toc-text">不被遵守的函数声明规范</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数声明和函数表达式"><span class="toc-number">1.</span> <span class="toc-text">函数声明和函数表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用写法"><span class="toc-number">2.</span> <span class="toc-text">常用写法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#格式"><span class="toc-number">2.0.1.</span> <span class="toc-text">格式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#传参"><span class="toc-number">2.0.2.</span> <span class="toc-text">传参</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小用法：用自执行表达式保存状态"><span class="toc-number">3.</span> <span class="toc-text">小用法：用自执行表达式保存状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#号外：函数的声明提前"><span class="toc-number">4.</span> <span class="toc-text">号外：函数的声明提前</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#var声明提前"><span class="toc-number">4.1.</span> <span class="toc-text">var声明提前</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数声明提前"><span class="toc-number">4.2.</span> <span class="toc-text">函数声明提前</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数表达式为什么不能声明提前"><span class="toc-number">4.3.</span> <span class="toc-text">函数表达式为什么不能声明提前</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数声明提前的实例分析"><span class="toc-number">4.4.</span> <span class="toc-text">函数声明提前的实例分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#不被遵守的函数声明规范"><span class="toc-number">4.5.</span> <span class="toc-text">不被遵守的函数声明规范</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#写在最后"><span class="toc-number"></span> <span class="toc-text">写在最后</span></a>
                     </div>
                 </span>
             </div>
@@ -517,11 +521,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -533,11 +537,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">

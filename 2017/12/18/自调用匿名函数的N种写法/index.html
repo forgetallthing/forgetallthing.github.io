@@ -17,7 +17,7 @@
 <meta property="og:description" content="孔乙己自己知道不能和他们谈天，便只好向孩子说话。有一回对我说道，“你读过JavaScript高程么？”我略略点一点头。他说，“读过书，……我便考一考。自调用匿名函数，怎样写的？”我想，讨饭一样的人，也配考我么？便回过脸去，不再理会。孔乙己等了许久，很恳切的说道，“不能写罢？……我教给你，记着！这些写法应该记着。将来做架构师的时候，写代码要用。”我暗想我和架构师的等级还很远呢，而且我们架构师也从不">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/TIM%E5%9B%BE%E7%89%8720171218172625.png">
-<meta property="og:updated_time" content="2017-12-19T03:26:44.765Z">
+<meta property="og:updated_time" content="2017-12-19T07:10:16.656Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自调用匿名函数的N种写法">
 <meta name="twitter:description" content="孔乙己自己知道不能和他们谈天，便只好向孩子说话。有一回对我说道，“你读过JavaScript高程么？”我略略点一点头。他说，“读过书，……我便考一考。自调用匿名函数，怎样写的？”我想，讨饭一样的人，也配考我么？便回过脸去，不再理会。孔乙己等了许久，很恳切的说道，“不能写罢？……我教给你，记着！这些写法应该记着。将来做架构师的时候，写代码要用。”我暗想我和架构师的等级还很远呢，而且我们架构师也从不">
@@ -215,7 +215,68 @@
 <p>上述代码为最终格式。</p>
 <h3 id="小用法：用自执行表达式保存状态"><a href="#小用法：用自执行表达式保存状态" class="headerlink" title="小用法：用自执行表达式保存状态"></a>小用法：用自执行表达式保存状态</h3><p>利用自执行函数表达式锁住传入的参数，可以有效地保存状态。此处摘选自： <a href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/" target="_blank" rel="external">原文出处</a> ：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 这个代码是错误的，因为变量i从来就没背locked住</span></div><div class="line"><span class="comment">// 相反，当循环执行以后，我们在点击的时候i才获得数值</span></div><div class="line"><span class="comment">// 因为这个时候i操真正获得值</span></div><div class="line"><span class="comment">// 所以说无论点击那个连接，最终显示的都是I am link #10（如果有10个a元素的话）</span></div><div class="line"><span class="keyword">var</span> elems = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'a'</span>);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elems.length; i++) &#123;</div><div class="line">    elems[i].addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">        e.preventDefault();</div><div class="line">        alert(<span class="string">'I am link #'</span> + i);</div><div class="line">    &#125;, <span class="string">'false'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 这个是可以用的，因为他在自执行函数表达式闭包内部</span></div><div class="line"><span class="comment">// i的值作为locked的索引存在，在循环执行结束以后，尽管最后i的值变成了a元素总数（例如10）</span></div><div class="line"><span class="comment">// 但闭包内部的lockedInIndex值是没有改变，因为他已经执行完毕了</span></div><div class="line"><span class="comment">// 所以当点击连接的时候，结果是正确的</span></div><div class="line"><span class="keyword">var</span> elems = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'a'</span>);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elems.length; i++) &#123;</div><div class="line">    (<span class="function"><span class="keyword">function</span> (<span class="params">lockedInIndex</span>) </span>&#123;</div><div class="line">        elems[i].addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">            e.preventDefault();</div><div class="line">            alert(<span class="string">'I am link #'</span> + lockedInIndex);</div><div class="line">        &#125;, <span class="string">'false'</span>);</div><div class="line">    &#125;)(i);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 你也可以像下面这样应用，在处理函数那里使用自执行函数表达式</span></div><div class="line"><span class="comment">// 而不是在addEventListener外部</span></div><div class="line"><span class="comment">// 但是相对来说，上面的代码更具可读性</span></div><div class="line"><span class="keyword">var</span> elems = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'a'</span>);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elems.length; i++) &#123;</div><div class="line">    elems[i].addEventListener(<span class="string">'click'</span>, (<span class="function"><span class="keyword">function</span> (<span class="params">lockedInIndex</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">            e.preventDefault();</div><div class="line">            alert(<span class="string">'I am link #'</span> + lockedInIndex);</div><div class="line">        &#125;;</div><div class="line">    &#125;)(i), <span class="string">'false'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="号外：声明提前"><a href="#号外：声明提前" class="headerlink" title="号外：声明提前"></a>号外：声明提前</h3>
+<h3 id="号外：函数的声明提前"><a href="#号外：函数的声明提前" class="headerlink" title="号外：函数的声明提前"></a>号外：函数的声明提前</h3><p>既然前面提到了函数的声明和函数表达式，整好在这里介绍下两者的区别：大家都知道<strong>声明提前</strong>的说法， <strong>声明提前</strong>是函数声明和函数表达式的一个重要区别，对于我们进一步理解这两种函数定义方法有着重要的意义。</p>
+<h4 id="var声明提前"><a href="#var声明提前" class="headerlink" title="var声明提前"></a>var声明提前</h4><p>但是再说<strong>函数声明提前</strong>之前呢，有必要说一下<code>var</code><strong>声明提前</strong>。先给出<code>var</code><strong>声明提前</strong>的结论：</p>
+<blockquote>
+<p>变量在声明它们的脚本或函数中都是有定义的，变量声明语句会被提前到脚本或函数的顶部。但是，变量初始化的操作还是在原来var语句的位置执行，在声明语句之前变量的值是undefined。</p>
+</blockquote>
+<p>上面的结论中可以总结出三个简单的点：</p>
+<ol>
+<li>变量声明会提前到函数的顶部；</li>
+<li>只是声明被提前，初始化不提前，初始化还在原来初始化的位置进行初始化；</li>
+<li>在声明之前变量的值是undefined。</li>
+</ol>
+<ol>
+<li>在声明之前变量的值是undefined。</li>
+</ol>
+<p>还是来例子实在：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> handsome=<span class="string">'handsome'</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handsomeToUgly</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    alert(handsome);</div><div class="line">    <span class="keyword">var</span> handsome=<span class="string">'ugly'</span>;</div><div class="line">    alert(handsome);</div><div class="line">&#125;</div><div class="line">handsomeToUgly();</div></pre></td></tr></table></figure>
+<p>正确的输出结果是：<strong>先输出undefined，然后输出ugly。</strong></p>
+<p>而不是：<strong>先输出handsome，然后输出ugly。</strong></p>
+<p>这里正是变量<strong>声明提前</strong>起到的作用。该<code>handsome</code>局部变量在整个函数体内都是有定义的，在函数体内的<code>handsome</code>变量覆盖了同名的<code>handsome</code>全局变量，因为变量<strong>声明提前</strong>，即<code>var handsome</code>被提前至函数的顶部，就是这个样子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> handsome=<span class="string">'handsome'</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handsomeToUgly</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> handsome; <span class="comment">//声明提前，覆盖了全局变量，使函数体内的handsome变为undefined</span></div><div class="line">    alert(handsome);</div><div class="line">    <span class="keyword">var</span> handsome=<span class="string">'ugly'</span>;</div><div class="line">    alert(handsome);</div><div class="line">&#125;</div><div class="line">handsomeToUgly();</div></pre></td></tr></table></figure>
+<p>所以说在<code>alert(handsome)</code>之前，已经有了<code>var handsome</code>声明，由上面提到的</p>
+<blockquote>
+<p>在声明之前变量的值是undefined</p>
+</blockquote>
+<p>所以第一个输出<code>undefined</code>。</p>
+<p>又因为上面提到的：</p>
+<blockquote>
+<p>只是声明被提前，初始化不提前，初始化还在原来初始化的位置进行初始化</p>
+</blockquote>
+<p>所以第二个输出<code>ugly</code>。</p>
+<h4 id="函数声明提前"><a href="#函数声明提前" class="headerlink" title="函数声明提前"></a>函数声明提前</h4><p>接下俩我们结合<code>var</code><strong>声明提前</strong>开始聊函数声明的<strong>声明提前</strong>。</p>
+<p>函数声明的<strong>声明提前</strong>小伙伴们应该很熟悉，举个再熟悉不过的例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sayTruth();<span class="xml"><span class="comment">&lt;!-- 函数声明 --&gt;</span></span></div><div class="line">function sayTruth()&#123;</div><div class="line">    alert('money is handsome.');</div><div class="line">&#125;</div><div class="line"></div><div class="line">sayTruth();<span class="comment">&lt;!-- 函数表达式 --&gt;</span></div><div class="line">var sayTruth=function()&#123;</div><div class="line">    alert('money is handsome.');</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>小伙伴们都知道，对于函数声明的函数定义方法，即上面的第一种函数调用方法是正确的，可以输出<code>money is handsome.</code>的真理，因为函数调用语句可以放在函数声明之后。而对于函数表达式的函数定义方法，即上面的第二种函数调用的方法是不能输出<code>money is handsome.</code>的正确结果的。</p>
+<p>结合上面的<code>money is handsome.</code>例子，函数声明提前的结论似乎很好理解，不就是在使用函数声明的函数定义方法的时候，函数调用可以放在任意位置嘛，这一点即为：</p>
+<p><strong>函数声明提前的时候，函数声明和函数体均提前了。</strong></p>
+<p>而且：</p>
+<p><strong>函数声明是在预执行期执行的，就是说函数声明是在浏览器准备执行代码的时候执行的。因为函数声明在预执行期被执行，所以到了执行期，函数声明就不再执行。</strong></p>
+<h4 id="函数表达式为什么不能声明提前"><a href="#函数表达式为什么不能声明提前" class="headerlink" title="函数表达式为什么不能声明提前"></a>函数表达式为什么不能声明提前</h4><p>我们再说一点：为什么函数表达式不能像函数声明那样进行函数声明提前呢？</p>
+<p><strong>我们上面说了var的声明提前，注意我上面提过的：</strong></p>
+<blockquote>
+<p>只是声明被提前，初始化不提前，初始化还在原来初始化的位置进行初始化</p>
+</blockquote>
+<p>Ok，我们把函数表达式摆在这看看：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span>  variable=<span class="function"><span class="keyword">function</span>(<span class="params">arg1, arg2, ...</span>)</span>&#123;</div><div class="line">	&lt;!-- <span class="function"><span class="keyword">function</span> <span class="title">body</span> --&gt;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>函数表达式就是把函数定义的方式写成表达式的方式，就是把<strong>一个函数对象赋值给一个变量</strong>，所以我们把函数表达式写成这个样子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> varible = <span class="number">5</span>;</div></pre></td></tr></table></figure>
+<p>看到这，也许小伙伴们会明白了，一个是把一个值赋值给一个变量，一个是把函数对象赋值给一个变量，两者在声明时都遵循<code>var</code> 声明规则，所以对于函数表达式，变量赋值是不会提前的，即<code>function(arg1, arg2, ...){&lt;!-- function body --&gt;}</code>是不会提前的，变量varible为undefined，所以函数表达式不能像函数声明那样进行函数声明提前。</p>
+<h4 id="函数声明提前的实例分析"><a href="#函数声明提前的实例分析" class="headerlink" title="函数声明提前的实例分析"></a>函数声明提前的实例分析</h4><p>还是那句话，还是例子来的实在：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sayTruth();</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayTruth</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">'handsome'</span>)&#125;;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayTruth</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">'ugly'</span>)&#125;;</div></pre></td></tr></table></figure>
+<p>浏览器的输出结果是输出<code>ugly</code>，因为函数声明提前，所以函数声明会在代码执行前进行解析，执行顺序是这样的，先解析<code>function sayTruth(){alert(&#39;handsome&#39;)}</code>，在解析<code>function sayTruth(){alert(&#39;ugly&#39;)}</code>，覆盖了前面的函数声明，当我们调用<code>sayTruth()</code>函数的时候，也就是到了代码执行期间，声明会被忽略，所以自然会输出<code>ugly</code>。忘了的可以看上面说过的：</p>
+<blockquote>
+<p>函数声明是在预执行期执行的，就是说函数声明是在浏览器准备执行代码的时候执行的。因为函数声明在预执行期被执行，所以到了执行期，函数声明就不再执行了。</p>
+</blockquote>
+<h4 id="不被遵守的函数声明规范"><a href="#不被遵守的函数声明规范" class="headerlink" title="不被遵守的函数声明规范"></a>不被遵守的函数声明规范</h4><blockquote>
+<p>ECMAScript规范中表示，<em>函数声明</em>语句可以出现在全局代码中，或者内嵌在其他函数中，但是不能出现在循环、条件判、或者try/finally以及with语句中。</p>
+</blockquote>
+<p>的确是这样，但是规定下发了，遵守不遵守就是另一回事了。JavaScript对于这条规范的实现并不是严格遵守的。</p>
+<p>以下的代码在Chrome和Firefox中的运行结果为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sayTruth() <span class="comment">//Uncaught TypeError: sayTruth is not a function</span></div><div class="line"><span class="keyword">if</span>(<span class="number">1</span>) &#123;</div><div class="line">	sayTruth() <span class="comment">//m is handsome</span></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">sayTruth</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		alert(<span class="string">'m is handsome'</span>)</div><div class="line">	&#125;;</div><div class="line">&#125;</div><div class="line">sayTruth() <span class="comment">//m is handsome</span></div></pre></td></tr></table></figure>
+<p>号外部分摘自<a href="http://www.cnblogs.com/myvin/" target="_blank" rel="external">myvin</a> 的<a href="http://www.cnblogs.com/myvin/p/4621231.html" target="_blank" rel="external">函数声明和函数表达式——函数声明的声明提前</a></p>
+
       
 
       
@@ -327,7 +388,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数声明和函数表达式"><span class="toc-number">1.</span> <span class="toc-text">函数声明和函数表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用写法"><span class="toc-number">2.</span> <span class="toc-text">常用写法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#格式"><span class="toc-number">2.0.1.</span> <span class="toc-text">格式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#传参"><span class="toc-number">2.0.2.</span> <span class="toc-text">传参</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小用法：用自执行表达式保存状态"><span class="toc-number">3.</span> <span class="toc-text">小用法：用自执行表达式保存状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#号外：声明提前"><span class="toc-number">4.</span> <span class="toc-text">号外：声明提前</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数声明和函数表达式"><span class="toc-number">1.</span> <span class="toc-text">函数声明和函数表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用写法"><span class="toc-number">2.</span> <span class="toc-text">常用写法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#格式"><span class="toc-number">2.0.1.</span> <span class="toc-text">格式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#传参"><span class="toc-number">2.0.2.</span> <span class="toc-text">传参</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小用法：用自执行表达式保存状态"><span class="toc-number">3.</span> <span class="toc-text">小用法：用自执行表达式保存状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#号外：函数的声明提前"><span class="toc-number">4.</span> <span class="toc-text">号外：函数的声明提前</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#var声明提前"><span class="toc-number">4.1.</span> <span class="toc-text">var声明提前</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数声明提前"><span class="toc-number">4.2.</span> <span class="toc-text">函数声明提前</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数表达式为什么不能声明提前"><span class="toc-number">4.3.</span> <span class="toc-text">函数表达式为什么不能声明提前</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数声明提前的实例分析"><span class="toc-number">4.4.</span> <span class="toc-text">函数声明提前的实例分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#不被遵守的函数声明规范"><span class="toc-number">4.5.</span> <span class="toc-text">不被遵守的函数声明规范</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -452,19 +513,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -480,6 +537,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
@@ -492,15 +553,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -17,7 +17,7 @@
 <meta property="og:description" content="孔乙己自己知道不能和他们谈天，便只好向孩子说话。有一回对我说道，“你读过JavaScript高程么？”我略略点一点头。他说，“读过书，……我便考一考。自调用匿名函数，怎样写的？”我想，讨饭一样的人，也配考我么？便回过脸去，不再理会。孔乙己等了许久，很恳切的说道，“不能写罢？……我教给你，记着！这些写法应该记着。将来做架构师的时候，写代码要用。”我暗想我和架构师的等级还很远呢，而且我们架构师也从不">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/TIM%E5%9B%BE%E7%89%8720171218172625.png">
-<meta property="og:updated_time" content="2017-12-18T09:57:30.614Z">
+<meta property="og:updated_time" content="2017-12-19T02:56:37.388Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自调用匿名函数的N种写法">
 <meta name="twitter:description" content="孔乙己自己知道不能和他们谈天，便只好向孩子说话。有一回对我说道，“你读过JavaScript高程么？”我略略点一点头。他说，“读过书，……我便考一考。自调用匿名函数，怎样写的？”我想，讨饭一样的人，也配考我么？便回过脸去，不再理会。孔乙己等了许久，很恳切的说道，“不能写罢？……我教给你，记着！这些写法应该记着。将来做架构师的时候，写代码要用。”我暗想我和架构师的等级还很远呢，而且我们架构师也从不">
@@ -175,7 +175,7 @@
         <blockquote>
 <p>孔乙己自己知道不能和他们谈天，便只好向孩子说话。有一回对我说道，“你读过JavaScript高程么？”我略略点一点头。他说，“读过书，……我便考一考。自调用匿名函数，怎样写的？”我想，讨饭一样的人，也配考我么？便回过脸去，不再理会。孔乙己等了许久，很恳切的说道，“不能写罢？……我教给你，记着！这些写法应该记着。将来做架构师的时候，写代码要用。”我暗想我和架构师的等级还很远呢，而且我们架构师也从不写代码；又好笑，又不耐烦，懒懒的答他道，“谁要你教，不是两个括号加一个匿名函数么？”孔乙己显出极高兴的样子，将两个指头的长指甲敲着柜台，点头说，“对呀对呀！……自调用匿名函数有N样写法，你知道么？”我愈不耐烦了，努着嘴走远。孔乙己刚用指蘸了酒，想在柜上写代码，见我毫不热心，便又叹了口气，显出极惋惜的样子。</p>
 </blockquote>
-<p>自调用匿名函数是很常见的创建命名空间方法，在这篇文章我整理一下关于自调用匿名函数的相关知识：</p>
+<p>自调用匿名函数（这里指立即执行的匿名函数）是很常见的创建命名空间方法，在这篇文章我整理一下关于自调用匿名函数的相关知识：</p>
 <a id="more"></a>
 <h3 id="函数声明和函数表达式"><a href="#函数声明和函数表达式" class="headerlink" title="函数声明和函数表达式"></a>函数声明和函数表达式</h3><p>想知道自调用匿名函数的N种写法，必须先了解函数声明和函数表达式的概念，声明函数的时候，除了new Function构造函数方式，下面两种是我们常用的方式：</p>
 <blockquote>
@@ -201,10 +201,18 @@
 <p>既然有这么多种构建立即执行函数的方法，那他们的速度如何呢？在别的博客看到有人做了速度测试，结果如下:</p>
 <p><img src="http://otw7po22v.bkt.clouddn.com/TIM%E5%9B%BE%E7%89%8720171218172625.png" alt=""></p>
 <p>根据上图中的数据可以看出：<strong>new方法永远最慢</strong>，其它方法很多差距其实不大，<strong>传统的括号，在测试里表现始终很快</strong>，在大多数情况下比感叹号更快，所以平时我们常用的方式毫无问题，甚至可以说是最优的。<strong>加减号在chrome表现惊人</strong>，而且在其他浏览器中速度也不错。</p>
-<h3 id="常用写法"><a href="#常用写法" class="headerlink" title="常用写法"></a>常用写法</h3><p>其实上文已经列举了十多种写法，那么我们平时该用哪一种写法呢，我们推荐</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="comment">//....</span></div><div class="line">&#125;())</div></pre></td></tr></table></figure>
+<h3 id="常用写法"><a href="#常用写法" class="headerlink" title="常用写法"></a>常用写法</h3><h5 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h5><p>其实上文已经列举了十多种写法，那么我们平时该用哪一种写法呢，我们推荐</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="comment">//....</span></div><div class="line">&#125;());</div></pre></td></tr></table></figure>
 <p>为什么<code>(function(){})()</code> 不推荐呢，明明两种效果一模一样啊，那是为了预防一种少见的情况，别人拷贝了你的代码并放在他的代码下面，如果他的代码结尾处漏掉了分号，那就会报个让你一头雾水的错<code>Uncaught TypeError: (intermediate value)(...) is not a function</code>，为了预防万一，可以在我们的代码前加个分号：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> foo=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//别人的代码</span></div><div class="line">&#125;<span class="comment">//注意这里没有用分号结尾</span></div><div class="line"></div><div class="line"><span class="comment">//开始我们的代码</span></div><div class="line">;(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//我们的代码。。</span></div><div class="line">    alert(<span class="string">'Hello!'</span>);</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<p>我们推荐的写法就不会出现这种问题哈哈，需要注意的是不要忘记结尾的分号：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'test'</span>);</div><div class="line">&#125;())   <span class="comment">//这里不加分号会报错</span></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'test1'</span>);</div><div class="line">&#125;())</div></pre></td></tr></table></figure>
+<h5 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h5><p>下面介绍一下常用的系统变量 <strong>传参选择</strong>，我们知道，jQuery2.1.0中是这样做的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">window, factory</span>) </span>&#123;</div><div class="line">    factory(<span class="built_in">window</span>)</div><div class="line">&#125;(<span class="keyword">typeof</span> <span class="built_in">window</span> !== <span class="string">"undefined"</span> ? <span class="built_in">window</span> : <span class="keyword">this</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">       <span class="comment">//jQuery的调用</span></div><div class="line">    &#125;</div><div class="line">&#125;))</div></pre></td></tr></table></figure>
+<p>为什么要把window作为参数传入呢？答案是当我们这样做之后，window在函数内部就有了一个局部的引用，使用window时不需要将作用域链退回到顶部作用域，可以提高访问速度，我们在开发jQuery插件时，常常选择将<code>jQuery,window,document</code> 传入插件内部以期获得更好的性能。</p>
+<p>最后要传的参数就是<code>undefined</code> ，至于这个undefined，稍微有意思一点，在一些旧浏览器中可以修改undefined的值（这个行为在2009年的<a href="https://link.jianshu.com/?t=https://es5.github.io/#x15.1.1.3" target="_blank" rel="external">ECMAScript 5</a>被修复了），为了得到没有被修改的undefined，我们并没有传递这个参数，但却在接收时接收了它，因为实际并没有传，所以undefined那个位置接收到的就是真实的undefined了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">window, document,undefined</span>) </span>&#123;</div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;)(<span class="built_in">window</span>, <span class="built_in">document</span>);</div></pre></td></tr></table></figure>
+<p>上述代码为最终格式。</p>
 
       
 
@@ -317,7 +325,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数声明和函数表达式"><span class="toc-number">1.</span> <span class="toc-text">函数声明和函数表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用写法"><span class="toc-number">2.</span> <span class="toc-text">常用写法</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数声明和函数表达式"><span class="toc-number">1.</span> <span class="toc-text">函数声明和函数表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用写法"><span class="toc-number">2.</span> <span class="toc-text">常用写法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#格式"><span class="toc-number">2.0.1.</span> <span class="toc-text">格式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#传参"><span class="toc-number">2.0.2.</span> <span class="toc-text">传参</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -438,7 +446,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -446,27 +454,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -478,7 +470,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -490,7 +490,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -498,7 +502,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -506,7 +514,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
             
             <div class="clearfix"></div>

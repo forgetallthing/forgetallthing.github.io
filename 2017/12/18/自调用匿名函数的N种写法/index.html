@@ -17,7 +17,7 @@
 <meta property="og:description" content="孔乙己自己知道不能和他们谈天，便只好向孩子说话。有一回对我说道，“你读过JavaScript高程么？”我略略点一点头。他说，“读过书，……我便考一考。自调用匿名函数，怎样写的？”我想，讨饭一样的人，也配考我么？便回过脸去，不再理会。孔乙己等了许久，很恳切的说道，“不能写罢？……我教给你，记着！这些写法应该记着。将来做架构师的时候，写代码要用。”我暗想我和架构师的等级还很远呢，而且我们架构师也从不">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/TIM%E5%9B%BE%E7%89%8720171218172625.png">
-<meta property="og:updated_time" content="2017-12-19T07:33:01.574Z">
+<meta property="og:updated_time" content="2017-12-19T07:38:55.647Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自调用匿名函数的N种写法">
 <meta name="twitter:description" content="孔乙己自己知道不能和他们谈天，便只好向孩子说话。有一回对我说道，“你读过JavaScript高程么？”我略略点一点头。他说，“读过书，……我便考一考。自调用匿名函数，怎样写的？”我想，讨饭一样的人，也配考我么？便回过脸去，不再理会。孔乙己等了许久，很恳切的说道，“不能写罢？……我教给你，记着！这些写法应该记着。将来做架构师的时候，写代码要用。”我暗想我和架构师的等级还很远呢，而且我们架构师也从不">
@@ -213,9 +213,9 @@
 <p>最后要传的参数就是<code>undefined</code> ，至于这个undefined，稍微有意思一点，在一些旧浏览器中可以修改undefined的值（这个行为在2009年的<a href="https://link.jianshu.com/?t=https://es5.github.io/#x15.1.1.3" target="_blank" rel="external">ECMAScript 5</a>被修复了），为了得到没有被修改的undefined，我们并没有传递这个参数，但却在接收时接收了它，因为实际并没有传，所以undefined那个位置接收到的就是真实的undefined了：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">window, document,undefined</span>) </span>&#123;</div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;)(<span class="built_in">window</span>, <span class="built_in">document</span>);</div></pre></td></tr></table></figure>
 <p>上述代码为最终格式。</p>
-<h3 id="小用法：用自执行表达式保存状态"><a href="#小用法：用自执行表达式保存状态" class="headerlink" title="小用法：用自执行表达式保存状态"></a>小用法：用自执行表达式保存状态</h3><p>利用自执行函数表达式锁住传入的参数，可以有效地保存状态。此处摘选自： <a href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/" target="_blank" rel="external">原文出处</a> ：</p>
+<h3 id="小用法：用自执行表达式保存状态"><a href="#小用法：用自执行表达式保存状态" class="headerlink" title="小用法：用自执行表达式保存状态"></a>小用法：用自执行表达式保存状态</h3><p>利用自执行函数表达式锁住传入的参数，可以有效地保存状态。此处摘选自Ben Alman的博客： <a href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/" target="_blank" rel="external">原文出处</a> ：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 这个代码是错误的，因为变量i从来就没背locked住</span></div><div class="line"><span class="comment">// 相反，当循环执行以后，我们在点击的时候i才获得数值</span></div><div class="line"><span class="comment">// 因为这个时候i操真正获得值</span></div><div class="line"><span class="comment">// 所以说无论点击那个连接，最终显示的都是I am link #10（如果有10个a元素的话）</span></div><div class="line"><span class="keyword">var</span> elems = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'a'</span>);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elems.length; i++) &#123;</div><div class="line">    elems[i].addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">        e.preventDefault();</div><div class="line">        alert(<span class="string">'I am link #'</span> + i);</div><div class="line">    &#125;, <span class="string">'false'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 这个是可以用的，因为他在自执行函数表达式闭包内部</span></div><div class="line"><span class="comment">// i的值作为locked的索引存在，在循环执行结束以后，尽管最后i的值变成了a元素总数（例如10）</span></div><div class="line"><span class="comment">// 但闭包内部的lockedInIndex值是没有改变，因为他已经执行完毕了</span></div><div class="line"><span class="comment">// 所以当点击连接的时候，结果是正确的</span></div><div class="line"><span class="keyword">var</span> elems = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'a'</span>);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elems.length; i++) &#123;</div><div class="line">    (<span class="function"><span class="keyword">function</span> (<span class="params">lockedInIndex</span>) </span>&#123;</div><div class="line">        elems[i].addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">            e.preventDefault();</div><div class="line">            alert(<span class="string">'I am link #'</span> + lockedInIndex);</div><div class="line">        &#125;, <span class="string">'false'</span>);</div><div class="line">    &#125;)(i);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 你也可以像下面这样应用，在处理函数那里使用自执行函数表达式</span></div><div class="line"><span class="comment">// 而不是在addEventListener外部</span></div><div class="line"><span class="comment">// 但是相对来说，上面的代码更具可读性</span></div><div class="line"><span class="keyword">var</span> elems = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'a'</span>);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elems.length; i++) &#123;</div><div class="line">    elems[i].addEventListener(<span class="string">'click'</span>, (<span class="function"><span class="keyword">function</span> (<span class="params">lockedInIndex</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">            e.preventDefault();</div><div class="line">            alert(<span class="string">'I am link #'</span> + lockedInIndex);</div><div class="line">        &#125;;</div><div class="line">    &#125;)(i), <span class="string">'false'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>虽然本文中使用自调用匿名函数这一名称，但在benalman在博客中倡议使用立即调用的函数表达式（Immediately-Invoked Function Expression）这一名称，作者又举了一堆例子来解释，好吧，其实我是同意benalman的叫法的，我们来看看：</p>
+<p>虽然本文中使用自调用匿名函数这一名称，但Ben Alman在博客中倡议使用立即调用的函数表达式（Immediately-Invoked Function Expression）这一名称，作者又举了一堆例子来解释，好吧，其实我是同意Ben Alman的叫法的，我们来看看：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 这是一个自执行的函数，函数内部执行自身，递归</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123; foo(); &#125;</div><div class="line"></div><div class="line"><span class="comment">// 这是一个自执行的匿名函数，因为没有标示名称</span></div><div class="line"><span class="comment">// 必须使用arguments.callee属性来执行自己</span></div><div class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">arguments</span>.callee(); &#125;;</div><div class="line"></div><div class="line"><span class="comment">// 这可能也是一个自执行的匿名函数，仅仅是foo标示名称引用它自身</span></div><div class="line"><span class="comment">// 如果你将foo改变成其它的，你将得到一个used-to-self-execute匿名函数</span></div><div class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; foo(); &#125;;</div><div class="line"></div><div class="line"><span class="comment">// 有些人叫这个是自执行的匿名函数（即便它不是），因为它没有调用自身，它只是立即执行而已。</span></div><div class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="comment">/* code */</span> &#125; ());</div><div class="line"></div><div class="line"><span class="comment">// 为函数表达式添加一个标示名称，可以方便Debug</span></div><div class="line"><span class="comment">// 但一定命名了，这个函数就不再是匿名的了</span></div><div class="line">(<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123; <span class="comment">/* code */</span> &#125; ());</div><div class="line"></div><div class="line"><span class="comment">// 立即调用的函数表达式（IIFE）也可以自执行，不过可能不常用罢了</span></div><div class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">arguments</span>.callee(); &#125; ());</div><div class="line">(<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123; foo(); &#125; ());</div><div class="line"></div><div class="line"><span class="comment">// 另外，下面的代码在黑莓5里执行会出错，因为在一个命名的函数表达式里，他的名称是undefined</span></div><div class="line"><span class="comment">// 呵呵，奇怪</span></div><div class="line">(<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123; foo(); &#125; ());</div></pre></td></tr></table></figure>
 <p>希望这里的一些例子，可以让大家明白，什么叫自执行，什么叫立即调用。</p>
 <p><em>注：arguments.callee在ECMAScript 5 strict mode里被废弃了，所以在这个模式下，其实是不能用的。</em></p>
@@ -517,15 +517,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -549,7 +557,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -558,14 +566,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
               <li class="article-tag-list-item">

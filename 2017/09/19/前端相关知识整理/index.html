@@ -17,7 +17,7 @@
 <meta property="og:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具,github上有九千多star，简洁好用: 官网：http://www.browsersync.cn/ 如果你不用Gulp、Grunt的话，你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quot; 动">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/Video_2017-11-27_103235%2000_00_05-00_00_09.gif">
-<meta property="og:updated_time" content="2017-12-20T06:04:48.023Z">
+<meta property="og:updated_time" content="2017-12-20T06:05:25.679Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具,github上有九千多star，简洁好用: 官网：http://www.browsersync.cn/ 如果你不用Gulp、Grunt的话，你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quot; 动">
@@ -286,7 +286,7 @@
 <p><code>$(&quot;span&quot;,&quot;#show&quot;).size()</code> 表示#show中span的个数，所以结果为0；</p>
 <p><code>$(&quot;span,#show&quot;).size()</code> 表示条件1(#show)和条件2(span)的分别执行，然后取<strong>并集</strong> ，最后执行<code>.size</code> 求总数所以结果为3；</p>
 <p>例子：</p>
-<p><code>$(&quot;#show div,div&quot;).size()</code> 结果为3：条件1(#show div)取了#show中的div，条件2(div)取了页面所有的div，因为条件2的结果和条件1的结果有重叠部分，所以取并集的时候进行了去重，最后结果3；</p>
+<p><code>$(&quot;#show div,div&quot;).size()</code> 结果为3：条件1(#show div)取了#show中的div，条件2(div)取了页面所有的div，因为条件2的结果和条件1的结果有重叠部分，所以取<strong>并集</strong> 的时候进行了去重，最后结果3；</p>
 <h2 id="正则表达式相关"><a href="#正则表达式相关" class="headerlink" title="正则表达式相关"></a>正则表达式相关</h2><h4 id="动态构建正则表达式"><a href="#动态构建正则表达式" class="headerlink" title="动态构建正则表达式"></a>动态构建正则表达式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> className = <span class="string">"high"</span>;</div><div class="line"><span class="keyword">var</span> regex = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|\\s)"</span> + className + <span class="string">"(\\s|$)"</span>);</div><div class="line"><span class="built_in">console</span>.log(regex.source)</div><div class="line"><span class="comment">// =&gt; (^|\s)high(\s|$) 即字符串"(^|\\s)high(\\s|$)"</span></div></pre></td></tr></table></figure>
 <p>使用eval也可以将字符串转化为正则表达式。</p>
 <h4 id="正则表达式中的g对js-api的影响"><a href="#正则表达式中的g对js-api的影响" class="headerlink" title="正则表达式中的g对js api的影响"></a>正则表达式中的g对js api的影响</h4><p>用于正则操作的方法，共有 6 个，字符串实例 4 个，正则实例 2 个:</p>
@@ -539,15 +539,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -599,15 +599,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

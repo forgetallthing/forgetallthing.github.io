@@ -17,7 +17,7 @@
 <meta property="og:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具,github上有九千多star，简洁好用: 官网：http://www.browsersync.cn/ 如果你不用Gulp、Grunt的话，你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quot; 动">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/Video_2017-11-27_103235%2000_00_05-00_00_09.gif">
-<meta property="og:updated_time" content="2017-12-21T02:49:21.463Z">
+<meta property="og:updated_time" content="2017-12-21T02:50:30.721Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具,github上有九千多star，简洁好用: 官网：http://www.browsersync.cn/ 如果你不用Gulp、Grunt的话，你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quot; 动">
@@ -292,7 +292,7 @@
 <blockquote>
 <p>所谓事件命名空间，其实就是在事件类型后面以点语法附加一个别名，以便引用事件，如”click.a”，其中”a”就是click当前事件类型的别名，即事件命名空间。（由于点号是用来定义命名空间的，所以如果我们使用了自定义事件，那么事件名称一定不要包含点号，否则会引起意想不到的问题。这种问题，没有尝试的必要，特殊字符能不用则不用，否则是给自己找麻烦）</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 2个命名空间a和b  </span></div><div class="line">$(<span class="string">"#button1"</span>).on(<span class="string">"click.a"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">eventObj</span>)</span>&#123;    </div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"click1"</span>);    </div><div class="line">&#125;);   </div><div class="line">$(<span class="string">"#button1"</span>).on(<span class="string">"click.b"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">eventObj</span>)</span>&#123;    </div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"click2"</span>);    </div><div class="line">&#125;);   </div><div class="line">$(<span class="string">"#button1"</span>).on(<span class="string">"mouseup.a"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">eventObj</span>)</span>&#123;    </div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"mouseup"</span>);    </div><div class="line">&#125;);   </div><div class="line">$(<span class="string">"#button1"</span>).on(<span class="string">"mousedown.a"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">eventObj</span>)</span>&#123;    </div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"mousedown"</span>);    </div><div class="line">&#125;); </div><div class="line"><span class="comment">//解绑命名空间a里的全部事件</span></div><div class="line"><span class="comment">//解绑后只剩下命名空间b中的click事件</span></div><div class="line">$(<span class="string">"#button1"</span>).unbind(<span class="string">".a"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 2个命名空间a和b  </span></div><div class="line">$(<span class="string">"#button1"</span>).on(<span class="string">"click.a"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">eventObj</span>)</span>&#123;    </div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"click1"</span>);    </div><div class="line">&#125;);   </div><div class="line">$(<span class="string">"#button1"</span>).on(<span class="string">"click.b"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">eventObj</span>)</span>&#123;    </div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"click2"</span>);    </div><div class="line">&#125;);   </div><div class="line">$(<span class="string">"#button1"</span>).on(<span class="string">"mouseup.a"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">eventObj</span>)</span>&#123;    </div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"mouseup"</span>);    </div><div class="line">&#125;);   </div><div class="line">$(<span class="string">"#button1"</span>).on(<span class="string">"mousedown.a"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">eventObj</span>)</span>&#123;    </div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"mousedown"</span>);    </div><div class="line">&#125;); </div><div class="line"><span class="comment">//解绑命名空间a里的全部事件</span></div><div class="line"><span class="comment">//解绑后只剩下命名空间b中的click事件</span></div><div class="line">$(<span class="string">"#button1"</span>).off(<span class="string">".a"</span>);</div></pre></td></tr></table></figure>
 <h2 id="正则表达式相关"><a href="#正则表达式相关" class="headerlink" title="正则表达式相关"></a>正则表达式相关</h2><h4 id="动态构建正则表达式"><a href="#动态构建正则表达式" class="headerlink" title="动态构建正则表达式"></a>动态构建正则表达式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> className = <span class="string">"high"</span>;</div><div class="line"><span class="keyword">var</span> regex = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|\\s)"</span> + className + <span class="string">"(\\s|$)"</span>);</div><div class="line"><span class="built_in">console</span>.log(regex.source)</div><div class="line"><span class="comment">// =&gt; (^|\s)high(\s|$) 即字符串"(^|\\s)high(\\s|$)"</span></div></pre></td></tr></table></figure>
 <p>使用eval也可以将字符串转化为正则表达式。</p>
 <h4 id="正则表达式中的g对js-api的影响"><a href="#正则表达式中的g对js-api的影响" class="headerlink" title="正则表达式中的g对js api的影响"></a>正则表达式中的g对js api的影响</h4><p>用于正则操作的方法，共有 6 个，字符串实例 4 个，正则实例 2 个:</p>
@@ -545,11 +545,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -561,30 +577,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -593,15 +585,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -610,6 +594,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">

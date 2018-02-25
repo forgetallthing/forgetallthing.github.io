@@ -6,20 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>JS计算字符串所占字节数 | 张伯伯的BLOG</title>
+  <title>Node爬取拍信网图片 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JS计算字符串所占字节数最近项目有个需求要用js计算一串字符串写入到localStorage里所占的内存，众所周知的，js是使用Unicode编码的。而Unicode的实现有N种，其中用的最多的就是UTF-8和UTF-16。因此本文只对这两种编码进行讨论。 下面这个定义摘自维基百科（http://zh.wikipedia.org/zh-cn/UTF-8），做了部分删减。 UTF-8（8-bit U">
-<meta name="keywords" content="JS">
+  <meta name="description" content="日色已尽花含烟，月明欲素愁不眠  不觉间年假已过，又一次“假期依山尽，春节入海流”，再回到工作岗位，面对IDE上的密密麻麻，脑海里浮现的全是我的7.62和5.56，眼看假期综合征就要吞噬掉我，赶紧 打个绷带 写个程序恢复一下，于是想起了我最爱的拍信网，这个大气漂亮，图片质量很高的正版图片交易平台，是我找图提升博客B格的不二选择，之前都是手工找到链接下载，正好今天来写个批量下载的爬虫玩玩，别误会">
+<meta name="keywords" content="node.js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS计算字符串所占字节数">
-<meta property="og:url" content="http://yoursite.com/2017/04/17/JS计算字符串所占字节数/index.html">
+<meta property="og:title" content="Node爬取拍信网图片">
+<meta property="og:url" content="http://yoursite.com/2018/02/25/Node爬取拍信网图片/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="JS计算字符串所占字节数最近项目有个需求要用js计算一串字符串写入到localStorage里所占的内存，众所周知的，js是使用Unicode编码的。而Unicode的实现有N种，其中用的最多的就是UTF-8和UTF-16。因此本文只对这两种编码进行讨论。 下面这个定义摘自维基百科（http://zh.wikipedia.org/zh-cn/UTF-8），做了部分删减。 UTF-8（8-bit U">
+<meta property="og:description" content="日色已尽花含烟，月明欲素愁不眠  不觉间年假已过，又一次“假期依山尽，春节入海流”，再回到工作岗位，面对IDE上的密密麻麻，脑海里浮现的全是我的7.62和5.56，眼看假期综合征就要吞噬掉我，赶紧 打个绷带 写个程序恢复一下，于是想起了我最爱的拍信网，这个大气漂亮，图片质量很高的正版图片交易平台，是我找图提升博客B格的不二选择，之前都是手工找到链接下载，正好今天来写个批量下载的爬虫玩玩，别误会">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-11-12T08:53:34.336Z">
+<meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/10128863_%E7%88%B1%E5%A5%87%E8%89%BA.jpg">
+<meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/%E5%9B%BE%E7%89%87%E5%88%97%E8%A1%A8.jpg">
+<meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/%E5%88%86%E8%BE%A8%E7%8E%87.jpg">
+<meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/10128312.jpeg">
+<meta property="og:updated_time" content="2018-02-25T07:44:15.508Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JS计算字符串所占字节数">
-<meta name="twitter:description" content="JS计算字符串所占字节数最近项目有个需求要用js计算一串字符串写入到localStorage里所占的内存，众所周知的，js是使用Unicode编码的。而Unicode的实现有N种，其中用的最多的就是UTF-8和UTF-16。因此本文只对这两种编码进行讨论。 下面这个定义摘自维基百科（http://zh.wikipedia.org/zh-cn/UTF-8），做了部分删减。 UTF-8（8-bit U">
+<meta name="twitter:title" content="Node爬取拍信网图片">
+<meta name="twitter:description" content="日色已尽花含烟，月明欲素愁不眠  不觉间年假已过，又一次“假期依山尽，春节入海流”，再回到工作岗位，面对IDE上的密密麻麻，脑海里浮现的全是我的7.62和5.56，眼看假期综合征就要吞噬掉我，赶紧 打个绷带 写个程序恢复一下，于是想起了我最爱的拍信网，这个大气漂亮，图片质量很高的正版图片交易平台，是我找图提升博客B格的不二选择，之前都是手工找到链接下载，正好今天来写个批量下载的爬虫玩玩，别误会">
+<meta name="twitter:image" content="http://otw7po22v.bkt.clouddn.com/10128863_%E7%88%B1%E5%A5%87%E8%89%BA.jpg">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -173,48 +178,43 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-JS计算字符串所占字节数" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Node爬取拍信网图片" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      JS计算字符串所占字节数
+      Node爬取拍信网图片
     </h1>
   
 
         
-        <a href="/2017/04/17/JS计算字符串所占字节数/" class="archive-article-date">
-  	<time datetime="2017-04-17T03:21:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-17</time>
+        <a href="/2018/02/25/Node爬取拍信网图片/" class="archive-article-date">
+  	<time datetime="2018-02-25T06:14:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="JS计算字符串所占字节数"><a href="#JS计算字符串所占字节数" class="headerlink" title="JS计算字符串所占字节数"></a><strong>JS计算字符串所占字节数</strong></h4><p>最近项目有个需求要用js计算一串字符串写入到localStorage里所占的内存，众所周知的，js是使用Unicode编码的。而Unicode的实现有N种，其中用的最多的就是UTF-8和UTF-16。因此本文只对这两种编码进行讨论。</p>
-<p>下面这个定义摘自维基百科（<a href="http://zh.wikipedia.org/zh-cn/UTF-8" target="_blank" rel="external">http://zh.wikipedia.org/zh-cn/UTF-8</a>），做了部分删减。</p>
-<p>UTF-8（8-bit Unicode Transformation Format）是一种针对Unicode的可变长度字符编码，可以表示Unicode标准中的任何字符，且其编码中的第一个字节仍与ASCII相容，使用一至四个字节为每个字符编码。</p>
-<p>其编码规则如下：</p>
-<a id="more"></a>
-<ol>
-<li>字符代码在000000 – 00007F之间的，用一个字节编码；</li>
-<li>000080 – 0007FF之间的字符用两个字节；</li>
-<li>000800 – 00D7FF 和 00E000 – 00FFFF之间的用三个字节，注: Unicode在范围 D800-DFFF 中不存在任何字符；</li>
-<li>010000 – 10FFFF之间的用4个字节。</li>
-</ol>
-<p>而<a href="http://zh.wikipedia.org/zh-cn/UTF-16" target="_blank" rel="external">UTF-16</a> 则是定长的字符编码，大部分字符使用两个字节编码，字符代码超出 65535 的使用四个字节，如下：</p>
-<ol>
-<li>000000 – 00FFFF 两个字节；</li>
-<li>010000 – 10FFFF 四个字节。</li>
-</ol>
-<p>一开始认为既然页面用的是UTF-8编码，那么存入localStorage的字符串，应该也是用UTF-8编码的。但后来测试发现，明明计算出的 size是不到5MB，存入localStorage却抛异常了。想了想，页面的编码是可以改的。如果localStorage按照页面的编码存字符串,不就乱套了？浏览器应该都是使用UTF-16编码的。用UTF-16编码计算出5MB的字符串，果然顺利写进去了，超过则失败了。</p>
-<p>好了，附上代码实现。计算规则就是上面写的，为了计算速度，把两个for循环分开写了。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">/**</span></div><div class="line">- 计算字符串所占的内存字节数，默认使用UTF-8的编码方式计算，也可制定为UTF-16</div><div class="line">- UTF-8 是一种可变长度的 Unicode 编码格式，使用一至四个字节为每个字符编码</div><div class="line">- </div><div class="line">- 000000 - 00007F(128个代码)     0zzzzzzz(00-7F)                             一个字节</div><div class="line">- 000080 - 0007FF(1920个代码)    110yyyyy(C0-DF) 10zzzzzz(80-BF)             两个字节</div><div class="line">- 000800 - 00D7FF </div><div class="line"></div><div class="line">  00E000 - 00FFFF(61440个代码)   1110xxxx(E0-EF) 10yyyyyy 10zzzzzz           三个字节</div><div class="line"></div><div class="line">- 010000 - 10FFFF(1048576个代码) 11110www(F0-F7) 10xxxxxx 10yyyyyy 10zzzzzz  四个字节</div><div class="line">- </div><div class="line">- 注: Unicode在范围D800-DFFF 中不存在任何字符</div><div class="line">- &#123;@linkhttp://zh.wikipedia.org/wiki/UTF-8&#125;</div><div class="line">- </div><div class="line">- UTF-16 大部分使用两个字节编码，编码超出 65535 的使用四个字节</div><div class="line">- 000000 -00FFFF  两个字节</div><div class="line">- 010000 -10FFFF  四个字节</div><div class="line">- </div><div class="line">- &#123;@linkhttp://zh.wikipedia.org/wiki/UTF-16&#125;</div><div class="line">- @param  &#123;String&#125; str </div><div class="line">- @param  &#123;String&#125; charset utf-8, utf-16</div><div class="line">- @return &#123;Number&#125;</div><div class="line"></div><div class="line">  */</div><div class="line"></div><div class="line"> <span class="keyword">var</span> sizeof = <span class="function"><span class="keyword">function</span>(<span class="params">str, charset</span>)</span>&#123;</div><div class="line"></div><div class="line">     <span class="keyword">var</span> total= <span class="number">0</span>,</div><div class="line"></div><div class="line">         charCode,</div><div class="line"></div><div class="line">         i,</div><div class="line"></div><div class="line">         len;</div><div class="line"></div><div class="line">     charset = charset ? charset.toLowerCase(): <span class="string">''</span>;</div><div class="line"></div><div class="line">     <span class="keyword">if</span>(charset=== <span class="string">'utf-16'</span> || charset === <span class="string">'utf16'</span>)&#123;</div><div class="line"></div><div class="line">         <span class="keyword">for</span>(i= <span class="number">0</span>, len = str.length; i &lt; len; i++)&#123;</div><div class="line"></div><div class="line">             charCode =str.charCodeAt(i);</div><div class="line"></div><div class="line">             <span class="keyword">if</span>(charCode&lt;= <span class="number">0xffff</span>)&#123;</div><div class="line"></div><div class="line">                 total += <span class="number">2</span>;</div><div class="line"></div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line"></div><div class="line">                 total += <span class="number">4</span>;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">         &#125;</div><div class="line"></div><div class="line">     &#125;<span class="keyword">else</span>&#123;</div><div class="line"></div><div class="line">         <span class="keyword">for</span>(i= <span class="number">0</span>, len = str.length; i &lt; len; i++)&#123;</div><div class="line"></div><div class="line">             charCode =str.charCodeAt(i);</div><div class="line"></div><div class="line">             <span class="keyword">if</span>(charCode&lt;= <span class="number">0x007f</span>) &#123;</div><div class="line"></div><div class="line">                 total += <span class="number">1</span>;</div><div class="line"></div><div class="line">             &#125;elseif(charCode &lt;= <span class="number">0x07ff</span>)&#123;</div><div class="line"></div><div class="line">                total += <span class="number">2</span>;</div><div class="line"></div><div class="line">             &#125;elseif(charCode &lt;= <span class="number">0xffff</span>)&#123;</div><div class="line"></div><div class="line">                 total += <span class="number">3</span>;</div><div class="line"></div><div class="line">             &#125;<span class="keyword">else</span>&#123;</div><div class="line"></div><div class="line">                 total += <span class="number">4</span>;</div><div class="line"></div><div class="line">             &#125;</div><div class="line"></div><div class="line">         &#125;</div><div class="line"></div><div class="line">     &#125;</div><div class="line"></div><div class="line">     <span class="keyword">return</span> total;</div><div class="line"></div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+        <p><img src="http://otw7po22v.bkt.clouddn.com/10128863_%E7%88%B1%E5%A5%87%E8%89%BA.jpg" alt=""></p>
 <blockquote>
-<p>原文出处已忘记，现在很多浏览器已经更改不了编码格式，具体存储的编码格式还需使用时自行测试。</p>
+<p>日色已尽花含烟，月明欲素愁不眠</p>
 </blockquote>
+<p>不觉间年假已过，又一次“假期依山尽，春节入海流”，再回到工作岗位，面对IDE上的密密麻麻，脑海里浮现的全是我的7.62和5.56，眼看假期综合征就要吞噬掉我，赶紧 <del>打个绷带</del> 写个程序恢复一下，于是想起了我最爱的<a href="http://www.paixin.com/" target="_blank" rel="external">拍信网</a>，这个大气漂亮，图片质量很高的正版图片交易平台，是我找图提升博客B格的不二选择，之前都是手工找到链接下载，正好今天来写个批量下载的爬虫玩玩，别误会，我爬的是免费图片区，不侵版权~，警察叔叔，我没有爬取付费区的图片，恩，绝对没有。</p>
+<a id="more"></a>
+<p>直接贴代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">'request'</span>);</div><div class="line"></div><div class="line"><span class="keyword">const</span> options = &#123;</div><div class="line">    <span class="attr">hostname</span>: <span class="string">'api.paixin.com'</span>,</div><div class="line">    <span class="attr">method</span>: <span class="string">"POST"</span>,</div><div class="line">    <span class="attr">headers</span>: &#123;</div><div class="line">        <span class="string">'cookie'</span>: <span class="string">"此处为你的登录态cookie"</span>,</div><div class="line">        <span class="string">'contentType'</span>: <span class="string">'text/json;charset=UTF-8'</span>,</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">startRequest();</div><div class="line"></div><div class="line"><span class="comment">//获取图片ID列表</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">startRequest</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> cur_option = options;</div><div class="line">    <span class="comment">//limit为图片数量</span></div><div class="line">    cur_option.path = <span class="string">'/media/recommend_list?limit=100&amp;line='</span>;</div><div class="line">    <span class="comment">//request payload数据</span></div><div class="line">    <span class="keyword">let</span> payloadData = <span class="built_in">JSON</span>.stringify(&#123;<span class="attr">type</span>: <span class="string">"6"</span>,<span class="attr">product</span>:<span class="string">"0"</span>,<span class="attr">mode</span>:<span class="string">"download_num"</span>&#125;);</div><div class="line">    <span class="keyword">let</span> req = http.request(cur_option, (res) =&gt; &#123;</div><div class="line">        <span class="keyword">let</span> result = <span class="string">""</span>, imgIdList = [];</div><div class="line">        res.setEncoding(<span class="string">'utf8'</span>);</div><div class="line">        res.on(<span class="string">'data'</span>, (chunk) =&gt; &#123;</div><div class="line">            result += chunk;</div><div class="line">        &#125;);</div><div class="line">        res.on(<span class="string">'end'</span>, () =&gt; &#123;</div><div class="line">            <span class="built_in">JSON</span>.parse(result).data.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">v</span>) </span>&#123;</div><div class="line">                imgIdList.push(v.id);</div><div class="line">            &#125;);</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">"图片总数："</span> + imgIdList.length);</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'------------------------------------'</span>);</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'下载开始:'</span>);</div><div class="line">            getImgUrl(imgIdList, <span class="number">1</span>);</div><div class="line">        &#125;)</div><div class="line">    &#125;);</div><div class="line">    <span class="comment">//payload数据写入请求体</span></div><div class="line">    req.write(payloadData);</div><div class="line">    req.on(<span class="string">'error'</span>, (e) =&gt; &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">`problem with request: <span class="subst">$&#123;e.message&#125;</span>`</span>);</div><div class="line">    &#125;);</div><div class="line">    req.end();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//根据图片ID获取下载链接</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getImgUrl</span>(<span class="params">imgIdList, NO</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (imgIdList.length &gt;= NO) &#123;</div><div class="line">        <span class="keyword">let</span> payloadData = <span class="built_in">JSON</span>.stringify(&#123;<span class="attr">media_id</span>: imgIdList[NO - <span class="number">1</span>]&#125;);</div><div class="line">        <span class="keyword">let</span> cur_option = options;</div><div class="line">        cur_option.path = <span class="string">'/media/download'</span>;</div><div class="line">        <span class="keyword">let</span> req = http.request(cur_option, (res) =&gt; &#123;</div><div class="line">            <span class="keyword">let</span> result = <span class="string">""</span>;</div><div class="line">            res.setEncoding(<span class="string">'utf8'</span>);</div><div class="line">            res.on(<span class="string">'data'</span>, (chunk) =&gt; &#123;</div><div class="line">                result += chunk;</div><div class="line">            &#125;);</div><div class="line">            res.on(<span class="string">'end'</span>, () =&gt; &#123;</div><div class="line">                <span class="built_in">console</span>.log(<span class="string">"---------------------"</span>);</div><div class="line">                <span class="built_in">console</span>.log(<span class="string">"图片编号:NO"</span>+NO);</div><div class="line">                result = <span class="built_in">JSON</span>.parse(result);</div><div class="line">                <span class="keyword">if</span>(result.out===<span class="string">"1"</span>)&#123;</div><div class="line">                    <span class="built_in">console</span>.log(<span class="string">"获取成功，开始下载"</span>);</div><div class="line">                    savedImg(result.data.download_url,imgIdList,NO);</div><div class="line">                &#125;<span class="keyword">else</span>&#123;</div><div class="line">                    <span class="built_in">console</span>.log(<span class="string">"获取失败，开始下一张"</span>);</div><div class="line">                    getImgUrl(imgIdList, NO+<span class="number">1</span>)</div><div class="line">                &#125;</div><div class="line">            &#125;)</div><div class="line">        &#125;);</div><div class="line">        req.write(payloadData);</div><div class="line">        req.on(<span class="string">'error'</span>, (e) =&gt; &#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">`problem with request: <span class="subst">$&#123;e.message&#125;</span>`</span>);</div><div class="line">        &#125;);</div><div class="line">        req.end();</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"-----------------------------------------------"</span>);</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"全部下载结束"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//拿到链接后下载图片</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">savedImg</span>(<span class="params">img_src,imgIdList,NO</span>) </span>&#123;</div><div class="line">    <span class="comment">//采用request模块，向服务器发起一次请求，获取图片资源</span></div><div class="line">    <span class="keyword">let</span> imgName=imgIdList[NO - <span class="number">1</span>] +<span class="string">"."</span> + img_src.split(<span class="string">"?"</span>)[<span class="number">0</span>].split(<span class="string">"."</span>).pop();</div><div class="line">    <span class="keyword">let</span> writer = fs.createWriteStream(<span class="string">'/图库/paixin图片/'</span> + imgName);</div><div class="line">    request.head(img_src,<span class="function"><span class="keyword">function</span>(<span class="params">err,res,body</span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(err)&#123;</div><div class="line">            <span class="built_in">console</span>.log(err);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">    request(img_src).pipe(writer);</div><div class="line">    writer.on(<span class="string">'close'</span>, () =&gt; &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'下载成功'</span>);</div><div class="line">        <span class="comment">//开始下载下一张</span></div><div class="line">        getImgUrl(imgIdList, NO+<span class="number">1</span>)</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>写完才发现很容易，只用了不到两个小时，若是爬取1280的图片还要更容易些，但我为了追求高清大图，爬下来的全部是原版图片，这些图片大一些的达到5mb左右,写入还是比较耗时，100张要四五分钟，不过这个质量也值得了。</p>
+<p>下面是爬取视频：<a href="http://www.iqiyi.com/w_19rxijql3l.html" target="_blank" rel="external">爱奇艺：拍信抓取图片</a></p>
+<p>参考：<a href="http://www.cnblogs.com/btgyoyo/p/6141480.html" target="_blank" rel="external">HTTP请求中的form data和request payload的区别</a></p>
+<p>图片列表：</p>
+<p><img src="http://otw7po22v.bkt.clouddn.com/%E5%9B%BE%E7%89%87%E5%88%97%E8%A1%A8.jpg" alt=""></p>
+<p>图片分辨率：</p>
+<p><img src="http://otw7po22v.bkt.clouddn.com/%E5%88%86%E8%BE%A8%E7%8E%87.jpg" alt=""></p>
+<p>最后放一张美美的给大家欣赏：</p>
+<p><img src="http://otw7po22v.bkt.clouddn.com/10128312.jpeg" alt=""></p>
 
       
 
@@ -259,7 +259,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">node.js</a>
         		</li>
       		
 		</ul>
@@ -315,7 +315,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2017/04/17/JS计算字符串所占字节数/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2018/02/25/Node爬取拍信网图片/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -329,18 +329,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2017/06/21/Eslint入门/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Eslint入门
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/27/bat小应用/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">bat小应用</div>
+    <a href="/2018/02/23/千里之行，始于足下/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">千里之行，始于足下</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -367,7 +358,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#JS计算字符串所占字节数"><span class="toc-number">1.</span> <span class="toc-text">JS计算字符串所占字节数</span></a></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>

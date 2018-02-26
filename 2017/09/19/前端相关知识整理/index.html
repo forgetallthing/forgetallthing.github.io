@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/8add660723429d876917506567ff054d_%E7%88%B1%E5%A5%87%E8%89%BA.jpg">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/Video_2017-11-27_103235%2000_00_05-00_00_09.gif">
-<meta property="og:updated_time" content="2018-01-22T09:18:10.874Z">
+<meta property="og:updated_time" content="2018-02-26T07:43:00.870Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具，github上有九千多star，简洁好用: 官网：http://www.browsersync.cn/ 如果你不用Gulp、Grunt的话，你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quot;">
@@ -328,6 +328,13 @@ var _hmt = _hmt || [];
 <h4 id="获取浏览器内核和版本信息"><a href="#获取浏览器内核和版本信息" class="headerlink" title="获取浏览器内核和版本信息"></a>获取浏览器内核和版本信息</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> browser = getBrowserInfo() ;</div><div class="line">alert(browser);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getBrowserInfo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> agent = navigator.userAgent.toLowerCase();</div><div class="line">    <span class="keyword">var</span> regStr_ie = <span class="regexp">/msie [\d.]+;/gi</span>;</div><div class="line">    <span class="keyword">var</span> regStr_ff = <span class="regexp">/firefox\/[\d.]+/gi</span></div><div class="line">    <span class="keyword">var</span> regStr_chrome = <span class="regexp">/chrome\/[\d.]+/gi</span>;</div><div class="line">    <span class="keyword">var</span> regStr_saf = <span class="regexp">/safari\/[\d.]+/gi</span>;</div><div class="line">  	<span class="keyword">var</span> regStr_ucbrowser = <span class="regexp">/ucbrowser\/[\d.]+/gi</span>;</div><div class="line"></div><div class="line">    <span class="comment">//360</span></div><div class="line">    <span class="keyword">if</span> (agent.indexOf(<span class="string">"wow"</span>) &gt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> [<span class="string">"360"</span>];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//uc</span></div><div class="line">    <span class="keyword">if</span> (agent.indexOf(<span class="string">"ucbrowser"</span>) &gt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> agent.match(regStr_ucbrowser);</div><div class="line">    &#125;</div><div class="line">	<span class="comment">//IE</span></div><div class="line">    <span class="keyword">if</span> (agent.indexOf(<span class="string">"msie"</span>) &gt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> agent.match(regStr_ie);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">	<span class="comment">//firefox</span></div><div class="line">    <span class="keyword">if</span> (agent.indexOf(<span class="string">"firefox"</span>) &gt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> agent.match(regStr_ff);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">	<span class="comment">//Chrome</span></div><div class="line">    <span class="keyword">if</span> (agent.indexOf(<span class="string">"chrome"</span>) &gt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> agent.match(regStr_chrome);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">	<span class="comment">//Safari</span></div><div class="line">    <span class="keyword">if</span> (agent.indexOf(<span class="string">"safari"</span>) &gt; <span class="number">0</span> &amp;&amp; agent.indexOf(<span class="string">"chrome"</span>) &lt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> agent.match(regStr_saf);</div><div class="line">    &#125;</div><div class="line">	</div><div class="line">  	<span class="keyword">return</span> [<span class="string">""</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="获取IP地址"><a href="#获取IP地址" class="headerlink" title="获取IP地址"></a>获取IP地址</h4><p>搜狐的这个可用</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"http://pv.sohu.com/cityjson?ie=utf-8"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span>  </div><div class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;  </div><div class="line"><span class="built_in">document</span>.write(returnCitySN[<span class="string">"cip"</span>]+<span class="string">','</span>+returnCitySN[<span class="string">"cname"</span>])  </div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
+<p>####使用setTimeout调整事件发生顺序（如冒泡）</p>
+<p>网页开发中，某个事件先发生在子元素，然后冒泡到父元素，即子元素的事件回调函数，会早于父元素的事件回调函数触发。如果，我们先让父元素的事件回调函数先发生，就要用到setTimeout(function, 0)。</p>
+<p>正常情况下，点击div元素，先弹出0，再弹出1：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"myDiv"</span> style=<span class="string">"height: 100px;width: 100px;background-color: pink;"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></div><div class="line">&lt;script&gt;</div><div class="line">    myDiv.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        alert(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">document</span>.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        alert(<span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
+<p>如果进行想让document的onclick事件先发生，即点击div元素，先弹出1，再弹出0。则进行如下设置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"myDiv"</span> style=<span class="string">"height: 100px;width: 100px;background-color: pink;"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></div><div class="line">&lt;script&gt;</div><div class="line">    myDiv.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            alert(<span class="number">0</span>);</div><div class="line">        &#125;)</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">document</span>.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        alert(<span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
+<p>至于为什么会这样，参考： <a href="http://www.cnblogs.com/xiaohuochai/p/5773183.html" target="_blank" rel="external">深入理解定时器系列第一篇——理解setTimeout和setInterval</a></p>
 <h2 id="正则表达式相关"><a href="#正则表达式相关" class="headerlink" title="正则表达式相关"></a>正则表达式相关</h2><h4 id="动态构建正则表达式"><a href="#动态构建正则表达式" class="headerlink" title="动态构建正则表达式"></a>动态构建正则表达式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> className = <span class="string">"high"</span>;</div><div class="line"><span class="keyword">var</span> regex = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|\\s)"</span> + className + <span class="string">"(\\s|$)"</span>);</div><div class="line"><span class="built_in">console</span>.log(regex.source)</div><div class="line"><span class="comment">// =&gt; (^|\s)high(\s|$) 即字符串"(^|\\s)high(\\s|$)"</span></div></pre></td></tr></table></figure>
 <p>使用eval也可以将字符串转化为正则表达式。</p>
 <h4 id="正则表达式中的g对js-api的影响"><a href="#正则表达式中的g对js-api的影响" class="headerlink" title="正则表达式中的g对js api的影响"></a>正则表达式中的g对js api的影响</h4><p>用于正则操作的方法，共有 6 个，字符串实例 4 个，正则实例 2 个:</p>
@@ -615,19 +622,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -635,11 +630,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,6 +650,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -659,11 +662,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -675,7 +678,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -683,11 +686,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -695,7 +694,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
             
             <div class="clearfix"></div>

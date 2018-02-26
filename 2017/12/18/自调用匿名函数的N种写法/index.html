@@ -17,7 +17,7 @@
 <meta property="og:description" content="孔乙己自己知道不能和他们谈天，便只好向孩子说话。有一回对我说道，“你读过JavaScript高程么？”我略略点一点头。他说，“读过书，……我便考一考。自调用匿名函数，怎样写的？”我想，讨饭一样的人，也配考我么？便回过脸去，不再理会。孔乙己等了许久，很恳切的说道，“不能写罢？……我教给你，记着！这些写法应该记着。将来做架构师的时候，写代码要用。”我暗想我和架构师的等级还很远呢，而且我们架构师也从不">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/TIM%E5%9B%BE%E7%89%8720171218172625.png">
-<meta property="og:updated_time" content="2017-12-28T03:38:45.524Z">
+<meta property="og:updated_time" content="2018-02-26T07:24:32.798Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自调用匿名函数的N种写法">
 <meta name="twitter:description" content="孔乙己自己知道不能和他们谈天，便只好向孩子说话。有一回对我说道，“你读过JavaScript高程么？”我略略点一点头。他说，“读过书，……我便考一考。自调用匿名函数，怎样写的？”我想，讨饭一样的人，也配考我么？便回过脸去，不再理会。孔乙己等了许久，很恳切的说道，“不能写罢？……我教给你，记着！这些写法应该记着。将来做架构师的时候，写代码要用。”我暗想我和架构师的等级还很远呢，而且我们架构师也从不">
@@ -272,7 +272,7 @@ var _hmt = _hmt || [];
 <h4 id="函数声明提前"><a href="#函数声明提前" class="headerlink" title="函数声明提前"></a>函数声明提前</h4><p>接下俩我们结合<code>var</code><strong>声明提前</strong>开始聊函数声明的<strong>声明提前</strong>。</p>
 <p>函数声明的<strong>声明提前</strong>小伙伴们应该很熟悉，举个再熟悉不过的例子。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sayTruth();<span class="xml"><span class="comment">&lt;!-- 函数声明 --&gt;</span></span></div><div class="line">function sayTruth()&#123;</div><div class="line">    alert('money is handsome.');</div><div class="line">&#125;</div><div class="line"></div><div class="line">sayTruth();<span class="comment">&lt;!-- 函数表达式 --&gt;</span></div><div class="line">var sayTruth=function()&#123;</div><div class="line">    alert('money is handsome.');</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>小伙伴们都知道，对于函数声明的函数定义方法，即上面的第一种函数调用方法是正确的，可以输出<code>money is handsome.</code>的真理，因为函数调用语句可以放在函数声明之后。而对于函数表达式的函数定义方法，即上面的第二种函数调用的方法是不能输出<code>money is handsome.</code>的正确结果的。</p>
+<p>小伙伴们都知道，对于函数声明的函数定义方法，即上面的第一种函数调用方法是正确的，可以输出<code>money is handsome.</code>的真理，因为函数调用语句可以放在函数声明之前。而对于函数表达式的函数定义方法，即上面的第二种函数调用的方法是不能输出<code>money is handsome.</code>的正确结果的。</p>
 <p>结合上面的<code>money is handsome.</code>例子，函数声明提前的结论似乎很好理解，不就是在使用函数声明的函数定义方法的时候，函数调用可以放在任意位置嘛，这一点即为：</p>
 <p><strong>函数声明提前的时候，函数声明和函数体均提前了。</strong></p>
 <p>而且：</p>
@@ -581,19 +581,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -601,11 +589,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -617,6 +609,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -625,11 +621,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -641,7 +637,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -649,11 +645,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,7 +653,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
             
             <div class="clearfix"></div>

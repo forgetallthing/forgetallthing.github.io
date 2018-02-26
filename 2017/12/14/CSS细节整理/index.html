@@ -17,7 +17,7 @@
 <meta property="og:description" content="本来css部分也写在前端知识整理里，但随着css相关日益增多，还是单独开个文章专门记录，会比较琐碎，请多担待。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/8b3399e2a71d32ad1362a0e4116655ff.jpeg">
-<meta property="og:updated_time" content="2018-01-02T07:43:33.984Z">
+<meta property="og:updated_time" content="2018-02-26T08:02:30.907Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS细节整理">
 <meta name="twitter:description" content="本来css部分也写在前端知识整理里，但随着css相关日益增多，还是单独开个文章专门记录，会比较琐碎，请多担待。">
@@ -246,7 +246,7 @@ var _hmt = _hmt || [];
 </ul>
 <p>实现原理：方案4是实现效果比较好的，居中块的尺寸可以做包裹性，缺点是增加了一层table-cell层来实现垂直居中。方案4的居中块可以设置 max-height、max-width，而且居中块是可以具有垂直方向的包裹性的。水平方向由于是在table-cell里面的，所以会直接显示max-width，也就是宽度趋大。</p>
 <p>此种实现往往会因为display：table而破坏整体布局，那还不如直接用table标签了呢。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="css"></span></div><div class="line"><span class="selector-class">.wrp4</span> &#123; <span class="attribute">display</span>: table; &#125;</div><div class="line"><span class="selector-class">.subwrp4</span> &#123;</div><div class="line">    <span class="attribute">display</span>: table-cell;</div><div class="line">    <span class="attribute">vertical-align</span>: middle;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.box4</span> &#123;</div><div class="line">    <span class="attribute">margin</span>: auto;</div><div class="line">    <span class="attribute">overflow-wrap</span>: break-word;</div><div class="line">    <span class="attribute">height</span>: auto;</div><div class="line">    <span class="attribute">max-height</span>: <span class="number">80%</span>;</div><div class="line">    <span class="attribute">max-width</span>: <span class="number">80%</span>;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrp wrp4"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"subwrp4"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="css"></span></div><div class="line"><span class="selector-class">.wrp4</span> &#123; <span class="attribute">display</span>: table; &#125;</div><div class="line"><span class="selector-class">.subwrp4</span> &#123;</div><div class="line">    <span class="attribute">display</span>: table-cell;</div><div class="line">    <span class="attribute">vertical-align</span>: middle;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.box4</span> &#123;</div><div class="line">    <span class="attribute">margin</span>: auto;</div><div class="line">    <span class="attribute">overflow-wrap</span>: break-word;</div><div class="line">    <span class="attribute">height</span>: auto;</div><div class="line">    <span class="attribute">max-height</span>: <span class="number">80%</span>;</div><div class="line">    <span class="attribute">max-width</span>: <span class="number">80%</span>;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrp wrp4"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"subwrp4"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box box4"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>完全居中方案四：<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
 <ul>
 <li>display:inline-block</li>
 </ul>
@@ -538,19 +538,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -558,11 +546,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -574,6 +566,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -582,11 +578,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -598,7 +594,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -606,11 +602,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,7 +610,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
             
             <div class="clearfix"></div>

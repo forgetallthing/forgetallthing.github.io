@@ -277,6 +277,11 @@ var _hmt = _hmt || [];
 <p>fight or flight？大扎好，我系轱天乐，我四渣渣辉，潜端面世，介四里没有挽过的船新版本，挤需体验三番钟，里造会干我一样，爱象节款面食，系兄弟里就来砍我，潜端面世了丐一蛤！</p>
 </blockquote>
 <h2 id="JS篇"><a href="#JS篇" class="headerlink" title="JS篇"></a>JS篇</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>函数定义的三种方式和四种调用方式： <a href="http://www.cnblogs.com/xiaohuochai/p/5702813.html" target="_blank" rel="external">深入理解javascript函数系列第一篇——函数概述</a> </p>
+<p>函数参数相关： <a href="http://www.cnblogs.com/xiaohuochai/p/5706289.html" target="_blank" rel="external">深入理解javascript函数系列第二篇——函数参数</a></p>
+<p>函数的属性和方法： <a href="http://www.cnblogs.com/xiaohuochai/p/5707378.html" target="_blank" rel="external">深入理解javascript函数系列第三篇——属性和方法</a></p>
+<p>PostScript：</p>
+<p>1.上文中提到找出数组最大值的方法：Math.max.apply(null, a); ,是因为Math.max()方法，支持传递多个参数，比如：Math.max(1,4,2,3,7,5,6)，但是它不支持直接传递一个数组作为参数，比如：Math.max(new Array(1,4,2,3,7,5,6))。这里，只要我们有方法把数组，一个一个拆分开来，传递到Math.max()方法中，就实现了传递数组的方法，所以使用了apply方法。</p>
+<p>2.将类数组对象转换成真正的数组：此处使用了<code>Array.prototype.slice.apply({0:1,length:1});//[1]</code> ,这里使用apply来使用真数组里才有的slice方法，而slice返回值是将array-like对象通过下标操作放进了新的Array并返回。</p>
         
           <a class="article-more-a" href="/2018/02/23/千里之行，始于足下/#more">more >></a>
         
@@ -1077,10 +1082,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
@@ -1089,19 +1090,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1113,6 +1114,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -1121,11 +1130,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1141,15 +1150,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1161,7 +1166,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
             
             <div class="clearfix"></div>

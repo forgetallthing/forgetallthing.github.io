@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: quiz | 张伯伯的BLOG</title>
+  <title>js获取表单数组 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="哪里有幸福可借">
-<meta property="og:type" content="website">
-<meta property="og:title" content="张伯伯的BLOG">
-<meta property="og:url" content="http://yoursite.com/tags/quiz/index.html">
+  <meta name="description" content="此篇为转载前辈封装好的方法，顺便把返回值改为对象，并且增加了几种新表单类型的支持和特殊字符的解码：">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js获取表单数组">
+<meta property="og:url" content="http://yoursite.com/2017/06/10/js获取表单数组/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="哪里有幸福可借">
+<meta property="og:description" content="此篇为转载前辈封装好的方法，顺便把返回值改为对象，并且增加了几种新表单类型的支持和特殊字符的解码：">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-10T11:38:03.084Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="张伯伯的BLOG">
-<meta name="twitter:description" content="哪里有幸福可借">
+<meta name="twitter:title" content="js获取表单数组">
+<meta name="twitter:description" content="此篇为转载前辈封装好的方法，顺便把返回值改为对象，并且增加了几种新表单类型的支持和特殊字符的解码：">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -171,60 +173,200 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-js获取表单数组" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/23/千里之行，始于足下/" class="archive-article-date">
-  	<time datetime="2018-02-23T01:37:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-23</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/23/千里之行，始于足下/">千里之行，始于足下</a>
+    <h1 class="article-title" itemprop="name">
+      js获取表单数组
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/06/10/js获取表单数组/" class="archive-article-date">
+  	<time datetime="2017-06-10T11:31:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>此篇为转载前辈封装好的方法，顺便把返回值改为对象，并且增加了几种新表单类型的支持和特殊字符的解码：</p>
+<a id="more"></a>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getElements</span>(<span class="params">formId</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> form = <span class="built_in">document</span>.getElementById(formId);</div><div class="line">	<span class="keyword">var</span> elements = <span class="keyword">new</span> <span class="built_in">Array</span>();</div><div class="line">	<span class="keyword">var</span> tagElements = form.getElementsByTagName(<span class="string">'input'</span>);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; tagElements.length; j++) &#123;</div><div class="line">		elements.push(tagElements[j]);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">var</span> tagElements = form.getElementsByTagName(<span class="string">'select'</span>);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; tagElements.length; j++) &#123;</div><div class="line">		elements.push(tagElements[j]);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">var</span> tagElements = form.getElementsByTagName(<span class="string">'textarea'</span>);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; tagElements.length; j++) &#123;</div><div class="line">		elements.push(tagElements[j]);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> elements;</div><div class="line">&#125;</div><div class="line"><span class="comment">//组合URL </span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">serializeElement</span>(<span class="params">element</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> method = element.tagName.toLowerCase();</div><div class="line">	<span class="keyword">var</span> parameter;</div><div class="line">	<span class="keyword">if</span>(method == <span class="string">'select'</span>) &#123;</div><div class="line">		parameter = [element.name, element.value];</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">switch</span>(element.type.toLowerCase()) &#123;</div><div class="line">		<span class="keyword">case</span> <span class="string">'submit'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'hidden'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'password'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'email'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'range'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'url'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'number'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'text'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'date'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'textarea'</span>:</div><div class="line">			parameter = [element.name, element.value];</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> <span class="string">'checkbox'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'radio'</span>:</div><div class="line">			<span class="keyword">if</span>(element.checked) &#123;</div><div class="line">				parameter = [element.name, element.value];</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span>(parameter) &#123;</div><div class="line">		<span class="keyword">var</span> key = <span class="built_in">encodeURIComponent</span>(parameter[<span class="number">0</span>]);</div><div class="line">		<span class="keyword">if</span>(key.length == <span class="number">0</span>)</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		<span class="keyword">if</span>(parameter[<span class="number">1</span>].constructor != <span class="built_in">Array</span>)</div><div class="line">			parameter[<span class="number">1</span>] = [parameter[<span class="number">1</span>]];</div><div class="line">		<span class="keyword">var</span> values = parameter[<span class="number">1</span>];</div><div class="line">		<span class="keyword">var</span> results = [];</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; values.length; i++) &#123;</div><div class="line">			results.push(key + <span class="string">'='</span> + <span class="built_in">encodeURIComponent</span>(values[i]));</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> results.join(<span class="string">'&amp;'</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//调用方法   </span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">serializeForm</span>(<span class="params">formId</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> elements = getElements(formId);</div><div class="line">	<span class="keyword">var</span> queryComponents = <span class="keyword">new</span> <span class="built_in">Array</span>();</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elements.length; i++) &#123;</div><div class="line">		<span class="keyword">var</span> queryComponent = serializeElement(elements[i]);</div><div class="line">		<span class="keyword">if</span>(queryComponent) &#123;</div><div class="line">			queryComponents.push(queryComponent);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">var</span> result = &#123;&#125;;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> queryComponents) &#123;</div><div class="line">		<span class="keyword">var</span> x = queryComponents[i].split(<span class="string">"="</span>);</div><div class="line">		result[x[<span class="number">0</span>]] = <span class="built_in">decodeURIComponent</span>(x[<span class="number">1</span>])</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>原文：<a href="https://blog.csdn.net/u012841667/article/details/74922939" target="_blank" rel="external">原生js实现获取form表单数据</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>你转给我的不是钱，只是数字<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">quiz</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2017/06/10/js获取表单数组/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/06/21/Eslint入门/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Eslint入门
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/04/17/JS计算字符串所占字节数/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JS计算字符串所占字节数</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -260,9 +402,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

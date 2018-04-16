@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/8add660723429d876917506567ff054d_%E7%88%B1%E5%A5%87%E8%89%BA.jpg">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/Video_2017-11-27_103235%2000_00_05-00_00_09.gif">
-<meta property="og:updated_time" content="2018-04-11T02:50:41.450Z">
+<meta property="og:updated_time" content="2018-04-16T02:30:51.707Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具，github上有九千多star，简洁好用: 官网：http://www.browsersync.cn/ 如果你不用Gulp、Grunt的话，你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quot;">
@@ -342,7 +342,7 @@ var _hmt = _hmt || [];
 <p>详见：<a href="http://www.cnblogs.com/xiaohuochai/p/4779280.html" target="_blank" rel="external">如何避免javascript中的冲突</a></p>
 <h4 id="图片懒加载"><a href="#图片懒加载" class="headerlink" title="图片懒加载"></a>图片懒加载</h4><p><a href="http://www.cnblogs.com/xiaohuochai/p/4859899.html" target="_blank" rel="external">图片懒加载</a></p>
 <p>主要步骤：</p>
-<p>【1】网页中的图片都设为同一张图片<br>【2】给图片增加data-original = “img/test.jpg”的属性，保存图片的真实地址<br>【3】当触发某些条件时，自动改变该区域的图片的src属性为真实的地址</p>
+<p>【1】网页中的图片都设为同一张图片；<br>【2】给图片增加data-original = “img/test.jpg”的属性，保存图片的真实地址；<br>【3】当触发某些条件时，自动改变该区域的图片的src属性为真实的地址；</p>
 <h4 id="原生js在本节点后插入兄弟节点"><a href="#原生js在本节点后插入兄弟节点" class="headerlink" title="原生js在本节点后插入兄弟节点"></a>原生js在本节点后插入兄弟节点</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertAfter</span>(<span class="params">newElement, targetElement</span>)</span>&#123;  </div><div class="line">	<span class="keyword">var</span> parent = targetElement.parentNode;  </div><div class="line">	<span class="keyword">if</span> (parent.lastChild == targetElement) &#123;  </div><div class="line">		<span class="comment">// 如果最后的节点是目标元素，则直接添加。因为默认是最后  </span></div><div class="line">		parent.appendChild(newElement);  </div><div class="line">	&#125; <span class="keyword">else</span> &#123;  </div><div class="line">		parent.insertBefore(newElement, targetElement.nextSibling);  </div><div class="line">		<span class="comment">//如果不是，则插入在目标元素的下一个兄弟节点 的前面。也就是目标元素的后面  </span></div><div class="line">	&#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="正则表达式相关"><a href="#正则表达式相关" class="headerlink" title="正则表达式相关"></a>正则表达式相关</h2><h4 id="动态构建正则表达式"><a href="#动态构建正则表达式" class="headerlink" title="动态构建正则表达式"></a>动态构建正则表达式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> className = <span class="string">"high"</span>;</div><div class="line"><span class="keyword">var</span> regex = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|\\s)"</span> + className + <span class="string">"(\\s|$)"</span>);</div><div class="line"><span class="built_in">console</span>.log(regex.source)</div><div class="line"><span class="comment">// =&gt; (^|\s)high(\s|$) 即字符串"(^|\\s)high(\\s|$)"</span></div></pre></td></tr></table></figure>
 <p>使用eval也可以将字符串转化为正则表达式。</p>
@@ -631,11 +631,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -643,7 +647,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -659,14 +667,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -679,15 +679,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -699,11 +691,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">

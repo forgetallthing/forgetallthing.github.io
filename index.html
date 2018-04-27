@@ -173,6 +173,89 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-移动页面点击事件穿透问题解决方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/27/移动页面点击事件穿透问题解决方案/">移动页面点击事件穿透问题解决方案</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/27/移动页面点击事件穿透问题解决方案/" class="archive-article-date">
+  	<time datetime="2018-04-27T09:08:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在移动端页面上，点击蒙层（mask）上的关闭按钮，蒙层消失后发现触发了按钮下面元素的click事件，这就是标题中的点击事件穿透问题。我的mask层是审核错误的列表，当点击相关错误会立即隐藏蒙版并定位到问卷的某个题目，所以事件穿透会导致点击错误列表的时候误修改了问卷上用户的选择，也就是触发了input或select的click事件。在参考了以下两篇博客后使用<code>pointer-events</code> 解决了问题，链接如下：</p>
+<ol>
+<li><a href="http://www.cnblogs.com/xiaoxingyiyi/p/5447378.html" target="_blank" rel="external">移动端h5页面touch事件与点击穿透问题</a></li>
+<li><a href="https://blog.csdn.net/helloxiaoliang/article/details/51362107" target="_blank" rel="external">移动页面点击穿透问题解决方案</a></li>
+</ol>
+<p>整理如下：</p>
+<h2 id="touch事件的来源"><a href="#touch事件的来源" class="headerlink" title="touch事件的来源"></a>touch事件的来源</h2><p>PC网页上的大部分操作都是用鼠标的，即响应的是鼠标事件，包括<code>mousedown</code>、<code>mouseup</code>、<code>mousemove</code>和<code>click</code>事件。一次点击行为，可被拆解成：<code>mousedown</code> -&gt; <code>click</code> -&gt; <code>mouseup</code>三步。</p>
+<p>手机上没有鼠标，所以就用触摸事件去实现类似的功能。touch事件包含<code>touchstart</code>、<code>touchmove</code>、<code>touchend</code>，注意手机上并没有<code>tap</code>事件。手指触发触摸事件的过程为：<code>touchstart</code> -&gt; <code>touchmove</code> -&gt; <code>touchend</code>。</p>
+        
+          <a class="article-more-a" href="/2018/04/27/移动页面点击事件穿透问题解决方案/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/27/移动页面点击事件穿透问题解决方案/">打开看看 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-win10家庭版关闭自动更新" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -887,89 +970,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-前端相关知识整理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/19/前端相关知识整理/">前端相关知识整理</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/19/前端相关知识整理/" class="archive-article-date">
-  	<time datetime="2017-09-19T02:14:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://otw7po22v.bkt.clouddn.com/8add660723429d876917506567ff054d_%E7%88%B1%E5%A5%87%E8%89%BA.jpg" alt=""></p>
-<h2 id="各类库和工具收藏："><a href="#各类库和工具收藏：" class="headerlink" title="各类库和工具收藏："></a>各类库和工具收藏：</h2><h4 id="Browsersync"><a href="#Browsersync" class="headerlink" title="Browsersync"></a>Browsersync</h4><p>简洁的浏览器同步测试工具，github上有九千多star，简洁好用:</p>
-<p>官网：<a href="http://www.browsersync.cn/" target="_blank" rel="external">http://www.browsersync.cn/</a></p>
-<p>如果你不用<a href="http://www.browsersync.cn/docs/gulp" target="_blank" rel="external">Gulp</a>、<a href="http://www.browsersync.cn/docs/grunt" target="_blank" rel="external">Grunt</a>的话，你可能需要这个：</p>
-<p>静态网站(自动启动一个端口为3000的小型服务器)：</p>
-<p><code>browser-sync start --server --files &quot;*.* , */*.*&quot;</code></p>
-<p>动态服务器 ：</p>
-<p><code>browser-sync start --proxy &quot;主机名/地址&quot; --files &quot;*.* , */*.*&quot;</code></p>
-        
-          <a class="article-more-a" href="/2017/09/19/前端相关知识整理/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/19/前端相关知识整理/">打开看看 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1098,15 +1098,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1118,18 +1130,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
@@ -1138,7 +1138,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1146,7 +1146,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1159,14 +1167,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
               </li>
             
             <div class="clearfix"></div>

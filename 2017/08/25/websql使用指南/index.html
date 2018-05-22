@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="前言本篇博客将记录我在项目中实操websql的一些经验,争取记录的都是干货,下面开始： js部分1.架子：123456789101112131415var myDB = &amp;#123;	name: &apos;formData&apos;,	version: 1,	db: null&amp;#125;;myDB.db = openDatabase(myDB.name, myDB.version, &apos;test&apos;, 100 * 1">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-26T10:05:22.567Z">
+<meta property="og:updated_time" content="2018-05-22T09:14:58.017Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="websql使用指南">
 <meta name="twitter:description" content="前言本篇博客将记录我在项目中实操websql的一些经验,争取记录的都是干货,下面开始： js部分1.架子：123456789101112131415var myDB = &amp;#123;	name: &apos;formData&apos;,	version: 1,	db: null&amp;#125;;myDB.db = openDatabase(myDB.name, myDB.version, &apos;test&apos;, 100 * 1">
@@ -196,7 +196,7 @@ var _hmt = _hmt || [];
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>本篇博客将记录我在项目中实操websql的一些经验,争取记录的都是干货,下面开始：</p>
 <h3 id="js部分"><a href="#js部分" class="headerlink" title="js部分"></a>js部分</h3><h4 id="1-架子："><a href="#1-架子：" class="headerlink" title="1.架子："></a>1.架子：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myDB = &#123;</div><div class="line">	<span class="attr">name</span>: <span class="string">'formData'</span>,</div><div class="line">	<span class="attr">version</span>: <span class="number">1</span>,</div><div class="line">	<span class="attr">db</span>: <span class="literal">null</span></div><div class="line">&#125;;</div><div class="line">myDB.db = openDatabase(myDB.name, myDB.version, <span class="string">'test'</span>, <span class="number">100</span> * <span class="number">1024</span> * <span class="number">1024</span>);</div><div class="line">myDB.db.transaction(<span class="function"><span class="keyword">function</span>(<span class="params">tx</span>) </span>&#123;</div><div class="line">	tx.executeSql(<span class="string">''</span>, [], <span class="function"><span class="keyword">function</span>(<span class="params">tx, result</span>) </span>&#123;</div><div class="line">      	  <span class="keyword">if</span>(result.rows.length!=<span class="number">0</span>)&#123;</div><div class="line">              <span class="comment">//result.rows.item(i)</span></div><div class="line">      	  &#125;</div><div class="line">	&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">tx, error</span>) </span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(error);</div><div class="line">	&#125;);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <a id="more"></a>
-<h3 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h3><figure class="highlight sql"><figcaption><span>lite</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">//新建表</div><div class="line">'<span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> 表名 (列名称<span class="number">1</span> PRIMARY <span class="keyword">KEY</span>,列名称<span class="number">2</span> <span class="keyword">UNIQUE</span> ,列名称<span class="number">3</span>)<span class="string">'</span></div><div class="line">//删除表</div><div class="line">'<span class="keyword">DROP</span> <span class="keyword">TABLE</span> 表名<span class="string">'</span></div><div class="line">//清空表</div><div class="line">'<span class="keyword">DELETE</span> <span class="keyword">FROM</span> 表名<span class="string">'</span></div><div class="line">//删除条目</div><div class="line">'<span class="keyword">DELETE</span> <span class="keyword">FROM</span> 表名 <span class="keyword">WHERE</span> 列名称<span class="number">1</span> = ? <span class="keyword">and</span> 列名称<span class="number">2</span> = ?<span class="string">'</span></div><div class="line">//新增一条</div><div class="line">'<span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名 <span class="keyword">VALUES</span> (?,?,?,?,?,?,?)<span class="string">'　//为所有列添加值</span></div><div class="line">'<span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名 (列名称<span class="number">2</span>,列名称<span class="number">4</span>,列名称<span class="number">6</span>) <span class="keyword">VALUES</span> (?,?,?)<span class="string">'　//为指定列添加值</span></div><div class="line">//更新一条</div><div class="line">'<span class="keyword">UPDATE</span> 表名 <span class="keyword">SET</span> 列名称<span class="number">1</span> = ? <span class="keyword">where</span> 列名称<span class="number">2</span> = ? <span class="keyword">AND</span> 列名称<span class="number">3</span> = ?<span class="string">'</span></div><div class="line">　//根据主键存在与否，更新或添加一条数据</div><div class="line">'<span class="keyword">replace</span> <span class="keyword">into</span> 表名 (列名称<span class="number">1</span>,列名称<span class="number">2</span>,列名称<span class="number">3</span>,列名称<span class="number">4</span>,列名称<span class="number">5</span>) <span class="keyword">VALUES</span> (?,?,?,?,?) <span class="string">'</span></div><div class="line">　//查找（更多查询请根据自己的需要自由组合）</div><div class="line">'<span class="keyword">select</span> * <span class="keyword">from</span> 表名 <span class="keyword">where</span> 列名称<span class="number">1</span> = ? <span class="keyword">and</span> 列名称<span class="number">1</span> &gt;= ?<span class="string">'　//常规查找</span></div><div class="line">'<span class="keyword">select</span> * <span class="keyword">from</span> 表名 <span class="keyword">where</span> 列名称<span class="number">1</span> = ? <span class="keyword">or</span> 列名称<span class="number">1</span> &gt;= ?<span class="string">'　//常规查找</span></div><div class="line">WHERE 列名称 IS NOT NULL //非空</div><div class="line">WHERE 列名称 LIKE "111%"</div><div class="line">WHERE 列名称 GLOB '<span class="number">111</span>*<span class="string">'　//111开头的</span></div><div class="line">WHERE 列名称 IN ( 25, 27 ) 　//值为25或27的</div><div class="line">WHERE 列名称 NOT IN ( 25, 27 ) 　//值不为25或27的</div><div class="line">WHERE 列名称 BETWEEN 25 AND 27 　//值在25到27之间的</div><div class="line">//索引</div><div class="line">'<span class="keyword">CREATE</span> <span class="keyword">INDEX</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> 索引名 <span class="keyword">on</span> 表名 (列名称<span class="number">1</span>, 列名称<span class="number">2</span>) <span class="string">'</span></div><div class="line">'<span class="keyword">DROP</span> <span class="keyword">INDEX</span> 索引名<span class="string">'</span></div></pre></td></tr></table></figure>
+<h3 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h3><figure class="highlight sql"><figcaption><span>lite</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">//新建表</div><div class="line">'<span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> 表名 (列名称<span class="number">1</span> PRIMARY <span class="keyword">KEY</span>,列名称<span class="number">2</span> <span class="keyword">UNIQUE</span> ,列名称<span class="number">3</span>)<span class="string">'</span></div><div class="line">//删除表</div><div class="line">'<span class="keyword">DROP</span> <span class="keyword">TABLE</span> 表名<span class="string">'</span></div><div class="line">//清空表</div><div class="line">'<span class="keyword">DELETE</span> <span class="keyword">FROM</span> 表名<span class="string">'</span></div><div class="line">//删除条目</div><div class="line">'<span class="keyword">DELETE</span> <span class="keyword">FROM</span> 表名 <span class="keyword">WHERE</span> 列名称<span class="number">1</span> = ? <span class="keyword">and</span> 列名称<span class="number">2</span> = ?<span class="string">'</span></div><div class="line">//新增一条</div><div class="line">'<span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名 <span class="keyword">VALUES</span> (?,?,?,?,?,?,?)<span class="string">'　//为所有列添加值</span></div><div class="line">'<span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表名 (列名称<span class="number">2</span>,列名称<span class="number">4</span>,列名称<span class="number">6</span>) <span class="keyword">VALUES</span> (?,?,?)<span class="string">'　//为指定列添加值</span></div><div class="line">//更新一条</div><div class="line">'<span class="keyword">UPDATE</span> 表名 <span class="keyword">SET</span> 列名称<span class="number">1</span> = ? <span class="keyword">where</span> 列名称<span class="number">2</span> = ? <span class="keyword">AND</span> 列名称<span class="number">3</span> = ?<span class="string">'</span></div><div class="line">'<span class="keyword">UPDATE</span> 表名 <span class="keyword">SET</span> 列名称<span class="number">1</span> = ?,列名称<span class="number">2</span> = ?,列名称<span class="number">3</span> = ? <span class="keyword">where</span> 列名称<span class="number">2</span> = ? <span class="keyword">AND</span> 列名称<span class="number">3</span> = ?<span class="string">'</span></div><div class="line">　//根据主键存在与否，更新或添加一条数据</div><div class="line">'<span class="keyword">replace</span> <span class="keyword">into</span> 表名 (列名称<span class="number">1</span>,列名称<span class="number">2</span>,列名称<span class="number">3</span>,列名称<span class="number">4</span>,列名称<span class="number">5</span>) <span class="keyword">VALUES</span> (?,?,?,?,?) <span class="string">'</span></div><div class="line">　//查找（更多查询请根据自己的需要自由组合）</div><div class="line">'<span class="keyword">select</span> * <span class="keyword">from</span> 表名 <span class="keyword">where</span> 列名称<span class="number">1</span> = ? <span class="keyword">and</span> 列名称<span class="number">1</span> &gt;= ?<span class="string">'　//常规查找</span></div><div class="line">'<span class="keyword">select</span> * <span class="keyword">from</span> 表名 <span class="keyword">where</span> 列名称<span class="number">1</span> = ? <span class="keyword">or</span> 列名称<span class="number">1</span> &gt;= ?<span class="string">'　//常规查找</span></div><div class="line">WHERE 列名称 IS NOT NULL //非空</div><div class="line">WHERE 列名称 LIKE "111%"</div><div class="line">WHERE 列名称 GLOB '<span class="number">111</span>*<span class="string">'　//111开头的</span></div><div class="line">WHERE 列名称 IN ( 25, 27 ) 　//值为25或27的</div><div class="line">WHERE 列名称 NOT IN ( 25, 27 ) 　//值不为25或27的</div><div class="line">WHERE 列名称 BETWEEN 25 AND 27 　//值在25到27之间的</div><div class="line">//索引</div><div class="line">'<span class="keyword">CREATE</span> <span class="keyword">INDEX</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> 索引名 <span class="keyword">on</span> 表名 (列名称<span class="number">1</span>, 列名称<span class="number">2</span>) <span class="string">'</span></div><div class="line">'<span class="keyword">DROP</span> <span class="keyword">INDEX</span> 索引名<span class="string">'</span></div></pre></td></tr></table></figure>
 <p>详见：<a href="http://www.runoob.com/sqlite/sqlite-tutorial.html" target="_blank" rel="external">sqlite教程</a></p>
 <h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><ul>
 <li>测试安卓4.1以上sqlite3语法可用；</li>
@@ -479,6 +479,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
@@ -487,19 +491,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -515,6 +507,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -523,23 +523,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -551,15 +543,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">

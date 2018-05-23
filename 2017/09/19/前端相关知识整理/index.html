@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/8add660723429d876917506567ff054d_%E7%88%B1%E5%A5%87%E8%89%BA.jpg">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/Video_2017-11-27_103235%2000_00_05-00_00_09.gif">
-<meta property="og:updated_time" content="2018-05-21T12:16:47.166Z">
+<meta property="og:updated_time" content="2018-05-23T09:31:30.608Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具,github上有九千多star,简洁好用: 官网：http://www.browsersync.cn/； 如果你不用Gulp、Grunt的话,你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quot;">
@@ -348,7 +348,7 @@ var _hmt = _hmt || [];
 <h4 id="select获取选中值和设置选中值"><a href="#select获取选中值和设置选中值" class="headerlink" title="select获取选中值和设置选中值"></a>select获取选中值和设置选中值</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置select选中值</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setSelectCheck</span>(<span class="params">id,value</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> selectObj = <span class="built_in">document</span>.getElementById(id);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; selectObj.options.length; i++) &#123;</div><div class="line">        <span class="keyword">if</span> (selectObj.options[i].value == value) &#123;</div><div class="line">            selectObj.options[i].selected = <span class="literal">true</span>;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//获取select选中值</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getSelectCheck</span>(<span class="params">id</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> selectObj = <span class="built_in">document</span>.getElementById(id);</div><div class="line">    <span class="keyword">return</span> selectObj.options[selectObj.selectedIndex].value;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="正则表达式相关"><a href="#正则表达式相关" class="headerlink" title="正则表达式相关"></a>正则表达式相关</h2><h4 id="动态构建正则表达式"><a href="#动态构建正则表达式" class="headerlink" title="动态构建正则表达式"></a>动态构建正则表达式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> className = <span class="string">"high"</span>;</div><div class="line"><span class="keyword">var</span> regex = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|\\s)"</span> + className + <span class="string">"(\\s|$)"</span>);</div><div class="line"><span class="built_in">console</span>.log(regex.source)</div><div class="line"><span class="comment">// =&gt; (^|\s)high(\s|$) 即字符串"(^|\\s)high(\\s|$)"</span></div></pre></td></tr></table></figure>
 <p>使用eval也可以将字符串转化为正则表达式。</p>
-<h4 id="正则表达式中的g对js-api的影响"><a href="#正则表达式中的g对js-api的影响" class="headerlink" title="正则表达式中的g对js api的影响"></a>正则表达式中的g对js api的影响</h4><p>用于正则操作的方法，共有 6 个，字符串实例 4 个，正则实例 2 个:</p>
+<h4 id="正则表达式中的g对js-api的影响"><a href="#正则表达式中的g对js-api的影响" class="headerlink" title="正则表达式中的g对js api的影响"></a>正则表达式中的g对js api的影响</h4><p>用于正则操作的方法,共有 6 个,字符串实例 4 个,正则实例 2 个:</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String#search</div><div class="line">String#split</div><div class="line">String#match</div><div class="line">String#replace</div><div class="line">RegExp#test</div><div class="line">RegExp#exec</div></pre></td></tr></table></figure>
 <p>正则实例的 lastIndex 属性，表示尝试匹配时，从字符串的 lastIndex 位开始去匹配。而字符串的四个方法，每次匹配时，都是从 0 开始的，即 lastIndex 属性始终不变。</p>
 <p>也就是说，正则实例的两个方法 exec、test，当正则是全局匹配时，每一次匹配完成后，都会修改 lastIndex。</p>
@@ -663,11 +663,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -683,15 +683,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -703,15 +707,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">

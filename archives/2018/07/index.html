@@ -6,23 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>使用amr.js播放&quot;amr&quot;格式的录音文件 | 张伯伯的BLOG</title>
+  <title>Archives: 2018/7 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题所在：做专项调查队项目的时候，要求能在平台端播放app上传而来的录音文件，而安卓端目前只能录制”amr”、”3gp”格式，完美的避开了html支持的三种音频格式。">
-<meta name="keywords" content="JS">
-<meta property="og:type" content="article">
-<meta property="og:title" content="使用amr.js播放&quot;amr&quot;格式的录音文件">
-<meta property="og:url" content="http://yoursite.com/2018/03/13/使用amr-js播放amr格式的录音文件/index.html">
+  <meta name="description" content="哪里有幸福可借">
+<meta property="og:type" content="website">
+<meta property="og:title" content="张伯伯的BLOG">
+<meta property="og:url" content="http://yoursite.com/archives/2018/07/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="问题所在：做专项调查队项目的时候，要求能在平台端播放app上传而来的录音文件，而安卓端目前只能录制”amr”、”3gp”格式，完美的避开了html支持的三种音频格式。">
+<meta property="og:description" content="哪里有幸福可借">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/10138189_%E7%88%B1%E5%A5%87%E8%89%BA.jpg">
-<meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/180727/03Hl84BfJh.png?imageslim">
-<meta property="og:updated_time" content="2018-07-27T08:27:22.873Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用amr.js播放&quot;amr&quot;格式的录音文件">
-<meta name="twitter:description" content="问题所在：做专项调查队项目的时候，要求能在平台端播放app上传而来的录音文件，而安卓端目前只能录制”amr”、”3gp”格式，完美的避开了html支持的三种音频格式。">
-<meta name="twitter:image" content="http://otw7po22v.bkt.clouddn.com/10138189_%E7%88%B1%E5%A5%87%E8%89%BA.jpg">
+<meta name="twitter:title" content="张伯伯的BLOG">
+<meta name="twitter:description" content="哪里有幸福可借">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -176,284 +171,49 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-使用amr-js播放amr格式的录音文件" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      使用amr.js播放&quot;amr&quot;格式的录音文件
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/07/27/使用xlsx-populate导出excel/" class="archive-article-date">
+  	<time datetime="2018-07-27T08:27:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-27</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/07/27/使用xlsx-populate导出excel/">使用xlsx-populate导出excel</a>
     </h1>
   
 
-        
-        <a href="/2018/03/13/使用amr-js播放amr格式的录音文件/" class="archive-article-date">
-  	<time datetime="2018-03-13T03:51:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://otw7po22v.bkt.clouddn.com/10138189_%E7%88%B1%E5%A5%87%E8%89%BA.jpg" alt=""></p>
-<p><strong>问题所在</strong>：做专项调查队项目的时候，要求能在平台端播放app上传而来的录音文件，而安卓端目前只能录制”amr”、”3gp”格式，完美的避开了html支持的三种音频格式。</p>
-<a id="more"></a>
-<p>我们选择了每分钟约100kb的“amr”格式来完成录制和上传功能，而在html5中：</p>
-<p>video 元素支持三种视频格式：</p>
-<table>
-<thead>
-<tr>
-<th>格式</th>
-<th>IE</th>
-<th>Firefox</th>
-<th>Opera</th>
-<th>Chrome</th>
-<th>Safari</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Ogg</td>
-<td>No</td>
-<td>3.5+</td>
-<td>10.5+</td>
-<td>5.0+</td>
-<td>No</td>
-</tr>
-<tr>
-<td>MPEG 4</td>
-<td>9.0+</td>
-<td>No</td>
-<td>No</td>
-<td>5.0+</td>
-<td>3.0+</td>
-</tr>
-<tr>
-<td>WebM</td>
-<td>No</td>
-<td>4.0+</td>
-<td>10.6+</td>
-<td>6.0+</td>
-<td>No</td>
-</tr>
-</tbody>
-</table>
-<p>audio 元素支持三种音频格式：</p>
-<table>
-<thead>
-<tr>
-<th>格式</th>
-<th>IE 9</th>
-<th>Firefox 3.5</th>
-<th>Opera 10.5</th>
-<th>Chrome 3.0</th>
-<th>Safari 3.0</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Ogg Vorbis</td>
-<td></td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td></td>
-</tr>
-<tr>
-<td>MP3</td>
-<td>√</td>
-<td></td>
-<td></td>
-<td>√</td>
-<td>√</td>
-</tr>
-<tr>
-<td>Wav</td>
-<td></td>
-<td>√</td>
-<td>√</td>
-<td></td>
-<td>√</td>
-</tr>
-</tbody>
-</table>
-<p><strong>解决办法</strong>：我在github上找到了这个库 <a href="https://github.com/yxl/opencore-amr-js" target="_blank" rel="external">opencore-amr-js</a> ,这个库使用amr.js对“amr”文件进行转码：<code>AMR.decode(amr)</code>  ，再使用<code>AudioContext</code> 对象进行播放即可。各位可去github上看具体实现和作者的<a href="http://yxl.github.io/opencore-amr-js/" target="_blank" rel="external">demo</a>,下面是我整理的得小demo，实现了播放功能和兼容性处理，除了不支持<code>AudioContext</code> 的IE之外，其他桌面端浏览器基本都可以正常运行，移动端兼容性上我没有测试，据说ios端行不通，安卓端可以：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>AMR decode/encode tests<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"amrnb.js"</span> <span class="attr">defer</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"but"</span>&gt;</span>Play<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">			but.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">				<span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">				xhr.open(<span class="string">'GET'</span>, <span class="string">"test.amr"</span>);</div><div class="line">				xhr.responseType = <span class="string">'blob'</span>;</div><div class="line">				xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">					readBlob(<span class="keyword">this</span>.response, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">						playAmrArray(data);</div><div class="line">					&#125;);</div><div class="line">				&#125;;</div><div class="line">				xhr.onerror = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">					alert(<span class="string">'Failed to fetch '</span> + url);</div><div class="line">				&#125;;</div><div class="line">				xhr.send();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="built_in">window</span>.AudioContext = <span class="built_in">window</span>.AudioContext || <span class="built_in">window</span>.webkitAudioContext || <span class="built_in">window</span>.mozAudioContext || <span class="built_in">window</span>.msAudioContext;</div><div class="line"></div><div class="line">			<span class="function"><span class="keyword">function</span> <span class="title">readBlob</span>(<span class="params">blob, callback</span>) </span>&#123;</div><div class="line">				<span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</div><div class="line">				reader.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">					<span class="keyword">var</span> data = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(e.target.result);</div><div class="line">					callback(data);</div><div class="line">				&#125;;</div><div class="line">				reader.readAsArrayBuffer(blob);</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="function"><span class="keyword">function</span> <span class="title">playAmrArray</span>(<span class="params">array</span>) </span>&#123;</div><div class="line">				<span class="keyword">var</span> samples = AMR.decode(array);</div><div class="line">				<span class="keyword">if</span>(!samples) &#123;</div><div class="line">					alert(<span class="string">'Failed to decode!'</span>);</div><div class="line">					<span class="keyword">return</span>;</div><div class="line">				&#125;</div><div class="line">				playPcm(samples);</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="function"><span class="keyword">function</span> <span class="title">playPcm</span>(<span class="params">samples</span>) </span>&#123;</div><div class="line">				<span class="keyword">try</span> &#123;</div><div class="line">					<span class="keyword">var</span> ctx = <span class="keyword">new</span> AudioContext();</div><div class="line">				&#125; <span class="keyword">catch</span>(e) &#123;</div><div class="line">					alert(<span class="string">'您的浏览器暂不支持播放录音'</span>);</div><div class="line">					<span class="keyword">return</span>;</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">var</span> src = ctx.createBufferSource();</div><div class="line">				<span class="keyword">var</span> buffer = ctx.createBuffer(<span class="number">1</span>, samples.length, <span class="number">8000</span>);</div><div class="line">				<span class="keyword">if</span>(buffer.copyToChannel) &#123;</div><div class="line">					buffer.copyToChannel(samples, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">				&#125; <span class="keyword">else</span> &#123;</div><div class="line">					<span class="keyword">var</span> channelBuffer = buffer.getChannelData(<span class="number">0</span>);</div><div class="line">					channelBuffer.set(samples);</div><div class="line">				&#125;</div><div class="line">				src.buffer = buffer;</div><div class="line">				src.connect(ctx.destination);</div><div class="line">				src.start();</div><div class="line">			&#125;</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>AudioContext相关以及兼容性请参考： <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext" target="_blank" rel="external">AudioContext</a></p>
-<p>更新:以上只是实现了简单的播放,如果想添加其他功能的话,可以使用<a href="https://wavesurfer-js.org/" target="_blank" rel="external">wavesurfer-js</a> 来实现炫酷的效果:</p>
-<p><img src="http://otw7po22v.bkt.clouddn.com/blog/180727/03Hl84BfJh.png?imageslim" alt="mark"></p>
-<p>部分代码(ps:我们测试的效果蛮丑的,希望你可以弄得比上面这个还要漂亮):</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> wavesurfer = <span class="built_in">Object</span>.create(WaveSurfer);</div><div class="line"></div><div class="line"><span class="comment">// Init &amp; load audio file</span></div><div class="line"><span class="built_in">document</span>.addEventListener(<span class="string">"DOMContentLoaded"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> options = &#123;</div><div class="line">        <span class="attr">container</span>: <span class="built_in">document</span>.querySelector(<span class="string">"#waveform"</span>),</div><div class="line">        <span class="attr">waveColor</span>: <span class="string">"violet"</span>,</div><div class="line">        <span class="attr">progressColor</span>: <span class="string">"purple"</span>,</div><div class="line">        <span class="attr">loaderColor</span>: <span class="string">"purple"</span>,</div><div class="line">        <span class="attr">cursorColor</span>: <span class="string">"navy"</span></div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (location.search.match(<span class="string">"scroll"</span>)) &#123;</div><div class="line">        options.minPxPerSec = <span class="number">100</span>;</div><div class="line">        options.scrollParent = <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Init</span></div><div class="line">    wavesurfer.init(options);</div><div class="line">    <span class="comment">// Load audio from URL</span></div><div class="line">    <span class="comment">//wavesurfer.load("example/media/demo.wav");</span></div><div class="line"></div><div class="line">    <span class="comment">// Regions</span></div><div class="line">    <span class="comment">// if (wavesurfer.enableDragSelection) &#123;</span></div><div class="line">    <span class="comment">//     wavesurfer.enableDragSelection(&#123;</span></div><div class="line">    <span class="comment">//         color: "rgba(0, 255, 0, 0.1)"</span></div><div class="line">    <span class="comment">//     &#125;);</span></div><div class="line">    <span class="comment">// &#125;</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// Play at once when ready</span></div><div class="line"><span class="comment">// Won't work on iOS until you touch the page</span></div><div class="line">wavesurfer.on(<span class="string">"ready"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    wavesurfer.play();</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// Report errors</span></div><div class="line">wavesurfer.on(<span class="string">"error"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.error(err);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// Do something when the clip is over</span></div><div class="line">wavesurfer.on(<span class="string">"finish"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"播放完成"</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">readBlob</span>(<span class="params">blob, callback</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</div><div class="line">    reader.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> data = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(e.target.result);</div><div class="line">        callback(data);</div><div class="line">    &#125;;</div><div class="line">    reader.readAsArrayBuffer(blob);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">playAmrArray</span>(<span class="params">array</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> samples = AMR.decode(array);</div><div class="line">    <span class="keyword">if</span> (!samples) &#123;</div><div class="line">        alert(<span class="string">"解码失败!"</span>);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    wavesurfer.loadAMRDecodedBuffer(samples);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">playAmrContent</span>(<span class="params">url</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">    xhr.open(<span class="string">"GET"</span>, url);</div><div class="line">    xhr.responseType = <span class="string">"blob"</span>;</div><div class="line">    xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        readBlob(<span class="keyword">this</span>.response, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">            playAmrArray(data);</div><div class="line">        &#125;);</div><div class="line">    &#125;;</div><div class="line">    xhr.onerror = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        alert(<span class="string">"加载资源失败"</span>);</div><div class="line">    &#125;;</div><div class="line">    xhr.send();</div><div class="line">&#125;</div><div class="line"><span class="comment">/* Progress bar */</span></div><div class="line"><span class="built_in">document</span>.addEventListener(<span class="string">"DOMContentLoaded"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> progressDiv = <span class="built_in">document</span>.querySelector(<span class="string">"#progress-bar"</span>);</div><div class="line">    <span class="keyword">var</span> progressBar = progressDiv.querySelector(<span class="string">".progress-bar"</span>);</div><div class="line"></div><div class="line">    <span class="keyword">var</span> showProgress = <span class="function"><span class="keyword">function</span>(<span class="params">percent</span>) </span>&#123;</div><div class="line">        progressDiv.style.display = <span class="string">"block"</span>;</div><div class="line">        progressBar.style.width = percent + <span class="string">"%"</span>;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> hideProgress = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        progressDiv.style.display = <span class="string">"none"</span>;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    wavesurfer.on(<span class="string">"loading"</span>, showProgress);</div><div class="line">    wavesurfer.on(<span class="string">"ready"</span>, hideProgress);</div><div class="line">    wavesurfer.on(<span class="string">"destroy"</span>, hideProgress);</div><div class="line">    wavesurfer.on(<span class="string">"error"</span>, hideProgress);</div><div class="line">    <span class="keyword">var</span> fileId = getQueryStringByName(<span class="string">"file"</span>);</div><div class="line">    playAmrContent(<span class="string">"/file/download?param="</span> + <span class="built_in">JSON</span>.stringify(&#123; <span class="attr">id</span>: fileId &#125;));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-      
+        <div class="article-info info-on-right">
+          
+          
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>你转给我的不是钱，只是数字<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/zhifubao.jpg">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/weixin.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2018/03/13/使用amr-js播放amr格式的录音文件/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/03/30/win10家庭版关闭自动更新/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          win10家庭版关闭自动更新
-        
-      </div>
-    </a>
   
   
-    <a href="/2018/02/25/Node爬取拍信网图片/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Node爬取拍信网图片</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    目录，不存在的…
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
+    
 
 
           </div>
@@ -489,8 +249,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

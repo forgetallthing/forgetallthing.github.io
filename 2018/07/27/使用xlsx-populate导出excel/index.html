@@ -8,17 +8,23 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>使用xlsx-populate导出excel | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="哪里有幸福可借">
+  <meta name="description" content="简单的导出excel并不需要额外的库,但是最近在做数据汇总分析的时候,客户想要导出这样的表:  这是一张调查问卷回收以后,做个简单的频率分析,每一道题是一个table; 还有下面这样的:   这两张属于交叉分析,是指不同的题目之间进行运算,以上是两种模式,在这里就不细说了. 为了实现上面的需求,我先找了比较流行的SheetJS / js-xlsx;官网是sheetjs.com ;但是很快就发现社">
+<meta name="keywords" content="js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用xlsx-populate导出excel">
 <meta property="og:url" content="http://yoursite.com/2018/07/27/使用xlsx-populate导出excel/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="哪里有幸福可借">
+<meta property="og:description" content="简单的导出excel并不需要额外的库,但是最近在做数据汇总分析的时候,客户想要导出这样的表:  这是一张调查问卷回收以后,做个简单的频率分析,每一道题是一个table; 还有下面这样的:   这两张属于交叉分析,是指不同的题目之间进行运算,以上是两种模式,在这里就不细说了. 为了实现上面的需求,我先找了比较流行的SheetJS / js-xlsx;官网是sheetjs.com ;但是很快就发现社">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-27T08:27:44.897Z">
+<meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/180727/4ak24ajAJ2.png?imageslim">
+<meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/180727/A2m5i3LLBa.png?imageslim">
+<meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/180727/IefI6EjbGl.png?imageslim">
+<meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/180727/K2Di6cLhgE.png?imageslim">
+<meta property="og:updated_time" content="2018-07-27T09:10:50.619Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用xlsx-populate导出excel">
-<meta name="twitter:description" content="哪里有幸福可借">
+<meta name="twitter:description" content="简单的导出excel并不需要额外的库,但是最近在做数据汇总分析的时候,客户想要导出这样的表:  这是一张调查问卷回收以后,做个简单的频率分析,每一道题是一个table; 还有下面这样的:   这两张属于交叉分析,是指不同的题目之间进行运算,以上是两种模式,在这里就不细说了. 为了实现上面的需求,我先找了比较流行的SheetJS / js-xlsx;官网是sheetjs.com ;但是很快就发现社">
+<meta name="twitter:image" content="http://otw7po22v.bkt.clouddn.com/blog/180727/4ak24ajAJ2.png?imageslim">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -192,7 +198,22 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p><img src="http://otw7po22v.bkt.clouddn.com/blog/180727/4ak24ajAJ2.png?imageslim" alt="mark"></p>
+<p>简单的导出excel并不需要额外的库,但是最近在做数据汇总分析的时候,客户想要导出这样的表:</p>
+<p><img src="http://otw7po22v.bkt.clouddn.com/blog/180727/A2m5i3LLBa.png?imageslim" alt="mark"></p>
+<p>这是一张调查问卷回收以后,做个简单的频率分析,每一道题是一个table;</p>
+<p>还有下面这样的:</p>
+<p><img src="http://otw7po22v.bkt.clouddn.com/blog/180727/IefI6EjbGl.png?imageslim" alt="mark"></p>
+<p><img src="http://otw7po22v.bkt.clouddn.com/blog/180727/K2Di6cLhgE.png?imageslim" alt="mark"></p>
+<p>这两张属于交叉分析,是指不同的题目之间进行运算,以上是两种模式,在这里就不细说了.</p>
+<p>为了实现上面的需求,我先找了比较流行的<a href="https://github.com/SheetJS/js-xlsx" target="_blank" rel="external">SheetJS / js-xlsx</a>;官网是<a href="https://sheetjs.com/" target="_blank" rel="external">sheetjs.com</a> ;但是很快就发现社区版不支持添加样式,虽然有<a href="https://github.com/protobi/js-xlsx" target="_blank" rel="external">protobi / js-xlsx</a> 和<a href="https://github.com/xSirrioNx/js-xlsx" target="_blank" rel="external">xSirrioNx / js-xlsx</a> 这样的可添加样式增强版,但是组织数据的格式麻烦的让人发指,还好最后找到了适合我的库:<a href="https://www.npmjs.com/package/xlsx-populate#Range+forEach" target="_blank" rel="external">xlsx-populate</a> :</p>
+<blockquote>
+<p>Excel XLSX parser/generator written in JavaScript with Node.js and browser support, jQuery/d3-style method chaining, encryption, and a focus on keeping existing workbook features and styles in tact.</p>
+</blockquote>
+<p>翻看他的文档你可以清楚地发现,这个库提供sheet,单元格(cell),范围(range),行和列等对象,可以方便快捷的组织你的excel;使用方法也很简单, <code>sheet.cell(&quot;A1&quot;).value().style()</code> 链式调用,可以设置值和样式,<code>sheet.range(&quot;A1:C3&quot;).merged(true</code> 可以合并单元格,文档上很清楚了我就不再赘述,下面是效果展示和代码:</p>
+<video id="video" controls preload="none" poster="http://otw7po22v.bkt.clouddn.com/%E7%94%B0%E9%87%8E%E9%A3%8E%E6%99%AF.jpg" style="width:92%;"><br>​      <source id="wmv" src="http://otw7po22v.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%8F%8A%E5%AF%BC%E5%87%BA.wmv" type="video/wmv"><br>  </video>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="built_in">Promise</span> = XlsxPopulate.Promise;</div><div class="line">XlsxPopulate.fromBlankAsync()</div><div class="line">    .then(<span class="function"><span class="keyword">function</span> (<span class="params">workbook</span>) </span>&#123;</div><div class="line">  	<span class="comment">//处理数据和导出样式</span></div><div class="line">    <span class="keyword">var</span> sheet = workbook.sheet(<span class="number">0</span>);</div><div class="line">    sheet.column(<span class="string">"A"</span>).width(<span class="number">35</span>).style(&#123;</div><div class="line">        <span class="attr">wrapText</span>: <span class="literal">true</span></div><div class="line">    &#125;);</div><div class="line">    sheet.column(<span class="string">"B"</span>).width(<span class="number">18</span>).style(&#123;</div><div class="line">        <span class="attr">wrapText</span>: <span class="literal">true</span>,</div><div class="line">      	<span class="attr">numberFormat</span>: <span class="string">"0.00"</span></div><div class="line">    &#125;);</div><div class="line">   	sheet.cell(<span class="string">"A1"</span>).value([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]).style(&#123;<span class="attr">leftBorder</span>: <span class="string">"thick"</span>, <span class="attr">rightBorder</span>: <span class="string">"thick"</span> &#125;)</div><div class="line">  	<span class="comment">//处理完毕</span></div><div class="line">    <span class="keyword">return</span> workbook.outputAsync(&#123;</div><div class="line">        <span class="attr">type</span>: <span class="string">""</span></div><div class="line">    &#125;);</div><div class="line">&#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params">blob</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.navigator &amp;&amp; <span class="built_in">window</span>.navigator.msSaveOrOpenBlob) &#123;</div><div class="line">        <span class="built_in">window</span>.navigator.msSaveOrOpenBlob(blob, controls.data.form.name + <span class="string">".xlsx"</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">var</span> url = <span class="built_in">window</span>.URL.createObjectURL(blob);</div><div class="line">        <span class="keyword">var</span> a = <span class="built_in">document</span>.createElement(<span class="string">"a"</span>);</div><div class="line">        <span class="built_in">document</span>.body.appendChild(a);</div><div class="line">        a.href = url;</div><div class="line">        a.download = controls.data.form.name + <span class="string">".xlsx"</span>;</div><div class="line">        a.click();</div><div class="line">        <span class="built_in">window</span>.URL.revokeObjectURL(url);</div><div class="line">        <span class="built_in">document</span>.body.removeChild(a);</div><div class="line">    &#125;</div><div class="line">&#125;).catch (<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</div><div class="line">    alert(err.message || err);</div><div class="line">    <span class="keyword">throw</span> err;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
       
 
       
@@ -231,6 +252,17 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -453,11 +485,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -469,15 +505,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -486,6 +518,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -501,10 +537,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
@@ -513,19 +545,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -534,6 +562,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
             
             <div class="clearfix"></div>

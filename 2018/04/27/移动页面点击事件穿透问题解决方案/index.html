@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://segmentfault.com/img/bVqjnT">
 <meta property="og:image" content="https://segmentfault.com/img/bVqjI1">
-<meta property="og:updated_time" content="2018-04-28T09:37:35.056Z">
+<meta property="og:updated_time" content="2018-08-14T06:38:12.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动页面点击事件穿透问题解决方案">
 <meta name="twitter:description" content="在移动端页面上，点击蒙层（mask）上的关闭按钮，蒙层消失后发现触发了按钮下面元素的click事件，这就是标题中的点击事件穿透问题。我的mask层是审核错误的列表，当点击相关错误会立即隐藏蒙版并定位到问卷的某个题目，所以事件穿透会导致点击错误列表的时候误修改了问卷上用户的选择，也就是触发了input或select的click事件。在参考了以下两篇博客后使用pointer-events 解决了问题，">
@@ -279,7 +279,7 @@ var _hmt = _hmt || [];
 </tbody>
 </table>
 <p>关于使用 pointer-events 后的事件冒泡，有人做了个实验，<a href="http://runjs.cn/code/teegz43u" target="_blank" rel="external">见代码</a></p>
-<p>因此解决“穿透”的办法就很简单，<a href="http://fuxiaode.cn/demo/touch-event/solution2.html" target="_blank" rel="external">demo如下</a></p>
+<p>因此解决“穿透”的办法就很简单，demo如下:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#closePopup'</span>).on(<span class="string">'tap'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">    $(<span class="string">'#popupLayer'</span>).hide();</div><div class="line">    $(<span class="string">'#bgMask'</span>).hide();</div><div class="line"></div><div class="line">    $(<span class="string">'#underLayer'</span>).css(<span class="string">'pointer-events'</span>, <span class="string">'none'</span>);</div><div class="line"></div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        $(<span class="string">'#underLayer'</span>).css(<span class="string">'pointer-events'</span>, <span class="string">'auto'</span>);</div><div class="line">    &#125;, <span class="number">400</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h3 id="4-fastclick"><a href="#4-fastclick" class="headerlink" title="4. fastclick"></a>4. fastclick</h3><p>使用<a href="https://github.com/ftlabs/fastclick" target="_blank" rel="external">fastclick</a>库，其实现思路是，取消 click 事件（<a href="https://github.com/ftlabs/fastclick/blob/master/lib/fastclick.js#L164-L173" target="_blank" rel="external">参看源码 164-173 行</a>），用 touchend 模拟快速点击行为（<a href="https://github.com/ftlabs/fastclick/blob/master/lib/fastclick.js#L521-L610" target="_blank" rel="external">参看源码 521-610 行</a>）。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">FastClick.attach(document.body);</div></pre></td></tr></table></figure>
@@ -558,15 +558,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -574,7 +566,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -590,19 +586,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -614,11 +598,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -630,11 +618,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">

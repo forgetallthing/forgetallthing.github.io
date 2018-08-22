@@ -17,7 +17,7 @@
 <meta property="og:description" content="话说这个移动端滚动穿透问题自打去年做第一个app时就遇到了,当时采用的是弹出框出现时,记录滚动位置并让body禁止滚动,弹出框消失时,body滚动到记忆位置,但是弹出框是居中的一小块,其余部分使用黑色半透明的遮罩蒙版覆盖,所以弹出框时客户还是可以看见列表位置变成第一列,弹出框消失时列表又变到记忆位置,客户说俺们上了年纪,这样眼晕的慌,于是我找了找大家的方法,顺利解决了这个问题,顺便在此记录一下几">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/180822/b79lJmg35f.jpeg?imageslim">
-<meta property="og:updated_time" content="2018-08-22T07:49:12.884Z">
+<meta property="og:updated_time" content="2018-08-22T07:50:18.434Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动端滚动穿透问题完美解决方案">
 <meta name="twitter:description" content="话说这个移动端滚动穿透问题自打去年做第一个app时就遇到了,当时采用的是弹出框出现时,记录滚动位置并让body禁止滚动,弹出框消失时,body滚动到记忆位置,但是弹出框是居中的一小块,其余部分使用黑色半透明的遮罩蒙版覆盖,所以弹出框时客户还是可以看见列表位置变成第一列,弹出框消失时列表又变到记忆位置,客户说俺们上了年纪,这样眼晕的慌,于是我找了找大家的方法,顺利解决了这个问题,顺便在此记录一下几">
@@ -198,6 +198,7 @@ var _hmt = _hmt || [];
         <p><img src="http://otw7po22v.bkt.clouddn.com/blog/180822/b79lJmg35f.jpeg?imageslim" alt="mark"></p>
 <p>话说这个移动端滚动穿透问题自打去年做第一个app时就遇到了,当时采用的是弹出框出现时,记录滚动位置并让body禁止滚动,弹出框消失时,body滚动到记忆位置,但是弹出框是居中的一小块,其余部分使用黑色半透明的遮罩蒙版覆盖,所以弹出框时客户还是可以看见列表位置变成第一列,弹出框消失时列表又变到记忆位置,客户说俺们上了年纪,这样眼晕的慌,于是我找了找大家的方法,顺利解决了这个问题,顺便在此记录一下几种处理方法:</p>
 <h4 id="1-更换滚动dom的方法"><a href="#1-更换滚动dom的方法" class="headerlink" title="1.更换滚动dom的方法"></a>1.更换滚动dom的方法</h4><p>经测试,当body滚动时,操作弹出层才会触发body的滚动,如果是其他dom滚动的话,在操作弹出层的时候不会触发该dom的滚动,所以把滚动内容的容器改成其他dom就可以了,如下:</p>
+<a id="more"></a>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">ui-view</span> <span class="attr">class</span>=<span class="string">"container"</span> <span class="attr">style</span>=<span class="string">"display: block; height: 100%; overflow: auto"</span>&gt;</span><span class="tag">&lt;/<span class="name">ui-view</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"showDetail"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>这种办法最是简单有效,但是和我使用的上拉加载和上拉刷新组件冲突,最后我使用的是方法2:</p>
 <h4 id="2-移动body"><a href="#2-移动body" class="headerlink" title="2.移动body"></a>2.移动body</h4><p>这个方法来自:<a href="https://segmentfault.com/a/1190000005617307" target="_blank" rel="external">移动端滚动穿透问题完美解决方案</a></p>
@@ -478,15 +479,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -495,10 +500,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -518,6 +519,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -534,6 +539,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
@@ -543,10 +552,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -563,10 +568,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
             
             <div class="clearfix"></div>

@@ -196,23 +196,9 @@ var _hmt = _hmt || [];
         <p><img src="http://otw7po22v.bkt.clouddn.com/blog/180822/b79lJmg35f.jpeg?imageslim" alt="mark"></p>
 <p>话说这个移动端滚动穿透问题自打去年做第一个app时就遇到了,当时采用的是弹出框出现时,记录滚动位置并让body禁止滚动,弹出框消失时,body滚动到记忆位置,但是弹出框是居中的一小块,其余部分使用黑色半透明的遮罩蒙版覆盖,所以弹出框时客户还是可以看见列表位置变成第一列,弹出框消失时列表又变到记忆位置,客户说俺们上了年纪,这样眼晕的慌,于是我找了找大家的方法,顺利解决了这个问题,顺便在此记录一下几种处理方法:</p>
 <h4 id="1-更换滚动dom的方法"><a href="#1-更换滚动dom的方法" class="headerlink" title="1.更换滚动dom的方法"></a>1.更换滚动dom的方法</h4><p>经测试,当body滚动时,操作弹出层才会触发body的滚动,如果是其他dom滚动的话,在操作弹出层的时候不会触发该dom的滚动,所以把滚动内容的容器改成其他dom就可以了,如下:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">ui-view</span> <span class="attr">class</span>=<span class="string">"container"</span> <span class="attr">style</span>=<span class="string">"display: block; height: 100%; overflow: auto"</span>&gt;</span><span class="tag">&lt;/<span class="name">ui-view</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"showDetail"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>这种办法最是简单有效,但是和我使用的上拉加载和上拉刷新组件冲突,最后我使用的是方法2:</p>
-<h4 id="2-移动body"><a href="#2-移动body" class="headerlink" title="2.移动body"></a>2.移动body</h4><p>这个方法来自:<a href="https://segmentfault.com/a/1190000005617307" target="_blank" rel="external">移动端滚动穿透问题完美解决方案</a></p>
-<p>思路是弹出框弹出前,记录目前滚动位置,给body加上<code>position: fixed;</code> 然后使body的top距离为负的滚动距离即可(使屏幕显示的区域不变);弹出框消失时,移除<code>position: fixed;</code> ,设置body滚动位置为记录位置,这样就解决了我开头提到的位置跳转的问题:屏幕显示的内容始终不变,老年人表示头脑清爽多了~</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span><span class="selector-class">.modal-open</span> &#123;</div><div class="line">    <span class="attribute">position</span>: fixed;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ModalHelper = (<span class="function"><span class="keyword">function</span>(<span class="params">bodyCls</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> scrollTop;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    <span class="attr">afterOpen</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      scrollTop = <span class="built_in">document</span>.scrollingElement.scrollTop;</div><div class="line">      <span class="built_in">document</span>.body.classList.add(bodyCls);</div><div class="line">      <span class="built_in">document</span>.body.style.top = -scrollTop + <span class="string">'px'</span>;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">beforeClose</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="built_in">document</span>.body.classList.remove(bodyCls);</div><div class="line">      <span class="comment">// scrollTop lost after set position:fixed, restore it back.</span></div><div class="line">      <span class="built_in">document</span>.scrollingElement.scrollTop = scrollTop;</div><div class="line">    &#125;</div><div class="line">  &#125;;</div><div class="line">&#125;)(<span class="string">'modal-open'</span>);</div></pre></td></tr></table></figure>
-<h4 id="3-css-之-overflow-hidden"><a href="#3-css-之-overflow-hidden" class="headerlink" title="3.css 之 overflow: hidden"></a>3.css 之 <code>overflow: hidden</code></h4><p>这个就是我原来采用的方法:</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.no-scroll</span> &#123;</div><div class="line">    <span class="attribute">overflow</span>: hidden;</div><div class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>页面弹出层上将 <code>.no-scroll</code> 添加到 html 上,禁用 html 和 body 的滚动条,使用js来记录滚动位置,弹出框关闭时还原,老用户表示眼晕~ ,一点不skr~</p>
-<h4 id="4-js-之-touchmove-preventDefault"><a href="#4-js-之-touchmove-preventDefault" class="headerlink" title="4.js 之 touchmove + preventDefault"></a>4.js 之 touchmove + preventDefault</h4><p>这种也是简单快速的处理办法,直接接听弹出层dom的<code>touchmove</code> 事件,然后阻止默认行为即可,但是这种方法使得弹出层dom的滚动事件也一并失效,所以当你的弹出层无需滚动时,这不失是一种快捷有效的方法:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">modal.addEventListener(<span class="string">'touchmove'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">  e.preventDefault();</div><div class="line">&#125;, <span class="literal">false</span>);</div></pre></td></tr></table></figure>
-<p>ps : addEventListener中的第三个参数:</p>
-<ul>
-<li>true - 事件句柄在捕获阶段执行;</li>
-<li>false- false- 默认。事件句柄在冒泡阶段执行;</li>
-</ul>
-
+        
+          <a class="article-more-a" href="/2018/08/22/移动端滚动穿透问题完美解决方案/#more">more >></a>
+        
       
 
       
@@ -1096,15 +1082,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1113,10 +1103,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1136,6 +1122,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -1152,6 +1142,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
@@ -1161,10 +1155,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1181,10 +1171,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
             
             <div class="clearfix"></div>

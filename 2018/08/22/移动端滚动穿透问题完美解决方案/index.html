@@ -17,7 +17,7 @@
 <meta property="og:description" content="话说这个移动端滚动穿透问题自打去年做第一个app时就遇到了,当时采用的是弹出框出现时,记录滚动位置并让body禁止滚动,弹出框消失时,body滚动到记忆位置,但是弹出框是居中的一小块,其余部分使用黑色半透明的遮罩蒙版覆盖,所以弹出框时客户还是可以看见列表位置变成第一列,弹出框消失时列表又变到记忆位置,客户说俺们上了年纪,这样眼晕的慌,于是我找了找大家的方法,顺利解决了这个问题,顺便在此记录一下几">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/180822/b79lJmg35f.jpeg?imageslim">
-<meta property="og:updated_time" content="2018-08-22T07:48:51.180Z">
+<meta property="og:updated_time" content="2018-08-22T07:49:12.884Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动端滚动穿透问题完美解决方案">
 <meta name="twitter:description" content="话说这个移动端滚动穿透问题自打去年做第一个app时就遇到了,当时采用的是弹出框出现时,记录滚动位置并让body禁止滚动,弹出框消失时,body滚动到记忆位置,但是弹出框是居中的一小块,其余部分使用黑色半透明的遮罩蒙版覆盖,所以弹出框时客户还是可以看见列表位置变成第一列,弹出框消失时列表又变到记忆位置,客户说俺们上了年纪,这样眼晕的慌,于是我找了找大家的方法,顺利解决了这个问题,顺便在此记录一下几">
@@ -211,8 +211,8 @@ var _hmt = _hmt || [];
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">modal.addEventListener(<span class="string">'touchmove'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">  e.preventDefault();</div><div class="line">&#125;, <span class="literal">false</span>);</div></pre></td></tr></table></figure>
 <p>ps : addEventListener中的第三个参数:</p>
 <ul>
-<li>true - 事件句柄在捕获阶段执行</li>
-<li>false- false- 默认。事件句柄在冒泡阶段执行</li>
+<li>true - 事件句柄在捕获阶段执行;</li>
+<li>false- false- 默认。事件句柄在冒泡阶段执行;</li>
 </ul>
 
       
@@ -482,11 +482,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -494,19 +494,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -514,11 +502,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,15 +514,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -554,11 +546,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,6 +563,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
             
             <div class="clearfix"></div>

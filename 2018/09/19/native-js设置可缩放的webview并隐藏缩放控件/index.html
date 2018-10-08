@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/180919/A0dbHH83mk.jpg?imageslim">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/180919/9l19gDEAE1.png?imageslim">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/180919/175bj7cCFk.png?imageslim">
-<meta property="og:updated_time" content="2018-09-26T01:43:00.093Z">
+<meta property="og:updated_time" content="2018-10-08T02:00:26.708Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="native.js设置可缩放的webview并隐藏缩放控件">
 <meta name="twitter:description" content="需求明确:webview页面可以手指缩放,并且不要那个原生控件; 实现思路: 1.使用h5+封装好的方法:设置scalable 属性,并在html中设置meta标签:user-scalable=yes 或不设置,minimum-scale 和maximum-scale 需要注意不要都设为1: 1&amp;lt;meta name=&quot;viewport&quot; content=&quot;width=device-widt">
@@ -208,7 +208,7 @@ var _hmt = _hmt || [];
 <p><img src="http://otw7po22v.bkt.clouddn.com/blog/180919/9l19gDEAE1.png?imageslim" alt="mark"></p>
 <p>如此一个不能更改样式的控件出现在右下角,客户一定会怒发冲冠的,但是在经过研究之后,发现html5plus不提供隐藏这个控件的api,只能通过native.js来写:</p>
 <p>2.native.js的方法依旧需要设置<code>meta</code> 标签,但是记得去掉<code>scalable:true</code> ,这个会覆盖我们的代码:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Webview = plus.android.importClass(<span class="string">"android.webkit.WebView"</span>);</div><div class="line"><span class="keyword">var</span> WebSettings = plus.android.importClass(<span class="string">"android.webkit.WebSettings"</span>);</div><div class="line"><span class="keyword">var</span> wv = plus.android.currentWebview();</div><div class="line"><span class="keyword">var</span> setting = plus.android.invoke(wv, <span class="string">"getSettings"</span>);</div><div class="line"><span class="built_in">console</span>.log(setting)</div><div class="line"></div><div class="line"><span class="comment">//支持缩放</span></div><div class="line">setting.setSupportZoom(<span class="literal">true</span>);</div><div class="line">setting.setBuiltInZoomControls(<span class="literal">true</span>)</div><div class="line"><span class="comment">//隐藏控件</span></div><div class="line">setting.setDisplayZoomControls(<span class="literal">false</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取WebSettings</span></div><div class="line"><span class="keyword">var</span> Webview = plus.android.importClass(<span class="string">"android.webkit.WebView"</span>);</div><div class="line"><span class="keyword">var</span> WebSettings = plus.android.importClass(<span class="string">"android.webkit.WebSettings"</span>);</div><div class="line"><span class="keyword">var</span> wv = plus.android.currentWebview();</div><div class="line"><span class="keyword">var</span> setting = plus.android.invoke(wv, <span class="string">"getSettings"</span>);</div><div class="line"><span class="built_in">console</span>.log(setting)</div><div class="line"></div><div class="line"><span class="comment">//支持缩放</span></div><div class="line">setting.setSupportZoom(<span class="literal">true</span>);</div><div class="line">setting.setBuiltInZoomControls(<span class="literal">true</span>)</div><div class="line"><span class="comment">//隐藏控件</span></div><div class="line">setting.setDisplayZoomControls(<span class="literal">false</span>)</div></pre></td></tr></table></figure>
 <p>有人在h5+社区里问怎么获取安卓里的<code>WebSettings</code> ,以下就是打印的<code>setting</code> ,可以见到<code>WebSettings</code> 里面的方法都可以调用啦! 各位可以在文档中找到自己需要的:</p>
 <p>WebSettings 官方文档:<a href="https://developer.android.com/reference/android/webkit/WebSettings.html#setBuiltInZoomControls" target="_blank" rel="external">https://developer.android.com/reference/android/webkit/WebSettings.html#setBuiltInZoomControls</a></p>
 <p><img src="http://otw7po22v.bkt.clouddn.com/blog/180919/175bj7cCFk.png?imageslim" alt="mark"></p>
@@ -484,7 +484,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -492,11 +492,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -508,10 +520,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -520,23 +528,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -552,11 +548,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">

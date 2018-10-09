@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/Video_2017-11-27_103235%2000_00_05-00_00_09.gif">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/181009/L3gEdDaI35.png?imageslim">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/181009/kI9GL53cfL.png?imageslim">
-<meta property="og:updated_time" content="2018-10-09T09:27:56.701Z">
+<meta property="og:updated_time" content="2018-10-09T09:33:43.358Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具,github上有九千多star,简洁好用: 官网地址：http://www.browsersync.cn/； 如果你不用Gulp、Grunt的话,你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quo">
@@ -366,7 +366,7 @@ var _hmt = _hmt || [];
 <h4 id="精确获取js变量类型"><a href="#精确获取js变量类型" class="headerlink" title="精确获取js变量类型"></a>精确获取js变量类型</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">null</span>);<span class="comment">//”[object Null]”</span></div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">undefined</span>);<span class="comment">//”[object Undefined]”</span></div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(“abc”);<span class="comment">//”[object String]”</span></div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="number">123</span>);<span class="comment">//”[object Number]”</span></div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">true</span>);<span class="comment">//”[object Boolean]”</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(“test”);&#125;</div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(fn);<span class="comment">//”[object Function]”</span></div><div class="line"></div><div class="line"><span class="built_in">Object</span>.prototype.toString.call([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]);<span class="comment">//”[object Array]”</span></div><div class="line"></div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(&#123;&#125;);<span class="comment">//”[object Object]”</span></div><div class="line"></div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="keyword">new</span> <span class="built_in">Date</span>());<span class="comment">//”[object Date]”</span></div><div class="line"></div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="regexp">/[hbc]at/gi</span>);<span class="comment">//”[object RegExp]”</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">    <span class="keyword">this</span>.age = age;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">"Rose"</span>, <span class="number">18</span>);</div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(arr); <span class="comment">//”[object Object]”</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> isNativeJSON = <span class="built_in">window</span>.JSON &amp;&amp; <span class="built_in">Object</span>.prototype.toString.call(<span class="built_in">JSON</span>);</div><div class="line"><span class="built_in">console</span>.log(isNativeJSON);<span class="comment">//输出结果为”[object JSON]”说明JSON是原生的，否则不是</span></div></pre></td></tr></table></figure>
 <p>参考:<a href="https://www.cnblogs.com/chang229/p/6518648.html" target="_blank" rel="external">JavaScript中toStirng()与Object.prototype.toString.call()方法浅谈</a> (&lt;&lt;&lt;此文中部分例子写错,请诸位看官谨慎食用~)</p>
 <h4 id="Jquery中的prop和attr注意点"><a href="#Jquery中的prop和attr注意点" class="headerlink" title="Jquery中的prop和attr注意点:"></a>Jquery中的prop和attr注意点:</h4><p>1.操作单选框时:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//一下两种写法结果一致:页面显示的单选按钮未被选择,只是加上了checked="checked"属性而已,此时进行鼠标选中或取消选中操作,都不影响此属性,但是打印dom可以看到checked:false</span></div><div class="line">$(<span class="string">"*[name = level][value = "</span> + control.level + <span class="string">"]"</span>).attr(<span class="string">"checked"</span>, <span class="string">"checked"</span>)</div><div class="line">$(<span class="string">"*[name = level][value = "</span> + control.level + <span class="string">"]"</span>).attr(<span class="string">"checked"</span>, <span class="literal">true</span>)</div><div class="line"></div><div class="line"><span class="comment">//页面显示的单选按钮被选择,标签并没有加上checked属性,但是打印dom可以看到checked:true</span></div><div class="line">$(<span class="string">"*[name = level][value = "</span> + control.level + <span class="string">"]"</span>).prop(<span class="string">"checked"</span>, <span class="string">"checked"</span>)</div><div class="line"></div><div class="line"><span class="comment">//使用prop选中的按钮,可以使用removeAttr取消选中</span></div><div class="line">$(<span class="string">"*[name = level][value = "</span> + control.level + <span class="string">"]"</span>).removeAttr(<span class="string">"checked"</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//以下两种写法结果一致:页面显示的单选按钮未被选择,只是加上了checked="checked"属性而已,此时进行鼠标选中或取消选中操作,都不影响此属性,但是打印dom可以看到checked:false</span></div><div class="line">$(<span class="string">"*[name = level][value = "</span> + control.level + <span class="string">"]"</span>).attr(<span class="string">"checked"</span>, <span class="string">"checked"</span>)</div><div class="line">$(<span class="string">"*[name = level][value = "</span> + control.level + <span class="string">"]"</span>).attr(<span class="string">"checked"</span>, <span class="literal">true</span>)</div><div class="line"></div><div class="line"><span class="comment">//页面显示的单选按钮被选择,标签并没有加上checked属性,但是打印dom可以看到checked:true</span></div><div class="line">$(<span class="string">"*[name = level][value = "</span> + control.level + <span class="string">"]"</span>).prop(<span class="string">"checked"</span>, <span class="string">"checked"</span>)</div><div class="line"></div><div class="line"><span class="comment">//使用prop选中的按钮,可以使用removeAttr取消选中</span></div><div class="line">$(<span class="string">"*[name = level][value = "</span> + control.level + <span class="string">"]"</span>).removeAttr(<span class="string">"checked"</span>)</div></pre></td></tr></table></figure>
 <p>如图:标签里的checked</p>
 <p><img src="http://otw7po22v.bkt.clouddn.com/blog/181009/L3gEdDaI35.png?imageslim" alt="mark"></p>
 <p>如图:打印dom里的checked</p>
@@ -379,7 +379,7 @@ var _hmt = _hmt || [];
 <p>从上文可以看出，官网给出了明确的解释，在jquery1.6之后，对于checked，selected等进行状态改变时，需要使用的是prop()而不是attr()</p>
 <p>另外,在html中<code>&lt;input type=&quot;radio&quot; value=&quot;1&quot; name=&quot;e&quot; checked=&quot;checked&quot;</code> 这种方式可以设置默认选中,并且标签有checked=”checked”属性,打印dom可以看到checked:true,当你鼠标操作选中不选中的时候,变化的只有dom里的checked,而标签里的checked=”checked”一直不变;</p>
 <p>综上所述,我们使用js操作单选框时使用prop的方式选中,获取单选框选中状态的时候可以使用<code>$(&quot;*[name = &quot; + param.col + &quot;]:checked&quot;)</code> 来获取准确的选中状态,避免被checked=”checked”误导;</p>
-<p>多选框使用attr也可以操作选中,其他表现和单选一致,所以尽量都使用prop~</p>
+<p>多选框使用attr也可以操作选中,其他表现和单选一致,但是推荐尽量都使用prop~</p>
 <h2 id="正则表达式相关"><a href="#正则表达式相关" class="headerlink" title="正则表达式相关"></a>正则表达式相关</h2><h4 id="动态构建正则表达式"><a href="#动态构建正则表达式" class="headerlink" title="动态构建正则表达式"></a>动态构建正则表达式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> className = <span class="string">"high"</span>;</div><div class="line"><span class="keyword">var</span> regex = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|\\s)"</span> + className + <span class="string">"(\\s|$)"</span>);</div><div class="line"><span class="built_in">console</span>.log(regex.source)</div><div class="line"><span class="comment">// =&gt; (^|\s)high(\s|$) 即字符串"(^|\\s)high(\\s|$)"</span></div></pre></td></tr></table></figure>
 <p>使用eval也可以将字符串转化为正则表达式。</p>
 <h4 id="正则表达式中的g对js-api的影响"><a href="#正则表达式中的g对js-api的影响" class="headerlink" title="正则表达式中的g对js api的影响"></a>正则表达式中的g对js api的影响</h4><p>用于正则操作的方法,共有 6 个,字符串实例 4 个,正则实例 2 个:</p>
@@ -679,7 +679,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -687,7 +687,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -703,19 +703,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -735,15 +735,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">

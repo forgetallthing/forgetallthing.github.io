@@ -8,19 +8,20 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>这是什么第一期 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本期名词:  orm">
+  <meta name="description" content="本期名词:  orm 弱类型、强类型、动态类型、静态类型语言">
 <meta name="keywords" content="something">
 <meta property="og:type" content="article">
 <meta property="og:title" content="这是什么第一期">
 <meta property="og:url" content="http://yoursite.com/2018/08/30/这是什么第一期/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="本期名词:  orm">
+<meta property="og:description" content="本期名词:  orm 弱类型、强类型、动态类型、静态类型语言">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/180919/F6HccK2icc.png?imageslim">
-<meta property="og:updated_time" content="2018-09-19T08:16:57.789Z">
+<meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/181019/79eBa5Hj95.png?imageslim">
+<meta property="og:updated_time" content="2018-10-19T06:20:28.969Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="这是什么第一期">
-<meta name="twitter:description" content="本期名词:  orm">
+<meta name="twitter:description" content="本期名词:  orm 弱类型、强类型、动态类型、静态类型语言">
 <meta name="twitter:image" content="http://otw7po22v.bkt.clouddn.com/blog/180919/F6HccK2icc.png?imageslim">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
@@ -199,6 +200,7 @@ var _hmt = _hmt || [];
 <p>本期名词:</p>
 <ul>
 <li>orm</li>
+<li>弱类型、强类型、动态类型、静态类型语言</li>
 </ul>
 <a id="more"></a>
 <h3 id="ORM是什么？如何理解ORM"><a href="#ORM是什么？如何理解ORM" class="headerlink" title="ORM是什么？如何理解ORM"></a>ORM是什么？如何理解ORM</h3><h4 id="一、ORM简介"><a href="#一、ORM简介" class="headerlink" title="一、ORM简介"></a>一、ORM简介</h4><p>​        对象关系映射（Object Relational Mapping，简称ORM）模式是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术。简单的说，ORM是通过使用描述对象和数据库之间映射的元数据，将程序中的对象自动持久化到关系数据库中。那么，到底如何实现持久化呢？一种简单的方案是采用硬编码方式，为每一种可能的数据库访问操作提供单独的方法。<br>​        这种方案存在以下不足：<br>​        1.持久化层缺乏弹性。一旦出现业务需求的变更，就必须修改持久化层的接口<br>​        2.持久化层同时与域模型与关系数据库模型绑定，不管域模型还是关系数据库模型发生变化，毒药修改持久化曾的相关程序代码，增加了软件的维护难度。 </p>
@@ -208,6 +210,20 @@ var _hmt = _hmt || [];
 <h4 id="三、ORM的优缺点"><a href="#三、ORM的优缺点" class="headerlink" title="三、ORM的优缺点"></a>三、ORM的优缺点</h4><p>​        ORM的缺点是会牺牲程序的执行效率和会固定思维模式。<br>​        从系统结构上来看,采用ORM的系统一般都是多层系统，系统的层次多了，效率就会降低。ORM是一种完全的面向对象的做法，而面向对象的做法也会对性能产生一定的影响。 </p>
 <p>​        在我们开发系统时，一般都有性能问题。性能问题主要产生在算法不正确和与数据库不正确的使用上。ORM所生成的代码一般不太可能写出很高效的算法，在数据库应用上更有可能会被误用，主要体现在对持久对象的提取和和数据的加工处理上，如果用上了ORM,程序员很有可能将全部的数据提取到内存对象中，然后再进行过滤和加工处理，这样就容易产生性能问题。<br>​        在对对象做持久化时，ORM一般会持久化所有的属性，有时，这是不希望的。<br>​        但ORM是一种工具，工具确实能解决一些重复，简单的劳动。这是不可否认的。但我们不能指望工具能一劳永逸的解决所有问题，有些问题还是需要特殊处理的，但需要特殊处理的部分对绝大多数的系统，应该是很少的。</p>
 <p>来源: <a href="https://www.cnblogs.com/huanhang/p/6054908.html" target="_blank" rel="external">ORM是什么？如何理解ORM</a></p>
+<h3 id="弱类型、强类型、动态类型、静态类型语言"><a href="#弱类型、强类型、动态类型、静态类型语言" class="headerlink" title="弱类型、强类型、动态类型、静态类型语言"></a>弱类型、强类型、动态类型、静态类型语言</h3><h4 id="1-强、弱类型"><a href="#1-强、弱类型" class="headerlink" title="1.强、弱类型"></a>1.强、弱类型</h4><ul>
+<li><em>强类型strongly typed</em>: 如果一种语言的所有程序都是well behaved——即不可能出现forbidden behaviors，则该语言为strongly typed。</li>
+<li><em>弱类型weakly typed</em>: 否则为weakly typed。比如C语言的缓冲区溢出，属于trapped errors，即属于forbidden behaviors..故C是弱类型</li>
+</ul>
+<h4 id="2-动态、静态类型"><a href="#2-动态、静态类型" class="headerlink" title="2.动态、静态类型"></a>2.动态、静态类型</h4><ul>
+<li><em>静态类型 statically</em>: 如果在编译时拒绝ill behaved程序，则是statically typed;</li>
+<li><em>动态类型dynamiclly</em>: 如果在运行时拒绝ill behaviors, 则是dynamiclly typed。</li>
+</ul>
+<p><img src="http://otw7po22v.bkt.clouddn.com/blog/181019/79eBa5Hj95.png?imageslim" alt="mark"></p>
+<p>简洁版:</p>
+<p>强类型：偏向于不容忍隐式类型转换。譬如说haskell的int就不能变成double</p>
+<p>弱类型：偏向于容忍隐式类型转换。譬如说C语言的int可以变成double</p>
+<p>静态类型：编译的时候就知道每一个变量的类型，因为类型错误而不能做的事情是语法错误。</p>
+<p>动态类型：编译的时候不知道每一个变量的类型，因为类型错误而不能做的事情是运行时错误。譬如说你不能对一个数字a写a[10]当数组用。</p>
 
       
 
@@ -360,7 +376,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ORM是什么？如何理解ORM"><span class="toc-number">1.</span> <span class="toc-text">ORM是什么？如何理解ORM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、ORM简介"><span class="toc-number">1.1.</span> <span class="toc-text">一、ORM简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、ORM的概念"><span class="toc-number">1.2.</span> <span class="toc-text">二、ORM的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、ORM的优缺点"><span class="toc-number">1.3.</span> <span class="toc-text">三、ORM的优缺点</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ORM是什么？如何理解ORM"><span class="toc-number">1.</span> <span class="toc-text">ORM是什么？如何理解ORM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、ORM简介"><span class="toc-number">1.1.</span> <span class="toc-text">一、ORM简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、ORM的概念"><span class="toc-number">1.2.</span> <span class="toc-text">二、ORM的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、ORM的优缺点"><span class="toc-number">1.3.</span> <span class="toc-text">三、ORM的优缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弱类型、强类型、动态类型、静态类型语言"><span class="toc-number">2.</span> <span class="toc-text">弱类型、强类型、动态类型、静态类型语言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-强、弱类型"><span class="toc-number">2.1.</span> <span class="toc-text">1.强、弱类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-动态、静态类型"><span class="toc-number">2.2.</span> <span class="toc-text">2.动态、静态类型</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -485,15 +501,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -509,7 +525,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -521,11 +537,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -537,11 +549,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -557,7 +569,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -565,7 +577,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -574,6 +586,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">something</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
             
             <div class="clearfix"></div>

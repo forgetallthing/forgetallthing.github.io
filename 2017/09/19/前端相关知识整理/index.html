@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/Video_2017-11-27_103235%2000_00_05-00_00_09.gif">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/181009/L3gEdDaI35.png?imageslim">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/181009/kI9GL53cfL.png?imageslim">
-<meta property="og:updated_time" content="2018-10-24T09:48:10.281Z">
+<meta property="og:updated_time" content="2018-10-24T09:52:08.711Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具,github上有九千多star,简洁好用: 官网地址：http://www.browsersync.cn/； 如果你不用Gulp、Grunt的话,你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quo">
@@ -395,7 +395,7 @@ var _hmt = _hmt || [];
 <h4 id="获取数组里的非空项的长度"><a href="#获取数组里的非空项的长度" class="headerlink" title="获取数组里的非空项的长度"></a>获取数组里的非空项的长度</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//主要用来获取select中排序题的值，写审核公式用的~</span></div><div class="line"><span class="keyword">var</span> x = [<span class="string">""</span>,<span class="string">"2"</span>,<span class="string">"45"</span>,<span class="string">""</span>,<span class="string">"234"</span>,<span class="string">"1545"</span>,<span class="string">""</span>,,];</div><div class="line"><span class="keyword">var</span> NUM = x.join().match(<span class="regexp">/(\d+,)|(,\d+)/g</span>).length;</div></pre></td></tr></table></figure>
 <h4 id="含偏僻字中文"><a href="#含偏僻字中文" class="headerlink" title="含偏僻字中文"></a>含偏僻字中文</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/^(?!.*?[\u3000-\u303F\u4DC0-\u4DFF\u2800-\u28FF\u3200-\u32FF\u3300-\u33FF\u2700-\u27BF\u2600-\u26FF\uFE10-\uFE1F\uFE30-\uFE4F])[\u4e00-\u9fbb\u2E80-\uFE4F]+$/</div><div class="line"></div><div class="line"><span class="comment">//可以排除[] 内的 字符</span></div><div class="line"><span class="comment">//(?!.*?[要排除的字符])</span></div></pre></td></tr></table></figure>
 <p>摘自<a href="https://blog.csdn.net/qq_37214567/article/details/80771737" target="_blank" rel="external">正则_验证文本框输入的姓名是否规范（包含生僻字，不包含中文符号与其他字符）</a></p>
-<p>测试字:䶮㘝</p>
+<p>测试字: 䶮㘝</p>
 <p>解释:</p>
 <ul>
 <li>常见的中文:</li>
@@ -706,10 +706,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
@@ -718,11 +714,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -738,14 +742,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -758,11 +754,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -774,15 +766,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/Video_2017-11-27_103235%2000_00_05-00_00_09.gif">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/181009/L3gEdDaI35.png?imageslim">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/181009/kI9GL53cfL.png?imageslim">
-<meta property="og:updated_time" content="2018-10-24T09:45:47.416Z">
+<meta property="og:updated_time" content="2018-10-24T09:48:10.281Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具,github上有九千多star,简洁好用: 官网地址：http://www.browsersync.cn/； 如果你不用Gulp、Grunt的话,你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quo">
@@ -382,7 +382,8 @@ var _hmt = _hmt || [];
 <p>多选框使用attr也可以操作选中,其他表现和单选一致,但是推荐尽量都使用prop~</p>
 <h4 id="eval中不会进行变量提升"><a href="#eval中不会进行变量提升" class="headerlink" title="eval中不会进行变量提升"></a>eval中不会进行变量提升</h4><p>大家都知道 <code>eval(&#39;var a = 2&#39;);</code> 不会变量提升,但是eval在执行中也不会变量提升:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">eval</span>(<span class="string">"console.log(xxxxxxx); var xxxxxxx=1"</span>)<span class="comment">//undefined</span></div><div class="line"><span class="built_in">eval</span>(<span class="string">" var xxxxxxx= 1; console.log(xxxxxxx);"</span>)<span class="comment">//1</span></div></pre></td></tr></table></figure>
-<h4 id="radio再次点击取消选择"><a href="#radio再次点击取消选择" class="headerlink" title="radio再次点击取消选择"></a>radio再次点击取消选择</h4><h2 id="正则表达式相关"><a href="#正则表达式相关" class="headerlink" title="正则表达式相关"></a>正则表达式相关</h2><h4 id="动态构建正则表达式"><a href="#动态构建正则表达式" class="headerlink" title="动态构建正则表达式"></a>动态构建正则表达式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> className = <span class="string">"high"</span>;</div><div class="line"><span class="keyword">var</span> regex = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|\\s)"</span> + className + <span class="string">"(\\s|$)"</span>);</div><div class="line"><span class="built_in">console</span>.log(regex.source)</div><div class="line"><span class="comment">// =&gt; (^|\s)high(\s|$) 即字符串"(^|\\s)high(\\s|$)"</span></div></pre></td></tr></table></figure>
+<h4 id="radio再次点击取消选择"><a href="#radio再次点击取消选择" class="headerlink" title="radio再次点击取消选择"></a>radio再次点击取消选择</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// jquery</span></div><div class="line">  $(<span class="string">'input:radio'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> $radio = $(<span class="keyword">this</span>);</div><div class="line">    <span class="keyword">if</span> ($radio.data(<span class="string">'waschecked'</span>) == <span class="literal">true</span>)&#123;</div><div class="line">      $radio.prop(<span class="string">'checked'</span>, <span class="literal">false</span>);</div><div class="line">      $radio.data(<span class="string">'waschecked'</span>, <span class="literal">false</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      $radio.prop(<span class="string">'checked'</span>, <span class="literal">true</span>);</div><div class="line">      $(<span class="string">"input:radio[name = "</span> + $radio.attr(<span class="string">"name"</span>) + <span class="string">"]"</span>).data(<span class="string">'waschecked'</span>, <span class="literal">false</span>);</div><div class="line">      $radio.data(<span class="string">'waschecked'</span>, <span class="literal">true</span>);</div><div class="line">    &#125;</div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
+<h2 id="正则表达式相关"><a href="#正则表达式相关" class="headerlink" title="正则表达式相关"></a>正则表达式相关</h2><h4 id="动态构建正则表达式"><a href="#动态构建正则表达式" class="headerlink" title="动态构建正则表达式"></a>动态构建正则表达式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> className = <span class="string">"high"</span>;</div><div class="line"><span class="keyword">var</span> regex = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|\\s)"</span> + className + <span class="string">"(\\s|$)"</span>);</div><div class="line"><span class="built_in">console</span>.log(regex.source)</div><div class="line"><span class="comment">// =&gt; (^|\s)high(\s|$) 即字符串"(^|\\s)high(\\s|$)"</span></div></pre></td></tr></table></figure>
 <p>使用eval也可以将字符串转化为正则表达式。</p>
 <h4 id="正则表达式中的g对js-api的影响"><a href="#正则表达式中的g对js-api的影响" class="headerlink" title="正则表达式中的g对js api的影响"></a>正则表达式中的g对js api的影响</h4><p>用于正则操作的方法,共有 6 个,字符串实例 4 个,正则实例 2 个:</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String#search</div><div class="line">String#split</div><div class="line">String#match</div><div class="line">String#replace</div><div class="line">RegExp#test</div><div class="line">RegExp#exec</div></pre></td></tr></table></figure>
@@ -693,15 +694,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -714,10 +719,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -741,6 +742,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -750,10 +755,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -773,7 +774,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -781,7 +782,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">

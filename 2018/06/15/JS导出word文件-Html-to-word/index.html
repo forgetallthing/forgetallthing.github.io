@@ -17,7 +17,7 @@
 <meta property="og:description" content="本次使用插件:jquery.wordexport.js; Dependencies: jQuery and FileSaver.js ; 遇到了需要将页面内容导出为word的需求,本以为是个简单的需求,却折腾了一天,主要难点在css样式和echarts图表的导出,wordexport.js插件的使用非常简单: 123456789&amp;lt;script src=&quot;js/jquery-2.1.0.js">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/a80a30f5fa4ff777141a5182f089d899.jpg">
-<meta property="og:updated_time" content="2018-06-29T08:36:55.894Z">
+<meta property="og:updated_time" content="2018-11-27T01:23:54.056Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS导出word文件(Html to word)">
 <meta name="twitter:description" content="本次使用插件:jquery.wordexport.js; Dependencies: jQuery and FileSaver.js ; 遇到了需要将页面内容导出为word的需求,本以为是个简单的需求,却折腾了一天,主要难点在css样式和echarts图表的导出,wordexport.js插件的使用非常简单: 123456789&amp;lt;script src=&quot;js/jquery-2.1.0.js">
@@ -219,6 +219,7 @@ var _hmt = _hmt || [];
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> rules = <span class="string">"table&#123;border-collapse:collapse;margin:0 auto;text-align:center;width: 100%;&#125;table td,table th&#123;border:1px solid #cad9ea;color:#666;height:30px&#125;table thead th&#123;background-color:#F1F1F1;min-width:400px&#125;table tr&#123;background:#fff&#125;"</span>,</div><div class="line">        ss = <span class="built_in">document</span>.styleSheets;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; ss.length; ++i) &#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> x = <span class="number">0</span>; x &lt; ss[i].cssRules.length; ++x) &#123;</div><div class="line">            rules += ss[i].cssRules[x].cssText;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>关于echarts图表的导出:word的导出会忽略很多dom结构,echarts的canvas正是其中之一,于是在这里我们需要先使用<code>curEchart.getConnectedDataURL()</code>将图表转为base64的编码的图片,然后指定img标签的src为获取到的base64字符串,这样就可以顺利导出图片啦~,下面是我最终的代码:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> rules = <span class="string">"table&#123;border-collapse:collapse;margin:0 auto;text-align:center;width: 100%;&#125;table td,table th&#123;border:1px solid #cad9ea;color:#666;height:30px&#125;table thead th&#123;background-color:#F1F1F1;min-width:400px&#125;table tr&#123;background:#fff&#125;"</span>,</div><div class="line">	ss = <span class="built_in">document</span>.styleSheets;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; ss.length; ++i) &#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> x = <span class="number">0</span>; x &lt; ss[i].cssRules.length; ++x) &#123;</div><div class="line">		rules += ss[i].cssRules[x].cssText;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//先clone来避免影响页面显示</span></div><div class="line"><span class="keyword">var</span> clone = $(<span class="string">"#container"</span>).clone();</div><div class="line"><span class="comment">//找到所有echarts图表容器</span></div><div class="line"><span class="keyword">var</span> charts = clone.find(<span class="string">".chart"</span>);</div><div class="line"><span class="comment">//隐藏无需导出的dom</span></div><div class="line">clone.find(<span class="string">".input_div"</span>).hide();</div><div class="line"><span class="comment">//简单控制流程</span></div><div class="line"><span class="keyword">var</span> flag = charts.length;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; charts.length; i++) &#123;</div><div class="line">    <span class="comment">//获取echarts对象</span></div><div class="line">	<span class="keyword">var</span> curEchart = echarts.getInstanceByDom(charts[i]);</div><div class="line">	<span class="keyword">if</span>(curEchart) &#123;</div><div class="line">        <span class="comment">//将图表替换为图片</span></div><div class="line">		<span class="keyword">var</span> base = curEchart.getConnectedDataURL();</div><div class="line">		<span class="keyword">var</span> img = $(<span class="string">'&lt;img style="" src="'</span> + base + <span class="string">'"/&gt;'</span>);</div><div class="line">		$(charts[i]).html(img);</div><div class="line">		flag--;</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		flag--;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> interval = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">if</span>(!flag) &#123;</div><div class="line">		clearInterval(interval);</div><div class="line">        <span class="comment">//导出word</span></div><div class="line">		clone.wordExport(name, rules);</div><div class="line">	&#125;</div><div class="line">&#125;, <span class="number">200</span>)</div></pre></td></tr></table></figure>
+<p>to-do-list:最近发现,这样导出的图片,竟然wps不支持,似乎是不支持img标签中base64数据的写法,不止是旧版本,wps2019都打不开,软件直接卡死。没有找到好的解决办法,看到有人将图片存储在服务器上,然后在img中直接写地址,大家需要的可以尝试一下。</p>
 
       
 
@@ -496,27 +497,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -536,19 +529,35 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -560,10 +569,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
@@ -572,7 +577,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -584,11 +589,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
             
             <div class="clearfix"></div>

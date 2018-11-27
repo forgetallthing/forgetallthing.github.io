@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="黄河西来决昆仑，咆哮万里触龙门。 ————— by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-23T08:25:08.949Z">
+<meta property="og:updated_time" content="2018-11-27T08:12:06.782Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="建站练习全记录">
 <meta name="twitter:description" content="黄河西来决昆仑，咆哮万里触龙门。 ————— by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
@@ -251,6 +251,24 @@ var _hmt = _hmt || [];
 <p>使用pm2启动服务:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 start /opt/something/app.js</div></pre></td></tr></table></figure>
 <p>在浏览器输入你的公网ip即可访问</p>
+<h3 id="搭建git服务"><a href="#搭建git服务" class="headerlink" title="搭建git服务"></a>搭建git服务</h3><p>我打算以github为git服务器,从本地上传到github,然后在云服务器上<code>git pull</code> </p>
+<h4 id="1-安装git"><a href="#1-安装git" class="headerlink" title="1.安装git"></a>1.安装git</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum install git</div><div class="line">git version</div><div class="line">git version <span class="number">1.8</span><span class="number">.3</span><span class="number">.1</span></div></pre></td></tr></table></figure>
+<h4 id="2获取公钥"><a href="#2获取公钥" class="headerlink" title="2获取公钥"></a>2获取公钥</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd ~/.ssh</div><div class="line">ssh-keygen</div></pre></td></tr></table></figure>
+<p>根据提示输入保存地址和密码等,出现下面的图形则为生成成功:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">The key's randomart image is:</div><div class="line">+---[RSA 2048]----+</div><div class="line">|       .= +++ .  |</div><div class="line">|       o.B.B +   |</div><div class="line">|    .. oBo*.O    |</div><div class="line">|   . .=ooB++ o   |</div><div class="line">|  .   o+EBo..    |</div><div class="line">| . . . .B.=      |</div><div class="line">|  . .  o.+ o     |</div><div class="line">|          +      |</div><div class="line">|                 |</div><div class="line">+----[SHA256]-----+</div></pre></td></tr></table></figure>
+<p>然后打印公钥内容:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat ~<span class="regexp">/.ssh/i</span>d_rsa.pub</div></pre></td></tr></table></figure>
+<p>复制出现的ssh-rsa开头的一大段,添加到你的github里即可</p>
+<h4 id="3-连接github仓库"><a href="#3-连接github仓库" class="headerlink" title="3.连接github仓库"></a>3.连接github仓库</h4><p>输入你的github登录名和邮箱</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.name  <span class="string">"forgetallthing"</span></div><div class="line">git config --global user.email <span class="string">"786014381@qq.com"</span></div></pre></td></tr></table></figure>
+<p>cd到你存放代码的文件夹,建立git仓库并关联github</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git init</div><div class="line">git remote add origin git@github.com:forgetallthing/ourhome.git</div></pre></td></tr></table></figure>
+<p>拉取代码</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">[root@iz2zehcv8qx068ewjqxlklz web]# git pull</div><div class="line">remote: Enumerating objects: 1158, done.</div><div class="line">remote: Counting objects: 100% (1158/1158), done.</div><div class="line">remote: Compressing objects: 100% (888/888), done.</div><div class="line">remote: Total 1296 (delta 221), reused 1153 (delta 217), pack-reused 138</div><div class="line">Receiving objects: 100% (1296/1296), 12.06 MiB | 832.00 KiB/s, done.</div><div class="line">Resolving deltas: 100% (254/254), done.</div><div class="line">From github.com:forgetallthing/ourhome</div><div class="line"> * [new branch]      master     -&gt; origin/master</div><div class="line">There is no tracking information for the current branch.</div><div class="line">Please specify which branch you want to merge with.</div><div class="line">See git-pull(1) for details</div><div class="line"></div><div class="line">    git pull &lt;remote&gt; &lt;branch&gt;</div><div class="line"></div><div class="line">If you wish to set tracking information for this branch you can do so with:</div><div class="line"></div><div class="line">    git branch --set-upstream-to=origin/&lt;branch&gt; master</div></pre></td></tr></table></figure>
+<p>出现这种提示代表代码已经下载成功,但是你还没有关联分支,现在是看不到你下载的代码的</p>
+<p>建立master分支并关联github主分支</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git checkout master</div><div class="line">git branch --set-upstream-to=origin/master master</div></pre></td></tr></table></figure>
+<p>现在打开云服务器上的git仓库,文件已经显示出来了</p>
 <h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><h4 id="1-pm2常用命令"><a href="#1-pm2常用命令" class="headerlink" title="1.pm2常用命令"></a>1.pm2常用命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> pm2 start app.js              # 启动app.js应用程序</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 start app.js -i 4         # cluster mode 模式启动4个app.js的应用实例     # 4个应用程序会自动进行负载均衡</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 start app.js --name="api" # 启动应用程序并命名为 "api"</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 start app.js --watch      # 当文件变化时自动重启应用</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 start script.sh           # 启动 bash 脚本</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 list                      # 列表 PM2 启动的所有的应用程序</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 monit                     # 显示每个应用程序的CPU和内存占用情况</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 show [app-name]           # 显示应用程序的所有信息</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 logs                      # 显示所有应用程序的日志</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 logs [app-name]           # 显示指定应用程序的日志</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 flush</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 stop all                  # 停止所有的应用程序</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 stop 0                    # 停止 id为 0的指定应用程序</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 restart all               # 重启所有应用</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 reload all                # 重启 cluster mode下的所有应用</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 gracefulReload all        # Graceful reload all apps in cluster mode</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 delete all                # 关闭并删除所有应用</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 delete 0                  # 删除指定应用 id 0</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 scale api 10              # 把名字叫api的应用扩展到10个实例</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 reset [app-name]          # 重置重启数量</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 startup                   # 创建开机自启动命令</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 save                      # 保存当前应用列表</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 resurrect                 # 重新加载保存的应用列表</div></pre></td></tr></table></figure>
 
       
@@ -395,7 +413,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、准备服务器和相关工具"><span class="toc-number">1.</span> <span class="toc-text">一、准备服务器和相关工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、搭建个简单的架子"><span class="toc-number">2.</span> <span class="toc-text">二、搭建个简单的架子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-在本地准备个程序"><span class="toc-number">2.1.</span> <span class="toc-text">1.在本地准备个程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-在服务器安装node以及pm2"><span class="toc-number">2.2.</span> <span class="toc-text">2.在服务器安装node以及pm2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-开启端口并启动服务"><span class="toc-number">2.3.</span> <span class="toc-text">3.开启端口并启动服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录"><span class="toc-number">3.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-pm2常用命令"><span class="toc-number">3.1.</span> <span class="toc-text">1.pm2常用命令</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、准备服务器和相关工具"><span class="toc-number">1.</span> <span class="toc-text">一、准备服务器和相关工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、搭建个简单的架子"><span class="toc-number">2.</span> <span class="toc-text">二、搭建个简单的架子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-在本地准备个程序"><span class="toc-number">2.1.</span> <span class="toc-text">1.在本地准备个程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-在服务器安装node以及pm2"><span class="toc-number">2.2.</span> <span class="toc-text">2.在服务器安装node以及pm2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-开启端口并启动服务"><span class="toc-number">2.3.</span> <span class="toc-text">3.开启端口并启动服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搭建git服务"><span class="toc-number">3.</span> <span class="toc-text">搭建git服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装git"><span class="toc-number">3.1.</span> <span class="toc-text">1.安装git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2获取公钥"><span class="toc-number">3.2.</span> <span class="toc-text">2获取公钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-连接github仓库"><span class="toc-number">3.3.</span> <span class="toc-text">3.连接github仓库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录"><span class="toc-number">4.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-pm2常用命令"><span class="toc-number">4.1.</span> <span class="toc-text">1.pm2常用命令</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -524,6 +542,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
@@ -532,15 +562,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -556,6 +578,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -564,7 +590,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -572,15 +598,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -592,6 +610,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
@@ -600,7 +622,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -609,10 +631,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">something</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
             
             <div class="clearfix"></div>

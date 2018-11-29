@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="黄河西来决昆仑，咆哮万里触龙门。 ————— by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-27T08:12:06.782Z">
+<meta property="og:updated_time" content="2018-11-29T01:56:29.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="建站练习全记录">
 <meta name="twitter:description" content="黄河西来决昆仑，咆哮万里触龙门。 ————— by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
@@ -269,6 +269,19 @@ var _hmt = _hmt || [];
 <p>建立master分支并关联github主分支</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git checkout master</div><div class="line">git branch --set-upstream-to=origin/master master</div></pre></td></tr></table></figure>
 <p>现在打开云服务器上的git仓库,文件已经显示出来了</p>
+<h4 id="4-服务器配置文件不更新的命令"><a href="#4-服务器配置文件不更新的命令" class="headerlink" title="4.服务器配置文件不更新的命令"></a>4.服务器配置文件不更新的命令</h4><p>ps : git stash我在具体部署时候遇到了很多问题,最后我没有采用这个方案,逃~</p>
+<p>如果服务器上有配置文件和测试环境/开发环境的配置文件不一致,怎么做到pull的时候忽略这个文件的更新呢?</p>
+<p>我们知道<code>git update-index --assume-unchanged</code> <code>.gitignore</code> 等方式只能忽略提交,我既不想像gitignore那样完全不给配置文件加版本控制,也没法解决在开发环境设置<code>git update-index --assume-unchanged</code> 后<code>git pull</code> 的报错,所以我只有在服务器更新的时候,试用以下命令来完成:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git stash</div><div class="line">git pull</div><div class="line">git stash pop</div></pre></td></tr></table></figure>
+<p>第一次Git pull之后,修改服务器的配置文件,然后直邮的每次pull,都先储藏一下现有的更改,再pull代码变动,现在你的配置文件变成github上的配置文件,最后执行<code>git stash pop</code> 将储存的修改恢复回来,你会发现你的配置文件变成本次pull之前的样子,而其他代码的修改生效了。</p>
+<p><a href="https://git-scm.com/book/zh/v1/Git-%E5%B7%A5%E5%85%B7-%E5%82%A8%E8%97%8F%EF%BC%88Stashing%EF%BC%89" target="_blank" rel="external">Git 工具 - 储藏（Stashing）</a></p>
+<h4 id="5使用-GitHub的-Webhooks-进行网站自动化部署"><a href="#5使用-GitHub的-Webhooks-进行网站自动化部署" class="headerlink" title="5使用 GitHub的 Webhooks 进行网站自动化部署"></a>5使用 GitHub的 Webhooks 进行网站自动化部署</h4><p>在github上新增一个Webhook,Payload URL填写<code>http://60.205.12306.12306:1111/update/</code>  这里ip和域名皆可,</p>
+<p>其他的基本不用更改,想使用Secret的请自行研究~</p>
+<p>然后在云服务器上添加一个脚本来接收:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">var</span> process = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</div><div class="line"></div><div class="line"><span class="keyword">const</span> PORT = <span class="number">9000</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> deployServer = http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">request, response</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (request.url.search(<span class="regexp">/update\/?$/i</span>) &gt; <span class="number">0</span>) &#123;</div><div class="line">        process.exec(<span class="string">'cd /home/web/&amp;&amp;pwd&amp;&amp;git pull'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error, stdout, stderr</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (error !== <span class="literal">null</span>) &#123;</div><div class="line">                <span class="built_in">console</span>.log(<span class="string">'exec error: '</span> + error);</div><div class="line">                response.writeHead(<span class="number">500</span>)</div><div class="line">                response.end(<span class="string">'Server Internal Error.'</span>)</div><div class="line">                <span class="keyword">throw</span> error</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">              	<span class="built_in">console</span>.log(stdout);</div><div class="line">              	<span class="built_in">console</span>.log(<span class="string">"-------------success-------------"</span>);</div><div class="line">				response.writeHead(<span class="number">200</span>)</div><div class="line">      			response.end(<span class="string">'Deploy Done.'</span>)</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        response.writeHead(<span class="number">404</span>)</div><div class="line">        response.end(<span class="string">'Not Found.'</span>)</div><div class="line">    &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">deployServer.listen(PORT)</div></pre></td></tr></table></figure>
+<p>这里注意端口需要在阿里云安全策略重开放,上面写过步骤;</p>
+<p>使用pm2启动这个nodejs脚本,在github上点击Recent Deliveries中的Redeliver按钮来测试,状态码显示200的话表示成功,现在可以在本地进行修改提交,看看云服务器上的代码是不是自动部署了呢,之后的每次触发webhook,都可以在github上看状态码和返回信息等等;</p>
+<p>在服务器使用 <code>pm2 start app.js --watch</code> ,让代码变动时自动重启程序~</p>
 <h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><h4 id="1-pm2常用命令"><a href="#1-pm2常用命令" class="headerlink" title="1.pm2常用命令"></a>1.pm2常用命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> pm2 start app.js              # 启动app.js应用程序</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 start app.js -i 4         # cluster mode 模式启动4个app.js的应用实例     # 4个应用程序会自动进行负载均衡</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 start app.js --name="api" # 启动应用程序并命名为 "api"</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 start app.js --watch      # 当文件变化时自动重启应用</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 start script.sh           # 启动 bash 脚本</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 list                      # 列表 PM2 启动的所有的应用程序</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 monit                     # 显示每个应用程序的CPU和内存占用情况</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 show [app-name]           # 显示应用程序的所有信息</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 logs                      # 显示所有应用程序的日志</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 logs [app-name]           # 显示指定应用程序的日志</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 flush</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 stop all                  # 停止所有的应用程序</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 stop 0                    # 停止 id为 0的指定应用程序</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 restart all               # 重启所有应用</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 reload all                # 重启 cluster mode下的所有应用</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 gracefulReload all        # Graceful reload all apps in cluster mode</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 delete all                # 关闭并删除所有应用</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 delete 0                  # 删除指定应用 id 0</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 scale api 10              # 把名字叫api的应用扩展到10个实例</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 reset [app-name]          # 重置重启数量</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 startup                   # 创建开机自启动命令</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 save                      # 保存当前应用列表</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 resurrect                 # 重新加载保存的应用列表</div></pre></td></tr></table></figure>
 
       
@@ -413,7 +426,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、准备服务器和相关工具"><span class="toc-number">1.</span> <span class="toc-text">一、准备服务器和相关工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、搭建个简单的架子"><span class="toc-number">2.</span> <span class="toc-text">二、搭建个简单的架子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-在本地准备个程序"><span class="toc-number">2.1.</span> <span class="toc-text">1.在本地准备个程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-在服务器安装node以及pm2"><span class="toc-number">2.2.</span> <span class="toc-text">2.在服务器安装node以及pm2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-开启端口并启动服务"><span class="toc-number">2.3.</span> <span class="toc-text">3.开启端口并启动服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搭建git服务"><span class="toc-number">3.</span> <span class="toc-text">搭建git服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装git"><span class="toc-number">3.1.</span> <span class="toc-text">1.安装git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2获取公钥"><span class="toc-number">3.2.</span> <span class="toc-text">2获取公钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-连接github仓库"><span class="toc-number">3.3.</span> <span class="toc-text">3.连接github仓库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录"><span class="toc-number">4.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-pm2常用命令"><span class="toc-number">4.1.</span> <span class="toc-text">1.pm2常用命令</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、准备服务器和相关工具"><span class="toc-number">1.</span> <span class="toc-text">一、准备服务器和相关工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、搭建个简单的架子"><span class="toc-number">2.</span> <span class="toc-text">二、搭建个简单的架子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-在本地准备个程序"><span class="toc-number">2.1.</span> <span class="toc-text">1.在本地准备个程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-在服务器安装node以及pm2"><span class="toc-number">2.2.</span> <span class="toc-text">2.在服务器安装node以及pm2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-开启端口并启动服务"><span class="toc-number">2.3.</span> <span class="toc-text">3.开启端口并启动服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搭建git服务"><span class="toc-number">3.</span> <span class="toc-text">搭建git服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装git"><span class="toc-number">3.1.</span> <span class="toc-text">1.安装git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2获取公钥"><span class="toc-number">3.2.</span> <span class="toc-text">2获取公钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-连接github仓库"><span class="toc-number">3.3.</span> <span class="toc-text">3.连接github仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-服务器配置文件不更新的命令"><span class="toc-number">3.4.</span> <span class="toc-text">4.服务器配置文件不更新的命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5使用-GitHub的-Webhooks-进行网站自动化部署"><span class="toc-number">3.5.</span> <span class="toc-text">5使用 GitHub的 Webhooks 进行网站自动化部署</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录"><span class="toc-number">4.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-pm2常用命令"><span class="toc-number">4.1.</span> <span class="toc-text">1.pm2常用命令</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -534,6 +547,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
@@ -542,15 +559,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -559,6 +568,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -578,10 +591,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -590,15 +599,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -611,6 +620,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">

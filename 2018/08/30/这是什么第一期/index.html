@@ -8,20 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>这是什么第一期 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本期名词:  orm 弱类型、强类型、动态类型、静态类型语言">
+  <meta name="description" content="本期名词:  orm 弱类型、强类型、动态类型、静态类型语言 CDN简介">
 <meta name="keywords" content="something">
 <meta property="og:type" content="article">
 <meta property="og:title" content="这是什么第一期">
 <meta property="og:url" content="http://yoursite.com/2018/08/30/这是什么第一期/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="本期名词:  orm 弱类型、强类型、动态类型、静态类型语言">
+<meta property="og:description" content="本期名词:  orm 弱类型、强类型、动态类型、静态类型语言 CDN简介">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/180919/F6HccK2icc.png?imageslim">
 <meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/blog/181019/79eBa5Hj95.png?imageslim">
-<meta property="og:updated_time" content="2018-10-19T06:20:28.969Z">
+<meta property="og:image" content="http://jerryblog.qiniudn.com/cdn3.png">
+<meta property="og:updated_time" content="2018-11-29T02:42:41.273Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="这是什么第一期">
-<meta name="twitter:description" content="本期名词:  orm 弱类型、强类型、动态类型、静态类型语言">
+<meta name="twitter:description" content="本期名词:  orm 弱类型、强类型、动态类型、静态类型语言 CDN简介">
 <meta name="twitter:image" content="http://otw7po22v.bkt.clouddn.com/blog/180919/F6HccK2icc.png?imageslim">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
@@ -201,6 +202,7 @@ var _hmt = _hmt || [];
 <ul>
 <li>orm</li>
 <li>弱类型、强类型、动态类型、静态类型语言</li>
+<li>CDN简介</li>
 </ul>
 <a id="more"></a>
 <h3 id="ORM是什么？如何理解ORM"><a href="#ORM是什么？如何理解ORM" class="headerlink" title="ORM是什么？如何理解ORM"></a>ORM是什么？如何理解ORM</h3><h4 id="一、ORM简介"><a href="#一、ORM简介" class="headerlink" title="一、ORM简介"></a>一、ORM简介</h4><p>​        对象关系映射（Object Relational Mapping，简称ORM）模式是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术。简单的说，ORM是通过使用描述对象和数据库之间映射的元数据，将程序中的对象自动持久化到关系数据库中。那么，到底如何实现持久化呢？一种简单的方案是采用硬编码方式，为每一种可能的数据库访问操作提供单独的方法。<br>​        这种方案存在以下不足：<br>​        1.持久化层缺乏弹性。一旦出现业务需求的变更，就必须修改持久化层的接口<br>​        2.持久化层同时与域模型与关系数据库模型绑定，不管域模型还是关系数据库模型发生变化，毒药修改持久化曾的相关程序代码，增加了软件的维护难度。 </p>
@@ -224,6 +226,17 @@ var _hmt = _hmt || [];
 <p>弱类型：偏向于容忍隐式类型转换。譬如说C语言的int可以变成double</p>
 <p>静态类型：编译的时候就知道每一个变量的类型，因为类型错误而不能做的事情是语法错误。</p>
 <p>动态类型：编译的时候不知道每一个变量的类型，因为类型错误而不能做的事情是运行时错误。譬如说你不能对一个数字a写a[10]当数组用。</p>
+<h3 id="CDN简介"><a href="#CDN简介" class="headerlink" title="CDN简介"></a>CDN简介</h3><h4 id="什么是CDN"><a href="#什么是CDN" class="headerlink" title="什么是CDN"></a>什么是CDN</h4><p>CDN 的全称是 <a href="http://en.wikipedia.org/wiki/Content_delivery_network" target="_blank" rel="external">Content Delivery Network</a>，即内容分发网络，一般用于分发静态内容，比如图片、视频、CSS、JS文件。    </p>
+<p>如果不使用 CDN，那所有用户的请求都会直接导向单一的源服务器(Origin Server)。而如果启用了 CDN 服务，那么 CDN 服务提供商会分配给你若干个节点，比如分配给你的服务器 3 个东海岸的节点和 3 个西海岸的节点。</p>
+<p>此时用户就不会直接向源服务器发送请求，而是向边缘服务器(Edge Server)发送请求。再看下面这张示意图，当你第一次访问资源 foo.png 时，边缘服务器没有 foo.png 的缓存。所以会由它向源服务器发送请求，并获取到 foo.png。下一次所有经过这个节点的请求，因为存在缓存的缘故，都不用再次向源服务器发送请求，而是由边缘服务器直接返回该文件的缓存即可。这样一来就可以大大降低时延，也减小了源服务器的压力。</p>
+<p><img src="http://jerryblog.qiniudn.com/cdn3.png" alt=""></p>
+<p>那 CDN 服务是如何决定你从哪个边缘服务器获取资源的呢？其实就是在发送 DNS 请求的时候，将你要访问的域名映射到最近的节点的 IP 上。具体判定哪个是最近的节点，最简单的策略就是根据 IP，但各个 CDN 的服务提供商的策略可能各不相同，这里就不展开讨论了</p>
+<p>上面介绍的是CDN的pull策略,CDN有推和拉两种策略,push的用法比如又拍云,七牛云等可以手动推送图床等,从主服务器同步内容到边缘服务器;</p>
+<h4 id="CDN-的局限性"><a href="#CDN-的局限性" class="headerlink" title="CDN 的局限性"></a>CDN 的局限性</h4><p>CDN 确实能够解决不少问题，但它本身也存在一定的局限性。其中最重要的一点是：<strong>决不能用 CDN 来缓存动态内容</strong>。</p>
+<p>来看一个例子，假设服务器端有这样一个PHP文件 hello.php：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line">    &lt;head&gt;...&lt;/head&gt;</div><div class="line">    &lt;body&gt;Hello, &lt;?= $name ?&gt; &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>如果 CDN 缓存了这个文件就会造成很糟糕的后果。比如 Jerry 先访问了 hello.php 页面，得到了 Hello, Jerry 的内容。此时这个内容已经被缓存到了节点 A，而 Tom 同学也是离节点 A 最近，那么 Tom 同学访问 hello.php 时，就会直接得到缓存内容：Hello, Jerry。这个时候 Tom 同学的内心一定是崩溃的。</p>
+<p>你还应该<strong>避免</strong>使用 CDN 的情况有：<strong>根据 user-agent 来选择返回移动版还是桌面版页面</strong>。</p>
 
       
 
@@ -376,7 +389,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ORM是什么？如何理解ORM"><span class="toc-number">1.</span> <span class="toc-text">ORM是什么？如何理解ORM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、ORM简介"><span class="toc-number">1.1.</span> <span class="toc-text">一、ORM简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、ORM的概念"><span class="toc-number">1.2.</span> <span class="toc-text">二、ORM的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、ORM的优缺点"><span class="toc-number">1.3.</span> <span class="toc-text">三、ORM的优缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弱类型、强类型、动态类型、静态类型语言"><span class="toc-number">2.</span> <span class="toc-text">弱类型、强类型、动态类型、静态类型语言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-强、弱类型"><span class="toc-number">2.1.</span> <span class="toc-text">1.强、弱类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-动态、静态类型"><span class="toc-number">2.2.</span> <span class="toc-text">2.动态、静态类型</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ORM是什么？如何理解ORM"><span class="toc-number">1.</span> <span class="toc-text">ORM是什么？如何理解ORM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、ORM简介"><span class="toc-number">1.1.</span> <span class="toc-text">一、ORM简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、ORM的概念"><span class="toc-number">1.2.</span> <span class="toc-text">二、ORM的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、ORM的优缺点"><span class="toc-number">1.3.</span> <span class="toc-text">三、ORM的优缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弱类型、强类型、动态类型、静态类型语言"><span class="toc-number">2.</span> <span class="toc-text">弱类型、强类型、动态类型、静态类型语言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-强、弱类型"><span class="toc-number">2.1.</span> <span class="toc-text">1.强、弱类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-动态、静态类型"><span class="toc-number">2.2.</span> <span class="toc-text">2.动态、静态类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CDN简介"><span class="toc-number">3.</span> <span class="toc-text">CDN简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是CDN"><span class="toc-number">3.1.</span> <span class="toc-text">什么是CDN</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CDN-的局限性"><span class="toc-number">3.2.</span> <span class="toc-text">CDN 的局限性</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -497,11 +510,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -509,11 +522,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -525,7 +538,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -537,7 +554,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -549,11 +566,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -569,11 +582,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">

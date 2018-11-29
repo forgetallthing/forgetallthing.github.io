@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>H5plus软键盘弹出问题 | 张伯伯的BLOG</title>
+  <title>native.js判断录音权限是否开启(附原生摄像头权限检测) | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="点击锚点软键盘弹出问题当input有焦点的时候且软键盘关闭时，点击a标签（如下）也会导致软键盘弹出一次  解决办法如下：因此当键盘收起时使input失去焦点即可，获取键盘收起事件如下：（可以通过监听屏幕高度的变化来判断。键盘弹出和收回会触发js标准的onresize事件，因为软键盘弹出时会压缩屏幕高度）">
+  <meta name="description" content="很坑爹的h5+并不提供判断安卓app是否拥有某项权限的接口,只好使用原生类来实现:">
 <meta name="keywords" content="mui">
 <meta property="og:type" content="article">
-<meta property="og:title" content="H5plus软键盘弹出问题">
-<meta property="og:url" content="http://yoursite.com/2017/06/22/H5plus软键盘弹出问题/index.html">
+<meta property="og:title" content="native.js判断录音权限是否开启(附原生摄像头权限检测)">
+<meta property="og:url" content="http://yoursite.com/2018/11/29/native-js检测应用是否开启录音权限/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="点击锚点软键盘弹出问题当input有焦点的时候且软键盘关闭时，点击a标签（如下）也会导致软键盘弹出一次  解决办法如下：因此当键盘收起时使input失去焦点即可，获取键盘收起事件如下：（可以通过监听屏幕高度的变化来判断。键盘弹出和收回会触发js标准的onresize事件，因为软键盘弹出时会压缩屏幕高度）">
+<meta property="og:description" content="很坑爹的h5+并不提供判断安卓app是否拥有某项权限的接口,只好使用原生类来实现:">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://otw7po22v.bkt.clouddn.com/h51.png">
-<meta property="og:updated_time" content="2017-08-14T03:30:39.185Z">
+<meta property="og:updated_time" content="2018-11-29T09:37:50.342Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="H5plus软键盘弹出问题">
-<meta name="twitter:description" content="点击锚点软键盘弹出问题当input有焦点的时候且软键盘关闭时，点击a标签（如下）也会导致软键盘弹出一次  解决办法如下：因此当键盘收起时使input失去焦点即可，获取键盘收起事件如下：（可以通过监听屏幕高度的变化来判断。键盘弹出和收回会触发js标准的onresize事件，因为软键盘弹出时会压缩屏幕高度）">
-<meta name="twitter:image" content="http://otw7po22v.bkt.clouddn.com/h51.png">
+<meta name="twitter:title" content="native.js判断录音权限是否开启(附原生摄像头权限检测)">
+<meta name="twitter:description" content="很坑爹的h5+并不提供判断安卓app是否拥有某项权限的接口,只好使用原生类来实现:">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -175,38 +173,44 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-H5plus软键盘弹出问题" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-native-js检测应用是否开启录音权限" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      H5plus软键盘弹出问题
+      native.js判断录音权限是否开启(附原生摄像头权限检测)
     </h1>
   
 
         
-        <a href="/2017/06/22/H5plus软键盘弹出问题/" class="archive-article-date">
-  	<time datetime="2017-06-22T08:20:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
+        <a href="/2018/11/29/native-js检测应用是否开启录音权限/" class="archive-article-date">
+  	<time datetime="2018-11-29T08:56:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="点击锚点软键盘弹出问题"><a href="#点击锚点软键盘弹出问题" class="headerlink" title="点击锚点软键盘弹出问题"></a>点击锚点软键盘弹出问题</h3><p>当input有焦点的时候且软键盘关闭时，点击a标签（如下）也会导致软键盘弹出一次</p>
-<p><img src="http://otw7po22v.bkt.clouddn.com/h51.png" alt="img"></p>
-<p>解决办法如下：因此当键盘收起时使input失去焦点即可，获取键盘收起事件如下：（可以通过监听屏幕高度的变化来判断。<br>键盘弹出和收回会触发js标准的onresize事件，因为软键盘弹出时会压缩屏幕高度）</p>
+        <p>很坑爹的h5+并不提供判断安卓app是否拥有某项权限的接口,只好使用原生类来实现:</p>
 <a id="more"></a>
-<p>//获取原始窗口的高度</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> originalHeight = <span class="built_in">document</span>.documentElement.clientHeight || <span class="built_in">document</span>.body.clientHeight;</div><div class="line"></div><div class="line"><span class="built_in">window</span>.onresize = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">   <span class="comment">//软键盘弹起与隐藏  都会引起窗口的高度发生变化</span></div><div class="line"></div><div class="line">   <span class="keyword">var</span> resizeHeight = <span class="built_in">document</span>.documentElement.clientHeight|| <span class="built_in">document</span>.body.clientHeight;</div><div class="line"></div><div class="line"> </div><div class="line"></div><div class="line">   <span class="keyword">if</span>((resizeHeight * <span class="number">1</span> +<span class="number">20</span>)&gt; originalHeight * <span class="number">1</span>) &#123; <span class="comment">//resizeHeight&lt;originalHeight证明窗口被挤压了</span></div><div class="line"></div><div class="line">      $(<span class="string">'#searchs'</span>).blur()</div><div class="line"></div><div class="line">   &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>只有通过点击键盘上的下箭头关闭软键盘时才会使input保留焦点，所以我最开始想监听点击下箭头的keycode，但是貌似没有这个的keycode，以后找到了再更新。</p>
-<h3 id="focus-软键盘弹出瞬间又收起问题"><a href="#focus-软键盘弹出瞬间又收起问题" class="headerlink" title="focus()软键盘弹出瞬间又收起问题"></a>focus()软键盘弹出瞬间又收起问题</h3><p>在写登录注册页面时，校验用户输入不合规范时，给相应input触发focus事件，可以使input获取焦点并使软键盘弹出，但是在h5+中出现input获取焦点又失去焦点的情况，无论是<code>$(&quot;#s_un&quot;).focus()</code>,还是使用原生的写法，或者mui的写法：<code>mui.focus(document.getElementById(&quot;s_un&quot;))</code>都是一样的bug，软键盘弹出又消失。无奈只好强制弹出软键盘，再给input获取焦点，这时input的焦点就不会失去了</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> nativeWebview, imm, InputMethodManager;</div><div class="line"><span class="keyword">var</span> initNativeObjects = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (mui.os.android) &#123;</div><div class="line">        <span class="keyword">var</span> main = plus.android.runtimeMainActivity();</div><div class="line">        <span class="keyword">var</span> Context = plus.android.importClass(<span class="string">"android.content.Context"</span>);</div><div class="line">        InputMethodManager = plus.android.importClass(<span class="string">"android.view.inputmethod.InputMethodManager"</span>);</div><div class="line">        imm = main.getSystemService(Context.INPUT_METHOD_SERVICE);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        nativeWebview = plus.webview.currentWebview().nativeInstanceObject();</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> showSoftInput = <span class="function"><span class="keyword">function</span>(<span class="params">i</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (mui.os.android) &#123;</div><div class="line">        imm.toggleSoftInput(<span class="number">0</span>, InputMethodManager.SHOW_FORCED);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        nativeWebview.plusCallMethod(&#123;</div><div class="line">            <span class="string">"setKeyboardDisplayRequiresUserAction"</span>: <span class="literal">false</span></div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">       <span class="comment">//此处可写具体逻辑设置获取焦点的input</span></div><div class="line">       <span class="keyword">var</span> inputElem = <span class="built_in">document</span>.getElementById(i);</div><div class="line">              inputElem.focus(); </div><div class="line">    &#125;, <span class="number">100</span>);</div><div class="line">&#125;; </div><div class="line">initNativeObjects();</div><div class="line">showSoftInput(<span class="string">"s_un"</span>);</div></pre></td></tr></table></figure>
-<p>又找到一个方法，给focus()设置延时执行：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	$(<span class="string">"#s_un"</span>).focus();</div><div class="line">&#125;, <span class="number">300</span>)</div></pre></td></tr></table></figure>
-<p>这种在安卓5.1.1测试可用，然而4.2.2失效，能获取焦点但是不能弹软键盘。</p>
+<h4 id="录音权限"><a href="#录音权限" class="headerlink" title="录音权限"></a>录音权限</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//是否有录音权限</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">hasRecordPermission</span>(<span class="params">callback</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> MediaRecorder = plus.android.importClass(<span class="string">'android.media.MediaRecorder'</span>);</div><div class="line">	<span class="keyword">var</span> AudioFormat = plus.android.importClass(<span class="string">'android.media.AudioFormat'</span>);</div><div class="line">	<span class="keyword">var</span> AudioRecord = plus.android.importClass(<span class="string">'android.media.AudioRecord'</span>);</div><div class="line">	<span class="keyword">var</span> audioSource = MediaRecorder.AudioSource.MIC;</div><div class="line">	<span class="keyword">var</span> channelConfig = AudioFormat.CHANNEL_IN_STEREO;</div><div class="line">	<span class="keyword">var</span> audioFormat = AudioFormat.ENCODING_PCM_16BIT;</div><div class="line">	<span class="keyword">var</span> sampleRateInHz = <span class="number">44100</span>;</div><div class="line">	<span class="keyword">var</span> bufferSizeInBytes = AudioRecord.getMinBufferSize(sampleRateInHz, channelConfig, audioFormat);</div><div class="line">	<span class="keyword">var</span> audioRecord = <span class="keyword">new</span> AudioRecord(audioSource, <span class="number">44100</span>, channelConfig, audioFormat, bufferSizeInBytes);</div><div class="line"></div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		<span class="comment">// 防止某些手机崩溃，例如联想</span></div><div class="line">		audioRecord.startRecording();</div><div class="line">	&#125; <span class="keyword">catch</span>(e) &#123;</div><div class="line">		<span class="built_in">console</span>.log(e)</div><div class="line">        <span class="comment">//检测不出,强行录音\(^o^)/~</span></div><div class="line">		callback(<span class="literal">true</span>)</div><div class="line">		<span class="keyword">return</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span>(audioRecord.getRecordingState() != AudioRecord.RECORDSTATE_RECORDING) &#123;</div><div class="line">      	<span class="comment">//没有录音权限</span></div><div class="line">		callback(<span class="literal">false</span>)</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		audioRecord.stop();</div><div class="line">		audioRecord.release();</div><div class="line">		audioRecord = <span class="literal">null</span>;</div><div class="line">      	<span class="comment">//拥有录音权限</span></div><div class="line">		callback(<span class="literal">true</span>)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="https://developer.android.com/reference/android/media/AudioRecord" target="_blank" rel="external">Android录音文档</a></p>
+<p><a href="https://blog.csdn.net/wanzhuanit/article/details/51218040" target="_blank" rel="external">参考blog:android 权限录音权限检测</a></p>
+<p><a href="https://blog.csdn.net/self_study/article/details/52965045" target="_blank" rel="external">Android 录音和摄像头权限适配</a></p>
+<p>上述方法是粗暴检测安卓6.0之前的录音权限,兼容性请大家测试之后再使用</p>
+<p>6.0之后系统提供了相关 API:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">int hasCameraPermission;</div><div class="line">hasCameraPermission = checkSelfPermission(Manifest.permission.CAMERA);</div><div class="line">Toast.makeText(<span class="keyword">this</span>, <span class="string">"camera granted : "</span> + (hasCameraPermission == PackageManager.PERMISSION_GRANTED), Toast.LENGTH_SHORT).show();</div></pre></td></tr></table></figure>
+<p>只要返回的值为 PackageManager.PERMISSION_GRANTED 就可以判定已经授权改权限。</p>
+<p>因为我需要兼容6.0以下所以采用了第一种方法。</p>
+<p>下面是摘抄自 <a href="https://blog.csdn.net/self_study/article/details/52965045" target="_blank" rel="external">Shawn_Dut的博客</a> ,安卓原生编写,未转化为native.js。</p>
+<h4 id="摄像头权限"><a href="#摄像头权限" class="headerlink" title="摄像头权限"></a>摄像头权限</h4><h5 id="6-0之前"><a href="#6-0之前" class="headerlink" title="6.0之前"></a>6.0之前</h5><p>　　同录音权限，在 6.0 之前的版本使用 AppOpsManager 在很多机型上会有适配问题，所以在这里依旧粗暴的采用下面这种方案：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">CameraPermissionCheckUtils</span> </span>&#123;</div><div class="line">    private <span class="keyword">static</span> final <span class="built_in">String</span> TAG = <span class="string">"CameraPermissionCheckUtils"</span>;</div><div class="line">    public <span class="keyword">static</span> boolean checkCameraPermission(Context context) &#123;</div><div class="line">        boolean canUse = <span class="literal">true</span>;</div><div class="line">        Camera mCamera = <span class="literal">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            mCamera = Camera.open(<span class="number">0</span>);</div><div class="line">            mCamera.setDisplayOrientation(<span class="number">90</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            AVLogUtils.e(TAG, Log.getStackTraceString(e));</div><div class="line">            canUse = <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (canUse) &#123;</div><div class="line">            mCamera.release();</div><div class="line">            mCamera = <span class="literal">null</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> canUse;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是貌似在少数机型和手机上依旧会有判断错误的情况存在，而且由于这个函数会调用 Camera.open 函数，所以造成在少些手机上会卡顿一下。</p>
+<h5 id="6-0-及之后"><a href="#6-0-及之后" class="headerlink" title="6.0 及之后"></a>6.0 及之后</h5><p>　　6.0 之后就直接使用系统 API 进行判断就可以了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">int hasAudioPermission;</div><div class="line">hasAudioPermission = checkSelfPermission(Manifest.permission.RECORD_AUDIO);</div><div class="line">Toast.makeText(<span class="keyword">this</span>, <span class="string">"audio granted : "</span> + (hasAudioPermission == PackageManager.PERMISSION_GRANTED),</div><div class="line">        Toast.LENGTH_SHORT).show();</div></pre></td></tr></table></figure>
+<p>同样，只要判断返回结果为 PackageManager.PERMISSION_GRANTED 就可以判定 app 已被授权摄像头权限。</p>
 
       
 
@@ -307,7 +311,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2017/06/22/H5plus软键盘弹出问题/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2018/11/29/native-js检测应用是否开启录音权限/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -321,18 +325,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2017/06/26/网卡版本回退/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          网卡版本回退
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/06/21/Eslint入门/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Eslint入门</div>
+    <a href="/2018/11/15/建站练习全记录/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">建站练习全记录</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -359,7 +354,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#点击锚点软键盘弹出问题"><span class="toc-number">1.</span> <span class="toc-text">点击锚点软键盘弹出问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#focus-软键盘弹出瞬间又收起问题"><span class="toc-number">2.</span> <span class="toc-text">focus()软键盘弹出瞬间又收起问题</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#录音权限"><span class="toc-number">1.</span> <span class="toc-text">录音权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#摄像头权限"><span class="toc-number">2.</span> <span class="toc-text">摄像头权限</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#6-0之前"><span class="toc-number">2.1.</span> <span class="toc-text">6.0之前</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-0-及之后"><span class="toc-number">2.2.</span> <span class="toc-text">6.0 及之后</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

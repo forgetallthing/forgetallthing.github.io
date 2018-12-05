@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="黄河西来决昆仑，咆哮万里触龙门。 ————— by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-30T07:22:07.725Z">
+<meta property="og:updated_time" content="2018-12-05T08:27:31.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="建站练习全记录">
 <meta name="twitter:description" content="黄河西来决昆仑，咆哮万里触龙门。 ————— by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
@@ -298,7 +298,51 @@ var _hmt = _hmt || [];
 <p>server_name：转发到哪个地址</p>
 <p>proxy_pass：代理到哪个地址</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">http &#123;</div><div class="line">    server &#123;</div><div class="line">        listen       <span class="number">80</span> default_server;</div><div class="line">        listen       [::]:<span class="number">80</span> default_server;</div><div class="line">        server_name  <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6000</span>;</div><div class="line">        root         /usr/share/nginx/html;</div><div class="line"></div><div class="line">        include /etc/nginx/<span class="keyword">default</span>.d<span class="comment">/*.conf;</span></div><div class="line">        location / &#123;</div><div class="line">             proxy_pass   http://127.0.0.1:6000;</div><div class="line">        &#125;</div><div class="line">        error_page 404 /404.html;</div><div class="line">            location = /40x.html &#123;</div><div class="line">        &#125;</div><div class="line">        error_page 500 502 503 504 /50x.html;</div><div class="line">            location = /50x.html &#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>重启服务即可：nginx -s reload</p>
+<h3 id="MongoDB的使用"><a href="#MongoDB的使用" class="headerlink" title="MongoDB的使用"></a>MongoDB的使用</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>1.下载mongodb</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -O https:<span class="comment">//fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.2.9.tgz</span></div></pre></td></tr></table></figure>
+<p>2.解压</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar zxvf mongodb-linux-x86_64<span class="number">-3.2</span><span class="number">.9</span>.tgz</div></pre></td></tr></table></figure>
+<p>3.创建数据文件夹和日志文件等</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir -p  /usr/local/mongodb/data</div><div class="line">touch /usr/local/mongodb/mongod.log</div><div class="line">touch /usr/local/mongodb/mongodb.conf</div></pre></td></tr></table></figure>
+<p>4.添加mongod命令到PATH</p>
+<p>首先在<code>/etc/profile</code>文件最后添加<code>export PATH=$PATH:/usr/local/server/mongodb/bin</code>。然后执行<code>source /etc/profile</code>使配置生效。这样，在所有路径中都能使用mongodb命令</p>
+<p>5.编辑配置文件</p>
+<p>编译mongodb.conf文件，指定数据库存放位置、log文件等。注意，首次启动时，因为还没有添加用户和密码，所以auth配置要设置为false，这样所有用户都能操作数据库，有很大的安全风险，所以随后会介绍如何为数据库添加用户和密码，然后将auth设置为true，这样再次启动mongodb服务后，访问该数据库就需要使用用户和密码登录，否则访问不了数据库，这样就保证了安全性。<br>注意，不能设置bindip项，如果bindip设置为127.0.0.1，那么远程客户端就不能通过服务器Ip访问服务器mongodb数据库。不设置bindip，那么远程客户端和服务器本身都可以访问服务器数据库。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">dbpath=<span class="regexp">/usr/</span>local/mongodb/data</div><div class="line">logpath=<span class="regexp">/usr/</span>local/mongodb/mongod.log</div><div class="line">logappend = <span class="literal">true</span></div><div class="line">port = <span class="number">27017</span></div><div class="line">fork = <span class="literal">true</span></div><div class="line">auth = <span class="literal">false</span></div></pre></td></tr></table></figure>
+<h4 id="启动MongoDB"><a href="#启动MongoDB" class="headerlink" title="启动MongoDB"></a>启动MongoDB</h4><p>1.配置文件启动</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod --config /usr/local/mongodb/mongodb.conf</div></pre></td></tr></table></figure>
+<p>2.停止服务</p>
+<p> 通常情况下，我们都是希望将mongodb server优雅的关闭。如果服务程序运行于前台，那么直接CTRL+C即可。如果是后台，那么可以通过SIGINT和SIGTERM信号来通知服务程序准备退出，服务器在收到信号后，会先妥善的安排退出前的数据和状态保存工作，如：正常的关闭当前的连接、将缓存中的数据刷新到磁盘等。在完成所有这些工作之后，服务器正常停止</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pkill mongod</div></pre></td></tr></table></figure>
+<p>或者通过mongo客户端工具通知服务器正常退出:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mongo</div><div class="line">use admin</div><div class="line">db.shutdownServer()</div></pre></td></tr></table></figure>
+<p>不要执行 <code>pkill -9 mongod</code> 该信号将会导致mongodb server强制性立即退出</p>
+<p>3.查看是否运行</p>
+<p>可以使用查看端口状态的方法来查看MongoDB是否运行,或者<code>ps -e</code> 查看系统进程;</p>
+<p>运行 <code>netstat -lanp | grep 27017</code> 查看端口状态:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@naturling-general-01 ~]# netstat -lanp | grep 27017</div><div class="line">tcp        0      0 127.0.0.1:27017         0.0.0.0:*               LISTEN      14512/mongod        </div><div class="line">unix  2      [ ACC ]     STREAM     LISTENING     1436989  14512/mongod         /tmp/mongodb-27017.sock</div></pre></td></tr></table></figure>
+<p>4.设置auth</p>
+<p>添加用户和密码，需要先用mongo连接到数据库，然后指定数据库，再使用添加命令添加，如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">mongo --port <span class="number">27017</span> </div><div class="line">use admin</div><div class="line">db.createUser(</div><div class="line">  &#123;</div><div class="line">    <span class="attr">user</span>: <span class="string">"adminUser"</span>,</div><div class="line">    <span class="attr">pwd</span>: <span class="string">"adminPass"</span>,</div><div class="line">    <span class="attr">roles</span>: [ &#123; <span class="attr">role</span>: <span class="string">"userAdminAnyDatabase"</span>, <span class="attr">db</span>: <span class="string">"admin"</span> &#125; ]</div><div class="line">  &#125;</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>赋予的角色为userAdminAnyDatabase,这个角色可以管理27017下所有数据库的用户;</p>
+<p><a href="https://docs.mongodb.com/manual/reference/built-in-roles/#dbOwner" target="_blank" rel="external">具体角色分类请看官网</a></p>
+<p>添加用户密码成功后，将数据库配置文件mongodb.conf中的auth修改为true，再次启动服务器。这样，下次再连接数据库，就需要使用用户和密码登录，才能权限操作数据库:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.auth(<span class="string">"adminUser"</span>,<span class="string">"adminPass"</span>)</div></pre></td></tr></table></figure>
+<p>通常不能直接使用local或者admin库为业务数据库,我们需要授权admin中的用户管理其他数据库:</p>
+<p>下面我们在admin库中执行以下命令：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">use admin</div><div class="line">db.grantRolesToUser("adminUser", [ &#123; role:"dbOwner", db:"test"&#125; ])</div><div class="line">##admin  指的是用户名  test 指的要授权的数据库</div><div class="line">use test</div><div class="line">db.auth("adminUser","adminPass")</div><div class="line">db.createCollection("newCollection")</div><div class="line">&#123; "ok" : 1 &#125;</div></pre></td></tr></table></figure>
+<p>我们将dbOwner角色赋予了adminUser,这代表adminUser可以在test数据库上执行任何管理操作,包含 readWrite, dbAdmin and userAdmin roles;</p>
+<p>5.设置随开机自启</p>
+<p>在<code>/etc/rc.local</code> 中添加启动命令即可</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vi /etc/rc.local</div><div class="line">mongod --config /service/mongodb/bin/mongodb.conf</div></pre></td></tr></table></figure>
+<h4 id="远程连接mongodb数据库"><a href="#远程连接mongodb数据库" class="headerlink" title="远程连接mongodb数据库"></a>远程连接mongodb数据库</h4><p>1.在阿里云实例安全组中开启27017端口(需重启服务器);</p>
+<p>2.使用mongobooster可视化管理工具链接数据库新建一个连接,在basic选项卡的server处输入公网ip和端口;</p>
+<p>3.在authentication选项卡中:mode选择basic(username/password),然后设置好database,用户名和密码;</p>
+<p>4.点击save&amp;connect即可连接;</p>
 <h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><h4 id="1-pm2常用命令"><a href="#1-pm2常用命令" class="headerlink" title="1.pm2常用命令"></a>1.pm2常用命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> pm2 start app.js              # 启动app.js应用程序</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 start app.js -i 4         # cluster mode 模式启动4个app.js的应用实例     # 4个应用程序会自动进行负载均衡</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 start app.js --name="api" # 启动应用程序并命名为 "api"</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 start app.js --watch      # 当文件变化时自动重启应用</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 start script.sh           # 启动 bash 脚本</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 list                      # 列表 PM2 启动的所有的应用程序</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 monit                     # 显示每个应用程序的CPU和内存占用情况</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 show [app-name]           # 显示应用程序的所有信息</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 logs                      # 显示所有应用程序的日志</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 logs [app-name]           # 显示指定应用程序的日志</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 flush</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 stop all                  # 停止所有的应用程序</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 stop 0                    # 停止 id为 0的指定应用程序</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 restart all               # 重启所有应用</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 reload all                # 重启 cluster mode下的所有应用</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 gracefulReload all        # Graceful reload all apps in cluster mode</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 delete all                # 关闭并删除所有应用</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 delete 0                  # 删除指定应用 id 0</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 scale api 10              # 把名字叫api的应用扩展到10个实例</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 reset [app-name]          # 重置重启数量</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 startup                   # 创建开机自启动命令</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 save                      # 保存当前应用列表</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 resurrect                 # 重新加载保存的应用列表</div></pre></td></tr></table></figure>
+<h4 id="2-MongoDB导出-导入数据文件"><a href="#2-MongoDB导出-导入数据文件" class="headerlink" title="2.MongoDB导出/导入数据文件"></a>2.MongoDB导出/导入数据文件</h4><h5 id="导出数据库文件到json文件中"><a href="#导出数据库文件到json文件中" class="headerlink" title="导出数据库文件到json文件中"></a>导出数据库文件到json文件中</h5><p>使用mongoexport命令，可以将mongodb数据库导出到json/csv文件中。注意，导出时，是按collection逐个导出。命令格式如下：<br>　　<code>mongoexport -d dbname -c collectionname -o file --type json/csv -f field</code><br>　　　　-d ：数据库名<br>　　　　-c ：collection名<br>　　　　-o ：输出的文件名<br>　　　　–type ： 输出的格式，默认为json<br>　　　　-f ：输出的字段，如果-type为csv，则需要加上-f “字段名”，不指定-f时默认输出所有字段<br>　　例：<code>mongoexport -d mongotest -c users -o /home/python/Desktop/mongoDB/users.json --type json -f &quot;_id,user_id,user_name,age,status&quot;</code><br>　　数据库导出完毕后，将json文件打包在一起，通过scp命令传输到服务器。然后服务器解压后，逐个导入到数据库。</p>
+<h5 id="导入json文件"><a href="#导入json文件" class="headerlink" title="导入json文件"></a>导入json文件</h5><p>使用mongoimport命令，可以将json/csv文件中的内容导入到指定数据库指定collection中。命令格式如下：<br>　　<code>mongoimport -d dbname -c collectionname --file filename --headerline --type json/csv -f field</code><br>　　　　–headerline    如果导入的格式是csv，则可以使用第一行的标题作为导入的字段</p>
 
       
 
@@ -451,7 +495,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、准备服务器和相关工具"><span class="toc-number">1.</span> <span class="toc-text">一、准备服务器和相关工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、搭建个简单的架子"><span class="toc-number">2.</span> <span class="toc-text">二、搭建个简单的架子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-在本地准备个程序"><span class="toc-number">2.1.</span> <span class="toc-text">1.在本地准备个程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-在服务器安装node以及pm2"><span class="toc-number">2.2.</span> <span class="toc-text">2.在服务器安装node以及pm2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-开启端口并启动服务"><span class="toc-number">2.3.</span> <span class="toc-text">3.开启端口并启动服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搭建git服务"><span class="toc-number">3.</span> <span class="toc-text">搭建git服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装git"><span class="toc-number">3.1.</span> <span class="toc-text">1.安装git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2获取公钥"><span class="toc-number">3.2.</span> <span class="toc-text">2获取公钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-连接github仓库"><span class="toc-number">3.3.</span> <span class="toc-text">3.连接github仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-服务器配置文件不更新的命令"><span class="toc-number">3.4.</span> <span class="toc-text">4.服务器配置文件不更新的命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5使用-GitHub的-Webhooks-进行网站自动化部署"><span class="toc-number">3.5.</span> <span class="toc-text">5使用 GitHub的 Webhooks 进行网站自动化部署</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx反向代理"><span class="toc-number">4.</span> <span class="toc-text">nginx反向代理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#反向代理nginx"><span class="toc-number">4.1.</span> <span class="toc-text">反向代理nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装nginx"><span class="toc-number">4.2.</span> <span class="toc-text">安装nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#如果安装nginx的时候报错，可以尝试下面的方法："><span class="toc-number">4.2.1.</span> <span class="toc-text">如果安装nginx的时候报错，可以尝试下面的方法：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反向代理80端口到6000端口"><span class="toc-number">4.3.</span> <span class="toc-text">反向代理80端口到6000端口</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录"><span class="toc-number">5.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-pm2常用命令"><span class="toc-number">5.1.</span> <span class="toc-text">1.pm2常用命令</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、准备服务器和相关工具"><span class="toc-number">1.</span> <span class="toc-text">一、准备服务器和相关工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、搭建个简单的架子"><span class="toc-number">2.</span> <span class="toc-text">二、搭建个简单的架子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-在本地准备个程序"><span class="toc-number">2.1.</span> <span class="toc-text">1.在本地准备个程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-在服务器安装node以及pm2"><span class="toc-number">2.2.</span> <span class="toc-text">2.在服务器安装node以及pm2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-开启端口并启动服务"><span class="toc-number">2.3.</span> <span class="toc-text">3.开启端口并启动服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搭建git服务"><span class="toc-number">3.</span> <span class="toc-text">搭建git服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装git"><span class="toc-number">3.1.</span> <span class="toc-text">1.安装git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2获取公钥"><span class="toc-number">3.2.</span> <span class="toc-text">2获取公钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-连接github仓库"><span class="toc-number">3.3.</span> <span class="toc-text">3.连接github仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-服务器配置文件不更新的命令"><span class="toc-number">3.4.</span> <span class="toc-text">4.服务器配置文件不更新的命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5使用-GitHub的-Webhooks-进行网站自动化部署"><span class="toc-number">3.5.</span> <span class="toc-text">5使用 GitHub的 Webhooks 进行网站自动化部署</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx反向代理"><span class="toc-number">4.</span> <span class="toc-text">nginx反向代理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#反向代理nginx"><span class="toc-number">4.1.</span> <span class="toc-text">反向代理nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装nginx"><span class="toc-number">4.2.</span> <span class="toc-text">安装nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#如果安装nginx的时候报错，可以尝试下面的方法："><span class="toc-number">4.2.1.</span> <span class="toc-text">如果安装nginx的时候报错，可以尝试下面的方法：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反向代理80端口到6000端口"><span class="toc-number">4.3.</span> <span class="toc-text">反向代理80端口到6000端口</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MongoDB的使用"><span class="toc-number">5.</span> <span class="toc-text">MongoDB的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装"><span class="toc-number">5.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动MongoDB"><span class="toc-number">5.2.</span> <span class="toc-text">启动MongoDB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程连接mongodb数据库"><span class="toc-number">5.3.</span> <span class="toc-text">远程连接mongodb数据库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录"><span class="toc-number">6.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-pm2常用命令"><span class="toc-number">6.1.</span> <span class="toc-text">1.pm2常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-MongoDB导出-导入数据文件"><span class="toc-number">6.2.</span> <span class="toc-text">2.MongoDB导出/导入数据文件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#导出数据库文件到json文件中"><span class="toc-number">6.2.1.</span> <span class="toc-text">导出数据库文件到json文件中</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#导入json文件"><span class="toc-number">6.2.2.</span> <span class="toc-text">导入json文件</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -576,23 +620,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -600,7 +632,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -613,6 +653,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -644,11 +688,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -660,11 +704,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">

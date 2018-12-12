@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20181207/O0nhH7MaTEA9.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20181207/gCidh7JYPuKL.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/1234%2000_00_00-00_00_27~3.gif">
-<meta property="og:updated_time" content="2018-12-07T09:08:03.107Z">
+<meta property="og:updated_time" content="2018-12-07T09:29:45.075Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECharts设置X轴axisLabel自适应">
 <meta name="twitter:description" content="江汉曾为客，相逢每醉还。浮云一别后，流水十年间。  制作echarts的柱状图时我们发现axisLabel的长度过长时文字会堆叠在一起:">
@@ -208,9 +208,10 @@ var _hmt = _hmt || [];
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20181207/ox1ri6fHDbzs.png?imageslim" alt="mark"></p>
 <p>有些网站选择倾斜axisLabel来显示,或者让axisLabel完全竖直,效果都很差,我这里采用计算x轴刻度宽度的方法来进行换行处理:</p>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20181207/O0nhH7MaTEA9.png?imageslim" alt="mark"></p>
-<p>首先计算每个空格大致可以显示多少个字:</p>
+<p>echarts将柱状图分为grid,X轴Label和Y轴Label三个部分;</p>
+<p>我们首先计算每个X轴Label大致可以显示多少个字:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xAxisData = [<span class="string">"something..."</span>,<span class="string">"something..."</span>,<span class="string">"something..."</span>,<span class="string">"something..."</span>]</div><div class="line"><span class="keyword">var</span> gridWidth = <span class="number">681</span>; <span class="comment">//可以根据canvas的宽度和grid的right,left,width进行计算</span></div><div class="line"><span class="keyword">var</span> fontsize = <span class="number">14</span>; <span class="comment">//字体大小</span></div><div class="line"><span class="keyword">var</span> wordNum = <span class="built_in">parseInt</span>((gridWidth / xAxisData.length) / fontsize);</div></pre></td></tr></table></figure>
-<p>然后在axisLabel的formatter中设置换行:</p>
+<p>然后在xAxis.axisLabel的formatter中设置换行:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">xAxis: &#123;</div><div class="line">    <span class="attr">data</span>: xAxisData,</div><div class="line">    <span class="attr">type</span>: <span class="string">'category'</span>,</div><div class="line">    <span class="attr">axisLabel</span>: &#123;</div><div class="line">        <span class="attr">interval</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">formatter</span>: <span class="function"><span class="keyword">function</span> (<span class="params">value, index</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> strs = value.split(<span class="string">''</span>);</div><div class="line">            <span class="keyword">var</span> str = <span class="string">''</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, s; s = strs[i++];) &#123;</div><div class="line">                str += s;</div><div class="line">                <span class="keyword">if</span> (!(i % wordNum)) str += <span class="string">'\n'</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> str</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这时我们发现如果grid的bottom默认为60,意味着x轴到canvas底部只能放下3行文字,所以我们需要调整grid的高度来放下更多的行:</p>
 <p>计算最多有多少行,并根据最大行数设置chart容器高度:</p>
@@ -492,6 +493,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
@@ -500,15 +505,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,19 +513,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -540,11 +529,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -564,15 +565,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -581,6 +574,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">

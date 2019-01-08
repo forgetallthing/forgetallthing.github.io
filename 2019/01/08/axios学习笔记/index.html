@@ -17,7 +17,7 @@
 <meta property="og:description" content="最近在看《雪中悍刀行》,里面对于奇珍异兽的描写不多,鸟类更是只有北凉王徐凤年的海东青了,轻抛一点入云去，喝杀三声掠地来,用这种人人道俊哉的鸟来做axios的封面图,应该是十分合适吧。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/giovanni-calia-796-unsplash.jpg">
-<meta property="og:updated_time" content="2019-01-08T07:34:50.935Z">
+<meta property="og:updated_time" content="2019-01-08T07:38:05.097Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="axios学习笔记">
 <meta name="twitter:description" content="最近在看《雪中悍刀行》,里面对于奇珍异兽的描写不多,鸟类更是只有北凉王徐凤年的海东青了,轻抛一点入云去，喝杀三声掠地来,用这种人人道俊哉的鸟来做axios的封面图,应该是十分合适吧。">
@@ -209,7 +209,30 @@ var _hmt = _hmt || [];
 <p>來源：<a href="https://www.jianshu.com/p/be226d22e0da" target="_blank" rel="external">简书 zzXiaoFeng</a></p>
 </blockquote>
 <p>从MDN资料:<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="external">HTTP访问控制（CORS）</a> 中我们找到了规则:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">当请求满足下述任一条件时，即应首先发送预检请求：</div><div class="line">1.使用了下面任一 HTTP 方法：</div><div class="line">PUT</div><div class="line">DELETE</div><div class="line">CONNECT</div><div class="line">OPTIONS</div><div class="line">TRACE</div><div class="line">PATCH</div><div class="line">2.人为设置了对 CORS 安全的首部字段集合之外的其他首部字段。该集合为：</div><div class="line">Accept</div><div class="line">Accept-Language</div><div class="line">Content-Language</div><div class="line">Content-Type (but note the additional requirements below)</div><div class="line">DPR</div><div class="line">Downlink</div><div class="line">Save-Data</div><div class="line">Viewport-Width</div><div class="line">Width</div><div class="line">3.Content-Type 的值不属于下列之一:</div><div class="line">application/x-www-form-urlencoded</div><div class="line">multipart/form-data</div><div class="line">text/plain</div></pre></td></tr></table></figure>
+<blockquote>
+<p>当请求满足下述任一条件时，即应首先发送预检请求：</p>
+<p>1.使用了下面任一 HTTP 方法：</p>
+<p>PUT</p>
+<p>DELETE</p>
+<p>CONNECT</p>
+<p>OPTIONS</p>
+<p>TRACE</p>
+<p>PATCH</p>
+<p>2.人为设置了对 CORS 安全的首部字段集合之外的其他首部字段。该集合为：</p>
+<p>Accept</p>
+<p>Accept-Language</p>
+<p>Content-Language</p>
+<p>Content-Type (but note the additional requirements below)</p>
+<p>DPR</p>
+<p>Downlink</p>
+<p>Save-Data</p>
+<p>Viewport-Width</p>
+<p>Width</p>
+<p>3.Content-Type 的值不属于下列之一:</p>
+<p>application/x-www-form-urlencoded</p>
+<p>multipart/form-data</p>
+<p>text/plain</p>
+</blockquote>
 <p>而axios的Content-Type为<code>application/json</code> ,所以发送了预检请求!</p>
 <h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>所以,我们可以将传输的数据转为字符串,这样axios的Content-Type就会自动转变为<code>application/x-www-form-urlencoded</code> ,就不会触预检请求啦,这样可以减少响应时间和服务器压力!</p>
 <p>这里我们可以使用拼接字符串的方式,或者<code>JSON.stringify</code> 来处理,这两种拼接和服务器端识别都相当麻烦,我们推荐采用<code>qs</code> 模块来将json数据序列化成URL形式,这种在服务器端大多数语言可以直接解析出来,非常方便:</p>
@@ -518,15 +541,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -534,7 +553,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -542,7 +561,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -551,14 +582,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">mongod</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -594,11 +617,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -610,11 +633,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">something</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">something</a>
               </li>
             
             <div class="clearfix"></div>

@@ -8,15 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>axios学习笔记 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="最近在看《雪中悍刀行》,里面对于奇珍异兽的描写不多,鸟类更是只有北凉王徐凤年的海东青了,轻抛一点入云去，喝杀三声掠地来,用这种人人道俊哉的鸟来做axios的封面图,应该是十分合适吧。">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
 <meta property="og:title" content="axios学习笔记">
 <meta property="og:url" content="http://yoursite.com/2019/01/08/axios学习笔记/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
+<meta property="og:description" content="最近在看《雪中悍刀行》,里面对于奇珍异兽的描写不多,鸟类更是只有北凉王徐凤年的海东青了,轻抛一点入云去，喝杀三声掠地来,用这种人人道俊哉的鸟来做axios的封面图,应该是十分合适吧。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/giovanni-calia-796-unsplash.jpg">
-<meta property="og:updated_time" content="2019-01-08T04:00:54.369Z">
+<meta property="og:updated_time" content="2019-01-08T07:34:50.935Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="axios学习笔记">
+<meta name="twitter:description" content="最近在看《雪中悍刀行》,里面对于奇珍异兽的描写不多,鸟类更是只有北凉王徐凤年的海东青了,轻抛一点入云去，喝杀三声掠地来,用这种人人道俊哉的鸟来做axios的封面图,应该是十分合适吧。">
 <meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/giovanni-calia-796-unsplash.jpg">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
@@ -192,7 +196,57 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <p><img src="http://qiniuyun.ipromiseyourlife.com/giovanni-calia-796-unsplash.jpg" alt=""></p>
+<blockquote>
+<p>最近在看《雪中悍刀行》,里面对于奇珍异兽的描写不多,鸟类更是只有北凉王徐凤年的海东青了,<strong><em>轻抛一点入云去，喝杀三声掠地来</em></strong>,用这种人人道俊哉的鸟来做axios的封面图,应该是十分合适吧。</p>
+</blockquote>
 <a id="more"></a>
+<h3 id="一-解决跨域时axios发送两次请求的问题-OPTIONS-POST"><a href="#一-解决跨域时axios发送两次请求的问题-OPTIONS-POST" class="headerlink" title="一 解决跨域时axios发送两次请求的问题(OPTIONS+POST)"></a>一 解决跨域时axios发送两次请求的问题(OPTIONS+POST)</h3><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>最近跨域调试vue程序时,发现axios一定几率会发送两次请求，第一次是<code>Request Method</code> 为 <code>options</code> 的请求,成功应答后再发送正确的请求,而且成功的标志并不是200,而是<code>Access-Control-Allow-Headers</code>中必须设置<code>content-type</code> 才行,所以服务器端设置跨域为以下形式才可以正确接受请求:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">res.header(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</div><div class="line">res.header(<span class="string">"Access-Control-Allow-Headers"</span>, <span class="string">"X-Requested-With,content-type"</span>);</div><div class="line">res.header(<span class="string">"Access-Control-Allow-Methods"</span>, <span class="string">"PUT,POST,GET,DELETE,OPTIONS"</span>);</div></pre></td></tr></table></figure>
+<p>在网上找到如下资料对此做出了解释:</p>
+<blockquote>
+<p>跨域资源共享标准新增了一组 HTTP 首部字段，允许服务器声明哪些源站有权限访问哪些资源。另外，规范要求，对那些可能对服务器数据产生副作用的 HTTP 请求方法（特别是 GET 以外的 HTTP 请求，或者搭配某些 MIME 类型的 POST 请求），浏览器必须首先使用 OPTIONS 方法发起一个预检请求（preflight request），从而获知服务端是否允许该跨域请求。服务器确认允许之后，才发起实际的 HTTP 请求。在预检请求的返回中，服务器端也可以通知客户端，是否需要携带身份凭证（包括 Cookies 和 HTTP 认证相关数据）。</p>
+<p>也就是说，它会先使用options去测试，你这个接口是否能够正常通讯，如果不能就不会发送真正的请求过来，如果测试通讯正常，则开始正常请求。</p>
+<p>來源：<a href="https://www.jianshu.com/p/be226d22e0da" target="_blank" rel="external">简书 zzXiaoFeng</a></p>
+</blockquote>
+<p>从MDN资料:<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="external">HTTP访问控制（CORS）</a> 中我们找到了规则:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">当请求满足下述任一条件时，即应首先发送预检请求：</div><div class="line">1.使用了下面任一 HTTP 方法：</div><div class="line">PUT</div><div class="line">DELETE</div><div class="line">CONNECT</div><div class="line">OPTIONS</div><div class="line">TRACE</div><div class="line">PATCH</div><div class="line">2.人为设置了对 CORS 安全的首部字段集合之外的其他首部字段。该集合为：</div><div class="line">Accept</div><div class="line">Accept-Language</div><div class="line">Content-Language</div><div class="line">Content-Type (but note the additional requirements below)</div><div class="line">DPR</div><div class="line">Downlink</div><div class="line">Save-Data</div><div class="line">Viewport-Width</div><div class="line">Width</div><div class="line">3.Content-Type 的值不属于下列之一:</div><div class="line">application/x-www-form-urlencoded</div><div class="line">multipart/form-data</div><div class="line">text/plain</div></pre></td></tr></table></figure>
+<p>而axios的Content-Type为<code>application/json</code> ,所以发送了预检请求!</p>
+<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>所以,我们可以将传输的数据转为字符串,这样axios的Content-Type就会自动转变为<code>application/x-www-form-urlencoded</code> ,就不会触预检请求啦,这样可以减少响应时间和服务器压力!</p>
+<p>这里我们可以使用拼接字符串的方式,或者<code>JSON.stringify</code> 来处理,这两种拼接和服务器端识别都相当麻烦,我们推荐采用<code>qs</code> 模块来将json数据序列化成URL形式,这种在服务器端大多数语言可以直接解析出来,非常方便:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">"axios"</span>;</div><div class="line"><span class="keyword">import</span> qs <span class="keyword">from</span> <span class="string">"qs"</span>;</div><div class="line">axios.post(<span class="string">'//localhost:3000/user/userLogin'</span>, qs.stringify(&#123; <span class="attr">p</span>: <span class="number">1</span> &#125;))</div><div class="line">            .then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</div><div class="line">                <span class="built_in">console</span>.log(response);</div><div class="line">            &#125;)</div><div class="line">            .catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</div><div class="line">                <span class="built_in">console</span>.log(error);</div><div class="line">            &#125;);</div></pre></td></tr></table></figure>
+<h4 id="qs简单介绍"><a href="#qs简单介绍" class="headerlink" title="qs简单介绍"></a>qs简单介绍</h4><p>qs是个小巧的格式转化模块:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Qs = <span class="built_in">require</span>(<span class="string">'qs'</span>);</div><div class="line"><span class="keyword">let</span> obj= &#123;</div><div class="line">     <span class="attr">a</span>: <span class="string">"1"</span>,</div><div class="line">     <span class="attr">b</span>: <span class="string">"2"</span>,</div><div class="line">   &#125;;</div><div class="line"><span class="keyword">let</span> res = Qs.stringify(obj);</div><div class="line"><span class="built_in">console</span>.log(Qs.stringify(obj));<span class="comment">//a=1&amp;b=2</span></div><div class="line"><span class="built_in">console</span>.log(Qs.parse(res));<span class="comment">//&#123;a: "1",b: "2"&#125;</span></div></pre></td></tr></table></figure>
+<p>qs还有很多属性设置,请自行查看文档~</p>
+<h3 id="附录1-post时content-type的几种取值"><a href="#附录1-post时content-type的几种取值" class="headerlink" title="附录1:post时content-type的几种取值"></a>附录1:<a href="https://zccst.iteye.com/blog/2180127" target="_blank" rel="external">post时content-type的几种取值</a></h3><p>四种常见的 POST 提交数据方式 </p>
+<p>我们知道，HTTP 协议是以 ASCII 码传输，建立在 TCP/IP 协议之上的应用层规范。规范把 HTTP 请求分为三个部分：状态行、请求头、消息主体。类似于下面这样： </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">method</span>&gt;</span> <span class="tag">&lt;<span class="name">request-url</span>&gt;</span> <span class="tag">&lt;<span class="name">version</span>&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">headers</span>&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">entity-body</span>&gt;</span><span class="tag">&lt;/<span class="name">entity-body</span>&gt;</span><span class="tag">&lt;/<span class="name">headers</span>&gt;</span><span class="tag">&lt;/<span class="name">version</span>&gt;</span><span class="tag">&lt;/<span class="name">request-url</span>&gt;</span><span class="tag">&lt;/<span class="name">method</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>协议规定 POST 提交的数据必须放在消息主体（entity-body）中，但协议并没有规定数据必须使用什么编码方式。实际上，开发者完全可以自己决定消息主体的格式，只要最后发送的 HTTP 请求满足上面的格式就可以。 </p>
+<p>但是，数据发送出去，还要服务端解析成功才有意义。一般服务端语言如 php、python 等，以及它们的 framework，都内置了自动解析常见数据格式的功能。服务端通常是根据请求头（headers）中的 Content-Type 字段来获知请求中的消息主体是用何种方式编码，再对主体进行解析。所以说到 POST 提交数据方案，包含了 Content-Type 和消息主体编码方式两部分。下面就正式开始介绍它们。 </p>
+<p><strong>application/x-www-form-urlencoded</strong> </p>
+<p>这应该是最常见的 POST 提交数据的方式了。浏览器的原生 form 表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。请求类似于下面这样（无关的请求头在本文中都省略掉了）： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">POST http:<span class="comment">//www.example.com HTTP/1.1 </span></div><div class="line">Content-Type: application/x-www-form-urlencoded;charset=utf<span class="number">-8</span> </div><div class="line">title=test&amp;sub%<span class="number">5</span>B%<span class="number">5</span>D=<span class="number">1</span>&amp;sub%<span class="number">5</span>B%<span class="number">5</span>D=<span class="number">2</span>&amp;sub%<span class="number">5</span>B%<span class="number">5</span>D=<span class="number">3</span></div></pre></td></tr></table></figure>
+<p>首先，Content-Type 被指定为 application/x-www-form-urlencoded；其次，提交的数据按照 key1=val1&amp;key2=val2 的方式进行编码，key 和 val 都进行了 URL 转码。大部分服务端语言都对这种方式有很好的支持。例如 PHP 中，$_POST[‘title’] 可以获取到 title 的值，$_POST[‘sub’] 可以得到 sub 数组。 </p>
+<p>很多时候，我们用 Ajax 提交数据时，也是使用这种方式。例如 JQuery 和 QWrap 的 Ajax，Content-Type 默认值都是「application/x-www-form-urlencoded;charset=utf-8」。 </p>
+<p><strong>multipart/form-data</strong> </p>
+<p>这又是一个常见的 POST 数据提交的方式。我们使用表单上传文件时，必须让 form 的 enctyped 等于这个值。直接来看一个请求示例： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">POST http:<span class="comment">//www.example.com HTTP/1.1 </span></div><div class="line">Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryrGKCBY7qhFd3TrwA </div><div class="line">------WebKitFormBoundaryrGKCBY7qhFd3TrwA </div><div class="line">Content-Disposition: form-data; name=<span class="string">"text"</span> </div><div class="line">title </div><div class="line">------WebKitFormBoundaryrGKCBY7qhFd3TrwA </div><div class="line">Content-Disposition: form-data; name=<span class="string">"file"</span>; filename=<span class="string">"chrome.png"</span> </div><div class="line">Content-Type: image/png </div><div class="line">PNG ... content <span class="keyword">of</span> chrome.png ... </div><div class="line">------WebKitFormBoundaryrGKCBY7qhFd3TrwA--</div></pre></td></tr></table></figure>
+<p>这个例子稍微复杂点。首先生成了一个 boundary 用于分割不同的字段，为了避免与正文内容重复，boundary 很长很复杂。然后 Content-Type 里指明了数据是以 mutipart/form-data 来编码，本次请求的 boundary 是什么内容。消息主体里按照字段个数又分为多个结构类似的部分，每部分都是以 –boundary 开始，紧接着内容描述信息，然后是回车，最后是字段具体内容（文本或二进制）。如果传输的是文件，还要包含文件名和文件类型信息。消息主体最后以 –boundary– 标示结束。关于 mutipart/form-data 的详细定义，请前往 rfc1867 查看。 </p>
+<p>这种方式一般用来上传文件，各大服务端语言对它也有着良好的支持。 </p>
+<p>上面提到的这两种 POST 数据的方式，都是浏览器原生支持的，而且现阶段原生 form 表单也只支持这两种方式。但是随着越来越多的 Web 站点，尤其是 WebApp，全部使用 Ajax 进行数据交互之后，我们完全可以定义新的数据提交方式，给开发带来更多便利。 </p>
+<p><strong>application/json</strong> </p>
+<p>application/json 这个 Content-Type 作为响应头大家肯定不陌生。实际上，现在越来越多的人把它作为请求头，用来告诉服务端消息主体是序列化后的 JSON 字符串。由于 JSON 规范的流行，除了低版本 IE 之外的各大浏览器都原生支持 JSON.stringify，服务端语言也都有处理 JSON 的函数，使用 JSON 不会遇上什么麻烦。 </p>
+<p>JSON 格式支持比键值对复杂得多的结构化数据，这一点也很有用。记得我几年前做一个项目时，需要提交的数据层次非常深，我就是把数据 JSON 序列化之后来提交的。不过当时我是把 JSON 字符串作为 val，仍然放在键值对里，以 x-www-form-urlencoded 方式提交。 </p>
+<p>Google 的 AngularJS 中的 Ajax 功能，默认就是提交 JSON 字符串。例如下面这段代码： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> data = &#123;<span class="string">'title'</span>:<span class="string">'test'</span>, <span class="string">'sub'</span> : [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]&#125;; </div><div class="line">$http.post(url, data).success(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123; </div><div class="line">    ... </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>最终发送的请求是： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">POST http:<span class="comment">//www.example.com HTTP/1.1 </span></div><div class="line">Content-Type: application/json;charset=utf<span class="number">-8</span> </div><div class="line">&#123;<span class="string">"title"</span>:<span class="string">"test"</span>,<span class="string">"sub"</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]&#125;</div></pre></td></tr></table></figure>
+<p>这种方案，可以方便的提交复杂的结构化数据，特别适合 RESTful 的接口。各大抓包工具如 Chrome 自带的开发者工具、Firebug、Fiddler，都会以树形结构展示 JSON 数据，非常友好。但也有些服务端语言还没有支持这种方式，例如 php 就无法通过 $_POST 对象从上面的请求中获得内容。这时候，需要自己动手处理下：在请求头中 Content-Type 为 application/json 时，从 php://input 里获得原始输入流，再 json_decode 成对象。一些 php 框架已经开始这么做了。 </p>
+<p>当然 AngularJS 也可以配置为使用 x-www-form-urlencoded 方式提交数据。如有需要，可以参考这篇文章。 </p>
+<p><strong>text/xml</strong> </p>
+<p>我的博客之前提到过 XML-RPC（XML Remote Procedure Call）。它是一种使用 HTTP 作为传输协议，XML 作为编码方式的远程调用规范。典型的 XML-RPC 请求是这样的： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">POST http:<span class="comment">//www.example.com HTTP/1.1 </span></div><div class="line">Content-Type: text/xml </div><div class="line">&lt;!--?xml version=<span class="string">"1.0"</span>?--&gt; </div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">methodcall</span>&gt;</span> </span></div><div class="line">    <span class="tag">&lt;<span class="name">methodname</span>&gt;</span>examples.getStateName<span class="tag">&lt;/<span class="name">methodname</span>&gt;</span> </div><div class="line">    <span class="tag">&lt;<span class="name">params</span>&gt;</span> </div><div class="line">       <span class="tag">&lt;<span class="name">value</span>&gt;</span><span class="tag">&lt;<span class="name">i4</span>&gt;</span>41<span class="tag">&lt;/<span class="name">i4</span>&gt;</span><span class="tag">&lt;/<span class="name">value</span>&gt;</span> </div><div class="line">    <span class="tag">&lt;/<span class="name">params</span>&gt;</span> </div><div class="line"><span class="tag">&lt;/<span class="name">methodcall</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>XML-RPC 协议简单、功能够用，各种语言的实现都有。它的使用也很广泛，如 WordPress 的 XML-RPC Api，搜索引擎的 ping 服务等等。JavaScript 中，也有现成的库支持以这种方式进行数据交互，能很好的支持已有的 XML-RPC 服务。不过，我个人觉得 XML 结构还是过于臃肿，一般场景用 JSON 会更灵活方便。 </p>
+
       
 
       
@@ -231,6 +285,17 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -324,7 +389,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-解决跨域时axios发送两次请求的问题-OPTIONS-POST"><span class="toc-number">1.</span> <span class="toc-text">一 解决跨域时axios发送两次请求的问题(OPTIONS+POST)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#问题描述"><span class="toc-number">1.1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决办法"><span class="toc-number">1.2.</span> <span class="toc-text">解决办法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#qs简单介绍"><span class="toc-number">1.3.</span> <span class="toc-text">qs简单介绍</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录1-post时content-type的几种取值"><span class="toc-number">2.</span> <span class="toc-text">附录1:post时content-type的几种取值</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -449,15 +514,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">echarts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -465,19 +522,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -485,7 +538,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -494,6 +551,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -537,19 +602,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">something</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>axios学习笔记 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近在看《雪中悍刀行》,里面对于奇珍异兽的描写不多,鸟类更是只有北凉王徐凤年的海东青了,轻抛一点入云去，喝杀三声掠地来,用这种人人道俊哉的鸟来做axios的封面图,应该是十分合适吧。">
+  <meta name="description" content="最近在看《雪中悍刀行》,里面对于奇珍异兽的描写不多,鸟类更是只有北凉王徐凤年的海东青了,轻抛一点入云去，喝杀三声掠地来,用这种人人道俊哉的鸟来做axios的封面图,应该是十分合适吧。  一 解决跨域时axios发送两次请求的问题(OPTIONS+POST)">
 <meta name="keywords" content="js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="axios学习笔记">
 <meta property="og:url" content="http://yoursite.com/2019/01/08/axios学习笔记/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="最近在看《雪中悍刀行》,里面对于奇珍异兽的描写不多,鸟类更是只有北凉王徐凤年的海东青了,轻抛一点入云去，喝杀三声掠地来,用这种人人道俊哉的鸟来做axios的封面图,应该是十分合适吧。">
+<meta property="og:description" content="最近在看《雪中悍刀行》,里面对于奇珍异兽的描写不多,鸟类更是只有北凉王徐凤年的海东青了,轻抛一点入云去，喝杀三声掠地来,用这种人人道俊哉的鸟来做axios的封面图,应该是十分合适吧。  一 解决跨域时axios发送两次请求的问题(OPTIONS+POST)">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/giovanni-calia-796-unsplash.jpg">
-<meta property="og:updated_time" content="2019-01-08T07:39:13.249Z">
+<meta property="og:updated_time" content="2019-01-08T07:41:17.852Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="axios学习笔记">
-<meta name="twitter:description" content="最近在看《雪中悍刀行》,里面对于奇珍异兽的描写不多,鸟类更是只有北凉王徐凤年的海东青了,轻抛一点入云去，喝杀三声掠地来,用这种人人道俊哉的鸟来做axios的封面图,应该是十分合适吧。">
+<meta name="twitter:description" content="最近在看《雪中悍刀行》,里面对于奇珍异兽的描写不多,鸟类更是只有北凉王徐凤年的海东青了,轻抛一点入云去，喝杀三声掠地来,用这种人人道俊哉的鸟来做axios的封面图,应该是十分合适吧。  一 解决跨域时axios发送两次请求的问题(OPTIONS+POST)">
 <meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/giovanni-calia-796-unsplash.jpg">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
@@ -199,8 +199,8 @@ var _hmt = _hmt || [];
 <blockquote>
 <p>最近在看《雪中悍刀行》,里面对于奇珍异兽的描写不多,鸟类更是只有北凉王徐凤年的海东青了,<strong><em>轻抛一点入云去，喝杀三声掠地来</em></strong>,用这种人人道俊哉的鸟来做axios的封面图,应该是十分合适吧。</p>
 </blockquote>
-<a id="more"></a>
-<h3 id="一-解决跨域时axios发送两次请求的问题-OPTIONS-POST"><a href="#一-解决跨域时axios发送两次请求的问题-OPTIONS-POST" class="headerlink" title="一 解决跨域时axios发送两次请求的问题(OPTIONS+POST)"></a>一 解决跨域时axios发送两次请求的问题(OPTIONS+POST)</h3><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>最近跨域调试vue程序时,发现axios一定几率会发送两次请求，第一次是<code>Request Method</code> 为 <code>options</code> 的请求,成功应答后再发送正确的请求,而且成功的标志并不是200,而是<code>Access-Control-Allow-Headers</code>中必须设置<code>content-type</code> 才行,所以服务器端设置跨域为以下形式才可以正确接受请求:</p>
+<h3 id="一-解决跨域时axios发送两次请求的问题-OPTIONS-POST"><a href="#一-解决跨域时axios发送两次请求的问题-OPTIONS-POST" class="headerlink" title="一 解决跨域时axios发送两次请求的问题(OPTIONS+POST)"></a>一 解决跨域时axios发送两次请求的问题(OPTIONS+POST)</h3><a id="more"></a>
+<h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>最近跨域调试vue程序时,发现axios一定几率会发送两次请求，第一次是<code>Request Method</code> 为 <code>options</code> 的请求,成功应答后再发送正确的请求,而且成功的标志并不是200,而是<code>Access-Control-Allow-Headers</code>中必须设置<code>content-type</code> 才行,所以服务器端设置跨域为以下形式才可以正确接受请求:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">res.header(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</div><div class="line">res.header(<span class="string">"Access-Control-Allow-Headers"</span>, <span class="string">"X-Requested-With,content-type"</span>);</div><div class="line">res.header(<span class="string">"Access-Control-Allow-Methods"</span>, <span class="string">"PUT,POST,GET,DELETE,OPTIONS"</span>);</div></pre></td></tr></table></figure>
 <p>在网上找到如下资料对此做出了解释:</p>
 <blockquote>
@@ -561,6 +561,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
@@ -577,11 +585,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -590,10 +594,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -617,11 +617,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">

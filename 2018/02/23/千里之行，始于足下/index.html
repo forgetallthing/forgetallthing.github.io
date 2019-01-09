@@ -17,7 +17,7 @@
 <meta property="og:description" content="fight or flight？大扎好，我系轱天乐，我四渣渣辉，潜端面世，介四里没有挽过的船新版本，挤需体验三番钟，里造会干我一样，爱象节款面食，系兄弟里就来砍我，潜端面世了丐一蛤！   朴灵的 fks 镇楼 马云云的面试题整理 JS篇函数函数定义的三种方式和四种调用方式： 深入理解javascript函数系列第一篇——函数概述  函数参数相关： 深入理解javascript函数系列第二篇——函">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=334e9beb3b12b31bd361c57be7715d1f/0df431adcbef76090bf59e332cdda3cc7dd99e9b.jpg">
-<meta property="og:updated_time" content="2018-11-29T03:12:43.739Z">
+<meta property="og:updated_time" content="2019-01-09T07:49:05.424Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="千里之行，始于足下">
 <meta name="twitter:description" content="fight or flight？大扎好，我系轱天乐，我四渣渣辉，潜端面世，介四里没有挽过的船新版本，挤需体验三番钟，里造会干我一样，爱象节款面食，系兄弟里就来砍我，潜端面世了丐一蛤！   朴灵的 fks 镇楼 马云云的面试题整理 JS篇函数函数定义的三种方式和四种调用方式： 深入理解javascript函数系列第一篇——函数概述  函数参数相关： 深入理解javascript函数系列第二篇——函">
@@ -248,7 +248,31 @@ var _hmt = _hmt || [];
 <p>jq操作dom需要时刻注意重绘和回流问题，虽然可以处理但是比较麻烦,不如现代框架:</p>
 <p>如React 、Vue 、Angular框架，都是属于MV*框架的范畴，其设计特点，主要是以数据为核心。可以说操作DOM的事儿，就留给框架去做了。这比传统jQuery开发效率高，代码可维护性高，可扩展性强、性能好。</p>
 <p>使用现代框架,还可以使用脚手架快速搭建项目以及使用ES6、ES7语法进行开发，体验良好。</p>
-<h2 id="html-css篇"><a href="#html-css篇" class="headerlink" title="html+css篇"></a>html+css篇</h2><h3 id="重绘和回流"><a href="#重绘和回流" class="headerlink" title="重绘和回流"></a>重绘和回流</h3><p><a href="http://www.cnblogs.com/xiaohuochai/p/4750460.html" target="_blank" rel="external">浏览器的重绘、回流及网页优化</a></p>
+<h2 id="html-css篇"><a href="#html-css篇" class="headerlink" title="html+css篇"></a>html+css篇</h2><h3 id="重绘和回流"><a href="#重绘和回流" class="headerlink" title="重绘和回流"></a>重绘和回流</h3><h2 id="http篇"><a href="#http篇" class="headerlink" title="http篇"></a>http篇</h2><h3 id="GET和POST两种基本请求方法的区别"><a href="#GET和POST两种基本请求方法的区别" class="headerlink" title="GET和POST两种基本请求方法的区别"></a><a href="https://www.cnblogs.com/logsharing/p/8448446.html" target="_blank" rel="external">GET和POST两种基本请求方法的区别</a></h3><blockquote>
+<ul>
+<li>GET在浏览器回退时是无害的(缓存)，而POST会再次提交请求。</li>
+<li>GET产生的URL地址可以被Bookmark(书签)，而POST不可以。</li>
+<li>GET请求会被浏览器主动cache，而POST不会，除非手动设置。</li>
+<li>GET请求只能进行url编码，而POST支持多种编码方式。</li>
+<li>GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。</li>
+<li>GET请求在URL中传送的参数是有长度限制的，而POST么有。</li>
+<li>对参数的数据类型，GET只接受ASCII字符，而POST没有限制。</li>
+<li>GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。</li>
+<li>GET产生一个TCP数据包；POST产生两个TCP数据包。</li>
+</ul>
+</blockquote>
+<p>   对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。</p>
+<p>也就是说，GET只需要汽车跑一趟就把货送到了，而POST得跑两趟，第一趟，先去和服务器打个招呼“嗨，我等下要送一批货来，你们打开门迎接我”，然后再回头把货送过去。</p>
+<p>因为POST需要两步，时间上消耗的要多一点，看起来GET比POST更有效。因此Yahoo团队有推荐用GET替换POST来优化网站性能。但这是一个坑！跳入需谨慎。为什么？</p>
+<ol>
+<li>GET与POST都有自己的语义，不能随便混用。</li>
+<li>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证数据包完整性上，有非常大的优点。</li>
+<li>并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次</li>
+</ol>
+<ul>
+<li>GET参数通过URL传递，POST放在Request body中。</li>
+</ul>
+<p><a href="http://www.cnblogs.com/xiaohuochai/p/4750460.html" target="_blank" rel="external">浏览器的重绘、回流及网页优化</a></p>
 <h2 id="最后的嘱托"><a href="#最后的嘱托" class="headerlink" title="最后的嘱托"></a>最后的嘱托</h2><p>你已经发现，这是一篇博客文章汇总，主要用来记载2018年发现的一些有内容的博客，可能你看到这么多链接立马感叹路漫漫其修远，先收藏再说以后慢慢看，实际上以后再不会打开。对于这种情况，我的建议是尝试改变一下自己的心态，你有武侠梦么？或者修仙情结？小说里那些侠肝义胆、武功盖世，或者御剑临仙、名满天下的人物，是否你也曾少年天真，梦想自己也成为他们一样的高手？可是你看小说爽快的同时，你注意到了他们修炼的难度么？或者熟记晦涩难懂的武功秘籍，或者十年如一日的打怪炼体，对比你自己，现在上面的链接就是一篇篇武林秘籍或者修仙法则，摆在你面前你都没恒心去看么？那些主角成长路上被淘汰掉、踩在脚下的小喽啰们，不就是你这样的人扮演的么？还有何脸面感叹命运不公，世道浇漓？</p>
 <blockquote>
 <p>雄关漫道真如铁，而今迈步从头越。</p>
@@ -409,7 +433,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JS篇"><span class="toc-number">1.</span> <span class="toc-text">JS篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数"><span class="toc-number">1.1.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this指针"><span class="toc-number">1.2.</span> <span class="toc-text">this指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包"><span class="toc-number">1.3.</span> <span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定时器"><span class="toc-number">1.4.</span> <span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#delete操作符"><span class="toc-number">1.5.</span> <span class="toc-text">delete操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript严格模式"><span class="toc-number">1.6.</span> <span class="toc-text">javascript严格模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript中的数据类型"><span class="toc-number">1.7.</span> <span class="toc-text">javascript中的数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坑"><span class="toc-number">1.8.</span> <span class="toc-text">坑:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正则表达式"><span class="toc-number">1.9.</span> <span class="toc-text">正则表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么不用jQuery"><span class="toc-number">1.10.</span> <span class="toc-text">为什么不用jQuery</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html-css篇"><span class="toc-number">2.</span> <span class="toc-text">html+css篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重绘和回流"><span class="toc-number">2.1.</span> <span class="toc-text">重绘和回流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后的嘱托"><span class="toc-number">3.</span> <span class="toc-text">最后的嘱托</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JS篇"><span class="toc-number">1.</span> <span class="toc-text">JS篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数"><span class="toc-number">1.1.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this指针"><span class="toc-number">1.2.</span> <span class="toc-text">this指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包"><span class="toc-number">1.3.</span> <span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定时器"><span class="toc-number">1.4.</span> <span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#delete操作符"><span class="toc-number">1.5.</span> <span class="toc-text">delete操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript严格模式"><span class="toc-number">1.6.</span> <span class="toc-text">javascript严格模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript中的数据类型"><span class="toc-number">1.7.</span> <span class="toc-text">javascript中的数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坑"><span class="toc-number">1.8.</span> <span class="toc-text">坑:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正则表达式"><span class="toc-number">1.9.</span> <span class="toc-text">正则表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么不用jQuery"><span class="toc-number">1.10.</span> <span class="toc-text">为什么不用jQuery</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html-css篇"><span class="toc-number">2.</span> <span class="toc-text">html+css篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重绘和回流"><span class="toc-number">2.1.</span> <span class="toc-text">重绘和回流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http篇"><span class="toc-number">3.</span> <span class="toc-text">http篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GET和POST两种基本请求方法的区别"><span class="toc-number">3.1.</span> <span class="toc-text">GET和POST两种基本请求方法的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后的嘱托"><span class="toc-number">4.</span> <span class="toc-text">最后的嘱托</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -558,6 +582,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
@@ -574,11 +606,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,10 +615,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -614,11 +638,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">

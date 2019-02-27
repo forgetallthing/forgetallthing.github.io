@@ -17,7 +17,7 @@
 <meta property="og:description" content="黄河西来决昆仑，咆哮万里触龙门。 ————— by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20181205/UR7r9tM6kt4r.jpg?imageslim">
-<meta property="og:updated_time" content="2019-02-26T02:41:08.829Z">
+<meta property="og:updated_time" content="2019-02-27T06:37:02.736Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="建站练习全记录">
 <meta name="twitter:description" content="黄河西来决昆仑，咆哮万里触龙门。 ————— by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
@@ -356,7 +356,7 @@ var _hmt = _hmt || [];
 <p>3.在authentication选项卡中:mode选择basic(username/password),然后设置好database,用户名和密码;</p>
 <p>4.点击save&amp;connect即可连接;</p>
 <h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><h4 id="1-pm2常用命令"><a href="#1-pm2常用命令" class="headerlink" title="1.pm2常用命令"></a>1.pm2常用命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> pm2 start app.js              # 启动app.js应用程序</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 start app.js -i 4         # cluster mode 模式启动4个app.js的应用实例     # 4个应用程序会自动进行负载均衡</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 start app.js --name="api" # 启动应用程序并命名为 "api"</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 start app.js --watch      # 当文件变化时自动重启应用</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 start script.sh           # 启动 bash 脚本</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 list                      # 列表 PM2 启动的所有的应用程序</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 monit                     # 显示每个应用程序的CPU和内存占用情况</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 show [app-name]           # 显示应用程序的所有信息</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 logs                      # 显示所有应用程序的日志</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 logs [app-name]           # 显示指定应用程序的日志</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 flush</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 stop all                  # 停止所有的应用程序</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 stop 0                    # 停止 id为 0的指定应用程序</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 restart all               # 重启所有应用</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 reload all                # 重启 cluster mode下的所有应用</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 gracefulReload all        # Graceful reload all apps in cluster mode</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 delete all                # 关闭并删除所有应用</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 delete 0                  # 删除指定应用 id 0</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 scale api 10              # 把名字叫api的应用扩展到10个实例</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 reset [app-name]          # 重置重启数量</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 startup                   # 创建开机自启动命令</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 save                      # 保存当前应用列表</div><div class="line"><span class="meta"></span></div><div class="line">$ pm2 resurrect                 # 重新加载保存的应用列表</div></pre></td></tr></table></figure>
-<h4 id="2-pm2启动配置文件"><a href="#2-pm2启动配置文件" class="headerlink" title="2.pm2启动配置文件"></a>2.pm2启动配置文件</h4><p>有时候pm2的watch命令会失效,使用配置文件启动时避免失效的最佳方案:</p>
+<h4 id="2-pm2启动配置文件"><a href="#2-pm2启动配置文件" class="headerlink" title="2.pm2启动配置文件"></a>2.pm2启动配置文件</h4><p>有时候pm2的watch命令会失效,使用配置文件启动是避免失效的最佳方案:</p>
 <p>添加一个processes.json在你的项目根目录,我直接放在了home下,为了避免切换路径,我这里直接使用了绝对路径:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">      <span class="string">"apps"</span> : [&#123;</div><div class="line">        <span class="string">"name"</span>        : <span class="string">"update"</span>,</div><div class="line">        <span class="string">"script"</span>      : <span class="string">"/home/update/update.js"</span>,</div><div class="line">        <span class="string">"watch"</span>       : <span class="string">"/home/update/"</span>,</div><div class="line">        <span class="string">"log_date_format"</span>  : <span class="string">"YYYY-MM-DD HH:mm Z"</span>,</div><div class="line">      &#125;,&#123;</div><div class="line">        <span class="string">"name"</span>        : <span class="string">"web"</span>,</div><div class="line">        <span class="string">"script"</span>      : <span class="string">"/home/web/gn/bin/www"</span>,</div><div class="line">        <span class="string">"watch"</span>       : <span class="string">"/home/web/gn"</span>,</div><div class="line">        <span class="string">"log_date_format"</span>  : <span class="string">"YYYY-MM-DD HH:mm Z"</span>,</div><div class="line">      &#125;]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>启动pm2:</p>
@@ -640,11 +640,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -656,15 +660,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -672,11 +668,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -688,6 +680,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -696,11 +696,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -716,10 +720,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
@@ -732,11 +732,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">

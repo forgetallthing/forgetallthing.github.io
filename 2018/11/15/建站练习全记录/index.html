@@ -17,7 +17,7 @@
 <meta property="og:description" content="黄河西来决昆仑，咆哮万里触龙门。 ————— by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20181205/UR7r9tM6kt4r.jpg?imageslim">
-<meta property="og:updated_time" content="2019-02-27T06:37:02.736Z">
+<meta property="og:updated_time" content="2019-02-28T06:22:38.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="建站练习全记录">
 <meta name="twitter:description" content="黄河西来决昆仑，咆哮万里触龙门。 ————— by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
@@ -208,16 +208,16 @@ var _hmt = _hmt || [];
 <p>1 vCPU 2 GB (I/O优化)</p>
 <p>ecs.t5-lc1m2.small   1Mbps </p>
 <p>CentOS 7.4 64位</p>
-<p>实例开通后先设置密码(初始无密码),修改成功后重启服务器</p>
+<p>实例开通后先设置密码(初始无密码),修改成功后重启服务器;</p>
 <p>2.安装Xftp和Xshell</p>
 <p>新建连接:</p>
 <p>Xftp:输入主机(服务器的公网ip),协议(sftp),设置用户名和密码登录;</p>
-<h3 id="二、搭建个简单的架子"><a href="#二、搭建个简单的架子" class="headerlink" title="二、搭建个简单的架子"></a>二、搭建个简单的架子</h3><h4 id="1-在本地准备个程序"><a href="#1-在本地准备个程序" class="headerlink" title="1.在本地准备个程序"></a>1.在本地准备个程序</h4><p>本次使用nodejs搭建,并使用xftp将程序传输到云服务器</p>
-<h4 id="2-在服务器安装node以及pm2"><a href="#2-在服务器安装node以及pm2" class="headerlink" title="2.在服务器安装node以及pm2"></a>2.在服务器安装node以及pm2</h4><p>安装前的准备<br>1、 使用Xshell命令行登录到服务器上</p>
-<p>2、 查看服务器系统的位数信息</p>
+<h3 id="二、搭建个简单的架子"><a href="#二、搭建个简单的架子" class="headerlink" title="二、搭建个简单的架子"></a>二、搭建个简单的架子</h3><h4 id="1-在本地准备个程序"><a href="#1-在本地准备个程序" class="headerlink" title="1.在本地准备个程序"></a>1.在本地准备个程序</h4><p>本次使用nodejs搭建,并使用xftp将程序传输到云服务器;</p>
+<h4 id="2-在服务器安装node以及pm2"><a href="#2-在服务器安装node以及pm2" class="headerlink" title="2.在服务器安装node以及pm2"></a>2.在服务器安装node以及pm2</h4><p>安装前的准备<br>1、 使用Xshell命令行登录到服务器上;</p>
+<p>2、 查看服务器系统的位数信息:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">uname -a</div></pre></td></tr></table></figure>
-<p>通过输出的信息可确定云服务是32位的还是64位的</p>
-<p>3、切换环境到安装目录</p>
+<p>通过输出的信息可确定云服务是32位的还是64位的;</p>
+<p>3、切换环境到安装目录:</p>
 <p>这里我们在根目录下新建一个叫做app的文件夹，将Nodejs安装到这个文件夹里</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd / # 切换到根目录</div><div class="line">mkdir app &amp;&amp; cd app # 创建一个叫做app的文件夹并进入到文件夹内</div></pre></td></tr></table></figure>
 <p>Nodejs的下载与安装</p>
@@ -648,11 +648,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -660,15 +660,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -676,7 +672,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -685,6 +681,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -700,14 +704,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
@@ -720,6 +716,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
@@ -728,11 +728,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">

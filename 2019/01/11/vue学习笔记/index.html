@@ -17,7 +17,7 @@
 <meta property="og:description" content="本文将记录关于vue的一切">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190111/YJC2Jx0Vu645.jpg?imageslim">
-<meta property="og:updated_time" content="2019-02-15T01:09:32.974Z">
+<meta property="og:updated_time" content="2019-03-20T09:52:30.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue学习笔记">
 <meta name="twitter:description" content="本文将记录关于vue的一切">
@@ -203,7 +203,7 @@ var _hmt = _hmt || [];
 <h3 id="vue-动态加载图片src的解决办法"><a href="#vue-动态加载图片src的解决办法" class="headerlink" title="vue 动态加载图片src的解决办法"></a>vue 动态加载图片src的解决办法</h3><p>这次遇到js动态指定图片src,assets文件夹中的图片资源加载失败的情况,比如:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;li v-<span class="keyword">for</span>=<span class="string">"(item,index) in images"</span> :key=<span class="string">"index"</span>&gt;</div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">:src</span>=<span class="string">"item.src"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></div><div class="line"></div><div class="line"><span class="comment">//js部分</span></div><div class="line">data()&#123;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">	<span class="attr">images</span>:[&#123;<span class="attr">src</span>:<span class="string">'../assets/logo.png'</span>&#125;,&#123;<span class="string">'../assets/l.png'</span>&#125;]</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这是因为assets目录下的文件会被webpack处理解析为模块依赖,在引用的时候除了<code>&lt; img src=”./logo.png”&gt;</code>和<code>background:url(./logo.png)</code>引用;</p>
-<p>js中引用必须以模块引入才能生效:<code>require(&#39;../assets/logo.png&#39;)</code></p>
+<p>vue中引用必须以模块引入才能生效:<code>require(&#39;../assets/logo.png&#39;)</code></p>
 <p>如遇到很多图片的情况,网上的解决办法为配置json文件,统一引入:</p>
 <p>详见 : <a href="https://blog.csdn.net/mr_yanyan/article/details/78783091" target="_blank" rel="external">vue 动态加载图片src的解决办法</a></p>
 
@@ -474,7 +474,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -482,19 +482,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -502,7 +494,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -514,14 +518,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">bat</a>
               </li>
              
@@ -530,11 +526,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -546,15 +546,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -562,7 +558,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,6 +571,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">something</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
             
             <div class="clearfix"></div>

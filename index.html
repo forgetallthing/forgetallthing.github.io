@@ -194,8 +194,17 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190404/JScrGcphSFnc.jpg?imageslim" alt="mark"></p>
-<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190403/rGEGFzoxtMga.jpg?imageslim" alt="mark"></p>
-
+<p>关于打印输出pdf文件这一块,有以下几种方式可以选择:</p>
+<ul>
+<li>html2canvas+jsPDF (纯前端:用图片来冒充pdf,内容容易失真)</li>
+<li>iText (java插件,html标签必须严格闭合,后端实现复杂,服务器需要安装字体,图片渲染有问题)</li>
+<li>wkhtmltopdf (语言无关,服务器需安装wkhtmltopdf环境)</li>
+<li>Phantomjs (大名鼎鼎,不介绍了)</li>
+</ul>
+<p>提到Phantomjs,我就想起<strong>开发Phantomjs的大牛吵架后停止开发</strong>和<strong>selenium分手Phantomjs</strong>的事,于是想起了现在风头正火的<strong>Headless Chrome</strong>,只要安装了Chrome浏览器就可以使用,更贴合浏览器环境,做测试/爬虫/截图/pdf都超级方便,本文主要将介绍<strong>在nodejs中使用puppeteer打印pdf</strong>,以下就是<a href="[https://github.com/GoogleChrome/puppeteer](https://github.com/GoogleChrome/puppeteer">puppeteer</a>)的官方介绍:</p>
+        
+          <a class="article-more-a" href="/2019/04/03/Chrome-Headless与puppeteer的使用指南/#more">more >></a>
+        
       
 
       
@@ -1088,11 +1097,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1100,11 +1109,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1120,15 +1129,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">bat</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">mongod</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1156,19 +1165,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -17,8 +17,9 @@
 <meta property="og:description" content="关于打印输出pdf文件这一块,有以下几种方式可以选择:  html2canvas+jsPDF (纯前端:用图片来冒充pdf,内容容易失真) iText (java插件,html标签必须严格闭合,后端实现复杂,服务器需要安装字体,图片渲染有问题) wkhtmltopdf (语言无关,服务器需安装wkhtmltopdf环境) Phantomjs (大名鼎鼎,不介绍了)  提到Phantomjs,我就">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190404/JScrGcphSFnc.jpg?imageslim">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190404/AKWXyugESuao.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190403/rGEGFzoxtMga.jpg?imageslim">
-<meta property="og:updated_time" content="2019-04-04T02:13:55.684Z">
+<meta property="og:updated_time" content="2019-04-04T02:29:37.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chrome Headless与puppeteer的使用指南">
 <meta name="twitter:description" content="关于打印输出pdf文件这一块,有以下几种方式可以选择:  html2canvas+jsPDF (纯前端:用图片来冒充pdf,内容容易失真) iText (java插件,html标签必须严格闭合,后端实现复杂,服务器需要安装字体,图片渲染有问题) wkhtmltopdf (语言无关,服务器需安装wkhtmltopdf环境) Phantomjs (大名鼎鼎,不介绍了)  提到Phantomjs,我就">
@@ -209,10 +210,25 @@ var _hmt = _hmt || [];
 <blockquote>
 <p>Puppeteer is a Node library which provides a high-level API to control Chrome or Chromium over the <a href="https://chromedevtools.github.io/devtools-protocol/" target="_blank" rel="external">DevTools Protocol</a>. Puppeteer runs <a href="https://developers.google.com/web/updates/2017/04/headless-chrome" target="_blank" rel="external">headless</a> by default, but can be configured to run full (non-headless) Chrome or Chromium.</p>
 </blockquote>
-<p>参考资料:                                                </p>
+<h3 id="先在windows环境下做个测试"><a href="#先在windows环境下做个测试" class="headerlink" title="先在windows环境下做个测试"></a>先在windows环境下做个测试</h3><p>首先必须安装了60版本以上的Chrome浏览器;</p>
+<p>然后配置个环境变量或者直接在chrome.exe打开命令行工具;</p>
+<p>然后输入以下命令:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chrome --headless --disable-gpu --print-to-pdf=D:\output.pdf https:<span class="comment">//www.google.com/</span></div></pre></td></tr></table></figure>
+<p>随后你就可以打开D盘,找到output.pdf啦:</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190404/AKWXyugESuao.png?imageslim" alt="mark"></p>
+<p>windows下需要注意:</p>
+<ul>
+<li>必须指定输出文件;</li>
+<li>必须添加–disable-gpu;</li>
+</ul>
+<p>你还可以试试这个命令来打印dom:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chrome --headless --disable-gpu --enable-logging --dump-dom https:<span class="comment">//www.google.com/</span></div></pre></td></tr></table></figure>
+<p>更多命令请见:<a href="https://developers.google.com/web/updates/2017/04/headless-chrome" target="_blank" rel="external">Getting Started with Headless Chrome</a></p>
+<h3 id="开始使用puppeteer"><a href="#开始使用puppeteer" class="headerlink" title="开始使用puppeteer"></a>开始使用puppeteer</h3><p>参考资料:                                                </p>
 <ul>
 <li><a href="[https://blog.csdn.net/huyuyang6688/article/details/79710704](https://blog.csdn.net/huyuyang6688/article/details/79710704">html页面导出为pdf（jsPDF、iText、wkhtmltopdf）</a>)</li>
 <li><a href="[https://www.jianshu.com/p/31f2b63437ed](https://www.jianshu.com/p/31f2b63437ed">用Python做爬虫的各位，不要再用PhantomJS了</a>)</li>
+<li><a href="https://developers.google.com/web/updates/2017/04/headless-chrome" target="_blank" rel="external">Getting Started with Headless Chrome</a></li>
 </ul>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190403/rGEGFzoxtMga.jpg?imageslim" alt="mark"></p>
 
@@ -358,7 +374,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#先在windows环境下做个测试"><span class="toc-number">1.</span> <span class="toc-text">先在windows环境下做个测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始使用puppeteer"><span class="toc-number">2.</span> <span class="toc-text">开始使用puppeteer</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -491,11 +507,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -503,11 +519,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -543,11 +559,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,11 +583,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">

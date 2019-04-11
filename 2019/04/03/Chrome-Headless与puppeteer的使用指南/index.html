@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190404/JScrGcphSFnc.jpg?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190404/AKWXyugESuao.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190403/rGEGFzoxtMga.jpg?imageslim">
-<meta property="og:updated_time" content="2019-04-10T03:35:12.110Z">
+<meta property="og:updated_time" content="2019-04-11T01:29:59.855Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chrome Headless与puppeteer的使用指南">
 <meta name="twitter:description" content="关于打印输出pdf文件这一块,有以下几种方式可以选择:  html2canvas+jsPDF (纯前端:用图片来冒充pdf,内容容易失真) iText (java插件,html标签必须严格闭合,后端实现复杂,服务器需要安装字体,图片渲染有问题) wkhtmltopdf (语言无关,服务器需安装wkhtmltopdf环境) Phantomjs (大名鼎鼎,不介绍了)  提到Phantomjs,我就">
@@ -224,7 +224,15 @@ var _hmt = _hmt || [];
 <p>你还可以试试这个命令来打印dom:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chrome --headless --disable-gpu --enable-logging --dump-dom https:<span class="comment">//www.google.com/</span></div></pre></td></tr></table></figure>
 <p>更多命令请见:<a href="https://developers.google.com/web/updates/2017/04/headless-chrome" target="_blank" rel="external">Getting Started with Headless Chrome</a></p>
-<h3 id="开始使用puppeteer"><a href="#开始使用puppeteer" class="headerlink" title="开始使用puppeteer"></a>开始使用puppeteer</h3><p>啦啦啦32吃</p>
+<h3 id="开始使用puppeteer"><a href="#开始使用puppeteer" class="headerlink" title="开始使用puppeteer"></a>开始使用puppeteer</h3><p>首先安装npm包,因为我的开发环境已有chrome浏览器,所以我使用的是纯净版的puppeteer:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i puppeteer-core</div></pre></td></tr></table></figure>
+<p>安装好之后就可以使用啦:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> puppeteer = <span class="built_in">require</span>(<span class="string">'puppeteer-core'</span>);</div><div class="line"><span class="keyword">const</span> chromePath = <span class="string">"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"</span>;</div><div class="line"><span class="keyword">const</span> pdfPath = <span class="string">'./puppeteerFiles/test.pdf'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> browser = <span class="keyword">yield</span> puppeteer.launch(&#123;</div><div class="line">  <span class="attr">executablePath</span>: chromePath</div><div class="line">&#125;);</div><div class="line"><span class="keyword">const</span> page = <span class="keyword">yield</span> browser.newPage();</div><div class="line"><span class="keyword">yield</span> page.goto(<span class="string">'https://baidu.com'</span>);</div><div class="line"><span class="comment">//打印pdf</span></div><div class="line"><span class="keyword">yield</span> page.pdf(&#123;</div><div class="line">  <span class="attr">path</span>: pdfPath</div><div class="line">&#125;);</div><div class="line"><span class="keyword">yield</span> browser.close();</div></pre></td></tr></table></figure>
+<p>官方的例子使用async,我这里使用了co,各位请自行改写;</p>
+<p>除了goto方法,还可以使用setContent注入html标签(字符串)来生成页面:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> page = <span class="keyword">yield</span> browser.newPage();</div><div class="line"><span class="keyword">yield</span> page.setContent(html);</div></pre></td></tr></table></figure>
+<p>如果不想吧pdf文件保存到磁盘,不给page.pdf()方法传入path即可,page.pdf()会返回pdf buffer:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> pdfBuffer = <span class="keyword">yield</span> page.pdf(&#123;&#125;);</div><div class="line"><span class="comment">//存储进mongoDB</span></div><div class="line"><span class="keyword">let</span> fs = <span class="keyword">new</span> girdFs(mongodb);</div><div class="line"><span class="keyword">let</span> us = fs.openUploadStream(fileName);</div><div class="line"><span class="keyword">yield</span> common.toPromise(<span class="function"><span class="keyword">function</span>(<span class="params">c</span>) </span>&#123;</div><div class="line">  us.end(pdfBuffer, <span class="string">""</span>, c);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>参考资料:                                                </p>
 <ul>
 <li><a href="https://blog.csdn.net/huyuyang6688/article/details/79710704" target="_blank" rel="external">html页面导出为pdf（jsPDF、iText、wkhtmltopdf）</a></li>
@@ -496,11 +504,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -508,7 +516,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,11 +532,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -529,6 +541,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -552,23 +568,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -581,6 +585,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/Video_2017-11-27_103235%2000_00_05-00_00_09.gif">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/181009/L3gEdDaI35.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/181009/kI9GL53cfL.png?imageslim">
-<meta property="og:updated_time" content="2019-04-03T10:18:21.436Z">
+<meta property="og:updated_time" content="2019-04-18T01:17:49.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具,github上有九千多star,简洁好用: 官网地址：http://www.browsersync.cn/； 如果你不用Gulp、Grunt的话,你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quo">
@@ -229,6 +229,7 @@ var _hmt = _hmt || [];
 <li><strong><a href="https://www.splitshire.com/" target="_blank" rel="external">SplitShire</a></strong></li>
 <li><strong><a href="https://www.designrush.com/resources/publicdomainarchive//" target="_blank" rel="external">Public domain archive</a></strong></li>
 <li><strong><a href="https://www.pexels.com/" target="_blank" rel="external">Pexels</a></strong></li>
+<li><strong><a href="http://nipponcolors.com/" target="_blank" rel="external">nipponcolors</a> 小野武彦的古风传统色 </strong></li>
 </ul>
 <h4 id="字体图标生成"><a href="#字体图标生成" class="headerlink" title="字体图标生成:"></a>字体图标生成:</h4><p><a href="https://icomoon.io/" target="_blank" rel="external">icomoon</a></p>
 <h2 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h2><h4 id="计算生肖"><a href="#计算生肖" class="headerlink" title="计算生肖"></a>计算生肖</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* *</span></div><div class="line">*  计算生肖</div><div class="line">*  支持简写生日，比如02转换为2002,86转换为1986；</div><div class="line">*  支持任何可以进行时间转换的格式，如'1989/01/01','1989 01'等;</div><div class="line">* */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getShengXiao</span>(<span class="params">birth</span>) </span>&#123;</div><div class="line">   birth += <span class="string">''</span>;</div><div class="line">   <span class="keyword">var</span> len = birth.length;</div><div class="line">   <span class="keyword">if</span> (len &lt; <span class="number">4</span> &amp;&amp; len != <span class="number">2</span>) &#123;</div><div class="line">       <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">if</span> (len == <span class="number">2</span>) &#123;</div><div class="line">       birth - <span class="number">0</span> &gt; <span class="number">30</span> ? birth = <span class="string">'19'</span> + birth : birth = <span class="string">'20'</span> + birth;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">var</span> year = (<span class="keyword">new</span> <span class="built_in">Date</span>(birth)).getFullYear();</div><div class="line">   <span class="keyword">var</span> arr = [<span class="string">'猴'</span>, <span class="string">'鸡'</span>, <span class="string">'狗'</span>, <span class="string">'猪'</span>, <span class="string">'鼠'</span>, <span class="string">'牛'</span>, <span class="string">'虎'</span>, <span class="string">'兔'</span>, <span class="string">'龙'</span>, <span class="string">'蛇'</span>, <span class="string">'马'</span>, <span class="string">'羊'</span>];</div><div class="line">   <span class="keyword">return</span> <span class="regexp">/^\d&#123;4&#125;$/</span>.test(year) ? arr[year % <span class="number">12</span>] : <span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -720,11 +721,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -736,15 +737,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -756,11 +753,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -780,11 +777,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -796,19 +793,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">

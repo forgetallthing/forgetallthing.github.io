@@ -17,7 +17,7 @@
 <meta property="og:description" content="fight or flight？大扎好，我系轱天乐，我四渣渣辉，潜端面世，介四里没有挽过的船新版本，挤需体验三番钟，里造会干我一样，爱象节款面食，系兄弟里就来砍我，潜端面世了丐一蛤！   朴灵的 fks 镇楼 马云云的面试题整理 JS篇—事件循环—宏任务(task),微任务(microtask)和有趣的例子: Tasks, microtasks, queues and schedules 什么是">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=334e9beb3b12b31bd361c57be7715d1f/0df431adcbef76090bf59e332cdda3cc7dd99e9b.jpg">
-<meta property="og:updated_time" content="2019-04-28T03:41:36.000Z">
+<meta property="og:updated_time" content="2019-05-06T03:04:56.702Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="千里之行，始于足下">
 <meta name="twitter:description" content="fight or flight？大扎好，我系轱天乐，我四渣渣辉，潜端面世，介四里没有挽过的船新版本，挤需体验三番钟，里造会干我一样，爱象节款面食，系兄弟里就来砍我，潜端面世了丐一蛤！   朴灵的 fks 镇楼 马云云的面试题整理 JS篇—事件循环—宏任务(task),微任务(microtask)和有趣的例子: Tasks, microtasks, queues and schedules 什么是">
@@ -259,6 +259,23 @@ var _hmt = _hmt || [];
 <h4 id="尾调用优化-Tail-Call-Optimization"><a href="#尾调用优化-Tail-Call-Optimization" class="headerlink" title="尾调用优化(Tail Call Optimization)"></a><a href="https://www.jianshu.com/p/c76c3c09ef56" target="_blank" rel="external">尾调用优化(Tail Call Optimization)</a></h4><h3 id="—this指针—"><a href="#—this指针—" class="headerlink" title="—this指针—"></a>—this指针—</h3><p><a href="http://www.cnblogs.com/xiaohuochai/p/5735901.html" target="_blank" rel="external">深入理解this机制系列第一篇——this的4种绑定规则</a></p>
 <p><a href="http://www.cnblogs.com/xiaohuochai/p/5737435.html" target="_blank" rel="external">深入理解this机制系列第二篇——this绑定优先级</a></p>
 <p><a href="http://www.cnblogs.com/xiaohuochai/p/5737876.html" target="_blank" rel="external">深入理解this机制系列第三篇——箭头函数</a></p>
+<p>上面三篇讲的比较细,如果复习的话这一篇足矣:<a href="https://www.jianshu.com/p/8d357981dedb" target="_blank" rel="external">JS中—-this的指向和如何修改this的指向</a>,但是这里没有箭头函数,在此补充:</p>
+<p>箭头函数注意事项:</p>
+<p>（1）函数体内的<code>this</code>对象，就是定义时所在的对象，而不是使用时所在的对象。</p>
+<p>（2）不可以当作构造函数，也就是说，不可以使用<code>new</code>命令，否则会抛出一个错误。</p>
+<p>（3）不可以使用<code>arguments</code>对象，该对象在函数体内不存在。如果要用，可以用 rest 参数代替。</p>
+<p>（4）不可以使用<code>yield</code>命令，因此箭头函数不能用作 Generator 函数。</p>
+<p>参考 : <a href="http://es6.ruanyifeng.com/#docs/function" target="_blank" rel="external">es6入门  阮一峰</a>,这里面有具体的例子,看了就明白了;</p>
+<p>例题:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">'tom'</span>;</div><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">  <span class="attr">name</span> : <span class="string">"zhar"</span>,</div><div class="line">  <span class="attr">say</span> : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">obj.say();<span class="comment">//zhar</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">'tom'</span>;</div><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">  <span class="attr">name</span> : <span class="string">"zhar"</span>,</div><div class="line">  <span class="attr">say</span> : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">obj.say()();<span class="comment">//tom</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">'tom'</span>;</div><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">  <span class="attr">name</span> : <span class="string">"zhar"</span>,</div><div class="line">  <span class="attr">say</span> : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span>=&gt;</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">obj.say()();<span class="comment">//zhar</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">'tom'</span>;</div><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">  <span class="attr">name</span> : <span class="string">"zhar"</span>,</div><div class="line">  <span class="attr">say</span> : <span class="function"><span class="params">()</span>=&gt;</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span>=&gt;</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">obj.say()();<span class="comment">//tom</span></div></pre></td></tr></table></figure>
+<p>最后一题中,由于obj的say是作为对象字面量的属性定义的，对象字面量在全局代码中定义，因此，箭头函数内部this值与全局代码的this值相同,而say中return的箭头函数和say的this一样,也就是全局代码的this值:window了。</p>
+<p>箭头函数里面根本没有自己的<code>this</code>，而是引用外层的<code>this</code>, 即定义时所在对象的this,我们可以在箭头函数执行时,去找定义箭头函数时的对象,此时该对象的this指向谁,箭头函数执行时的this就指向谁~</p>
+<p>比如:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'id:'</span>, <span class="keyword">this</span>.id);</div><div class="line">  &#125;, <span class="number">100</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> id = <span class="number">21</span>;</div><div class="line">foo.call(&#123; <span class="attr">id</span>: <span class="number">42</span> &#125;);</div><div class="line"><span class="comment">// id: 42  执行foo时,foo的this指向&#123; id: 42 &#125;,所以箭头函数的this也指向&#123; id: 42 &#125;,实际上箭头函数的this就是foo的this</span></div></pre></td></tr></table></figure>
+<p>如果你还是有点懵,那请仔细看看<a href="http://es6.ruanyifeng.com/" target="_blank" rel="external"><strong>ECMAScript 6 入门</strong></a>的函数的拓展,也可以看看<strong>javascript忍者秘籍第2版</strong>,关于函数进阶部分的讲解</p>
 <h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p><a href="https://zhuanlan.zhihu.com/p/25855075" target="_blank" rel="external">破解前端面试（80% 应聘者不及格系列）：从 闭包说起</a></p>
 <h3 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h3><p><a href="http://www.cnblogs.com/xiaohuochai/p/5773183.html" target="_blank" rel="external">深入理解定时器系列第一篇——理解setTimeout和setInterval</a></p>
 <p><a href="http://www.cnblogs.com/xiaohuochai/p/5777186.html" target="_blank" rel="external">深入理解定时器系列第二篇——被誉为神器的requestAnimationFrame</a></p>
@@ -606,7 +623,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -614,11 +631,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,7 +639,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -690,15 +707,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">

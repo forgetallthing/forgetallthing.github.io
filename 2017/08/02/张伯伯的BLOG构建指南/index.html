@@ -25,7 +25,7 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/%E8%B0%B7%E6%AD%8C%E9%80%9A%E7%9F%A5.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/%E8%B0%B7%E6%AD%8C%E6%94%B6%E5%BD%95.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/%E8%B0%B7%E6%AD%8C%E6%95%B0%E6%8D%AE.png">
-<meta property="og:updated_time" content="2019-05-06T02:23:38.057Z">
+<meta property="og:updated_time" content="2019-05-06T02:28:20.324Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="张伯伯的BLOG构建指南">
 <meta name="twitter:description" content="写在前面&amp;emsp;&amp;emsp;记录blog搭建过程的文章有很多，我本来以为既然有这么多文章写过，而且不难所以不需要记录下来，可是随着踩得坑越来越多，犹豫十秒钟之后我还是决定写吧，毕竟健忘癌晚期。 用到了什么 hexo  markdown  github  coding  域名  yilia  七牛云">
@@ -271,7 +271,7 @@ var _hmt = _hmt || [];
 </ul>
 <h4 id="4-写一篇BLOG"><a href="#4-写一篇BLOG" class="headerlink" title="4.写一篇BLOG"></a>4.写一篇BLOG</h4><p>&emsp;&emsp;写博客使用markdown语法，这是最简单的标记语言，花个十分钟入门吧，使用<code>hexo new &quot;文章名字&quot;</code>新建一篇博客，然后在blog\source\_posts中即可找到新建的.md文件，然后编辑你的markdown文件，我使用的是typora编辑器，写好后保存，blog根目录运行<code>hexo  g</code>  <code>hexo d</code>即可同步到github page。</p>
 <h4 id="5-使用七牛云图床"><a href="#5-使用七牛云图床" class="headerlink" title="5.使用七牛云图床"></a>5.使用七牛云图床</h4><p>&emsp;&emsp;七牛云是个免费10g空间，每月10g流量的存储平台，非常适合我这种没几个人看的博客使用，注册登录后新建对象储存，即可上传你的图片和视频，复制外链之后就可以在blog中使用，亲测速度不错哦。</p>
-<p>&emsp;&emsp;ps:七牛云是有免费使用时间的,时间一过,你存上去的图片都下载不下来,要想继续使用,必须配置自己的域名,次域名必须备案,没错,是用幕布拍照的那种ICP备案,流程大概一个月左右,备案好之后就可以永久使用七牛云了;不然的话,使用qq相册做图床也蛮不错的,网上也有自动化工具,但是没有七牛云的MPic.exe好用~</p>
+<p>&emsp;&emsp;ps:七牛云是有免费使用时间的,时间一过,你存上去的图片都下载不下来,要想继续使用,必须配置自己的域名,而且域名必须备案,没错,是用幕布拍照的那种ICP备案,流程大概一个月左右,备案好之后就可以永久使用七牛云了;不然的话,使用qq相册做图床也蛮不错的,网上也有自动化工具,但是没有七牛云的MPic.exe好用~</p>
 <h4 id="6-修改你的BLOG样式"><a href="#6-修改你的BLOG样式" class="headerlink" title="6.修改你的BLOG样式"></a>6.修改你的BLOG样式</h4><p>&emsp;&emsp;此处参考<a href="https://github.com/litten/hexo-theme-yilia/wiki/Yilia%E6%BA%90%E7%A0%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%8F%8A%E6%9E%84%E5%BB%BA%E9%A1%BB%E7%9F%A5" target="_blank" rel="external">Yilia源码目录结构及构建须知</a>，</p>
 <p>&emsp;&emsp;blog文章分享中的微信二维码生成不可用，我是这样解决的：在yilia\layout_partial\post\share.ejs里第四行加sUrl = sUrl.replace(/yoursite.com/, ‘V’); V为你的网址，如：ipromiseyourlife.com。我在_config.yml中配置url不好用，所以手动替换了微信二维码中的网址。</p>
 <blockquote>
@@ -611,6 +611,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
@@ -619,15 +627,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -663,7 +667,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -683,15 +687,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">quiz</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -699,11 +695,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">something</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">something</a>
               </li>
             
             <div class="clearfix"></div>

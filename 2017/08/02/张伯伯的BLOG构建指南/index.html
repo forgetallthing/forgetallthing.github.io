@@ -25,7 +25,7 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/%E8%B0%B7%E6%AD%8C%E9%80%9A%E7%9F%A5.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/%E8%B0%B7%E6%AD%8C%E6%94%B6%E5%BD%95.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/%E8%B0%B7%E6%AD%8C%E6%95%B0%E6%8D%AE.png">
-<meta property="og:updated_time" content="2018-12-05T08:40:42.000Z">
+<meta property="og:updated_time" content="2019-05-06T02:23:38.057Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="张伯伯的BLOG构建指南">
 <meta name="twitter:description" content="写在前面&amp;emsp;&amp;emsp;记录blog搭建过程的文章有很多，我本来以为既然有这么多文章写过，而且不难所以不需要记录下来，可是随着踩得坑越来越多，犹豫十秒钟之后我还是决定写吧，毕竟健忘癌晚期。 用到了什么 hexo  markdown  github  coding  域名  yilia  七牛云">
@@ -271,6 +271,7 @@ var _hmt = _hmt || [];
 </ul>
 <h4 id="4-写一篇BLOG"><a href="#4-写一篇BLOG" class="headerlink" title="4.写一篇BLOG"></a>4.写一篇BLOG</h4><p>&emsp;&emsp;写博客使用markdown语法，这是最简单的标记语言，花个十分钟入门吧，使用<code>hexo new &quot;文章名字&quot;</code>新建一篇博客，然后在blog\source\_posts中即可找到新建的.md文件，然后编辑你的markdown文件，我使用的是typora编辑器，写好后保存，blog根目录运行<code>hexo  g</code>  <code>hexo d</code>即可同步到github page。</p>
 <h4 id="5-使用七牛云图床"><a href="#5-使用七牛云图床" class="headerlink" title="5.使用七牛云图床"></a>5.使用七牛云图床</h4><p>&emsp;&emsp;七牛云是个免费10g空间，每月10g流量的存储平台，非常适合我这种没几个人看的博客使用，注册登录后新建对象储存，即可上传你的图片和视频，复制外链之后就可以在blog中使用，亲测速度不错哦。</p>
+<p>&emsp;&emsp;ps:七牛云是有免费使用时间的,时间一过,你存上去的图片都下载不下来,要想继续使用,必须配置自己的域名,次域名必须备案,没错,是用幕布拍照的那种ICP备案,流程大概一个月左右,备案好之后就可以永久使用七牛云了;不然的话,使用qq相册做图床也蛮不错的,网上也有自动化工具,但是没有七牛云的MPic.exe好用~</p>
 <h4 id="6-修改你的BLOG样式"><a href="#6-修改你的BLOG样式" class="headerlink" title="6.修改你的BLOG样式"></a>6.修改你的BLOG样式</h4><p>&emsp;&emsp;此处参考<a href="https://github.com/litten/hexo-theme-yilia/wiki/Yilia%E6%BA%90%E7%A0%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%8F%8A%E6%9E%84%E5%BB%BA%E9%A1%BB%E7%9F%A5" target="_blank" rel="external">Yilia源码目录结构及构建须知</a>，</p>
 <p>&emsp;&emsp;blog文章分享中的微信二维码生成不可用，我是这样解决的：在yilia\layout_partial\post\share.ejs里第四行加sUrl = sUrl.replace(/yoursite.com/, ‘V’); V为你的网址，如：ipromiseyourlife.com。我在_config.yml中配置url不好用，所以手动替换了微信二维码中的网址。</p>
 <blockquote>
@@ -291,6 +292,9 @@ var _hmt = _hmt || [];
 <p>最后在coding.net，刚建立的pages项目中登记这个公钥即可。添加后，在git bash命令输入：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@git.coding.net</div></pre></td></tr></table></figure>
 <p>&emsp;&emsp;检测公钥是否添加成功。</p>
+<p>&emsp;&emsp;这一步很重要,当更换电脑时,首先配置好github和coding的公钥,然后就需要在git bash中分别执行:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh -T git@git.coding.net</div><div class="line">ssh -T git@github.com</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;按照提示输入yew,等待片刻提示<code>forgetallthing，你好，你已经通过 SSH 协议认证 Coding.net 服务，这是一个个人公钥</code> 后,方可执行<code>hexo d</code>成功。</p>
 <h5 id="修改hexo目录的-config-yml，设置多个仓库同步"><a href="#修改hexo目录的-config-yml，设置多个仓库同步" class="headerlink" title="修改hexo目录的_config.yml，设置多个仓库同步"></a>修改hexo目录的_config.yml，设置多个仓库同步</h5><p>示例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: </div><div class="line">    github: https://github.com/cloudroc/cloudroc.github.io.git</div><div class="line">    coding: git@git.coding.net:cloudroc/cloudroc.git</div><div class="line">  branch: master</div><div class="line">  message: a little works</div></pre></td></tr></table></figure>
 <p>&emsp;&emsp;这里coding的ssh提交不可用，推荐都使用https地址进行配置。提交时可能需要登录coding，在本机配置即可：</p>
@@ -313,6 +317,7 @@ var _hmt = _hmt || [];
 <p>&emsp;&emsp;好了，我等了一天，百度也没有收录我的网站，记得在站长平台里检测网站评分有接近九十分。对于我来说，百度收录与否是无所谓的事情，只要百度蜘蛛能抓取到，收录只是时间的问题。好啦，这条路已经打通了，但是我并不喜欢这条路，于是我把域名解析改了回来，博客只托管在github page上，最终解析如下：</p>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%9C%80%E7%BB%88%E7%89%88.png" alt=""></p>
 <p>&emsp;&emsp;红色为blog地址解析，蓝色为百度站长认证解析，黄色为腾讯域名邮箱解析（zhangwang@ipromiseyourlife.com）。</p>
+<p>​    PS:后来的后来,我把ipromiseyourlife.com域名备案成功后的某一天,突然有同事用百度搜索问题,搜到了我的博客,于是我查看了一下,百度终于收录了<code>blog.ipromiseyourlife.com</code>,不知两者之间有没有必要联系~</p>
 <h4 id="7-番外-谷歌收录"><a href="#7-番外-谷歌收录" class="headerlink" title="7.番外:谷歌收录"></a>7.番外:谷歌收录</h4><p>&emsp;&emsp;首先翻墙，登陆谷歌的<a href="https://www.google.com/webmasters/tools/home?hl=zh-CN&amp;authuser=0" target="_blank" rel="external">search console</a>按要求登记你的网站，确认你为网站所有者之后（添加域名解析方式最为简单），点击你的网站-抓取-google抓取工具进行抓取测试，完成之后可以请求编入索引即可，我的网站什么优化也没做，站点地图也没有配置，只用了两天时间谷歌就发来邮件：</p>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/%E8%B0%B7%E6%AD%8C%E9%80%9A%E7%9F%A5.png" alt=""></p>
 <p>&emsp;&emsp;于是我打开谷歌，惊喜的发现已经可以被搜索到了：</p>
@@ -598,6 +603,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
@@ -610,15 +619,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,7 +627,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -634,7 +639,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -646,10 +651,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -658,7 +659,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -670,7 +675,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -678,7 +683,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -686,11 +691,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -698,7 +703,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

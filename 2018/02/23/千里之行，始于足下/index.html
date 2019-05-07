@@ -17,7 +17,7 @@
 <meta property="og:description" content="fight or flight？大扎好，我系轱天乐，我四渣渣辉，潜端面世，介四里没有挽过的船新版本，挤需体验三番钟，里造会干我一样，爱象节款面食，系兄弟里就来砍我，潜端面世了丐一蛤！   朴灵的 fks 镇楼 马云云的面试题整理 JS篇—事件循环—宏任务(task),微任务(microtask)和有趣的例子: Tasks, microtasks, queues and schedules 什么是">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=334e9beb3b12b31bd361c57be7715d1f/0df431adcbef76090bf59e332cdda3cc7dd99e9b.jpg">
-<meta property="og:updated_time" content="2019-05-06T03:04:56.702Z">
+<meta property="og:updated_time" content="2019-05-07T01:55:12.504Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="千里之行，始于足下">
 <meta name="twitter:description" content="fight or flight？大扎好，我系轱天乐，我四渣渣辉，潜端面世，介四里没有挽过的船新版本，挤需体验三番钟，里造会干我一样，爱象节款面食，系兄弟里就来砍我，潜端面世了丐一蛤！   朴灵的 fks 镇楼 马云云的面试题整理 JS篇—事件循环—宏任务(task),微任务(microtask)和有趣的例子: Tasks, microtasks, queues and schedules 什么是">
@@ -256,7 +256,7 @@ var _hmt = _hmt || [];
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;　 </div><div class="line">　<span class="comment">//将参数转为一个数组　 </span></div><div class="line">　 <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.apply(<span class="built_in">arguments</span>);　 </div><div class="line">　alert(args);　 </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>3.如果你有两个数组<code>a1=[oh,here,no];a2=[q,w,e,{o:p}]</code> 你可能想把a2插入到a1的here的位置,那你也可以使用apply来处理:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a1=[oh,here,no];</div><div class="line"><span class="keyword">var</span> a2=[q,w,e,&#123;<span class="attr">o</span>:p&#125;];</div><div class="line">args = [<span class="number">1</span>,<span class="number">1</span>].concat(a2);</div><div class="line"><span class="built_in">Array</span>.prototype.splice.apply(a1,args)</div></pre></td></tr></table></figure>
-<h4 id="尾调用优化-Tail-Call-Optimization"><a href="#尾调用优化-Tail-Call-Optimization" class="headerlink" title="尾调用优化(Tail Call Optimization)"></a><a href="https://www.jianshu.com/p/c76c3c09ef56" target="_blank" rel="external">尾调用优化(Tail Call Optimization)</a></h4><h3 id="—this指针—"><a href="#—this指针—" class="headerlink" title="—this指针—"></a>—this指针—</h3><p><a href="http://www.cnblogs.com/xiaohuochai/p/5735901.html" target="_blank" rel="external">深入理解this机制系列第一篇——this的4种绑定规则</a></p>
+<h3 id="—this指针—"><a href="#—this指针—" class="headerlink" title="—this指针—"></a>—this指针—</h3><p><a href="http://www.cnblogs.com/xiaohuochai/p/5735901.html" target="_blank" rel="external">深入理解this机制系列第一篇——this的4种绑定规则</a></p>
 <p><a href="http://www.cnblogs.com/xiaohuochai/p/5737435.html" target="_blank" rel="external">深入理解this机制系列第二篇——this绑定优先级</a></p>
 <p><a href="http://www.cnblogs.com/xiaohuochai/p/5737876.html" target="_blank" rel="external">深入理解this机制系列第三篇——箭头函数</a></p>
 <p>上面三篇讲的比较细,如果复习的话这一篇足矣:<a href="https://www.jianshu.com/p/8d357981dedb" target="_blank" rel="external">JS中—-this的指向和如何修改this的指向</a>,但是这里没有箭头函数,在此补充:</p>
@@ -277,6 +277,26 @@ var _hmt = _hmt || [];
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'id:'</span>, <span class="keyword">this</span>.id);</div><div class="line">  &#125;, <span class="number">100</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> id = <span class="number">21</span>;</div><div class="line">foo.call(&#123; <span class="attr">id</span>: <span class="number">42</span> &#125;);</div><div class="line"><span class="comment">// id: 42  执行foo时,foo的this指向&#123; id: 42 &#125;,所以箭头函数的this也指向&#123; id: 42 &#125;,实际上箭头函数的this就是foo的this</span></div></pre></td></tr></table></figure>
 <p>如果你还是有点懵,那请仔细看看<a href="http://es6.ruanyifeng.com/" target="_blank" rel="external"><strong>ECMAScript 6 入门</strong></a>的函数的拓展,也可以看看<strong>javascript忍者秘籍第2版</strong>,关于函数进阶部分的讲解</p>
 <h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p><a href="https://zhuanlan.zhihu.com/p/25855075" target="_blank" rel="external">破解前端面试（80% 应聘者不及格系列）：从 闭包说起</a></p>
+<p>上面这个博客说是讲闭包,结果跑偏了,关于闭包,<strong>javascript忍者秘籍第2版</strong>的第五章讲的很清楚:</p>
+<p>闭包允许函数访问并操作函数外部的变量。只要变量或函数存在于声明函数时的作用域内，闭包即可使函数能够访问这些变量或函数。甚至当该函数声明的作用域消失之后仍然可以调用:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> outerValue = <span class="string">"samurai"</span>;</div><div class="line"><span class="keyword">var</span> later;<span class="comment">// ⇽--- 声明一个空变量，稍后在后面的代码中使用</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">outerFunction</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> innerValue = <span class="string">"ninja"</span>; <span class="comment">//⇽--- 在函数内部声明一个值，该值在作用域局限于函数内部，在函数外部不允许访问</span></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">innerFunction</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		assert(outerValue === <span class="string">"samurai"</span>, <span class="string">"I can see the samurai."</span>);<span class="comment">//true</span></div><div class="line">		assert(innerValue === <span class="string">"ninja"</span>, <span class="string">"I can see the ninja."</span>)<span class="comment">//true</span></div><div class="line">	&#125; <span class="comment">//⇽--- 在outerFunction函数中声明一个内部函数，声明该内部函数时，innerValue是在内部函数的作用域内</span></div><div class="line">	later = innerFunction; <span class="comment">//⇽--- 将内部函数innerFunction的引用存储在变量later上，因为later在全局作用域内，所以我们可以对它进行调用</span></div><div class="line">&#125;</div><div class="line">outerFunction();<span class="comment">// ⇽--- 调用outerFunction函数，创建内部函数innerFunction,并将内部函数赋值给变量later</span></div><div class="line">later();<span class="comment">// ⇽--- 通过later调用内部函数。我们不能直接调用</span></div></pre></td></tr></table></figure>
+<p>内部函数被调用时,永远可以访问外部的函数作用域中的变量,这就是闭包所做的;</p>
+<p>了解闭包就必须理解js的作用域,函数的作用域是它声明时所在的作用域,所以以下代码会报错:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> a1 = <span class="number">1</span>;</div><div class="line">	b()</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(a1)</div><div class="line">&#125;</div><div class="line">a() <span class="comment">//会报错: Uncaught ReferenceError: a1 is not defined</span></div></pre></td></tr></table></figure>
+<p>面试常问<strong>闭包的实际使用例子</strong>,大多数博客中写道自执行函数是一个闭包的实例,其实也没错,自执行函数创建了新作用域来避免污染全局变量,同时内部可以访问全局变量~</p>
+<p>忍者秘籍中提到一种更好的使用实例:<strong>封装私有变量</strong>:</p>
+<p>许多编程语言使用私有变量，这些私有变量是对外部隐藏的对象属性。这是非常有用的一种特性，因为当通过其他代码访问这些变量时，我们不希望对象的实现细节对用户造成过度负荷。遗憾的是，原生JavaScript不支持私有变量。但是，通过使用闭包，我们可以实现很接近的、可接受的私有变量:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ninja</span>(<span class="params"></span>) </span>&#123; <span class="comment">//⇽--- 定义Ninja构造函数</span></div><div class="line">	<span class="keyword">var</span> feints = <span class="number">0</span>; <span class="comment">//⇽--- 在构造函数内部声明一个变量，因为所声明的变量的作用域局限于构造函数的内部，所以它是一个“私有”变量。我们使用该变量统计Ninja佯攻的次数</span></div><div class="line">	<span class="keyword">this</span>.getFeints = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="keyword">return</span> feints; <span class="comment">//⇽--- 创建用于访问计数变量feints的方法。由于在构造函数外部的代码是无法访问feints变量的，这是通过只读形式访问该变量的常用方法</span></div><div class="line">	&#125;;</div><div class="line">	<span class="keyword">this</span>.feint = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		feints++;</div><div class="line">	&#125;;<span class="comment">// ⇽--- 为feints变量声明一个累加方法。由于feints为私有变量，在外部是无法累加的，累加过程则被限制在我们提供的方法中</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> ninja1 = <span class="keyword">new</span> Ninja(); <span class="comment">//⇽--- 现在开始测试，首先创建一个Ninja的实例</span></div><div class="line">ninja1.feint(); <span class="comment">//⇽--- 调用feint方法，通过该方法增加Ninja的佯攻次数</span></div><div class="line">assert(ninja1.feints === <span class="literal">undefined</span>);<span class="comment">//true ⇽--- 验证我们无法直接获取该变量值</span></div><div class="line">assert(ninja1.getFeints() === <span class="number">1</span>);<span class="comment">//true ⇽--- 虽然我们无法直接对feints变量赋值，但是我们仍然能够通过getFeints方法操作该变量的值</span></div><div class="line"><span class="keyword">var</span> ninja2 = <span class="keyword">new</span> Ninja();</div><div class="line">assert(ninja2.getFeints() === <span class="number">0</span>);<span class="comment">//true ⇽---当我们通过ninja构造函数创建一个新的ninja2实例时，ninja2对象则具有自己私有的feints变量</span></div></pre></td></tr></table></figure>
+<p>在构造器内部，我们定义了一个变量feints用于保存状态。由于JavaScript的作用域规则的限制，因此只能在构造器内部访问该变量。为了让作用域外部的代码能够访问该变量，我们定义了访问该变量的方法getFeints。该方法可以读取私有变量，但不能改写私有变量。（只读访问的方法通常称为“getter”）;</p>
+<p>接下来创建增量方法feint，用于控制私有变量的值。在真实的应用程序中，该方法可能是一些业务逻辑的处理方法，但是在本例中，它只增加变量feints的值。这与真实的面向对象语言中的私有变量一样。</p>
+<h4 id="尾调用优化-Tail-Call-Optimization"><a href="#尾调用优化-Tail-Call-Optimization" class="headerlink" title="尾调用优化(Tail Call Optimization)"></a><a href="http://es6.ruanyifeng.com/#docs/function" target="_blank" rel="external">尾调用优化(Tail Call Optimization)</a></h4><p>指某个函数的最后一步是调用另一个函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x</span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> g(x);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>函数调用会在内存形成一个“调用记录”，又称“调用帧”（call frame），保存调用位置和内部变量等信息。如果在函数<code>A</code>的内部调用函数<code>B</code>，那么在<code>A</code>的调用帧上方，还会形成一个<code>B</code>的调用帧。等到<code>B</code>运行结束，将结果返回到<code>A</code>，<code>B</code>的调用帧才会消失。如果函数<code>B</code>内部还调用函数<code>C</code>，那就还有一个<code>C</code>的调用帧，以此类推。所有的调用帧，就形成一个“调用栈”（call stack）。</p>
+<p>尾调用由于是函数的最后一步操作，所以不需要保留外层函数的调用帧，因为调用位置、内部变量等信息都不会再用到了，只要直接用内层函数的调用帧，取代外层函数的调用帧就可以了。</p>
+<p>—————— 摘自 &lt;<ecmascript6入门>&gt;</ecmascript6入门></p>
+</blockquote>
+<p>阮一峰的es6那本书里把<strong><a href="http://es6.ruanyifeng.com/#docs/function" target="_blank" rel="external">尾调用优化(Tail Call Optimization)</a></strong>和<strong>尾递归</strong>讲的非常清楚,大家去看看吧,ES6第一次明确规定，所有 ECMAScript 的实现，都必须部署“尾调用优化”，所以，不能再说js没尾调用优化啦,但是ES6 的尾调用优化只在严格模式下开启，正常模式是无效的。</p>
 <h3 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h3><p><a href="http://www.cnblogs.com/xiaohuochai/p/5773183.html" target="_blank" rel="external">深入理解定时器系列第一篇——理解setTimeout和setInterval</a></p>
 <p><a href="http://www.cnblogs.com/xiaohuochai/p/5777186.html" target="_blank" rel="external">深入理解定时器系列第二篇——被誉为神器的requestAnimationFrame</a></p>
 <p>ps：requestAnimationFrame向下兼容可使用setTimeout实现，上文中有具体实现。</p>
@@ -291,6 +311,9 @@ var _hmt = _hmt || [];
 <p>所以:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">231</span>==<span class="literal">true</span> <span class="comment">//false</span></div><div class="line"><span class="number">1</span>==<span class="literal">true</span> <span class="comment">//true</span></div><div class="line"><span class="string">"1"</span>==<span class="literal">true</span> <span class="comment">//true</span></div><div class="line"><span class="string">"0"</span>==<span class="literal">true</span> <span class="comment">//false,不要以为字符串就是真哦~</span></div></pre></td></tr></table></figure>
 <p>综上所述:千万不要这么写</p>
+<p>关于隐式转换:</p>
+<p><a href="https://blog.csdn.net/itcast_cn/article/details/82887895" target="_blank" rel="external">js面试题大坑——隐式类型转换</a></p>
+<p><a href="https://www.cnblogs.com/chenmeng0818/p/5954215.html" target="_blank" rel="external">js中的隐式转换</a></p>
 <h3 id="—正则表达式—"><a href="#—正则表达式—" class="headerlink" title="—正则表达式—"></a>—正则表达式—</h3><p>此部分若无基础，请先阅读老姚的<a href="https://link.juejin.im?target=https%3A%2F%2Fzhuanlan.zhihu.com%2Fp%2F29707385%3Futm_source%3Dcom.daimajia.gold%26utm_medium%3Dsocial" target="_blank" rel="external">《JavaScript 正则表达式迷你书》</a></p>
 <p>下面是火柴的总结：</p>
 <p><a href="http://www.cnblogs.com/xiaohuochai/p/5608807.html" target="_blank" rel="external">javascript中正则表达式的基础语法</a></p>
@@ -498,7 +521,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JS篇"><span class="toc-number">1.</span> <span class="toc-text">JS篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#—事件循环—"><span class="toc-number">1.1.</span> <span class="toc-text">—事件循环—</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#—-函数—"><span class="toc-number">1.2.</span> <span class="toc-text">—-函数—-</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#尾调用优化-Tail-Call-Optimization"><span class="toc-number">1.2.1.</span> <span class="toc-text">尾调用优化(Tail Call Optimization)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#—this指针—"><span class="toc-number">1.3.</span> <span class="toc-text">—this指针—</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包"><span class="toc-number">1.4.</span> <span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定时器"><span class="toc-number">1.5.</span> <span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#delete操作符"><span class="toc-number">1.6.</span> <span class="toc-text">delete操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript严格模式"><span class="toc-number">1.7.</span> <span class="toc-text">javascript严格模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript中的数据类型"><span class="toc-number">1.8.</span> <span class="toc-text">javascript中的数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坑"><span class="toc-number">1.9.</span> <span class="toc-text">坑:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#—正则表达式—"><span class="toc-number">1.10.</span> <span class="toc-text">—正则表达式—</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么不用jQuery"><span class="toc-number">1.11.</span> <span class="toc-text">为什么不用jQuery</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html-css篇"><span class="toc-number">2.</span> <span class="toc-text">html+css篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重绘和回流"><span class="toc-number">2.1.</span> <span class="toc-text">重绘和回流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟DOM介绍"><span class="toc-number">2.2.</span> <span class="toc-text">虚拟DOM介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vue-虚拟dom实现原理"><span class="toc-number">2.3.</span> <span class="toc-text">vue 虚拟dom实现原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http篇"><span class="toc-number">3.</span> <span class="toc-text">http篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GET和POST两种基本请求方法的区别"><span class="toc-number">3.1.</span> <span class="toc-text">GET和POST两种基本请求方法的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#—-经典面试题—"><span class="toc-number">3.2.</span> <span class="toc-text">—-经典面试题—-</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后的嘱托"><span class="toc-number">4.</span> <span class="toc-text">最后的嘱托</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JS篇"><span class="toc-number">1.</span> <span class="toc-text">JS篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#—事件循环—"><span class="toc-number">1.1.</span> <span class="toc-text">—事件循环—</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#—-函数—"><span class="toc-number">1.2.</span> <span class="toc-text">—-函数—-</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#—this指针—"><span class="toc-number">1.3.</span> <span class="toc-text">—this指针—</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包"><span class="toc-number">1.4.</span> <span class="toc-text">闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#尾调用优化-Tail-Call-Optimization"><span class="toc-number">1.4.1.</span> <span class="toc-text">尾调用优化(Tail Call Optimization)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定时器"><span class="toc-number">1.5.</span> <span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#delete操作符"><span class="toc-number">1.6.</span> <span class="toc-text">delete操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript严格模式"><span class="toc-number">1.7.</span> <span class="toc-text">javascript严格模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript中的数据类型"><span class="toc-number">1.8.</span> <span class="toc-text">javascript中的数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坑"><span class="toc-number">1.9.</span> <span class="toc-text">坑:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#—正则表达式—"><span class="toc-number">1.10.</span> <span class="toc-text">—正则表达式—</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么不用jQuery"><span class="toc-number">1.11.</span> <span class="toc-text">为什么不用jQuery</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html-css篇"><span class="toc-number">2.</span> <span class="toc-text">html+css篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重绘和回流"><span class="toc-number">2.1.</span> <span class="toc-text">重绘和回流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟DOM介绍"><span class="toc-number">2.2.</span> <span class="toc-text">虚拟DOM介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vue-虚拟dom实现原理"><span class="toc-number">2.3.</span> <span class="toc-text">vue 虚拟dom实现原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http篇"><span class="toc-number">3.</span> <span class="toc-text">http篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GET和POST两种基本请求方法的区别"><span class="toc-number">3.1.</span> <span class="toc-text">GET和POST两种基本请求方法的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#—-经典面试题—"><span class="toc-number">3.2.</span> <span class="toc-text">—-经典面试题—-</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后的嘱托"><span class="toc-number">4.</span> <span class="toc-text">最后的嘱托</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -623,7 +646,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -639,15 +662,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -655,11 +674,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -667,11 +686,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -683,11 +698,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -699,11 +722,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">

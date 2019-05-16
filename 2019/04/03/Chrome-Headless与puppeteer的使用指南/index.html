@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Chrome Headless与puppeteer的使用指南 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于打印输出pdf文件这一块,有以下几种方式可以选择:  html2canvas+jsPDF (纯前端:用图片来冒充pdf,内容容易失真) iText (java插件,html标签必须严格闭合,后端实现复杂,服务器需要安装字体,图片渲染有问题) wkhtmltopdf (语言无关,服务器需安装wkhtmltopdf环境) Phantomjs (大名鼎鼎,不介绍了)  提到Phantomjs,我就">
+  <meta name="description" content="关于打印输出pdf文件这一块,有以下几种方式可以选择:  html2canvas+jsPDF (纯前端:用图片来冒充pdf,内容容易失真); iText (java插件,html标签必须严格闭合,后端实现复杂,服务器需要安装字体,图片渲染有问题); wkhtmltopdf (语言无关,服务器需安装wkhtmltopdf环境); Phantomjs (大名鼎鼎,不介绍了);  提到Phantomj">
 <meta name="keywords" content="node">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Chrome Headless与puppeteer的使用指南">
 <meta property="og:url" content="http://yoursite.com/2019/04/03/Chrome-Headless与puppeteer的使用指南/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="关于打印输出pdf文件这一块,有以下几种方式可以选择:  html2canvas+jsPDF (纯前端:用图片来冒充pdf,内容容易失真) iText (java插件,html标签必须严格闭合,后端实现复杂,服务器需要安装字体,图片渲染有问题) wkhtmltopdf (语言无关,服务器需安装wkhtmltopdf环境) Phantomjs (大名鼎鼎,不介绍了)  提到Phantomjs,我就">
+<meta property="og:description" content="关于打印输出pdf文件这一块,有以下几种方式可以选择:  html2canvas+jsPDF (纯前端:用图片来冒充pdf,内容容易失真); iText (java插件,html标签必须严格闭合,后端实现复杂,服务器需要安装字体,图片渲染有问题); wkhtmltopdf (语言无关,服务器需安装wkhtmltopdf环境); Phantomjs (大名鼎鼎,不介绍了);  提到Phantomj">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190404/JScrGcphSFnc.jpg?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190404/AKWXyugESuao.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190403/rGEGFzoxtMga.jpg?imageslim">
-<meta property="og:updated_time" content="2019-04-11T01:30:00.000Z">
+<meta property="og:updated_time" content="2019-05-16T02:17:11.745Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chrome Headless与puppeteer的使用指南">
-<meta name="twitter:description" content="关于打印输出pdf文件这一块,有以下几种方式可以选择:  html2canvas+jsPDF (纯前端:用图片来冒充pdf,内容容易失真) iText (java插件,html标签必须严格闭合,后端实现复杂,服务器需要安装字体,图片渲染有问题) wkhtmltopdf (语言无关,服务器需安装wkhtmltopdf环境) Phantomjs (大名鼎鼎,不介绍了)  提到Phantomjs,我就">
+<meta name="twitter:description" content="关于打印输出pdf文件这一块,有以下几种方式可以选择:  html2canvas+jsPDF (纯前端:用图片来冒充pdf,内容容易失真); iText (java插件,html标签必须严格闭合,后端实现复杂,服务器需要安装字体,图片渲染有问题); wkhtmltopdf (语言无关,服务器需安装wkhtmltopdf环境); Phantomjs (大名鼎鼎,不介绍了);  提到Phantomj">
 <meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190404/JScrGcphSFnc.jpg?imageslim">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
@@ -200,10 +200,10 @@ var _hmt = _hmt || [];
         <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190404/JScrGcphSFnc.jpg?imageslim" alt="mark"></p>
 <p>关于打印输出pdf文件这一块,有以下几种方式可以选择:</p>
 <ul>
-<li>html2canvas+jsPDF (纯前端:用图片来冒充pdf,内容容易失真)</li>
-<li>iText (java插件,html标签必须严格闭合,后端实现复杂,服务器需要安装字体,图片渲染有问题)</li>
-<li>wkhtmltopdf (语言无关,服务器需安装wkhtmltopdf环境)</li>
-<li>Phantomjs (大名鼎鼎,不介绍了)</li>
+<li>html2canvas+jsPDF (纯前端:用图片来冒充pdf,内容容易失真);</li>
+<li>iText (java插件,html标签必须严格闭合,后端实现复杂,服务器需要安装字体,图片渲染有问题);</li>
+<li>wkhtmltopdf (语言无关,服务器需安装wkhtmltopdf环境);</li>
+<li>Phantomjs (大名鼎鼎,不介绍了);</li>
 </ul>
 <p>提到Phantomjs,我就想起<strong>开发Phantomjs的大牛吵架后停止开发</strong>和<strong>selenium分手Phantomjs</strong>的事,于是想起了现在风头正火的<strong>Headless Chrome</strong>,只要安装了Chrome浏览器就可以使用,更贴合浏览器环境,做测试/爬虫/截图/pdf都超级方便,本文主要将介绍<strong>在nodejs中使用puppeteer打印pdf</strong>,以下就是<a href="https://github.com/GoogleChrome/puppeteer" target="_blank" rel="external">puppeteer</a>的官方介绍:</p>
 <a id="more"></a>
@@ -508,6 +508,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
@@ -516,27 +524,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -548,7 +544,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -560,19 +556,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -584,11 +584,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -596,11 +600,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">

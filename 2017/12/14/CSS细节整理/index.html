@@ -17,7 +17,7 @@
 <meta property="og:description" content="本来css部分也写在前端知识整理里，但随着css相关日益增多，还是单独开个文章专门记录，会比较琐碎，请多担待。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/8b3399e2a71d32ad1362a0e4116655ff.jpeg">
-<meta property="og:updated_time" content="2018-12-05T08:40:42.000Z">
+<meta property="og:updated_time" content="2019-05-22T06:09:45.803Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS细节整理">
 <meta name="twitter:description" content="本来css部分也写在前端知识整理里，但随着css相关日益增多，还是单独开个文章专门记录，会比较琐碎，请多担待。">
@@ -262,6 +262,12 @@ var _hmt = _hmt || [];
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.space</span> &#123;</div><div class="line">    <span class="attribute">font-size</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">-webkit-text-size-adjust</span>:none;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.space</span> <span class="selector-tag">a</span> &#123;</div><div class="line">    <span class="attribute">font-size</span>: <span class="number">12px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><a href="http://yuilibrary.com/yui/docs/cssgrids/" target="_blank" rel="external">YUI 3 CSS Grids </a> :使用<code>letter-spacing</code>和<code>word-spacing</code>去除格栅单元见间隔方法（注意，其针对的是block水平的元素，因此对IE8-浏览器做了hack处理:</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.yuig</span> &#123;</div><div class="line">  <span class="attribute">letter-spacing</span>: -<span class="number">0.31em</span>;</div><div class="line">  <span class="comment">/* webkit */</span></div><div class="line">  *<span class="attribute">letter-spacing</span>: normal;</div><div class="line">  <span class="comment">/* IE &lt; 8 重置 */</span></div><div class="line">  <span class="attribute">word-spacing</span>: -<span class="number">0.43em</span>;</div><div class="line">  <span class="comment">/* IE &lt; 8 &amp;&amp; gecko */</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.yuiu</span> &#123;</div><div class="line">  <span class="attribute">display</span>: inline-block;</div><div class="line">  zoom: <span class="number">1</span>;</div><div class="line">  *<span class="attribute">display</span>: inline;</div><div class="line">  <span class="comment">/* IE &lt; 8: 伪造 inline-block */</span></div><div class="line">  <span class="attribute">letter-spacing</span>: normal;</div><div class="line">  <span class="attribute">word-spacing</span>: normal;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="去除滚动条"><a href="#去除滚动条" class="headerlink" title="去除滚动条"></a>去除滚动条</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.element</span><span class="selector-pseudo">::-webkit-scrollbar</span> &#123;<span class="attribute">display</span>:none&#125;</div></pre></td></tr></table></figure>
+<p>上述只支持webkit内核的浏览器,如果要兼容 PC 其他浏览器（IE、Firefox 等) ,方法如下:</p>
+<p>在容器外面再嵌套一层 <code>overflow:hidden</code> 内部内容再限制尺寸和外部嵌套层一样，就变相隐藏了。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.outer-container</span>,<span class="selector-class">.content</span> &#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">200px</span>; <span class="attribute">height</span>: <span class="number">200px</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.outer-container</span> &#123;</div><div class="line">	<span class="attribute">position</span>: relative;</div><div class="line">	<span class="attribute">overflow</span>: hidden;</div><div class="line">	<span class="attribute">background-color</span>: <span class="number">#7FFFD4</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.inner-container</span> &#123;</div><div class="line">	<span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">	<span class="attribute">position</span>: absolute; <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">	<span class="attribute">overflow-x</span>: hidden;</div><div class="line">	<span class="attribute">overflow-y</span>: scroll;</div><div class="line">&#125;</div><div class="line"></div><div class="line"> <span class="comment">/* for Chrome */</span></div><div class="line"><span class="selector-class">.inner-container</span><span class="selector-pseudo">::-webkit-scrollbar</span> &#123;</div><div class="line">	<span class="attribute">display</span>: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"outer-container"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"inner-container"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
       
 
       
@@ -413,7 +419,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用calc做简单运算"><span class="toc-number">1.</span> <span class="toc-text">使用calc做简单运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重复指定box-shadow"><span class="toc-number">2.</span> <span class="toc-text">重复指定box-shadow</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#响应式网页中，如何只用CSS实现div的高和宽保持固定比例"><span class="toc-number">3.</span> <span class="toc-text">响应式网页中，如何只用CSS实现div的高和宽保持固定比例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#元素垂直水平居中"><span class="toc-number">4.</span> <span class="toc-text">元素垂直水平居中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#去除inline-block元素间间距"><span class="toc-number">5.</span> <span class="toc-text">去除inline-block元素间间距</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用calc做简单运算"><span class="toc-number">1.</span> <span class="toc-text">使用calc做简单运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重复指定box-shadow"><span class="toc-number">2.</span> <span class="toc-text">重复指定box-shadow</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#响应式网页中，如何只用CSS实现div的高和宽保持固定比例"><span class="toc-number">3.</span> <span class="toc-text">响应式网页中，如何只用CSS实现div的高和宽保持固定比例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#元素垂直水平居中"><span class="toc-number">4.</span> <span class="toc-text">元素垂直水平居中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#去除inline-block元素间间距"><span class="toc-number">5.</span> <span class="toc-text">去除inline-block元素间间距</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#去除滚动条"><span class="toc-number">6.</span> <span class="toc-text">去除滚动条</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -538,18 +544,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
@@ -558,11 +552,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -570,11 +568,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -586,6 +588,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -594,15 +600,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -622,7 +628,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -630,7 +636,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -17,7 +17,7 @@
 <meta property="og:description" content="需求分析:最近，公司要求实现个在线飙车系统实时展示出租车行驶路线图，必须要求出租车在线动起来,我一拍小脑瓜就说这需求太简单请交给我吧! 我每天都在看京东淘宝的快递小车在地图上移动,早就想干他一票了! 效果演示:          实现过程产品:  我们怕是不能和人家比, 我们每15秒才获取一次出租车的定位, 所以你的任务是每十五秒获取下一个位置, 然后让小车从当前点驾驶到下个点即可; 我:  1">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190522/iEfUWjhkgVXq.jpg?imageslim">
-<meta property="og:updated_time" content="2019-05-22T10:02:04.119Z">
+<meta property="og:updated_time" content="2019-05-23T09:16:24.845Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="百度地图，在线飙车">
 <meta name="twitter:description" content="需求分析:最近，公司要求实现个在线飙车系统实时展示出租车行驶路线图，必须要求出租车在线动起来,我一拍小脑瓜就说这需求太简单请交给我吧! 我每天都在看京东淘宝的快递小车在地图上移动,早就想干他一票了! 效果演示:          实现过程产品:  我们怕是不能和人家比, 我们每15秒才获取一次出租车的定位, 所以你的任务是每十五秒获取下一个位置, 然后让小车从当前点驾驶到下个点即可; 我:  1">
@@ -206,7 +206,7 @@ var _hmt = _hmt || [];
 <p><strong>产品:</strong> emmm~, 我们的后台正忙着从node迁移到java,再迁移到php,再迁移到python,再迁移到go,再迁移到Ruby,再迁移到.net, 数据库也正从oracle迁移到mysql,,再迁移到PostgreSQL,,再迁移到mongoDB,,再迁移到Cassandra,再迁移到CouchDB,再迁移到~</p>
 <p><strong>我:</strong> 我明白了, 告辞!!</p>
 <p>综上所述, 我的小车是每十五秒确定一个起点和终点, 然后让小车平滑驾驶过去即可, 所以每十五秒确定一次车头方向, 获取数据的延迟需要等待后端同学配合解决,下面开始实现过程:</p>
-<h4 id="1-出租车需要根据经纬度数据，在两个点之间平滑移动"><a href="#1-出租车需要根据经纬度数据，在两个点之间平滑移动" class="headerlink" title="1.出租车需要根据经纬度数据，在两个点之间平滑移动"></a>1.出租车需要根据经纬度数据，在两个点之间平滑移动</h4><p>（1）为了避免小车出现僵尸跳的效果，将两个点的坐标平分成多个坐标点，然后通过百度地图api提供的setPosition(new BMap.Point)方法改变小车的位置，使小车缓慢的移动到下个位置，而不是直接从开始位置跳到结束位置。</p>
+<h4 id="1-出租车需要根据经纬度数据，在两个点之间平滑移动"><a href="#1-出租车需要根据经纬度数据，在两个点之间平滑移动" class="headerlink" title="1.出租车需要根据经纬度数据，在两个点之间平滑移动"></a>1.出租车需要根据经纬度数据，在两个点之间平滑移动</h4><p>（1）为了避免小车出现僵尸跳的效果，将两个点的坐标平分成多个坐标点，然后通过百度地图api提供的setPosition(new BMap.Point)方法改变小车的位置，使用下一帧神器requestAnimationFrame来让小车丝滑的移动到下个位置。</p>
 <p>（2）如何知道两个点之间有哪些坐标点？</p>
 <p>通过map.getMapType().getProjection().lngLatToPoint(BMap.Point)将球面的经纬度坐标转换为平面坐标(x,y)。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">  *缓动效果</div><div class="line">  *初始坐标，目标坐标，当前的步长，总的步长</div><div class="line">  *@param&#123;BMap.Pixel&#125; initPos 初始平面坐标</div><div class="line">  *@parm&#123;BMap.Pixel&#125; targetPos 目标平面坐标</div><div class="line">  *@param&#123;number&#125; currentCount 当前帧数</div><div class="line">  *@param &#123;number&#125; count 总帧数</div><div class="line">*/</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">effect</span>(<span class="params">initPos, targetPos, currentCount, count</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> b = initPos, c = targetPos - initPos, t = currentCount,</div><div class="line">    d = count;</div><div class="line">    <span class="keyword">return</span> c * t / d + b;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -486,10 +486,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
@@ -498,31 +494,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,15 +510,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -550,15 +534,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,6 +559,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">

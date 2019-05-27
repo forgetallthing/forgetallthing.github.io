@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>这是什么第一期 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本期名词:  orm 弱类型、强类型、动态类型、静态类型语言 CDN简介 BI(商业智能)">
+  <meta name="description" content="本期名词:  orm 弱类型、强类型、动态类型、静态类型语言 CDN简介 BI(商业智能) 多租户架构 微服务架构">
 <meta name="keywords" content="something">
 <meta property="og:type" content="article">
 <meta property="og:title" content="这是什么第一期">
 <meta property="og:url" content="http://yoursite.com/2018/08/30/这是什么第一期/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="本期名词:  orm 弱类型、强类型、动态类型、静态类型语言 CDN简介 BI(商业智能)">
+<meta property="og:description" content="本期名词:  orm 弱类型、强类型、动态类型、静态类型语言 CDN简介 BI(商业智能) 多租户架构 微服务架构">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/180919/F6HccK2icc.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/181019/79eBa5Hj95.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20181212/ytqqRSQFyjsP.png?imageslim">
-<meta property="og:updated_time" content="2019-05-23T06:28:34.308Z">
+<meta property="og:updated_time" content="2019-05-27T04:13:15.706Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="这是什么第一期">
-<meta name="twitter:description" content="本期名词:  orm 弱类型、强类型、动态类型、静态类型语言 CDN简介 BI(商业智能)">
+<meta name="twitter:description" content="本期名词:  orm 弱类型、强类型、动态类型、静态类型语言 CDN简介 BI(商业智能) 多租户架构 微服务架构">
 <meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog/180919/F6HccK2icc.png?imageslim">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
@@ -204,6 +204,8 @@ var _hmt = _hmt || [];
 <li>弱类型、强类型、动态类型、静态类型语言</li>
 <li>CDN简介</li>
 <li>BI(商业智能)</li>
+<li>多租户架构</li>
+<li>微服务架构</li>
 </ul>
 <a id="more"></a>
 <h3 id="ORM是什么？如何理解ORM"><a href="#ORM是什么？如何理解ORM" class="headerlink" title="ORM是什么？如何理解ORM"></a>ORM是什么？如何理解ORM</h3><h4 id="一、ORM简介"><a href="#一、ORM简介" class="headerlink" title="一、ORM简介"></a>一、ORM简介</h4><p>​        对象关系映射（Object Relational Mapping，简称ORM）模式是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术。简单的说，ORM是通过使用描述对象和数据库之间映射的元数据，将程序中的对象自动持久化到关系数据库中。那么，到底如何实现持久化呢？一种简单的方案是采用硬编码方式，为每一种可能的数据库访问操作提供单独的方法。<br>​        这种方案存在以下不足：<br>​        1.持久化层缺乏弹性。一旦出现业务需求的变更，就必须修改持久化层的接口<br>​        2.持久化层同时与域模型与关系数据库模型绑定，不管域模型还是关系数据库模型发生变化，毒药修改持久化曾的相关程序代码，增加了软件的维护难度。 </p>
@@ -213,6 +215,9 @@ var _hmt = _hmt || [];
 <h4 id="三、ORM的优缺点"><a href="#三、ORM的优缺点" class="headerlink" title="三、ORM的优缺点"></a>三、ORM的优缺点</h4><p>​        ORM的缺点是会牺牲程序的执行效率和会固定思维模式。<br>​        从系统结构上来看,采用ORM的系统一般都是多层系统，系统的层次多了，效率就会降低。ORM是一种完全的面向对象的做法，而面向对象的做法也会对性能产生一定的影响。 </p>
 <p>​        在我们开发系统时，一般都有性能问题。性能问题主要产生在算法不正确和与数据库不正确的使用上。ORM所生成的代码一般不太可能写出很高效的算法，在数据库应用上更有可能会被误用，主要体现在对持久对象的提取和和数据的加工处理上，如果用上了ORM,程序员很有可能将全部的数据提取到内存对象中，然后再进行过滤和加工处理，这样就容易产生性能问题。<br>​        在对对象做持久化时，ORM一般会持久化所有的属性，有时，这是不希望的。<br>​        但ORM是一种工具，工具确实能解决一些重复，简单的劳动。这是不可否认的。但我们不能指望工具能一劳永逸的解决所有问题，有些问题还是需要特殊处理的，但需要特殊处理的部分对绝大多数的系统，应该是很少的。</p>
 <p>来源: <a href="https://www.cnblogs.com/huanhang/p/6054908.html" target="_blank" rel="external">ORM是什么？如何理解ORM</a></p>
+<h4 id="四、拓展：什么是数据持久化"><a href="#四、拓展：什么是数据持久化" class="headerlink" title="四、拓展：什么是数据持久化"></a>四、拓展：什么是数据持久化</h4><p>​        数据持久化就是将内存中的数据模型转换为存储模型,以及将存储模型转换为内存中的数据模型的统称. 数据模型可以是任何数据结构或对象模型,存储模型可以是关系模型、XML、二进制流等。cmp和Hibernate只是对象模型到关系模型之间转换的不同实现。</p>
+<p>​        <strong>狭义：</strong>只不过对象模型和关系模型应用广泛，所以就会误认为数据持久化就是对象模型到关系型数据库的转换，Hibernate框架会提供这种机制。对象上数据的修改，Hibernate框架会把这种修改同步到数据库中。在业务程序与数据库之间，Hibernate框架使用Session会话，来完成数据的提交、更新、删除、查询等等。</p>
+<p>​        <strong>广义：</strong>保存在内存中的数据是处于瞬时状态的，而保存在存储设备中的数据是处于持久状态的。数据持久化就是将内存中的瞬时数据保存到存储设备中，保证即使在手机或电脑关机的情况下，防止数据丢失。</p>
 <h3 id="弱类型、强类型、动态类型、静态类型语言"><a href="#弱类型、强类型、动态类型、静态类型语言" class="headerlink" title="弱类型、强类型、动态类型、静态类型语言"></a>弱类型、强类型、动态类型、静态类型语言</h3><h4 id="1-强、弱类型"><a href="#1-强、弱类型" class="headerlink" title="1.强、弱类型"></a>1.强、弱类型</h4><ul>
 <li><em>强类型strongly typed</em>: 如果一种语言的所有程序都是well behaved——即不可能出现forbidden behaviors，则该语言为strongly typed。</li>
 <li><em>弱类型weakly typed</em>: 否则为weakly typed。比如C语言的缓冲区溢出，属于trapped errors，即属于forbidden behaviors..故C是弱类型</li>
@@ -246,7 +251,26 @@ var _hmt = _hmt || [];
 <p>如何把数据库中存在的数据转变为业务人员需要的信息?大部分的答案是报表系统。简单说，报表系统已经可以称作是BI了，它是BI的低端实现。</p>
 <p>国外的企业，大部分已经进入了中端BI，叫做数据分析。有一些企业已经开始进入高端BI，叫做数据挖掘。而我国的企业，大部分还停留在报表阶段。</p>
 <p>详见: <a href="https://baike.baidu.com/item/BI/4579902?fr=aladdin" target="_blank" rel="external">BI</a></p>
-
+<h3 id="多租户架构"><a href="#多租户架构" class="headerlink" title="多租户架构"></a>多租户架构</h3><h4 id="对多租户的理解"><a href="#对多租户的理解" class="headerlink" title="对多租户的理解"></a>对多租户的理解</h4><p>​        多租户定义：多租户技术或称多重租赁技术，简称SaaS，是<strong>一种软件架构技术</strong>，是实现如何在<strong>多用户环境下（此处的多用户一般是面向企业用户）共用相同的系统或程序组件</strong>，并且可<strong>确保各用户间数据的隔离性</strong>。简单讲：在一台服务器上运行单个应用实例，它为多个租户（客户）提供服务。从定义中我们可以理解：多租户是一种架构，目的是为了让多用户环境下使用同一套程序，且保证用户间数据隔离。那么重点就很浅显易懂了，<strong>多租户的重点就是同一套程序下实现多用户数据的隔离</strong>。对于实现方式，我们下面会讨论到。</p>
+<p>　　在了解详细一点：在一个多租户的结构下，应用都是运行在同样的或者是一组服务器下，这种结构被称为“单实例”架构（Single Instance），单实例多租户。多个租户的数据是保存在相同位置，依靠对数据库分区来实现隔离操作。既然用户都在运行相同的应用实例，服务运行在服务供应商的服务器上，用户无法去进行定制化的操作，所以这对于对该产品有特殊需要定制化的客户就无法适用，所以多租户适合通用类需求的客户。那么缺点来了，多租户下无法实现用户的定制化操作。</p>
+<p>　　在翻阅多租户的资料时，还有一个名词与之相对应，那就是单租户SaaS架构（也被称作多实例架构（Multiple Instance））。单租户架构与多租户的区别在于，单租户是为每个客户单独创建各自的软件应用和支撑环境。单租户SaaS被广泛引用在客户需要支持定制化的应用场合，而这种定制或者是因为地域，抑或是他们需要更高的安全控制。通过单租户的模式，每个客户都有一份分别放在独立的服务器上的数据库和操作系统，或者使用强的安全措施进行隔离的虚拟网络环境中。因为本篇主要是讨论多租户，所以单租户的相关知识就简单了解一下，不做过多的阐述了。</p>
+<h4 id="多租户数据隔离的三种方案"><a href="#多租户数据隔离的三种方案" class="headerlink" title="多租户数据隔离的三种方案"></a><strong>多租户数据隔离的三种方案</strong></h4><p>多租户在数据存储上存在三种主要的方案，分别是：</p>
+<p>　　<strong>1. 独立数据库</strong></p>
+<p>　　这是第一种方案，即一个租户一个数据库，这种方案的用户数据隔离级别最高，安全性最好，但成本较高。<br>　　优点：<br>　　　　为不同的租户提供独立的数据库，有助于简化数据模型的扩展设计，满足不同租户的独特需求；如果出现故障，恢复数据比较简单。<br>　　缺点：<br>　　　　增多了数据库的安装数量，随之带来维护成本和购置成本的增加。<br>　　这种方案与传统的一个客户、一套数据、一套部署类似，差别只在于软件统一部署在运营商那里。如果面对的是银行、医院等需要非常高数据隔离级别的租户，可以选择这种模式，提高租用的定价。如果定价较低，产品走低价路线，这种方案一般对运营商来说是无法承受的。</p>
+<p>　　<strong>2. 共享数据库，独立 Schema</strong><br>　　这是第二种方案，即多个或所有租户共享Database，但是每个租户一个Schema（也可叫做一个user）。底层库比如是：DB2、ORACLE等，一个数据库下可以有多个SCHEMA<br>　　优点：<br>　　　　为安全性要求较高的租户提供了一定程度的逻辑数据隔离，并不是完全隔离；每个数据库可支持更多的租户数量。<br>　　缺点：<br>　　　　如果出现故障，数据恢复比较困难，因为恢复数据库将牵涉到其他租户的数据；<br>　　如果需要跨租户统计数据，存在一定困难。</p>
+<p>　　<strong>3. 共享数据库，共享 Schema，共享数据表</strong><br>　　这是第三种方案，即租户共享同一个Database、同一个Schema，但在表中增加TenantID多租户的数据字段。这是共享程度最高、隔离级别最低的模式。<br>　　即每插入一条数据时都需要有一个客户的标识。这样才能在同一张表中区分出不同客户的数据。<br>　　优点：<br>　　　　三种方案比较，第三种方案的维护和购置成本最低，允许每个数据库支持的租户数量最多。<br>　　缺点：<br>　　　　隔离级别最低，安全性最低，需要在设计开发时加大对安全的开发量； 数据备份和恢复最困难，需要逐表逐条备份和还原。</p>
+<p>　　如果希望以最少的服务器为最多的租户提供服务，并且租户接受牺牲隔离级别换取降低成本，这种方案最适合。<br>　　　　<br>　　在SaaS实施过程中，有一个显著的考量点，就是如何对应用数据进行设计，以支持多租户，而这种设计的思路，是要在<strong>数据的共享</strong>、<strong>安全隔离</strong>和<strong>性能</strong>间取得平衡。</p>
+<h4 id="三、选择合理的实现模式"><a href="#三、选择合理的实现模式" class="headerlink" title="三、选择合理的实现模式"></a><strong>三、选择合理的实现模式</strong></h4><p>衡量三种模式主要考虑的因素是<strong>隔离还是共享</strong>。</p>
+<ol>
+<li>成本角度因素 </li>
+</ol>
+<p>　　　　隔离性越好，设计和实现的难度和成本越高，初始成本越高。共享性越好，同一运营成本下支持的用户越多，运营成本越低。</p>
+<p>　2. 安全因素 </p>
+<p>　　　　要考虑业务和客户的安全方面的要求。安全性要求越高，越要倾向于隔离。</p>
+<p>　3. 从租户数量上考虑<br>　　主要考虑下面一些因素 ：<br>　　系统要支持多少租户？上百？上千还是上万？可能的租户越多，越倾向于共享。<br>　　平均每个租户要存储数据需要的空间大小。存贮的数据越多，越倾向于隔离。<br>　　每个租户的同时访问系统的最终用户数量。需要支持的越多，越倾向于隔离。<br>　　是否想针对每一租户提供附加的服务，例如数据的备份和恢复等。这方面的需求越多， 越倾向于隔离。</p>
+<p>　4. 技术储备<br>　　　　共享性越高，对技术的要求越高。</p>
+<p>已上摘自：<a href="https://www.cnblogs.com/pingfan21/p/7478242.html" target="_blank" rel="external">如何理解多租户架构</a></p>
+<h3 id="微服务架构"><a href="#微服务架构" class="headerlink" title="微服务架构"></a>微服务架构</h3><h4 id="微服务是什么"><a href="#微服务是什么" class="headerlink" title="微服务是什么"></a>微服务是什么</h4>
       
 
       
@@ -398,7 +422,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ORM是什么？如何理解ORM"><span class="toc-number">1.</span> <span class="toc-text">ORM是什么？如何理解ORM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、ORM简介"><span class="toc-number">1.1.</span> <span class="toc-text">一、ORM简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、ORM的概念"><span class="toc-number">1.2.</span> <span class="toc-text">二、ORM的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、ORM的优缺点"><span class="toc-number">1.3.</span> <span class="toc-text">三、ORM的优缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弱类型、强类型、动态类型、静态类型语言"><span class="toc-number">2.</span> <span class="toc-text">弱类型、强类型、动态类型、静态类型语言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-强、弱类型"><span class="toc-number">2.1.</span> <span class="toc-text">1.强、弱类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-动态、静态类型"><span class="toc-number">2.2.</span> <span class="toc-text">2.动态、静态类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CDN简介"><span class="toc-number">3.</span> <span class="toc-text">CDN简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是CDN"><span class="toc-number">3.1.</span> <span class="toc-text">什么是CDN</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CDN-的局限性"><span class="toc-number">3.2.</span> <span class="toc-text">CDN 的局限性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BI-商业智能"><span class="toc-number">4.</span> <span class="toc-text">BI(商业智能)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#简介"><span class="toc-number">4.1.</span> <span class="toc-text">简介</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ORM是什么？如何理解ORM"><span class="toc-number">1.</span> <span class="toc-text">ORM是什么？如何理解ORM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、ORM简介"><span class="toc-number">1.1.</span> <span class="toc-text">一、ORM简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、ORM的概念"><span class="toc-number">1.2.</span> <span class="toc-text">二、ORM的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、ORM的优缺点"><span class="toc-number">1.3.</span> <span class="toc-text">三、ORM的优缺点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四、拓展：什么是数据持久化"><span class="toc-number">1.4.</span> <span class="toc-text">四、拓展：什么是数据持久化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弱类型、强类型、动态类型、静态类型语言"><span class="toc-number">2.</span> <span class="toc-text">弱类型、强类型、动态类型、静态类型语言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-强、弱类型"><span class="toc-number">2.1.</span> <span class="toc-text">1.强、弱类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-动态、静态类型"><span class="toc-number">2.2.</span> <span class="toc-text">2.动态、静态类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CDN简介"><span class="toc-number">3.</span> <span class="toc-text">CDN简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是CDN"><span class="toc-number">3.1.</span> <span class="toc-text">什么是CDN</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CDN-的局限性"><span class="toc-number">3.2.</span> <span class="toc-text">CDN 的局限性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BI-商业智能"><span class="toc-number">4.</span> <span class="toc-text">BI(商业智能)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#简介"><span class="toc-number">4.1.</span> <span class="toc-text">简介</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多租户架构"><span class="toc-number">5.</span> <span class="toc-text">多租户架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对多租户的理解"><span class="toc-number">5.1.</span> <span class="toc-text">对多租户的理解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#多租户数据隔离的三种方案"><span class="toc-number">5.2.</span> <span class="toc-text">多租户数据隔离的三种方案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、选择合理的实现模式"><span class="toc-number">5.3.</span> <span class="toc-text">三、选择合理的实现模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#微服务架构"><span class="toc-number">6.</span> <span class="toc-text">微服务架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#微服务是什么"><span class="toc-number">6.1.</span> <span class="toc-text">微服务是什么</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -523,11 +547,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -539,15 +559,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -555,7 +575,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,7 +595,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -579,26 +615,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
@@ -607,7 +623,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -615,7 +639,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">

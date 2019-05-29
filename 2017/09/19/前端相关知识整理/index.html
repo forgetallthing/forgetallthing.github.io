@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/Video_2017-11-27_103235%2000_00_05-00_00_09.gif">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/181009/L3gEdDaI35.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/181009/kI9GL53cfL.png?imageslim">
-<meta property="og:updated_time" content="2019-04-18T01:17:50.000Z">
+<meta property="og:updated_time" content="2019-05-29T01:44:51.630Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端相关知识整理">
 <meta name="twitter:description" content="各类库和工具收藏：Browsersync简洁的浏览器同步测试工具,github上有九千多star,简洁好用: 官网地址：http://www.browsersync.cn/； 如果你不用Gulp、Grunt的话,你可能需要这个： 静态网站(自动启动一个端口为3000的小型服务器)： browser-sync start --server --files &amp;quot;*.* , */*.*&amp;quo">
@@ -313,6 +313,8 @@ var _hmt = _hmt || [];
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"sample"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></div><div class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</div><div class="line">	<span class="built_in">console</span>.log(sample);<span class="comment">// = &lt;div id="kk"&gt;&lt;/div&gt;    </span></div><div class="line">	<span class="built_in">console</span>.log(sample.attributes);<span class="comment">// = NamedNodeMap &#123;0: id, length: 1&#125;</span></div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
 <h4 id="随机生成字符串-小写字母和数字"><a href="#随机生成字符串-小写字母和数字" class="headerlink" title="随机生成字符串(小写字母和数字)"></a>随机生成字符串(小写字母和数字)</h4><p>利用Math.random和toString生成随机字符串。这里的技巧是利用了toString方法可以接收一个基数作为参数的原理，这个基数从2到36封顶，代表进制。如果不指定，默认基数是10进制。 </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">generateRandomAlphaNum</span>(<span class="params">len</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> rdmString = <span class="string">""</span>;</div><div class="line">    <span class="keyword">for</span> (; rdmString.length &lt; len; rdmString += <span class="built_in">Math</span>.random().toString(<span class="number">36</span>).substr(<span class="number">2</span>));</div><div class="line">    <span class="keyword">return</span> rdmString.substr(<span class="number">0</span>, len);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>拓展: 因为经常用这个来模拟object的key,所以首字母需要时英文,下面为改进版:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">generateRandomAlphaNum</span>(<span class="params">len</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> rdmString = <span class="built_in">String</span>.fromCharCode(<span class="number">97</span> + <span class="built_in">Math</span>.ceil(<span class="built_in">Math</span>.random() * <span class="number">25</span>));</div><div class="line">    <span class="keyword">for</span> (; rdmString.length &lt; len; rdmString += <span class="built_in">Math</span>.random().toString(<span class="number">36</span>).substr(<span class="number">2</span>));</div><div class="line">    <span class="keyword">return</span> rdmString.substr(<span class="number">0</span>, len);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="位运算符的妙用：浮点数取整"><a href="#位运算符的妙用：浮点数取整" class="headerlink" title="位运算符的妙用：浮点数取整"></a>位运算符的妙用：浮点数取整</h4><p>|0和~~很好的利用了位运算符的特点，使用这两者可以将浮点转成整型，且效率方面要比同类的parseInt,Math.round 要快。在处理像素及动画位移等效果的时候会很有用。性能比较<a href="http://jsperf.com/math-floor-vs-math-round-vs-parseint/42" target="_blank" rel="external">见此</a>。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> foo = <span class="number">4.16</span> | <span class="number">0</span>;<span class="comment">//结果为4</span></div><div class="line"><span class="comment">//需要注意的是，这种取整方法不适用超过32位整数最大值2147483647的数</span></div><div class="line"><span class="comment">//如：2147483649.4 | 0;</span></div><div class="line"><span class="comment">//结果为 -2147483647</span></div><div class="line"><span class="keyword">var</span> bar = ~~(<span class="number">12.4</span> / <span class="number">4.13</span>);<span class="comment">//结果为3</span></div><div class="line"><span class="comment">//使用否运算取整，是所有取整方法中最快的一种。</span></div><div class="line"><span class="comment">//否运算对特殊数值的处理是：超出32位的整数将会被截去超出的位数，NaN和Infinity转为0。</span></div></pre></td></tr></table></figure>
 <p>位运算符特点：</p>
@@ -721,7 +723,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -733,15 +735,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -749,15 +751,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -769,15 +767,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -789,11 +779,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -805,7 +807,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -813,15 +815,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">something</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

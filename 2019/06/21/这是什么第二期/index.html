@@ -16,12 +16,17 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="本期名词:  JWT (JSON Web Token)">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/gEPCn0GbC9Ay.jpg?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/LgVHlBaLcunc.png?imageslim">
-<meta property="og:updated_time" content="2019-06-21T04:01:57.450Z">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/HH2sHwBbfkIW.png?imageslim">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/sIotDI9pc4WR.png?imageslim">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/qlmjp3eWc6Qu.png?imageslim">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/aIhjjCjKC0RD.png?imageslim">
+<meta property="og:updated_time" content="2019-06-21T07:13:33.516Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="这是什么第二期">
 <meta name="twitter:description" content="本期名词:  JWT (JSON Web Token)">
-<meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/LgVHlBaLcunc.png?imageslim">
+<meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/gEPCn0GbC9Ay.jpg?imageslim">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -195,7 +200,8 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本期名词:</p>
+        <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190621/gEPCn0GbC9Ay.jpg?imageslim" alt="mark"></p>
+<p>本期名词:</p>
 <ul>
 <li>JWT (JSON Web Token)</li>
 </ul>
@@ -260,7 +266,8 @@ var _hmt = _hmt || [];
 <p>5、JWT本身包含认证信息，因此一旦信息泄露，任何人都可以获得令牌的所有权限。为了减少盗用，JWT的有效期不宜设置太长。对于某些重要操作，用户在使用时应该每次都进行进行身份验证。</p>
 <p>6、为了减少盗用和窃取，JWT不建议使用HTTP协议来传输代码，而是使用加密的HTTPS协议进行传输。</p>
 <p>已上摘自<a href="http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html" target="_blank" rel="external">JSON Web Token 入门教程</a></p>
-<h4 id="6-关于跨域的session丢失问题"><a href="#6-关于跨域的session丢失问题" class="headerlink" title="6.关于跨域的session丢失问题"></a>6.关于跨域的session丢失问题</h4><p>ps: 有人说除了分布式和单点登录, 使用jwt的场景是前后端彻底分离，无法通过cookie + session来认证的情况。我感觉session机智没有那么弱的好吧,跨域无非是cookie在请求中被拦截,导致session会话丢失而已,我简单搜索了一下,就有一大票的解决方案,比如:<a href="https://blog.csdn.net/zhaoenweiex/article/details/77814918" target="_blank" rel="external">服务跨域以及Session保持问题</a></p>
+<h4 id="6-关于跨域的session丢失问题"><a href="#6-关于跨域的session丢失问题" class="headerlink" title="6.关于跨域的session丢失问题"></a>6.关于跨域的session丢失问题</h4><p>ps: 有人说除了分布式和单点登录, 使用jwt的场景是前后端彻底分离，无法通过cookie + session来认证的情况。我感觉session机智没有那么弱的好吧,跨域无非是cookie在请求中被拦截,导致session会话丢失而已,我简单搜索了一下,就有一大票的解决方案,比如</p>
+<p><a href="https://blog.csdn.net/zhaoenweiex/article/details/77814918" target="_blank" rel="external">服务跨域以及Session保持问题</a></p>
 <p>简要内容如下:</p>
 <h5 id="前台的Session保持"><a href="#前台的Session保持" class="headerlink" title="前台的Session保持"></a>前台的Session保持</h5><p>前台一般通过各种前后端交互框架实现从后台获取数据的，比如fetch，ajax，http等。下面就从这三个为例子简单介绍一下怎么保持session问题（实际上是携带cookie）。</p>
 <h6 id="Fetch"><a href="#Fetch" class="headerlink" title="Fetch"></a>Fetch</h6><p>设置 credentials: “include”</p>
@@ -273,10 +280,30 @@ var _hmt = _hmt || [];
 <p>值得注意的是，很多服务端都是有session过期的问题，因此需要更一段时间登录一次以保证session没有过期。</p>
 <h5 id="代理服务的设置"><a href="#代理服务的设置" class="headerlink" title="代理服务的设置"></a>代理服务的设置</h5><p>这里的代理服务器主要是nginx<br>在设置nginx要注意需要设置cookie的转发，否则这个session是保持不了的<br>在服务器设置部分</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">proxy_set_header Cookie $http_cookie</div></pre></td></tr></table></figure>
-<h5 id="服务端的设置"><a href="#服务端的设置" class="headerlink" title="服务端的设置"></a>服务端的设置</h5><p>最重要的当然是服务端的设置，否则一切都是白扯</p>
-<p>服务端的设置<br>最重要的当然是服务端的设置，否则一切都是白扯</p>
+<h5 id="服务端的设置"><a href="#服务端的设置" class="headerlink" title="服务端的设置"></a>服务端的设置</h5><p>服务端的设置<br>最重要的当然是服务端的设置，否则一切都是白扯</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">header(<span class="string">'Access-Control-Allow-Origin:http://127.0.0.1:80'</span>);  </div><div class="line">header(<span class="string">"Access-Control-Allow-Methods:HEAD,POST,GET,PUT,DELETE,OPTIONS"</span>); </div><div class="line">header(<span class="string">'Access-Control-Allow-Credentials: true'</span>);</div></pre></td></tr></table></figure>
 <p>注意由于设置了Access-Control-Allow-Credentials: true，因此必须设置Origin不能使用通配符(*)。</p>
+<h4 id="关于前后端分离的解读"><a href="#关于前后端分离的解读" class="headerlink" title="关于前后端分离的解读:"></a>关于前后端分离的解读:</h4><p>详见: <a href="https://blog.csdn.net/fuzhongmin05/article/details/81591072" target="_blank" rel="external">前后端分离架构概述</a></p>
+<p><strong>未分离:</strong></p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190621/HH2sHwBbfkIW.png?imageslim" alt="mark"></p>
+<p><strong>半分离:</strong></p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190621/sIotDI9pc4WR.png?imageslim" alt="mark"></p>
+<p>半分离的缺点:</p>
+<p>1）JS存在大量冗余，在业务复杂的情况下，页面的渲染部分的代码，非常复杂；<br>2）在Json返回的数据量比较大的情况下，渲染的十分缓慢，会出现页面卡顿的情况；<br>3）SEO（ Search Engine Optimization，即搜索引擎优化）非常不方便，由于搜索引擎的爬虫无法爬下JS异步渲染的数据，导致这样的页面，SEO会存在一定的问题；</p>
+<p>4）资源消耗严重，在业务复杂的情况下，一个页面可能要发起多次HTTP请求才能将页面渲染完毕。可能有人不服，觉得PC端建立多次HTTP请求也没啥。那你考虑过移动端么，知道移动端建立一次HTTP请求需要消耗多少资源么。</p>
+<p><strong>全分离:</strong></p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190621/qlmjp3eWc6Qu.png?imageslim" alt="mark"></p>
+<p>增加node.js作为中间层，具体有哪些好处呢？</p>
+<p><strong>(1)适配性提升；</strong>我们其实在开发过程中，经常会给PC端、mobile、app端各自研发一套前端。其实对于这三端来说，大部分端业务逻辑是一样的。唯一区别就是交互展现逻辑不同。如果controller层在后端手里，后端为了这些不同端页面展示逻辑，自己维护这些controller，模版无法重用，徒增和前端沟通端成本。 如果增加了node.js层，此时架构图如下：</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190621/aIhjjCjKC0RD.png?imageslim" alt="mark"></p>
+<p> 在该结构下，每种前端的界面展示逻辑由node层自己维护。如果产品经理中途想要改动界面什么的，可以由前端自己专职维护，后端无需操心。前后端各司其职，后端专注自己的业务逻辑开发，前端专注产品效果开发。</p>
+<p> <strong>(2)响应速度提升</strong>；我们有时候，会遇到后端返回给前端的数据太简单了，前端需要对这些数据进行逻辑运算。那么在数据量比较小的时候，对其做运算分组等操作，并无影响。但是当数据量大的时候，会有明显的卡顿效果。这时候，node中间层其实可以将很多这样的代码放入node层处理、也可以替后端分担一些简单的逻辑、又可以用模板引擎自己掌握前台的输出。这样做灵活度、响应度都大大提升。</p>
+<p>  <strong>(3)性能得到提升</strong>；大家应该都知道单一职责原则。从该角度来看，我们，请求一个页面，可能要响应很多个后端接口，请求变多了，自然速度就变慢了，这种现象在mobile端更加严重。采用node作为中间层，将页面所需要的多个后端数据，直接在内网阶段就拼装好，再统一返回给前端，会得到更好的性能。</p>
+<p>  <strong>(4)异步与模板统一</strong>；淘宝首页就是被几十个HTML片段（每个片段一个文件）拼装成，之前PHP同步include这几十个片段，一定是串行的，Node可以异步，读文件可以并行，一旦这些片段中也包含业务逻辑，异步的优势就很明显了，真正做到哪个文件先渲染完就先输出显示。前端机的文件系统越复杂，页面的组成片段越多，这种异步的提速效果就越明显。前后端模板统一在无线领域很有用，PC页面和WIFI场景下的页面适合前端渲染（后端数据Ajax到前端），2G、3G弱网络环境适合后端渲染（数据随页面吐给前端），所以同样的模板，在不同的条件下走不同的渲染渠道，模板只需一次开发。</p>
+<p><strong>张伯伯的个人观点:</strong></p>
+<p>关于前后端完全分离,我司现在使用的是半分离的设计,所以我对完全分离的node中间件并不熟悉,看了上面链接中的文章后,才了解了express默认使用jade或者ejs等数据模板的用意,看来它定位就是在node层将数据渲染进html,然后直接将html展示在浏览器上,避免浏览器再使用ajax请求数据。</p>
+<p>随着科技和硬件设备的进步,我这一代开发者已经很难遇到浏览器渲染慢的问题,大数据量的可以做分页,计算复杂的一般在服务器端计算后返回结果进行渲染,这样一来,在浏览器上使用ajax异步获取数据后渲染页面似乎没什么问题。</p>
+<p>但是seo无法爬取异步渲染的数据,这对新闻网站似乎是致命的,看来还是要根据具体情况来选型,不能一概而论。</p>
 
       
 
@@ -420,7 +447,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#10分钟了解JSON-Web令牌"><span class="toc-number">1.</span> <span class="toc-text">10分钟了解JSON Web令牌</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-跨域身份验证"><span class="toc-number">1.1.</span> <span class="toc-text">1.跨域身份验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-JWT的原则"><span class="toc-number">1.2.</span> <span class="toc-text">2. JWT的原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-JWT的数据结构"><span class="toc-number">1.3.</span> <span class="toc-text">3. JWT的数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-JWT头"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 JWT头</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-有效载荷"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 有效载荷</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-签名哈希"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3 签名哈希</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-4-Base64URL算法"><span class="toc-number">1.3.4.</span> <span class="toc-text">3.4 Base64URL算法</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-JWT的用法"><span class="toc-number">1.4.</span> <span class="toc-text">4. JWT的用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-JWT问题和趋势"><span class="toc-number">1.5.</span> <span class="toc-text">5. JWT问题和趋势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-关于跨域的session丢失问题"><span class="toc-number">1.6.</span> <span class="toc-text">6.关于跨域的session丢失问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#前台的Session保持"><span class="toc-number">1.6.1.</span> <span class="toc-text">前台的Session保持</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Fetch"><span class="toc-number">1.6.1.1.</span> <span class="toc-text">Fetch</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#jquery"><span class="toc-number">1.6.1.2.</span> <span class="toc-text">jquery</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Angular"><span class="toc-number">1.6.1.3.</span> <span class="toc-text">Angular</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#客户端的session保持"><span class="toc-number">1.6.2.</span> <span class="toc-text">客户端的session保持</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#代理服务的设置"><span class="toc-number">1.6.3.</span> <span class="toc-text">代理服务的设置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#服务端的设置"><span class="toc-number">1.6.4.</span> <span class="toc-text">服务端的设置</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#10分钟了解JSON-Web令牌"><span class="toc-number">1.</span> <span class="toc-text">10分钟了解JSON Web令牌</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-跨域身份验证"><span class="toc-number">1.1.</span> <span class="toc-text">1.跨域身份验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-JWT的原则"><span class="toc-number">1.2.</span> <span class="toc-text">2. JWT的原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-JWT的数据结构"><span class="toc-number">1.3.</span> <span class="toc-text">3. JWT的数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-JWT头"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 JWT头</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-有效载荷"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 有效载荷</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-签名哈希"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3 签名哈希</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-4-Base64URL算法"><span class="toc-number">1.3.4.</span> <span class="toc-text">3.4 Base64URL算法</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-JWT的用法"><span class="toc-number">1.4.</span> <span class="toc-text">4. JWT的用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-JWT问题和趋势"><span class="toc-number">1.5.</span> <span class="toc-text">5. JWT问题和趋势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-关于跨域的session丢失问题"><span class="toc-number">1.6.</span> <span class="toc-text">6.关于跨域的session丢失问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#前台的Session保持"><span class="toc-number">1.6.1.</span> <span class="toc-text">前台的Session保持</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Fetch"><span class="toc-number">1.6.1.1.</span> <span class="toc-text">Fetch</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#jquery"><span class="toc-number">1.6.1.2.</span> <span class="toc-text">jquery</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Angular"><span class="toc-number">1.6.1.3.</span> <span class="toc-text">Angular</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#客户端的session保持"><span class="toc-number">1.6.2.</span> <span class="toc-text">客户端的session保持</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#代理服务的设置"><span class="toc-number">1.6.3.</span> <span class="toc-text">代理服务的设置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#服务端的设置"><span class="toc-number">1.6.4.</span> <span class="toc-text">服务端的设置</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于前后端分离的解读"><span class="toc-number">1.7.</span> <span class="toc-text">关于前后端分离的解读:</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -545,15 +572,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -561,11 +580,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -577,19 +600,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -601,6 +616,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -609,7 +636,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -621,11 +656,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -633,19 +664,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">something</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">something</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

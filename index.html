@@ -173,6 +173,85 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-这是什么第二期" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/这是什么第二期/">这是什么第二期</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/21/这是什么第二期/" class="archive-article-date">
+  	<time datetime="2019-06-21T01:42:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本期名词:</p>
+<ul>
+<li>JWT (JSON Web Token)</li>
+</ul>
+        
+          <a class="article-more-a" href="/2019/06/21/这是什么第二期/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">something</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/21/这是什么第二期/">打开看看 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-百度地图，在线飙车" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -195,28 +274,9 @@ var _hmt = _hmt || [];
       
         <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190522/iEfUWjhkgVXq.jpg?imageslim" alt="mark"></p>
 <h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析:"></a>需求分析:</h3><p>最近，公司要求实现个<del>在线飙车系统</del>实时展示出租车行驶路线图，必须要求出租车在线动起来,我一拍小脑瓜就说这需求太简单请交给我吧! 我每天都在看京东淘宝的快递小车在地图上移动,早就想干他一票了!</p>
-<h3 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示:"></a>效果演示:</h3><video id="video" controls preload="none" poster="http://qiniuyun.ipromiseyourlife.com/blog/20190522/iEfUWjhkgVXq.jpg?imageslim" style="width:92%;"><br>      <source id="wmv" src="http://qiniuyun.ipromiseyourlife.com/moveCar.webm" type="video/webm"><br>  </video>
-
-<h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><p><strong>产品:</strong>  我们怕是不能和人家比, 我们每15秒才获取一次出租车的定位, 所以你的任务是每十五秒获取下一个位置, 然后让小车从当前点驾驶到下个点即可;</p>
-<p><strong>我:</strong>  15秒? 我的车百公里加速才要3秒,15秒我要是从建筑物左边开到建筑物右边, 那车的行驶路线岂不是有可能穿墙而过?  除非我用百度的自动规划路线,可是路线如果有多条, 我怎么知道小车真实走的是哪个路线呢?</p>
-<p><strong>产品:</strong>  emmm~,15秒走不了多远吧,我的电瓶车才能走出十多米, 既然无法知道真实路线,那我们先穿墙吧, 也不是什么大事~ </p>
-<p><strong>我:</strong> 15秒获取一次数据的话, 用http请求会导致延迟, 不如我们用ws来实时更新吧~</p>
-<p><strong>产品:</strong> emmm~, 我们的后台正忙着从node迁移到java,再迁移到php,再迁移到python,再迁移到go,再迁移到Ruby,再迁移到.net, 数据库也正从oracle迁移到mysql,,再迁移到PostgreSQL,,再迁移到mongoDB,,再迁移到Cassandra,再迁移到CouchDB,再迁移到~</p>
-<p><strong>我:</strong> 我明白了, 告辞!!</p>
-<p>综上所述, 我的小车是每十五秒确定一个起点和终点, 然后让小车平滑驾驶过去即可, 所以每十五秒确定一次车头方向, 获取数据的延迟需要等待后端同学配合解决,下面开始实现过程:</p>
-<h4 id="1-出租车需要根据经纬度数据，在两个点之间平滑移动"><a href="#1-出租车需要根据经纬度数据，在两个点之间平滑移动" class="headerlink" title="1.出租车需要根据经纬度数据，在两个点之间平滑移动"></a>1.出租车需要根据经纬度数据，在两个点之间平滑移动</h4><p>（1）为了避免小车出现僵尸跳的效果，将两个点的坐标平分成多个坐标点，然后通过百度地图api提供的setPosition(new BMap.Point)方法改变小车的位置，使用下一帧神器requestAnimationFrame来让小车丝滑的移动到下个位置。</p>
-<p>（2）如何知道两个点之间有哪些坐标点？</p>
-<p>通过map.getMapType().getProjection().lngLatToPoint(BMap.Point)将球面的经纬度坐标转换为平面坐标(x,y)。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">  *缓动效果</div><div class="line">  *初始坐标，目标坐标，当前的步长，总的步长</div><div class="line">  *@param&#123;BMap.Pixel&#125; initPos 初始平面坐标</div><div class="line">  *@parm&#123;BMap.Pixel&#125; targetPos 目标平面坐标</div><div class="line">  *@param&#123;number&#125; currentCount 当前帧数</div><div class="line">  *@param &#123;number&#125; count 总帧数</div><div class="line">*/</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">effect</span>(<span class="params">initPos, targetPos, currentCount, count</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> b = initPos, c = targetPos - initPos, t = currentCount,</div><div class="line">    d = count;</div><div class="line">    <span class="keyword">return</span> c * t / d + b;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>（3）小车移动完整代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">*小车移动</div><div class="line">*@param &#123;Point&#125; prvePoint 开始坐标(PrvePoint)</div><div class="line">*@param &#123;Point&#125; newPoint 目标点坐标</div><div class="line">*@param &#123;int&#125; _runTime 动画持续时间(15000ms)</div><div class="line">*@param &#123;float&#125; _intervalTimer 一帧间隔(16.7ms)</div><div class="line">*@return  无返回值	</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getTrack_realTime</span>(<span class="params">prvePoint, newPoint, _runTime, _intervalTimer</span>) </span>&#123;</div><div class="line">	<span class="comment">//当前帧数</span></div><div class="line">	<span class="keyword">var</span> currentCount = <span class="number">0</span>,</div><div class="line">		<span class="comment">//将球面坐标转换为平面坐标</span></div><div class="line">		<span class="comment">//获取结束点的(x,y)坐标</span></div><div class="line">		<span class="comment">//初始坐标</span></div><div class="line">		_prvePoint = map.getMapType().getProjection().lngLatToPoint(<span class="keyword">new</span> BMap.Point(prvePoint.lon, prvePoint.lat)),</div><div class="line">		<span class="comment">//目标坐标</span></div><div class="line">		_newPoint = map.getMapType().getProjection().lngLatToPoint(<span class="keyword">new</span> BMap.Point(newPoint.lon, newPoint.lat)),</div><div class="line">		<span class="comment">//两点之间要循环定位的次数,要走多少步</span></div><div class="line">		count = _runTime / _intervalTimer;</div><div class="line">    	<span class="comment">//两点之间匀速移动</span></div><div class="line">		<span class="keyword">var</span> _intervalFlag = requestAnimationFrame(<span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="comment">//两点之间当前帧数大于总帧数的时候，则说明已经完成移动</span></div><div class="line">			<span class="keyword">if</span> (currentCount &gt;= count) &#123;</div><div class="line">				cancelAnimationFrame(_intervalFlag);</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">            	<span class="comment">//动画移动</span></div><div class="line">				currentCount++; <span class="comment">//计数</span></div><div class="line">				<span class="keyword">var</span> x = effect(_prvePoint.x, _newPoint.x, currentCount, count),</div><div class="line">					y = effect(_prvePoint.y, _newPoint.y, currentCount, count);</div><div class="line">                <span class="comment">//根据平面坐标转化为球面坐标</span></div><div class="line">				<span class="keyword">var</span> pos = map.getMapType().getProjection().pointToLngLat(newBMap.Pixel(x, y));</div><div class="line">                <span class="comment">//设置marker角度(两点之间的距离车的角度保持一致)</span></div><div class="line">				<span class="comment">//转换角度</span></div><div class="line">                setRotation(prvePoint, newPoint);</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="comment">//正在移动</span></div><div class="line">			marker.setPosition(pos);</div><div class="line">			_intervalFlag = requestAnimationFrame(fn);</div><div class="line">		&#125;</div><div class="line">	&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="车头需要根据经纬度数据指向其行驶的方向"><a href="#车头需要根据经纬度数据指向其行驶的方向" class="headerlink" title="车头需要根据经纬度数据指向其行驶的方向"></a>车头需要根据经纬度数据指向其行驶的方向</h4><p>根据计算出, 改变覆盖物的旋转角度api: map.setRotation(number);</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">*在每个点的真实步骤中设置小车转动的角度</div><div class="line">*@param&#123;BMap.Point&#125; curPos 起点</div><div class="line">*@param&#123;BMap.Point&#125; targetPos 终点</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setRotation</span>(<span class="params">curPos, targetPos</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> deg = <span class="number">0</span>;</div><div class="line">	<span class="keyword">if</span> (targetPos.lat != curPos.lat) &#123;</div><div class="line">		<span class="keyword">var</span> tan = (targetPos.lon - curPos.lon) / (targetPos.lat - curPos.lat),</div><div class="line">			atan = <span class="built_in">Math</span>.atan(tan);</div><div class="line">		deg = atan * <span class="number">360</span> / (<span class="number">2</span> * <span class="built_in">Math</span>.PI);</div><div class="line">		<span class="keyword">if</span> (targetPos.lat &lt; curPos.lat) &#123;</div><div class="line">			deg = -deg + <span class="number">90</span> + <span class="number">90</span>;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			deg = -deg;</div><div class="line">		&#125;</div><div class="line">		marker.setRotation(-deg);</div><div class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (targetPos.lon != curPos.lon) &#123;</div><div class="line">		<span class="keyword">var</span> disy = targetPos.y - curPos.y;</div><div class="line">		<span class="keyword">var</span> bias = <span class="number">0</span>;</div><div class="line">		<span class="keyword">if</span> (disy &gt; <span class="number">0</span>) &#123;</div><div class="line">			bias = <span class="number">-1</span></div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			bias = <span class="number">1</span></div><div class="line">		&#125;</div><div class="line">		marker.setRotation(-bias * <span class="number">90</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="可优化点"><a href="#可优化点" class="headerlink" title="可优化点"></a>可优化点</h4><ol>
-<li>15秒使用ajax获取一次数据,延迟问题需要解决;</li>
-<li>优化转向操作: 现在是直接更改方向,可考虑加入动画平滑转向;</li>
-</ol>
-
+        
+          <a class="article-more-a" href="/2019/05/22/百度地图，在线飙车/#more">more >></a>
+        
       
 
       
@@ -910,88 +970,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-建站练习全记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/15/建站练习全记录/">建站练习全记录</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/15/建站练习全记录/" class="archive-article-date">
-  	<time datetime="2018-11-15T01:41:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20181205/UR7r9tM6kt4r.jpg?imageslim" alt="mark"></p>
-<blockquote>
-<p>黄河西来决昆仑，咆哮万里触龙门。</p>
-<p>—————– by 李白 公无渡河</p>
-</blockquote>
-<p><strong>写在前面:</strong> </p>
-<p>起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。</p>
-        
-          <a class="article-more-a" href="/2018/11/15/建站练习全记录/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/15/建站练习全记录/">打开看看 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1100,11 +1078,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1112,11 +1090,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1128,6 +1106,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
@@ -1136,15 +1118,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1156,19 +1134,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1180,15 +1158,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1196,7 +1174,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">

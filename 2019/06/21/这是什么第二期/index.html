@@ -17,7 +17,7 @@
 <meta property="og:description" content="本期名词:  JWT (JSON Web Token)">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/LgVHlBaLcunc.png?imageslim">
-<meta property="og:updated_time" content="2019-06-21T02:25:58.930Z">
+<meta property="og:updated_time" content="2019-06-21T04:01:57.450Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="这是什么第二期">
 <meta name="twitter:description" content="本期名词:  JWT (JSON Web Token)">
@@ -224,13 +224,13 @@ var _hmt = _hmt || [];
 <p>最后，使用Base64 URL算法将上述JSON对象转换为字符串保存。</p>
 <h5 id="3-2-有效载荷"><a href="#3-2-有效载荷" class="headerlink" title="3.2 有效载荷"></a><strong>3.2 有效载荷</strong></h5><p>有效载荷部分，是JWT的主体内容部分，也是一个JSON对象，包含需要传递的数据。 JWT指定七个默认字段供选择。</p>
 <blockquote>
-<p>iss：发行人</p>
-<p>exp：到期时间</p>
-<p>sub：主题</p>
-<p>aud：用户</p>
-<p>nbf：在此之前不可用</p>
-<p>iat：发布时间</p>
-<p>jti：JWT ID用于标识该JWT</p>
+<p>iss：jwt签发者</p>
+<p>exp：过期时间(这个过期时间必须要大于签发时间)</p>
+<p>sub：主题(jwt所面向的用户)</p>
+<p>aud：用户(接收jwt的一方)</p>
+<p>nbf：定义在什么时间之前，该jwt都是不可用的</p>
+<p>iat：jwt的签发时间</p>
+<p>jti：JWT ID用于标识该JWT,主要用来作为一次性token,从而回避重放攻击。</p>
 </blockquote>
 <p>exp：到期时间</p>
 <p>sub：主题</p>
@@ -249,7 +249,8 @@ var _hmt = _hmt || [];
 <h5 id="3-4-Base64URL算法"><a href="#3-4-Base64URL算法" class="headerlink" title="3.4 Base64URL算法"></a><strong>3.4 Base64URL算法</strong></h5><p>如前所述，JWT头和有效载荷序列化的算法都用到了<strong>Base64URL</strong>。该算法和常见Base64算法类似，稍有差别。</p>
 <p>作为令牌的JWT可以放在URL中（例如api.example/?token=xxx）。 Base64中用的三个字符是”+”，”/“和”=”，由于在URL中有特殊含义，因此Base64URL中对他们做了替换：”=”去掉，”+”用”-“替换，”/“用”_”替换，这就是Base64URL算法，很简单把。</p>
 <h4 id="4-JWT的用法"><a href="#4-JWT的用法" class="headerlink" title="4. JWT的用法"></a><strong>4. JWT的用法</strong></h4><p>客户端接收服务器返回的JWT，将其存储在Cookie或localStorage中。</p>
-<p>此后，客户端将在与服务器交互中都会带JWT。如果将它存储在Cookie中，就可以自动发送，但是不会跨域，因此一般是将它放入HTTP请求的Header Authorization字段中。</p>
+<p>此后，客户端将在与服务器交互中都会带JWT。如果将它存储在Cookie中，就可以自动发送，但是不会跨域</p>
+<p>因此一般是将它放入HTTP请求的Header Authorization字段中。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Authorization: Bearer</div></pre></td></tr></table></figure>
 <p>当跨域时，也可以将JWT被放置于POST请求的数据主体中。</p>
 <h4 id="5-JWT问题和趋势"><a href="#5-JWT问题和趋势" class="headerlink" title="5. JWT问题和趋势"></a><strong>5. JWT问题和趋势</strong></h4><p>1、JWT默认不加密，但可以加密。生成原始令牌后，可以使用改令牌再次对其进行加密。</p>
@@ -258,7 +259,24 @@ var _hmt = _hmt || [];
 <p>4、JWT的最大缺点是服务器不保存会话状态，所以在使用期间不可能取消令牌或更改令牌的权限。也就是说，一旦JWT签发，在有效期内将会一直有效。</p>
 <p>5、JWT本身包含认证信息，因此一旦信息泄露，任何人都可以获得令牌的所有权限。为了减少盗用，JWT的有效期不宜设置太长。对于某些重要操作，用户在使用时应该每次都进行进行身份验证。</p>
 <p>6、为了减少盗用和窃取，JWT不建议使用HTTP协议来传输代码，而是使用加密的HTTPS协议进行传输。</p>
-<p>摘自<a href="https://baijiahao.baidu.com/s?id=1608021814182894637&amp;wfr=spider&amp;for=pc" target="_blank" rel="external">10分钟了解JSON Web令牌（JWT）</a></p>
+<p>已上摘自<a href="http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html" target="_blank" rel="external">JSON Web Token 入门教程</a></p>
+<h4 id="6-关于跨域的session丢失问题"><a href="#6-关于跨域的session丢失问题" class="headerlink" title="6.关于跨域的session丢失问题"></a>6.关于跨域的session丢失问题</h4><p>ps: 有人说除了分布式和单点登录, 使用jwt的场景是前后端彻底分离，无法通过cookie + session来认证的情况。我感觉session机智没有那么弱的好吧,跨域无非是cookie在请求中被拦截,导致session会话丢失而已,我简单搜索了一下,就有一大票的解决方案,比如:<a href="https://blog.csdn.net/zhaoenweiex/article/details/77814918" target="_blank" rel="external">服务跨域以及Session保持问题</a></p>
+<p>简要内容如下:</p>
+<h5 id="前台的Session保持"><a href="#前台的Session保持" class="headerlink" title="前台的Session保持"></a>前台的Session保持</h5><p>前台一般通过各种前后端交互框架实现从后台获取数据的，比如fetch，ajax，http等。下面就从这三个为例子简单介绍一下怎么保持session问题（实际上是携带cookie）。</p>
+<h6 id="Fetch"><a href="#Fetch" class="headerlink" title="Fetch"></a>Fetch</h6><p>设置 credentials: “include”</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">getData: <span class="function"><span class="keyword">function</span> (<span class="params">v,  callback, errorCallBack</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> url = URL + <span class="string">'/list?version='</span>+v;</div><div class="line">    fetch(url, &#123;</div><div class="line">        <span class="attr">method</span>: <span class="string">'GET'</span>,</div><div class="line">        <span class="attr">credentials</span>: <span class="string">"include"</span></div><div class="line">    &#125;).then(<span class="function">(<span class="params">response</span>)=&gt;</span>response.json())</div><div class="line">        .then(<span class="function">(<span class="params">responseJsonData</span>)=&gt;</span> &#123;</div><div class="line">            callback &amp;&amp; callback(responseJsonData);</div><div class="line">        &#125;).catch(<span class="function">(<span class="params">error</span>)=&gt;</span> &#123;     </div><div class="line">        &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h6 id="jquery"><a href="#jquery" class="headerlink" title="jquery"></a>jquery</h6><p>一般需要采用全局设置的方式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$.ajaxSetup(&#123;<span class="attr">xhrFiled</span>:&#123;</div><div class="line">	<span class="string">'withCredentials'</span>:<span class="literal">true</span></div><div class="line">&#125;&#125;)</div><div class="line">$.ajax(url:url,<span class="attr">method</span>:<span class="string">"get"</span>,<span class="attr">success</span>:<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;<span class="built_in">console</span>.log(data)&#125;);</div></pre></td></tr></table></figure>
+<h6 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h6><p>设置{‘withCredentials’:true}</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params">$scope,$http</span>)</span>&#123;</div><div class="line"> 	$http.post(url,&#123;<span class="attr">v1</span>:<span class="string">'name_eu'</span>&#125;,&#123;<span class="string">'withCredentials'</span>:<span class="literal">true</span>&#125;).success(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">     	$scope.var= data; </div><div class="line"> 	&#125;); </div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h5 id="客户端的session保持"><a href="#客户端的session保持" class="headerlink" title="客户端的session保持"></a>客户端的session保持</h5><p>这里的客户端指的是与服务端通讯的java，C#等单独的应用程序，实际上客户端本身是不存在纯粹的跨域问题，因为没有浏览器的同源策略的限制。但仍然存在session保持问题，同时由于不是前台，没有浏览器帮助解决cookie的携带问题，因此客户端的session保持问题需要对验证过程的更深入的理解才能完美解决。<br>在上文中我们已经谈到了实际上客户端（无论是前台还是应用程序）都是拿着sessionId向服务端进行验证的。我们通过浏览器开发工具可以看到，前端的sessionId是服务端写入到Cookie中的，而且一般是httpOnly属性(这也意味着我们不能通过普通的方法从cookie中将这个sessionId取出来)，在向服务端发送请求时浏览器自动携带的，前台完成这一切只需要设置 credentials字段，其余的全部由浏览器或框架自动完成。但在客户端这一过程需要我们手动完成。下面我们就简单介绍以下，这一过程的基本原理。<br>1.向服务端发发送登录请求<br>2.在获取到服务端的反馈结果后，检查是否登录成功<br>3.若登录成功则获取该请求的cookie数据(JSESSIONID)，并记录在缓存中。<br>4.按照业务需求发送其他请求，但要在每次发送时在request的header中添加Cookie,JESSIONID=缓存值(实际工程里我们可以检测每个cookie找到name=jsessionid的项，把整个项缓存起来)</p>
+<p>值得注意的是，很多服务端都是有session过期的问题，因此需要更一段时间登录一次以保证session没有过期。</p>
+<h5 id="代理服务的设置"><a href="#代理服务的设置" class="headerlink" title="代理服务的设置"></a>代理服务的设置</h5><p>这里的代理服务器主要是nginx<br>在设置nginx要注意需要设置cookie的转发，否则这个session是保持不了的<br>在服务器设置部分</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">proxy_set_header Cookie $http_cookie</div></pre></td></tr></table></figure>
+<h5 id="服务端的设置"><a href="#服务端的设置" class="headerlink" title="服务端的设置"></a>服务端的设置</h5><p>最重要的当然是服务端的设置，否则一切都是白扯</p>
+<p>服务端的设置<br>最重要的当然是服务端的设置，否则一切都是白扯</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">header(<span class="string">'Access-Control-Allow-Origin:http://127.0.0.1:80'</span>);  </div><div class="line">header(<span class="string">"Access-Control-Allow-Methods:HEAD,POST,GET,PUT,DELETE,OPTIONS"</span>); </div><div class="line">header(<span class="string">'Access-Control-Allow-Credentials: true'</span>);</div></pre></td></tr></table></figure>
+<p>注意由于设置了Access-Control-Allow-Credentials: true，因此必须设置Origin不能使用通配符(*)。</p>
 
       
 
@@ -402,7 +420,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#10分钟了解JSON-Web令牌"><span class="toc-number">1.</span> <span class="toc-text">10分钟了解JSON Web令牌</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-跨域身份验证"><span class="toc-number">1.1.</span> <span class="toc-text">1.跨域身份验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-JWT的原则"><span class="toc-number">1.2.</span> <span class="toc-text">2. JWT的原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-JWT的数据结构"><span class="toc-number">1.3.</span> <span class="toc-text">3. JWT的数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-JWT头"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 JWT头</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-有效载荷"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 有效载荷</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-签名哈希"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3 签名哈希</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-4-Base64URL算法"><span class="toc-number">1.3.4.</span> <span class="toc-text">3.4 Base64URL算法</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-JWT的用法"><span class="toc-number">1.4.</span> <span class="toc-text">4. JWT的用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-JWT问题和趋势"><span class="toc-number">1.5.</span> <span class="toc-text">5. JWT问题和趋势</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#10分钟了解JSON-Web令牌"><span class="toc-number">1.</span> <span class="toc-text">10分钟了解JSON Web令牌</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-跨域身份验证"><span class="toc-number">1.1.</span> <span class="toc-text">1.跨域身份验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-JWT的原则"><span class="toc-number">1.2.</span> <span class="toc-text">2. JWT的原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-JWT的数据结构"><span class="toc-number">1.3.</span> <span class="toc-text">3. JWT的数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-JWT头"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 JWT头</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-有效载荷"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 有效载荷</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-签名哈希"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3 签名哈希</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-4-Base64URL算法"><span class="toc-number">1.3.4.</span> <span class="toc-text">3.4 Base64URL算法</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-JWT的用法"><span class="toc-number">1.4.</span> <span class="toc-text">4. JWT的用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-JWT问题和趋势"><span class="toc-number">1.5.</span> <span class="toc-text">5. JWT问题和趋势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-关于跨域的session丢失问题"><span class="toc-number">1.6.</span> <span class="toc-text">6.关于跨域的session丢失问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#前台的Session保持"><span class="toc-number">1.6.1.</span> <span class="toc-text">前台的Session保持</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Fetch"><span class="toc-number">1.6.1.1.</span> <span class="toc-text">Fetch</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#jquery"><span class="toc-number">1.6.1.2.</span> <span class="toc-text">jquery</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Angular"><span class="toc-number">1.6.1.3.</span> <span class="toc-text">Angular</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#客户端的session保持"><span class="toc-number">1.6.2.</span> <span class="toc-text">客户端的session保持</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#代理服务的设置"><span class="toc-number">1.6.3.</span> <span class="toc-text">代理服务的设置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#服务端的设置"><span class="toc-number">1.6.4.</span> <span class="toc-text">服务端的设置</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -527,7 +545,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -535,23 +553,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -563,19 +581,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,19 +601,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -608,6 +618,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">

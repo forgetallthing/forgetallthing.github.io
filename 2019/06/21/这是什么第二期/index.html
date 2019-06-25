@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/sIotDI9pc4WR.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/qlmjp3eWc6Qu.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/aIhjjCjKC0RD.png?imageslim">
-<meta property="og:updated_time" content="2019-06-21T07:13:33.516Z">
+<meta property="og:updated_time" content="2019-06-21T09:21:58.362Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="这是什么第二期">
 <meta name="twitter:description" content="本期名词:  JWT (JSON Web Token)">
@@ -212,7 +212,7 @@ var _hmt = _hmt || [];
 <p>3.服务器向用户返回session_id，session信息都会写入到用户的Cookie。</p>
 <p>4.用户的每个后续请求都将通过在Cookie中取出session_id传给服务器。</p>
 <p>5.服务器收到session_id并对比之前保存的数据，确认用户的身份。</p>
-<p>这种模式最大的问题是，没有<strong>分布式架构</strong>，无法支持横向扩展。如果使用一个服务器，该模式完全没有问题。但是，如果它是服务器群集或面向服务的跨域体系结构的话，则需要一个统一的session数据库库来保存会话数据实现共享，这样负载均衡下的每个服务器才可以正确的验证用户身份。</p>
+<p>这种模式最大的问题是，没有<strong>分布式架构</strong>，无法支持横向扩展。如果使用一个服务器，该模式完全没有问题。但是，如果它是服务器群集或面向服务的跨域体系结构的话，则需要一个统一的session数据库来保存会话数据实现共享，这样负载均衡下的每个服务器才可以正确的验证用户身份。</p>
 <p>例如实际中常见的<strong>单点登陆</strong>的需求：站点A和站点B提供同一公司的相关服务。现在要求用户只需要登录其中一个网站，然后它就会自动登录到另一个网站。怎么做？</p>
 <p>一种解决方案是持久化session数据，写入数据库或文件持久层等。收到请求后，验证服务从持久层请求数据。该解决方案的优点在于架构清晰，而缺点是架构修改比较费劲，整个服务的验证逻辑层都需要重写，工作量相对较大。而且由于依赖于持久层的数据库或者问题系统，会有单点风险，如果持久层失败，整个认证体系都会挂掉。</p>
 <p>而现在流行另外一种灵活的解决方案，通过客户端保存数据，而服务器根本不保存会话数据，每个请求都被发送回服务器。 <strong>JWT</strong>是这种解决方案的代表。</p>
@@ -576,15 +576,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">echarts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -596,7 +592,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -604,7 +608,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -616,15 +620,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -636,15 +632,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -653,6 +645,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -668,11 +668,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">something</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">something</a>
               </li>
             
             <div class="clearfix"></div>

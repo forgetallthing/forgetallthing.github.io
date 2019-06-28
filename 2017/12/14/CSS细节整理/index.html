@@ -17,7 +17,7 @@
 <meta property="og:description" content="本来css部分也写在前端知识整理里，但随着css相关日益增多，还是单独开个文章专门记录，会比较琐碎，请多担待。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/8b3399e2a71d32ad1362a0e4116655ff.jpeg">
-<meta property="og:updated_time" content="2019-05-22T06:09:45.803Z">
+<meta property="og:updated_time" content="2019-06-28T02:41:22.020Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS细节整理">
 <meta name="twitter:description" content="本来css部分也写在前端知识整理里，但随着css相关日益增多，还是单独开个文章专门记录，会比较琐碎，请多担待。">
@@ -267,6 +267,31 @@ var _hmt = _hmt || [];
 <p>在容器外面再嵌套一层 <code>overflow:hidden</code> 内部内容再限制尺寸和外部嵌套层一样，就变相隐藏了。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.outer-container</span>,<span class="selector-class">.content</span> &#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">200px</span>; <span class="attribute">height</span>: <span class="number">200px</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.outer-container</span> &#123;</div><div class="line">	<span class="attribute">position</span>: relative;</div><div class="line">	<span class="attribute">overflow</span>: hidden;</div><div class="line">	<span class="attribute">background-color</span>: <span class="number">#7FFFD4</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.inner-container</span> &#123;</div><div class="line">	<span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">	<span class="attribute">position</span>: absolute; <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">	<span class="attribute">overflow-x</span>: hidden;</div><div class="line">	<span class="attribute">overflow-y</span>: scroll;</div><div class="line">&#125;</div><div class="line"></div><div class="line"> <span class="comment">/* for Chrome */</span></div><div class="line"><span class="selector-class">.inner-container</span><span class="selector-pseudo">::-webkit-scrollbar</span> &#123;</div><div class="line">	<span class="attribute">display</span>: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"outer-container"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"inner-container"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="js外部样式和style属性的添加移除"><a href="#js外部样式和style属性的添加移除" class="headerlink" title="js外部样式和style属性的添加移除"></a><strong>js外部样式和style属性的添加移除</strong></h4><ol>
+<li>外部样式class的添加删除</li>
+</ol>
+<p>html：document.getElemntById(“元素id”).addClass(“样式类名”);</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.getElemntById(<span class="string">"元素id"</span>).removeClass(<span class="string">"样式类名"</span>);</div></pre></td></tr></table></figure>
+<p>Jquery：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#元素id"</span>).addClass(<span class="string">"样式类名"</span>);         <span class="comment">//追加样式</span></div><div class="line">$(<span class="string">"#元素id"</span>).removeClass(<span class="string">"样式类名"</span>);</div><div class="line">$(<span class="string">"#元素id"</span>).toggleClass(<span class="string">"样式类名"</span>);    <span class="comment">//添加删除切换样式</span></div><div class="line">$(<span class="string">"#元素id"</span>).css(<span class="string">"属性名"</span>，<span class="string">"属性值"</span>);          <span class="comment">//追加样式属性</span></div></pre></td></tr></table></figure>
+<ol>
+<li>内部样式style的增加删除</li>
+</ol>
+<p>使用JS操作style属性的写法是有一定规律的，下面以一个style属性为例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">style=<span class="string">"margin:1px;border-bottom:1px soild #ccc;float:right;"</span></div></pre></td></tr></table></figure>
+<p>  a.对于没有中划线的css属性一般直接使用style.属性名即可访问。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">obj.style.margin = <span class="string">"2px"</span>;<span class="comment">//修改margin属性</span></div></pre></td></tr></table></figure>
+<p>  b.对于含有中划线的css属性，将每个中划线去点并将每个中划线后的第一个字母大写，通过style.改写后的属性名访问。如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">obj.style.borderBottom = <span class="string">""</span>;<span class="comment">//清空border-bottom属性</span></div></pre></td></tr></table></figure>
+<p>  c.float属性比较特殊，IE：obj.style.styleFloat,其他浏览器：obj.style.cssFloat.</p>
+<ol>
+<li>其他：</li>
+</ol>
+<p>获取所有的style属性值：obj.style.cssText;</p>
+<p>删除属性:obj.style.属性名 = “”;</p>
+<p>或者使用jquery的css()方法。如：</p>
+<p>$(“#id”).css(“width”):获取style中width属性的值</p>
+<p>$(“#id”).css(“width”,”100px”):设置style中width属性的值为100px。</p>
 
       
 
@@ -419,7 +444,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用calc做简单运算"><span class="toc-number">1.</span> <span class="toc-text">使用calc做简单运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重复指定box-shadow"><span class="toc-number">2.</span> <span class="toc-text">重复指定box-shadow</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#响应式网页中，如何只用CSS实现div的高和宽保持固定比例"><span class="toc-number">3.</span> <span class="toc-text">响应式网页中，如何只用CSS实现div的高和宽保持固定比例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#元素垂直水平居中"><span class="toc-number">4.</span> <span class="toc-text">元素垂直水平居中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#去除inline-block元素间间距"><span class="toc-number">5.</span> <span class="toc-text">去除inline-block元素间间距</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#去除滚动条"><span class="toc-number">6.</span> <span class="toc-text">去除滚动条</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用calc做简单运算"><span class="toc-number">1.</span> <span class="toc-text">使用calc做简单运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重复指定box-shadow"><span class="toc-number">2.</span> <span class="toc-text">重复指定box-shadow</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#响应式网页中，如何只用CSS实现div的高和宽保持固定比例"><span class="toc-number">3.</span> <span class="toc-text">响应式网页中，如何只用CSS实现div的高和宽保持固定比例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#元素垂直水平居中"><span class="toc-number">4.</span> <span class="toc-text">元素垂直水平居中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#去除inline-block元素间间距"><span class="toc-number">5.</span> <span class="toc-text">去除inline-block元素间间距</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#去除滚动条"><span class="toc-number">6.</span> <span class="toc-text">去除滚动条</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#js外部样式和style属性的添加移除"><span class="toc-number">7.</span> <span class="toc-text">js外部样式和style属性的添加移除</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -556,7 +581,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -564,11 +589,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -576,11 +597,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -608,10 +641,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
@@ -628,7 +657,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -636,7 +665,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">

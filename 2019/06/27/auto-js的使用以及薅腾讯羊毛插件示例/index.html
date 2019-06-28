@@ -6,18 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017 | 张伯伯的BLOG</title>
+  <title>auto.js的使用以及薅羊毛插件示例 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="哪里有幸福可借">
-<meta property="og:type" content="website">
-<meta property="og:title" content="张伯伯的BLOG">
-<meta property="og:url" content="http://yoursite.com/archives/2017/index.html">
+  <meta name="description" content="auto.js简介什么是auto.jsauto.js是一个支持无障碍服务的Android平台上的JavaScript IDE，可以编写各种自动化脚本，它主要有以下优点：  无需root：基于无障碍服务； 基于控件：以坐标为基础的按键精灵、脚本精灵很容易出现分辨率问题，而以控件为基础的Auto.js则没有这个问题； 上手简单：使用javascript编写，支持中文变量名； 可打包 ：可以将Java">
+<meta name="keywords" content="auto.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="auto.js的使用以及薅羊毛插件示例">
+<meta property="og:url" content="http://yoursite.com/2019/06/27/auto-js的使用以及薅腾讯羊毛插件示例/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="哪里有幸福可借">
+<meta property="og:description" content="auto.js简介什么是auto.jsauto.js是一个支持无障碍服务的Android平台上的JavaScript IDE，可以编写各种自动化脚本，它主要有以下优点：  无需root：基于无障碍服务； 基于控件：以坐标为基础的按键精灵、脚本精灵很容易出现分辨率问题，而以控件为基础的Auto.js则没有这个问题； 上手简单：使用javascript编写，支持中文变量名； 可打包 ：可以将Java">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190627/vGw8F3rCf8bo.jpg?imageslim">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190627/AUaYSA5pfEoD.png?imageslim">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190627/ErIIyyVKAt1k.png?imageslim">
+<meta property="og:updated_time" content="2019-06-28T02:41:43.281Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="张伯伯的BLOG">
-<meta name="twitter:description" content="哪里有幸福可借">
+<meta name="twitter:title" content="auto.js的使用以及薅羊毛插件示例">
+<meta name="twitter:description" content="auto.js简介什么是auto.jsauto.js是一个支持无障碍服务的Android平台上的JavaScript IDE，可以编写各种自动化脚本，它主要有以下优点：  无需root：基于无障碍服务； 基于控件：以坐标为基础的按键精灵、脚本精灵很容易出现分辨率问题，而以控件为基础的Auto.js则没有这个问题； 上手简单：使用javascript编写，支持中文变量名； 可打包 ：可以将Java">
+<meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190627/vGw8F3rCf8bo.jpg?imageslim">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -171,409 +177,240 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-auto-js的使用以及薅腾讯羊毛插件示例" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      auto.js的使用以及薅羊毛插件示例
+    </h1>
+  
+
+        
+        <a href="/2019/06/27/auto-js的使用以及薅腾讯羊毛插件示例/" class="archive-article-date">
+  	<time datetime="2019-06-27T03:36:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-27</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190627/vGw8F3rCf8bo.jpg?imageslim" alt="mark"></p>
+<h3 id="auto-js简介"><a href="#auto-js简介" class="headerlink" title="auto.js简介"></a>auto.js简介</h3><h4 id="什么是auto-js"><a href="#什么是auto-js" class="headerlink" title="什么是auto.js"></a>什么是auto.js</h4><p><strong>auto.js</strong>是一个支持无障碍服务的Android平台上的JavaScript IDE，可以编写各种自动化脚本，它主要有以下优点：</p>
+<ol>
+<li><strong>无需root</strong>：基于无障碍服务；</li>
+<li><strong>基于控件：</strong>以坐标为基础的按键精灵、脚本精灵很容易出现分辨率问题，而以控件为基础的Auto.js则没有这个问题；</li>
+<li><strong>上手简单：</strong>使用javascript编写，支持中文变量名；</li>
+<li><strong>可打包 ：</strong>可以将JavaScript打包为apk文件，这一点可以简化用户操作，对上了年纪的用户很重要；</li>
+</ol>
+<p>另外<strong>auto.js</strong>还有结合<strong>Tasker</strong>、自动布局分析、生成简单代码等功能，详见官方文档，这里就不搬运了~</p>
+<a id="more"></a>
+<h4 id="auto-js能做什么"><a href="#auto-js能做什么" class="headerlink" title="auto.js能做什么"></a>auto.js能做什么</h4><p><strong>auto.js</strong>可以替代用户做一些手机操作，比如以下脚本：</p>
+<ol>
+<li>一键收集蚂蚁森林能量</li>
+<li>微信跳一跳脚本</li>
+<li>支付宝星星球脚本</li>
+<li>手机屏幕取色器</li>
+<li>百度贴吧一键签到</li>
+<li>东方头条、趣头条自动刷金币</li>
+<li>超星尔雅学习刷课脚本</li>
+<li>王者荣耀刷金币</li>
+</ol>
+<h4 id="auto-js怎么用"><a href="#auto-js怎么用" class="headerlink" title="auto.js怎么用"></a>auto.js怎么用</h4><p>首先下载<strong>auto.js APP</strong>，地址在下方</p>
+<ol>
+<li>安装并打开，会提示需要启用无障碍服务，点击去设置，会跳转到手机设置-系统-无障碍页面，在应用列表选择Auto.js，开启无障碍服务即可；</li>
+<li>回到APP主页，你的脚本会在菜单栏第一项：脚本中，右下角可以选择导入脚本，或者新建文件或文件夹，我们新建一个send.js，点击三角标志可以运行脚本，我们首先点击铅笔图标进入编辑页面；</li>
+</ol>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190627/AUaYSA5pfEoD.png?imageslim" alt="mark"></p>
+<ol>
+<li><p>auto.js提供了很好的手机端辅助编辑工具，我们输入以下代码，这段代码可以输入一段文字，并发送给QQ好友：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//本示例来自官方文档，是一个QQ文本消息分享脚本</span></div><div class="line"><span class="keyword">var</span> content = rawInput(<span class="string">'请输入要分享的文本'</span>);</div><div class="line"><span class="comment">//启动QQ发送组件</span></div><div class="line">app.startActivity(&#123;</div><div class="line">    <span class="attr">action</span>: <span class="string">"android.intent.action.SEND"</span>,</div><div class="line">    <span class="attr">type</span>: <span class="string">"text/*"</span>,</div><div class="line">    <span class="attr">extras</span>: &#123;</div><div class="line">      <span class="string">"android.intent.extra.TEXT"</span>: content</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">packageName</span>: <span class="string">"com.tencent.mobileqq"</span>,</div><div class="line">    <span class="attr">className</span>: <span class="string">"com.tencent.mobileqq.activity.JumpActivity"</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190627/ErIIyyVKAt1k.png?imageslim" alt="mark"></p>
+<ol>
+<li><p>右上角点击保存，然后点击运行按钮，运行示例如下：</p>
+<video id="video" controls preload="none" poster="http://qiniuyun.ipromiseyourlife.com/blog/20190522/iEfUWjhkgVXq.jpg?imageslim" style="width:30%;"><br>      <source id="wmv" src="http://qiniuyun.ipromiseyourlife.com/aa356745a892823178817eb2571e9cb3.mp4" type="video/mp4"><br>  </video>
+</li>
+<li><p>发送成功后脚本运行结束，可以在auto.js APP里查看日志，对于循环调用的脚本，推荐在APP设置里打开<strong>音量上键停止所有脚本</strong>，这样也避免了我们不小心写了死循环的情况。</p>
+</li>
+<li>auto.js也可以使用电脑开发，推荐使用<strong>vscode</strong>的<strong>Auto.js-VSCodeExt</strong>插件，使用很简单，详见<a href="https://github.com/hyb1996/Auto.js-VSCode-Extension" target="_blank" rel="external">https://github.com/hyb1996/Auto.js-VSCode-Extension</a></li>
+</ol>
+<h4 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h4><p>官方文档：<a href="https://hyb1996.github.io/AutoJs-Docs/" target="_blank" rel="external">https://hyb1996.github.io/AutoJs-Docs/</a></p>
+<p>Github：<a href="https://github.com/hyb1996/Auto.js" target="_blank" rel="external">https://github.com/hyb1996/Auto.js</a></p>
+<p>APP下载地址:</p>
+<ul>
+<li><a href="http://shouji.baidu.com/software/23334313.html" target="_blank" rel="external">百度手机助手</a></li>
+<li><a href="https://www.coolapk.com/apk/129872" target="_blank" rel="external">酷安</a></li>
+</ul>
+<p>bilibili视频教程： <a href="https://www.bilibili.com/video/av35582484?from=search&amp;seid=12319191216902661794" target="_blank" rel="external">https://www.bilibili.com/video/av35582484?from=search&amp;seid=12319191216902661794</a></p>
+<p>bilibili文字教程：<a href="https://www.bilibili.com/read/cv1033982" target="_blank" rel="external">https://www.bilibili.com/read/cv1033982</a></p>
+<h3 id="薅羊毛脚本示例"><a href="#薅羊毛脚本示例" class="headerlink" title="薅羊毛脚本示例"></a>薅羊毛脚本示例</h3><p>好了我们进入正题，如何使用自动化脚本薅一把羊毛呢？这让我不得不想到我们小镇的薅羊毛团体：他们白天霸占公园，晚上霸占广场，连朋友圈，都被他们转发的新闻链接霸占~</p>
+<p>没错，他们就是大爷大妈们，他们长期使用东方头条、趣头条等软件，每天手动看新闻刷金币，分享新闻刷金币，最后使用金币兑换人民币并提现，以此达到薅资本主义羊毛的目的。</p>
+<p>我简单了解了一下，新手阶段过去之后，一个APP大概要三四天能得到一元钱，这真是个体力活呢，算时薪的话几乎没法看了~</p>
+<p>而且跳广场舞的时候又不能使用手机看新闻，这真是广场舞与羊毛不可兼得啊，这正是我们自动化脚本的用武之处：这边手机自动刷着新闻，那边跳了一轮又一轮，跳完舞还可以对比一下谁刷的金币多，啊，仿佛看见了财务自由~</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>你转给我的不是钱，只是数字<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/18/自调用匿名函数的N种写法/" class="archive-article-date">
-  	<time datetime="2017-12-18T09:34:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/18/自调用匿名函数的N种写法/">自调用匿名函数的N种写法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">auto.js</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2019/06/27/auto-js的使用以及薅腾讯羊毛插件示例/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/14/CSS细节整理/" class="archive-article-date">
-  	<time datetime="2017-12-14T01:59:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-14</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/21/这是什么第二期/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">这是什么第二期</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/14/CSS细节整理/">CSS细节整理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#auto-js简介"><span class="toc-number">1.</span> <span class="toc-text">auto.js简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是auto-js"><span class="toc-number">1.1.</span> <span class="toc-text">什么是auto.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#auto-js能做什么"><span class="toc-number">1.2.</span> <span class="toc-text">auto.js能做什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#auto-js怎么用"><span class="toc-number">1.3.</span> <span class="toc-text">auto.js怎么用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#相关资料"><span class="toc-number">1.4.</span> <span class="toc-text">相关资料</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#薅羊毛脚本示例"><span class="toc-number">2.</span> <span class="toc-text">薅羊毛脚本示例</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/19/前端相关知识整理/" class="archive-article-date">
-  	<time datetime="2017-09-19T02:14:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-19</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/19/前端相关知识整理/">前端相关知识整理</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/25/websql使用指南/" class="archive-article-date">
-  	<time datetime="2017-08-25T08:14:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/25/websql使用指南/">websql使用指南</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">websql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/22/sourcetree奇卡偏方/" class="archive-article-date">
-  	<time datetime="2017-08-22T05:51:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/22/sourcetree奇卡偏方/">sourcetree奇卡偏方</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">sourcetree</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/10/mui使用指南/" class="archive-article-date">
-  	<time datetime="2017-08-10T01:46:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/10/mui使用指南/">mui使用指南</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">mui</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/09/mui阻止返回键默认事件并添加自己的业务逻辑/" class="archive-article-date">
-  	<time datetime="2017-08-09T08:03:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/09/mui阻止返回键默认事件并添加自己的业务逻辑/">mui阻止返回键默认事件并添加自己的业务逻辑</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">mui</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/02/张伯伯的BLOG构建指南/" class="archive-article-date">
-  	<time datetime="2017-08-02T02:18:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/02/张伯伯的BLOG构建指南/">张伯伯的BLOG构建指南</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/03/手机短信通知实践报告/" class="archive-article-date">
-  	<time datetime="2017-07-03T07:41:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/03/手机短信通知实践报告/">手机短信通知实践报告</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">node.js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/26/网卡版本回退/" class="archive-article-date">
-  	<time datetime="2017-06-26T03:22:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/26/网卡版本回退/">网卡版本回退</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">windows</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2017/page/2/">2</a><a class="extend next" rel="next" href="/archives/2017/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -610,8 +447,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

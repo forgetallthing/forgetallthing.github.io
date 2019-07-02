@@ -17,7 +17,7 @@
 <meta property="og:description" content="最近在看《雪中悍刀行》,里面对于奇珍异兽的描写不多,鸟类更是只有北凉王徐凤年的海东青了,轻抛一点入云去，喝杀三声掠地来,用这种人人道俊哉的鸟来做axios的封面图,应该是十分合适吧。  一 解决跨域时axios发送两次请求的问题(OPTIONS+POST)">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/giovanni-calia-796-unsplash.jpg">
-<meta property="og:updated_time" content="2019-03-22T02:16:04.000Z">
+<meta property="og:updated_time" content="2019-07-02T07:56:22.217Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="axios学习笔记">
 <meta name="twitter:description" content="最近在看《雪中悍刀行》,里面对于奇珍异兽的描写不多,鸟类更是只有北凉王徐凤年的海东青了,轻抛一点入云去，喝杀三声掠地来,用这种人人道俊哉的鸟来做axios的封面图,应该是十分合适吧。  一 解决跨域时axios发送两次请求的问题(OPTIONS+POST)">
@@ -241,6 +241,15 @@ var _hmt = _hmt || [];
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Qs = <span class="built_in">require</span>(<span class="string">'qs'</span>);</div><div class="line"><span class="keyword">let</span> obj= &#123;</div><div class="line">     <span class="attr">a</span>: <span class="string">"1"</span>,</div><div class="line">     <span class="attr">b</span>: <span class="string">"2"</span>,</div><div class="line">   &#125;;</div><div class="line"><span class="keyword">let</span> res = Qs.stringify(obj);</div><div class="line"><span class="built_in">console</span>.log(Qs.stringify(obj));<span class="comment">//a=1&amp;b=2</span></div><div class="line"><span class="built_in">console</span>.log(Qs.parse(res));<span class="comment">//&#123;a: "1",b: "2"&#125;</span></div></pre></td></tr></table></figure>
 <p>qs还有很多属性设置,请自行查看文档~</p>
 <h3 id="二-路由跳转时放弃正在pending的请求"><a href="#二-路由跳转时放弃正在pending的请求" class="headerlink" title="二 路由跳转时放弃正在pending的请求"></a>二 路由跳转时放弃正在pending的请求</h3><p>目的是取消未响应的ajax请求,这个问题在网上有很多解答了: <a href="https://blog.csdn.net/qq_42409134/article/details/84662639" target="_blank" rel="external">路由跳转时放弃正在pending的请求</a></p>
+<h3 id="三-跨域请求的cookie传递"><a href="#三-跨域请求的cookie传递" class="headerlink" title="三 跨域请求的cookie传递"></a>三 跨域请求的cookie传递</h3><p>前端配置<code>withCredentials: true</code>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建axios实例</span></div><div class="line"><span class="keyword">const</span> service = axios.create(&#123;</div><div class="line">  <span class="attr">baseURL</span>: process.env.BASE_API, <span class="comment">// node环境的不同，对应不同的baseURL</span></div><div class="line">  timeout: <span class="number">5000</span>, <span class="comment">// 请求的超时时间</span></div><div class="line">  <span class="comment">//设置默认请求头，使post请求发送的是formdata格式数据// axios的header默认的Content-Type好像是'application/json;charset=UTF-8',我的项目都是用json格式传输，如果需要更改的话，可以用这种方式修改</span></div><div class="line">  <span class="comment">// headers: &#123;  </span></div><div class="line">    <span class="comment">// "Content-Type": "application/x-www-form-urlencoded"</span></div><div class="line">  <span class="comment">// &#125;,</span></div><div class="line">  withCredentials: <span class="literal">true</span> <span class="comment">// 允许携带cookie</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>这个时候需要注意需要后端配合设置：</p>
+<ul>
+<li>header信息 Access-Control-Allow-Credentials:true</li>
+<li>Access-Control-Allow-Origin不可以为 <code>*</code>，因为 <code>*</code>会和 Access-Control-Allow-Credentials:true 冲突，需配置指定的地址</li>
+</ul>
+<p>node中间层示例:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">app.all(<span class="string">"*"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">  res.header(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"http://127.0.0.1:8080"</span>);</div><div class="line">  res.header(<span class="string">"Access-Control-Allow-Credentials"</span>, <span class="literal">true</span>);</div><div class="line">  res.header(<span class="string">"Access-Control-Allow-Headers"</span>, <span class="string">"X-Requested-With,content-type"</span>);</div><div class="line">  res.header(<span class="string">"Access-Control-Allow-Methods"</span>, <span class="string">"PUT,POST,GET,DELETE,OPTIONS"</span>);</div><div class="line">  next();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h3 id="附录1-post时content-type的几种取值"><a href="#附录1-post时content-type的几种取值" class="headerlink" title="附录1:post时content-type的几种取值"></a>附录1:<a href="https://zccst.iteye.com/blog/2180127" target="_blank" rel="external">post时content-type的几种取值</a></h3><p>四种常见的 POST 提交数据方式 ：</p>
 <p>我们知道，HTTP 协议是以 ASCII 码传输，建立在 TCP/IP 协议之上的应用层规范。规范把 HTTP 请求分为三个部分：状态行、请求头、消息主体。类似于下面这样： </p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">method</span>&gt;</span> <span class="tag">&lt;<span class="name">request-url</span>&gt;</span> <span class="tag">&lt;<span class="name">version</span>&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">headers</span>&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">entity-body</span>&gt;</span><span class="tag">&lt;/<span class="name">entity-body</span>&gt;</span><span class="tag">&lt;/<span class="name">headers</span>&gt;</span><span class="tag">&lt;/<span class="name">version</span>&gt;</span><span class="tag">&lt;/<span class="name">request-url</span>&gt;</span><span class="tag">&lt;/<span class="name">method</span>&gt;</span></div></pre></td></tr></table></figure>
@@ -422,7 +431,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-解决跨域时axios发送两次请求的问题-OPTIONS-POST"><span class="toc-number">1.</span> <span class="toc-text">一 解决跨域时axios发送两次请求的问题(OPTIONS+POST)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#问题描述"><span class="toc-number">1.1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决办法"><span class="toc-number">1.2.</span> <span class="toc-text">解决办法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#qs简单介绍"><span class="toc-number">1.3.</span> <span class="toc-text">qs简单介绍</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-路由跳转时放弃正在pending的请求"><span class="toc-number">2.</span> <span class="toc-text">二 路由跳转时放弃正在pending的请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录1-post时content-type的几种取值"><span class="toc-number">3.</span> <span class="toc-text">附录1:post时content-type的几种取值</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-解决跨域时axios发送两次请求的问题-OPTIONS-POST"><span class="toc-number">1.</span> <span class="toc-text">一 解决跨域时axios发送两次请求的问题(OPTIONS+POST)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#问题描述"><span class="toc-number">1.1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决办法"><span class="toc-number">1.2.</span> <span class="toc-text">解决办法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#qs简单介绍"><span class="toc-number">1.3.</span> <span class="toc-text">qs简单介绍</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-路由跳转时放弃正在pending的请求"><span class="toc-number">2.</span> <span class="toc-text">二 路由跳转时放弃正在pending的请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-跨域请求的cookie传递"><span class="toc-number">3.</span> <span class="toc-text">三 跨域请求的cookie传递</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录1-post时content-type的几种取值"><span class="toc-number">4.</span> <span class="toc-text">附录1:post时content-type的几种取值</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -551,10 +560,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
@@ -563,7 +568,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -571,7 +576,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -583,15 +592,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -603,7 +604,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -612,10 +625,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -635,11 +644,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">

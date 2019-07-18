@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: mongodb | 张伯伯的BLOG</title>
+  <title>原生JS实现动态加载js文件 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="哪里有幸福可借">
-<meta property="og:type" content="website">
-<meta property="og:title" content="张伯伯的BLOG">
-<meta property="og:url" content="http://yoursite.com/tags/mongodb/index.html">
+  <meta name="description" content="有的时候需要动态加载javascript文件，并且在加载成功后执行回调函数。要实现这样的功能，可以使用&amp;lt;script&amp;gt; 元素的load事件（IE9+、chrome、FireFox等）和onreadystatechange 事件（IE8以下） 当你只需要加载一个js文件时，可以使用这段代码：">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原生JS实现动态加载js文件">
+<meta property="og:url" content="http://yoursite.com/2019/07/18/原生JS实现动态加载js文件/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="哪里有幸福可借">
+<meta property="og:description" content="有的时候需要动态加载javascript文件，并且在加载成功后执行回调函数。要实现这样的功能，可以使用&amp;lt;script&amp;gt; 元素的load事件（IE9+、chrome、FireFox等）和onreadystatechange 事件（IE8以下） 当你只需要加载一个js文件时，可以使用这段代码：">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12797375-3b1f939149fcbf02.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-07-18T02:47:34.416Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="张伯伯的BLOG">
-<meta name="twitter:description" content="哪里有幸福可借">
+<meta name="twitter:title" content="原生JS实现动态加载js文件">
+<meta name="twitter:description" content="有的时候需要动态加载javascript文件，并且在加载成功后执行回调函数。要实现这样的功能，可以使用&amp;lt;script&amp;gt; 元素的load事件（IE9+、chrome、FireFox等）和onreadystatechange 事件（IE8以下） 当你只需要加载一个js文件时，可以使用这段代码：">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/12797375-3b1f939149fcbf02.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -171,64 +175,197 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-原生JS实现动态加载js文件" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/19/centos云端搭建mongodb环境/" class="archive-article-date">
-  	<time datetime="2017-01-19T08:19:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-19</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/19/centos云端搭建mongodb环境/">centos云端搭建mongodb环境</a>
+    <h1 class="article-title" itemprop="name">
+      原生JS实现动态加载js文件
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/07/18/原生JS实现动态加载js文件/" class="archive-article-date">
+  	<time datetime="2019-07-18T02:32:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/12797375-3b1f939149fcbf02.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>有的时候需要动态加载javascript文件，并且在加载成功后执行回调函数。要实现这样的功能，可以使用<code>&lt;script&gt;</code> 元素的<code>load</code>事件（IE9+、chrome、FireFox等）和<code>onreadystatechange</code> 事件（IE8以下）</p>
+<p>当你只需要加载一个js文件时，可以使用这段代码：</p>
+<a id="more"></a>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadScript</span>(<span class="params">src, callback</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>),</div><div class="line">        head = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>];</div><div class="line">    script.type = <span class="string">'text/javascript'</span>;</div><div class="line">    script.charset = <span class="string">'UTF-8'</span>;</div><div class="line">    script.src = src;</div><div class="line">    <span class="keyword">if</span> (script.addEventListener) &#123;</div><div class="line">        script.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            callback();</div><div class="line">        &#125;, <span class="literal">false</span>);</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (script.attachEvent) &#123;</div><div class="line">        script.attachEvent(<span class="string">'onreadystatechange'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> target = <span class="built_in">window</span>.event.srcElement;</div><div class="line">            <span class="keyword">if</span> (target.readyState == <span class="string">'loaded'</span>) &#123;</div><div class="line">                callback();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    head.appendChild(script);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//调用</span></div><div class="line">loadScript(<span class="string">'http://cdn.staticfile.org/jquery/1.6.2/jquery.min.js'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'onload'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>当你需要加载多个js文件时：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadScript</span>(<span class="params">src, callback</span>) </span>&#123;</div><div class="line">    arraySync(<span class="function"><span class="keyword">function</span> (<span class="params">one, i, c</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> cur_script = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</div><div class="line">        cur_script.type = <span class="string">'text/javascript'</span>;</div><div class="line">        cur_script.charset = <span class="string">'UTF-8'</span>;</div><div class="line">        cur_script.src = one;</div><div class="line">        cur_script.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            c(<span class="number">0</span>, &#123;</div><div class="line">                <span class="attr">i</span>: i,</div><div class="line">                <span class="attr">v</span>: &#123;&#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;, <span class="literal">false</span>);</div><div class="line">        <span class="built_in">document</span>.head.appendChild(cur_script)</div><div class="line">    &#125;, src, <span class="function"><span class="keyword">function</span> (<span class="params">err, r</span>) </span>&#123;</div><div class="line">        <span class="comment">//全部加载完成后执行的回调函数</span></div><div class="line">        <span class="keyword">if</span> (err) &#123;</div><div class="line">            dhtmlxAlert(err.message);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            callback()</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//处理异步，不用promise的方案</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">arraySync</span>(<span class="params">bsFunc, ar</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> callback = <span class="built_in">arguments</span>[<span class="built_in">arguments</span>.length - <span class="number">1</span>];</div><div class="line">    <span class="keyword">if</span> (ar.length == <span class="number">0</span>) &#123;</div><div class="line">        callback(<span class="number">0</span>, []);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> sendErr = <span class="literal">false</span>;</div><div class="line">    <span class="keyword">var</span> finishNum = ar.length;</div><div class="line">    <span class="keyword">var</span> result = [];</div><div class="line">    <span class="keyword">var</span> args = [<span class="number">0</span>, <span class="number">0</span>];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> index = <span class="number">2</span>; index &lt; <span class="built_in">arguments</span>.length - <span class="number">1</span>; ++index) &#123;</div><div class="line">        args.push(<span class="built_in">arguments</span>[index]);</div><div class="line">    &#125;</div><div class="line">    args.push(<span class="function"><span class="keyword">function</span> (<span class="params">err, r</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (err) &#123;</div><div class="line">            <span class="keyword">if</span> (!sendErr) &#123;</div><div class="line">                sendErr = <span class="literal">true</span>;</div><div class="line">                callback(err);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        --finishNum;</div><div class="line">        result[r.i] = r.v;</div><div class="line">        <span class="keyword">if</span> (finishNum == <span class="number">0</span>) &#123;</div><div class="line">            callback(<span class="number">0</span>, result);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; ar.length; ++i) &#123;</div><div class="line">        args[<span class="number">0</span>] = ar[i];</div><div class="line">        args[<span class="number">1</span>] = i;</div><div class="line">        bsFunc.apply(<span class="literal">null</span>, args);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//调用</span></div><div class="line">loadScript([<span class="string">'./jquery.min.js'</span>,<span class="string">'./echarts.min.js'</span>,<span class="string">'./vue.min.js'</span>],<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'onload'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>上述代码使用了<code>arraySync</code>方案来处理异步，如果条件允许，你也可以使用<code>promise</code>来解决，效果都是一样的。</p>
+<p>我的项目中是需要从json文件中读取配置，取到的数据中有需要动态加载的js列表，然后使用上述的批量加载js函数进行处理，下面给出整体代码，有需要的可以搭配使用哦~</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> loadScript = <span class="function"><span class="keyword">function</span> (<span class="params">callback</span>) </span>&#123;</div><div class="line">    <span class="comment">//读取json</span></div><div class="line">    <span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">    request.open(<span class="string">"get"</span>, <span class="string">"package.json"</span>);</div><div class="line">    request.send(<span class="literal">null</span>);</div><div class="line">    request.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (request.status == <span class="number">200</span>) &#123;</div><div class="line">            <span class="keyword">var</span> package = <span class="built_in">JSON</span>.parse(request.responseText);</div><div class="line">            <span class="comment">//合并dependencies和plugins对象</span></div><div class="line">            <span class="built_in">Object</span>.assign(package.dependencies, package.plugins);</div><div class="line">            <span class="keyword">var</span> scriptUrls = [];</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> package.dependencies) &#123;</div><div class="line">                scriptUrls.push(package.dependencies[i])</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//异步载入script</span></div><div class="line">            arraySync(<span class="function"><span class="keyword">function</span> (<span class="params">one, i, c</span>) </span>&#123;</div><div class="line">                <span class="keyword">var</span> cur_script = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</div><div class="line">                cur_script.type = <span class="string">'text/javascript'</span>;</div><div class="line">                cur_script.charset = <span class="string">'UTF-8'</span>;</div><div class="line">                cur_script.src = one;</div><div class="line">                cur_script.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                    c(<span class="number">0</span>, &#123;</div><div class="line">                        <span class="attr">i</span>: i,</div><div class="line">                        <span class="attr">v</span>: &#123;&#125;</div><div class="line">                    &#125;);</div><div class="line">                &#125;, <span class="literal">false</span>);</div><div class="line">                <span class="built_in">document</span>.head.appendChild(cur_script)</div><div class="line">            &#125;, scriptUrls, <span class="function"><span class="keyword">function</span> (<span class="params">err, r</span>) </span>&#123;</div><div class="line">                <span class="keyword">if</span> (err) &#123;</div><div class="line">                    dhtmlxAlert(err.message);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    callback()</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//处理异步，不用promise的方案</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">arraySync</span>(<span class="params">bsFunc, ar</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> callback = <span class="built_in">arguments</span>[<span class="built_in">arguments</span>.length - <span class="number">1</span>];</div><div class="line">    <span class="keyword">if</span> (ar.length == <span class="number">0</span>) &#123;</div><div class="line">        callback(<span class="number">0</span>, []);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> sendErr = <span class="literal">false</span>;</div><div class="line">    <span class="keyword">var</span> finishNum = ar.length;</div><div class="line">    <span class="keyword">var</span> result = [];</div><div class="line">    <span class="keyword">var</span> args = [<span class="number">0</span>, <span class="number">0</span>];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> index = <span class="number">2</span>; index &lt; <span class="built_in">arguments</span>.length - <span class="number">1</span>; ++index) &#123;</div><div class="line">        args.push(<span class="built_in">arguments</span>[index]);</div><div class="line">    &#125;</div><div class="line">    args.push(<span class="function"><span class="keyword">function</span> (<span class="params">err, r</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (err) &#123;</div><div class="line">            <span class="keyword">if</span> (!sendErr) &#123;</div><div class="line">                sendErr = <span class="literal">true</span>;</div><div class="line">                callback(err);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        --finishNum;</div><div class="line">        result[r.i] = r.v;</div><div class="line">        <span class="keyword">if</span> (finishNum == <span class="number">0</span>) &#123;</div><div class="line">            callback(<span class="number">0</span>, result);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; ar.length; ++i) &#123;</div><div class="line">        args[<span class="number">0</span>] = ar[i];</div><div class="line">        args[<span class="number">1</span>] = i;</div><div class="line">        bsFunc.apply(<span class="literal">null</span>, args);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>你转给我的不是钱，只是数字<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mongodb</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">centos</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2019/07/18/原生JS实现动态加载js文件/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/06/27/auto-js的使用以及薅腾讯羊毛插件示例/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">auto.js的使用以及薅羊毛插件示例</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -263,9 +400,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

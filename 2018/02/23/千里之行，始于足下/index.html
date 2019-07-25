@@ -17,7 +17,7 @@
 <meta property="og:description" content="fight or flight？大扎好，我系轱天乐，我四渣渣辉，潜端面世，介四里没有挽过的船新版本，挤需体验三番钟，里造会干我一样，爱象节款面食，系兄弟里就来砍我，潜端面世了丐一蛤！   朴灵的 fks 镇楼 马云云的面试题整理 JS篇—事件循环—宏任务(task),微任务(microtask)和有趣的例子: Tasks, microtasks, queues and schedules 什么是">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=334e9beb3b12b31bd361c57be7715d1f/0df431adcbef76090bf59e332cdda3cc7dd99e9b.jpg">
-<meta property="og:updated_time" content="2019-05-13T08:08:57.284Z">
+<meta property="og:updated_time" content="2019-07-25T07:51:35.429Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="千里之行，始于足下">
 <meta name="twitter:description" content="fight or flight？大扎好，我系轱天乐，我四渣渣辉，潜端面世，介四里没有挽过的船新版本，挤需体验三番钟，里造会干我一样，爱象节款面食，系兄弟里就来砍我，潜端面世了丐一蛤！   朴灵的 fks 镇楼 马云云的面试题整理 JS篇—事件循环—宏任务(task),微任务(microtask)和有趣的例子: Tasks, microtasks, queues and schedules 什么是">
@@ -254,6 +254,7 @@ var _hmt = _hmt || [];
 <p>1.上文中提到找出数组最大值的方法：Math.max.apply(null, a); ,是因为Math.max()方法，支持传递多个参数，比如：Math.max(1,4,2,3,7,5,6)，但是它不支持直接传递一个数组作为参数，比如：Math.max(new Array(1,4,2,3,7,5,6))。这里，只要我们有方法把数组，一个一个拆分开来，传递到Math.max()方法中，就实现了传递数组的方法，所以使用了apply方法。</p>
 <p>2.将类数组对象转换成真正的数组：此处使用了<code>Array.prototype.slice.apply({0:1,length:1});//[1]</code> ,这里使用apply来使用真数组里才有的slice方法，而slice返回值是将array-like对象通过下标操作放进了新的Array并返回。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;　 </div><div class="line">　<span class="comment">//将参数转为一个数组　 </span></div><div class="line">　 <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.apply(<span class="built_in">arguments</span>);　 </div><div class="line">　alert(args);　 </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>slice的这种功能详见MDN<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice" target="_blank" rel="external">Array.prototype.slice（）</a> ,作为开发者不要看菜鸟教程或者w3school那种教程哦，那些只适合速查，但是真正全面的文档还是要看<a href="https://developer.mozilla.org/zh-CN/" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/</a></p>
 <p>3.如果你有两个数组<code>a1=[oh,here,no];a2=[q,w,e,{o:p}]</code> 你可能想把a2插入到a1的here的位置,那你也可以使用apply来处理:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a1=[oh,here,no];</div><div class="line"><span class="keyword">var</span> a2=[q,w,e,&#123;<span class="attr">o</span>:p&#125;];</div><div class="line">args = [<span class="number">1</span>,<span class="number">1</span>].concat(a2);</div><div class="line"><span class="built_in">Array</span>.prototype.splice.apply(a1,args)</div></pre></td></tr></table></figure>
 <h3 id="—this指针—"><a href="#—this指针—" class="headerlink" title="—this指针—"></a>—this指针—</h3><p><a href="http://www.cnblogs.com/xiaohuochai/p/5735901.html" target="_blank" rel="external">深入理解this机制系列第一篇——this的4种绑定规则</a></p>
@@ -649,11 +650,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,7 +666,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -673,11 +678,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -685,7 +686,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -694,6 +695,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -709,7 +714,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -721,10 +726,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
@@ -733,11 +734,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -745,11 +746,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">something</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">something</a>
               </li>
             
             <div class="clearfix"></div>

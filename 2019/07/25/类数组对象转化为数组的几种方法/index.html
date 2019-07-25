@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: something | 张伯伯的BLOG</title>
+  <title>类数组对象转化为数组的几种方法 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="哪里有幸福可借">
-<meta property="og:type" content="website">
-<meta property="og:title" content="张伯伯的BLOG">
-<meta property="og:url" content="http://yoursite.com/tags/something/index.html">
+  <meta name="description" content="伪数组对象(Array-like):拥有一个 length 属性和若干索引属性的任意对象。工作中碰到过几次需要将类数组对象转化为数组处理的情况，面试时也很可能被问到，因为这一个题目同时考察了以下几点：  数组的方法和原型链：Array.prototype上的slice、splice和concat方法； this指向绑定：call和apply； es6掌握情况：Array.from()；  下面我们">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="类数组对象转化为数组的几种方法">
+<meta property="og:url" content="http://yoursite.com/2019/07/25/类数组对象转化为数组的几种方法/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="哪里有幸福可借">
+<meta property="og:description" content="伪数组对象(Array-like):拥有一个 length 属性和若干索引属性的任意对象。工作中碰到过几次需要将类数组对象转化为数组处理的情况，面试时也很可能被问到，因为这一个题目同时考察了以下几点：  数组的方法和原型链：Array.prototype上的slice、splice和concat方法； this指向绑定：call和apply； es6掌握情况：Array.from()；  下面我们">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-25T07:52:32.455Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="张伯伯的BLOG">
-<meta name="twitter:description" content="哪里有幸福可借">
+<meta name="twitter:title" content="类数组对象转化为数组的几种方法">
+<meta name="twitter:description" content="伪数组对象(Array-like):拥有一个 length 属性和若干索引属性的任意对象。工作中碰到过几次需要将类数组对象转化为数组处理的情况，面试时也很可能被问到，因为这一个题目同时考察了以下几点：  数组的方法和原型链：Array.prototype上的slice、splice和concat方法； this指向绑定：call和apply； es6掌握情况：Array.from()；  下面我们">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -171,108 +173,215 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-类数组对象转化为数组的几种方法" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/这是什么第二期/" class="archive-article-date">
-  	<time datetime="2019-06-21T01:42:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/这是什么第二期/">这是什么第二期</a>
+    <h1 class="article-title" itemprop="name">
+      类数组对象转化为数组的几种方法
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/07/25/类数组对象转化为数组的几种方法/" class="archive-article-date">
+  	<time datetime="2019-07-25T07:51:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>伪数组对象(Array-like):拥有一个 length 属性和若干索引属性的任意对象。<br>工作中碰到过几次需要将类数组对象转化为数组处理的情况，面试时也很可能被问到，因为这一个题目同时考察了以下几点：</p>
+<ul>
+<li>数组的方法和原型链：Array.prototype上的slice、splice和concat方法；</li>
+<li>this指向绑定：call和apply；</li>
+<li>es6掌握情况：Array.from()；</li>
+</ul>
+<p>下面我们就来总结一下类数组对象(Array-like)转化为数组(Array)的几种方法：</p>
+<a id="more"></a>
+<p>###1.slice</p>
+<p>#####基础语法：<br>slice() 方法返回一个新的数组对象，这一对象是一个由 begin 和 end 决定的原数组的浅拷贝（包括 begin，不包括end）。原始数组不会被改变。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var animals = [&apos;ant&apos;, &apos;bison&apos;, &apos;camel&apos;, &apos;duck&apos;, &apos;elephant&apos;];</div><div class="line"></div><div class="line">console.log(animals.slice(2));</div><div class="line">// expected output: Array [&quot;camel&quot;, &quot;duck&quot;, &quot;elephant&quot;]</div><div class="line"></div><div class="line">console.log(animals.slice(2, 4));</div><div class="line">// expected output: Array [&quot;camel&quot;, &quot;duck&quot;]</div><div class="line"></div><div class="line">console.log(animals.slice(1, 5));</div><div class="line">// expected output: Array [&quot;bison&quot;, &quot;camel&quot;, &quot;duck&quot;, &quot;elephant&quot;]</div></pre></td></tr></table></figure></p>
+<p>#####转化类数组<br><code>slice</code> 方法可以用来将一个类数组（Array-like）对象/集合转换成一个新数组。你只需将该方法绑定到这个对象上。 一个函数中的  <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/arguments" title="arguments 是一个对应于传递给函数的参数的类数组对象。" target="_blank" rel="external"><code>arguments</code></a> 就是一个类数组对象的例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function list() &#123;</div><div class="line">  return Array.prototype.slice.call(arguments);</div><div class="line">&#125;</div><div class="line">var list1 = list(1, 2, 3); </div><div class="line">结果： [1, 2, 3]</div><div class="line">Array.prototype.slice.call(&#123;0:0,1:1,2:2,3:3,4:4,length:5&#125;)</div><div class="line">结果：[0, 1, 2, 3,4]</div><div class="line">Array.prototype.slice.call(&#123;0:0,1:1,2:2,3:3,4:4,length:5&#125;,1,3)</div><div class="line">结果：[1, 2]</div></pre></td></tr></table></figure>
+<p>你也可以简单的使用 [].slice.call(arguments) 来代替</p>
+<p>###2.splice</p>
+<p>#####基础语法：<br>splice() 方法通过删除或替换现有元素或者原地添加新的元素来修改数组,并以数组形式返回被修改的内容。此方法会改变原数组。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var months = [&apos;Jan&apos;, &apos;March&apos;, &apos;April&apos;, &apos;June&apos;];</div><div class="line">months.splice(1, 0, &apos;Feb&apos;);</div><div class="line">// inserts at index 1</div><div class="line">console.log(months);</div><div class="line">// expected output: Array [&apos;Jan&apos;, &apos;Feb&apos;, &apos;March&apos;, &apos;April&apos;, &apos;June&apos;]</div><div class="line"></div><div class="line">months.splice(4, 1, &apos;May&apos;);</div><div class="line">// replaces 1 element at index 4</div><div class="line">console.log(months);</div><div class="line">// expected output: Array [&apos;Jan&apos;, &apos;Feb&apos;, &apos;March&apos;, &apos;April&apos;, &apos;May&apos;]</div></pre></td></tr></table></figure></p>
+<p>#####转化类数组<br>和slice相似，不同的是会改变原对象，并且第一个参数（开始位置）必须传：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Array.prototype.splice.call(&#123;0:0,1:1,length:2&#125;,0);</div><div class="line">结果：[0,1]</div><div class="line">Array.prototype.splice.call(&#123;0:0,1:1,2:2,3:3,4:4,length:5&#125;,1,3)</div><div class="line">结果：[1, 2, 3]</div></pre></td></tr></table></figure></p>
+<p>###concat</p>
+<p>#####基础语法：<br>concat() 方法用于合并两个或多个数组。此方法不会更改现有数组，而是返回一个新数组。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[&apos;a&apos;, &apos;b&apos;, &apos;c&apos;].concat([&apos;d&apos;, &apos;e&apos;, &apos;f&apos;]);</div><div class="line">// expected output: Array [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;]</div><div class="line"></div><div class="line">[1, 2, 3].concat( [4, 5, 6], [7, 8, 9]);</div><div class="line">// results in [1, 2, 3, 4, 5, 6, 7, 8, 9]</div><div class="line"></div><div class="line">[&apos;a&apos;, &apos;b&apos;, &apos;c&apos;].concat(1, [2, 3]);</div><div class="line">// results in [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, 1, 2, 3]</div></pre></td></tr></table></figure></p>
+<p>#####转化类数组<br>这里利用apply可以把类数组对象分解成多个参数传入concat方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Array.concat.apply([], &#123;0:0,1:1,2:2,length:3&#125;);</div><div class="line">结果：[0, 1, 2]</div><div class="line">等价于：</div><div class="line">[].concat(0,1,2)</div></pre></td></tr></table></figure></p>
+<p>###4.Es6 Array.from<br><code>Array.from()</code> 方法从一个类似数组或可迭代对象中创建一个新的，浅拷贝的数组实例。 可以通过以下方式来创建数组对象：</p>
+<ul>
+<li>伪数组对象（拥有一个 <code>length</code> 属性和若干索引属性的任意对象）</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/iterable" target="_blank" rel="external">可迭代对象</a>（可以获取对象中的元素,如 Map和 Set 等）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Array.from(&apos;foo&apos;); </div><div class="line">转化数组：[&quot;f&quot;, &quot;o&quot;, &quot;o&quot;]</div><div class="line"></div><div class="line">let s = new Set([&apos;foo&apos;, window]); </div><div class="line">Array.from(s); </div><div class="line">转化set：[&quot;foo&quot;, window]</div><div class="line"></div><div class="line">let m = new Map([[1, 2], [2, 4], [4, 8]]);</div><div class="line">Array.from(m); </div><div class="line">转化map：[[1, 2], [2, 4], [4, 8]]</div><div class="line"></div><div class="line">function f() &#123;</div><div class="line">  return Array.from(arguments);</div><div class="line">&#125;</div><div class="line">f(1, 2, 3);</div><div class="line">转化Array-like： [1, 2, 3]</div></pre></td></tr></table></figure>
+<p>Array.from的方便之处是它的第二个参数可以设置一个函数，新数组中的每个元素会执行该函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Array.from([1, 2, 3], x =&gt; x + x);  </div><div class="line">结果：[2, 4, 6]</div><div class="line"></div><div class="line">Array.from(&#123;length: 5&#125;, (v, i) =&gt; i);</div><div class="line">结果： [0, 1, 2, 3, 4]</div></pre></td></tr></table></figure></p>
+<p>###示例：合并数组并去重<br>利用set中元素的唯一性，和Array.from可以把set转化为array的能力，我们可以封装一个数组去重的函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function combine()&#123; </div><div class="line">    //Array-like to Array</div><div class="line">    let arr = [].concat.apply([], arguments); </div><div class="line">    return Array.from(new Set(arr));</div><div class="line">&#125; </div><div class="line"></div><div class="line">var m = [1, 2, 2], n = [2,3,3], k = [1, 2, 6]; </div><div class="line">combine(m,n)                </div><div class="line">结果：[1, 2, 3]</div><div class="line"></div><div class="line">combine(m,n,k)</div><div class="line">结果：[1, 2, 3, 6]</div></pre></td></tr></table></figure></p>
+<p>###写在最后<br>注意以上方式都是浅拷贝，处理引用类型时需要多加小心。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>你转给我的不是钱，只是数字<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">something</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2019/07/25/类数组对象转化为数组的几种方法/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/18/原生JS实现动态加载js文件/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">原生JS实现动态加载js文件</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/30/这是什么第一期/" class="archive-article-date">
-  	<time datetime="2018-08-30T08:32:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-30</time>
-</a>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
         </div>
-    	 
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/30/这是什么第一期/">这是什么第一期</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">something</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -307,9 +416,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

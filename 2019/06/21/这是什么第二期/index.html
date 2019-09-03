@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>这是什么第二期 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本期名词:  JWT (JSON Web Token)">
+  <meta name="description" content="本期名词:  JWT (JSON Web Token)  GraphQL">
 <meta name="keywords" content="something">
 <meta property="og:type" content="article">
 <meta property="og:title" content="这是什么第二期">
 <meta property="og:url" content="http://yoursite.com/2019/06/21/这是什么第二期/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="本期名词:  JWT (JSON Web Token)">
+<meta property="og:description" content="本期名词:  JWT (JSON Web Token)  GraphQL">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/gEPCn0GbC9Ay.jpg?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/LgVHlBaLcunc.png?imageslim">
@@ -22,10 +22,11 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/sIotDI9pc4WR.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/qlmjp3eWc6Qu.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/aIhjjCjKC0RD.png?imageslim">
-<meta property="og:updated_time" content="2019-06-21T09:21:58.362Z">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190903/cdx3SG7zth1V.png?imageslim">
+<meta property="og:updated_time" content="2019-09-03T10:29:03.505Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="这是什么第二期">
-<meta name="twitter:description" content="本期名词:  JWT (JSON Web Token)">
+<meta name="twitter:description" content="本期名词:  JWT (JSON Web Token)  GraphQL">
 <meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/gEPCn0GbC9Ay.jpg?imageslim">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
@@ -203,9 +204,15 @@ var _hmt = _hmt || [];
         <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190621/gEPCn0GbC9Ay.jpg?imageslim" alt="mark"></p>
 <p>本期名词:</p>
 <ul>
-<li>JWT (JSON Web Token)</li>
+<li><p>JWT (JSON Web Token)</p>
+</li>
+<li><p>GraphQL </p>
+</li>
 </ul>
-<a id="more"></a>
+<ul>
+<li><a id="more"></a>
+</li>
+</ul>
 <h3 id="10分钟了解JSON-Web令牌"><a href="#10分钟了解JSON-Web令牌" class="headerlink" title="10分钟了解JSON Web令牌"></a>10分钟了解JSON Web令牌</h3><h4 id="1-跨域身份验证"><a href="#1-跨域身份验证" class="headerlink" title="1.跨域身份验证"></a><strong>1.跨域身份验证</strong></h4><p>首先回顾一下我们熟悉的<strong>session模式</strong>:</p>
 <p>1.用户向服务器发送用户名和密码。</p>
 <p>2.验证服务器后，相关数据（如用户角色，登录时间等）将保存在当前会话中。</p>
@@ -304,6 +311,37 @@ var _hmt = _hmt || [];
 <p>关于前后端完全分离,我司现在使用的是半分离的设计,所以我对完全分离的node中间件并不熟悉,看了上面链接中的文章后,才了解了express默认使用jade或者ejs等数据模板的用意,看来它定位就是在node层将数据渲染进html,然后直接将html展示在浏览器上,避免浏览器再使用ajax请求数据。</p>
 <p>随着科技和硬件设备的进步,我这一代开发者已经很难遇到浏览器渲染慢的问题,大数据量的可以做分页,计算复杂的一般在服务器端计算后返回结果进行渲染,这样一来,在浏览器上使用ajax异步获取数据后渲染页面似乎没什么问题。</p>
 <p>但是seo无法爬取异步渲染的数据,这对新闻网站似乎是致命的,看来还是要根据具体情况来选型,不能一概而论。</p>
+<h3 id="GraphQL"><a href="#GraphQL" class="headerlink" title="GraphQL"></a>GraphQL</h3><p>参考：</p>
+<p><a href="https://blog.csdn.net/VhWfR2u02Q/article/details/99668507" target="_blank" rel="external">https://blog.csdn.net/VhWfR2u02Q/article/details/99668507</a></p>
+<h4 id="什么是-GraphQL"><a href="#什么是-GraphQL" class="headerlink" title="什么是 GraphQL"></a>什么是 GraphQL</h4><p>GraphQL 是一种面向数据的 API 查询风格。</p>
+<p>传统的 API 拿到的是前后端约定好的数据格式，GraphQL 对 API 中的数据提供了一套易于理解的完整描述，客户端能够准确地获得它需要的数据，没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。</p>
+<h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>前端的开发随着 SPA 框架全面普及，组件化开发也随之成为大势所趋，各个组件分别管理着各自的状态，组件化给前端仔带来便利的同时也带来了一些烦恼。比如，组件需要负责把异步请求的状态分发给子组件或通知给父组件，这个过程中，由组件间通信带来的结构复杂度、来源不明的数据源、不知从何订阅的数据响应会使得数据流变得杂乱无章，也使得代码可读性变差，以及可维护性的降低，为以后项目的迭代带来极大困难。</p>
+<p>试想一下你都开发完了，产品告诉你要大改一番，从接口到组件结构都得改，后端也骂骂咧咧不愿配合让你从好几个 API 里取数据自己组合，这酸爽 😅</p>
+<p>在一些产品链复杂的场景，后端需要提供对应 WebApp、WebPC、APP、小程序、快应用等各端 API，此时 API 的粒度大小就显得格外重要，粗粒度会导致移动端不必要的流量损耗，细粒度则会造成函数爆炸 (Function Explosion)；在此情景下 Facebook 的工程师于 2015 年开源了 <strong>GraphQL</strong> 规范，让前端自己描述自己希望的数据形式，服务端则返回前端所描述的数据结构。</p>
+<p>简单使用可以参照下面这个图：</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190903/cdx3SG7zth1V.png?imageslim" alt="mark"></p>
+<h4 id="GraphQL-能力"><a href="#GraphQL-能力" class="headerlink" title="GraphQL 能力"></a>GraphQL 能力</h4><p>GraphQL 的操作类型可以是 <code>query</code>、 <code>mutation</code> 或 <code>subscription</code>，描述客户端希望进行什么样的操作</p>
+<ol>
+<li>query 查询：获取数据，比如查找，CRUD 中的 R</li>
+<li>mutation 变更：对数据进行变更，比如增加、删除、修改，CRUD 中的 CUD</li>
+<li>substription 订阅：当数据发生更改，进行消息推送</li>
+</ol>
+<p><a href="https://www.jianshu.com/p/12dff5905cf6" target="_blank" rel="external">https://www.jianshu.com/p/12dff5905cf6</a></p>
+<h4 id="5个使用GraphQL的理由"><a href="#5个使用GraphQL的理由" class="headerlink" title="5个使用GraphQL的理由"></a>5个使用GraphQL的理由</h4><p>使用GraphQL的理由， 必然是从讨论RESTful Service的局限性和问题开始。</p>
+<ol>
+<li>数据冗余和请求冗余 (overfetching &amp; underfetching)</li>
+<li>灵活而强类型的schema</li>
+<li>接口校验 (validation)</li>
+<li>接口变动，维护与文档</li>
+<li>开发效率</li>
+</ol>
+<h4 id="5个不用GraphQL的理由"><a href="#5个不用GraphQL的理由" class="headerlink" title="5个不用GraphQL的理由"></a>5个不用GraphQL的理由</h4><ol>
+<li>迁移成本</li>
+<li>牺牲Performance</li>
+<li>缺乏动态类型</li>
+<li>简单问题复杂化</li>
+<li>缓存能解决很多问题</li>
+</ol>
 
       
 
@@ -456,7 +494,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#10分钟了解JSON-Web令牌"><span class="toc-number">1.</span> <span class="toc-text">10分钟了解JSON Web令牌</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-跨域身份验证"><span class="toc-number">1.1.</span> <span class="toc-text">1.跨域身份验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-JWT的原则"><span class="toc-number">1.2.</span> <span class="toc-text">2. JWT的原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-JWT的数据结构"><span class="toc-number">1.3.</span> <span class="toc-text">3. JWT的数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-JWT头"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 JWT头</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-有效载荷"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 有效载荷</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-签名哈希"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3 签名哈希</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-4-Base64URL算法"><span class="toc-number">1.3.4.</span> <span class="toc-text">3.4 Base64URL算法</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-JWT的用法"><span class="toc-number">1.4.</span> <span class="toc-text">4. JWT的用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-JWT问题和趋势"><span class="toc-number">1.5.</span> <span class="toc-text">5. JWT问题和趋势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-关于跨域的session丢失问题"><span class="toc-number">1.6.</span> <span class="toc-text">6.关于跨域的session丢失问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#前台的Session保持"><span class="toc-number">1.6.1.</span> <span class="toc-text">前台的Session保持</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Fetch"><span class="toc-number">1.6.1.1.</span> <span class="toc-text">Fetch</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#jquery"><span class="toc-number">1.6.1.2.</span> <span class="toc-text">jquery</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Angular"><span class="toc-number">1.6.1.3.</span> <span class="toc-text">Angular</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#客户端的session保持"><span class="toc-number">1.6.2.</span> <span class="toc-text">客户端的session保持</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#代理服务的设置"><span class="toc-number">1.6.3.</span> <span class="toc-text">代理服务的设置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#服务端的设置"><span class="toc-number">1.6.4.</span> <span class="toc-text">服务端的设置</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于前后端分离的解读"><span class="toc-number">1.7.</span> <span class="toc-text">关于前后端分离的解读:</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#10分钟了解JSON-Web令牌"><span class="toc-number">1.</span> <span class="toc-text">10分钟了解JSON Web令牌</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-跨域身份验证"><span class="toc-number">1.1.</span> <span class="toc-text">1.跨域身份验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-JWT的原则"><span class="toc-number">1.2.</span> <span class="toc-text">2. JWT的原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-JWT的数据结构"><span class="toc-number">1.3.</span> <span class="toc-text">3. JWT的数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-JWT头"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 JWT头</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-有效载荷"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 有效载荷</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-签名哈希"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3 签名哈希</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-4-Base64URL算法"><span class="toc-number">1.3.4.</span> <span class="toc-text">3.4 Base64URL算法</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-JWT的用法"><span class="toc-number">1.4.</span> <span class="toc-text">4. JWT的用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-JWT问题和趋势"><span class="toc-number">1.5.</span> <span class="toc-text">5. JWT问题和趋势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-关于跨域的session丢失问题"><span class="toc-number">1.6.</span> <span class="toc-text">6.关于跨域的session丢失问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#前台的Session保持"><span class="toc-number">1.6.1.</span> <span class="toc-text">前台的Session保持</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Fetch"><span class="toc-number">1.6.1.1.</span> <span class="toc-text">Fetch</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#jquery"><span class="toc-number">1.6.1.2.</span> <span class="toc-text">jquery</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Angular"><span class="toc-number">1.6.1.3.</span> <span class="toc-text">Angular</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#客户端的session保持"><span class="toc-number">1.6.2.</span> <span class="toc-text">客户端的session保持</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#代理服务的设置"><span class="toc-number">1.6.3.</span> <span class="toc-text">代理服务的设置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#服务端的设置"><span class="toc-number">1.6.4.</span> <span class="toc-text">服务端的设置</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于前后端分离的解读"><span class="toc-number">1.7.</span> <span class="toc-text">关于前后端分离的解读:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GraphQL"><span class="toc-number">2.</span> <span class="toc-text">GraphQL</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是-GraphQL"><span class="toc-number">2.1.</span> <span class="toc-text">什么是 GraphQL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概述"><span class="toc-number">2.2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GraphQL-能力"><span class="toc-number">2.3.</span> <span class="toc-text">GraphQL 能力</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5个使用GraphQL的理由"><span class="toc-number">2.4.</span> <span class="toc-text">5个使用GraphQL的理由</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5个不用GraphQL的理由"><span class="toc-number">2.5.</span> <span class="toc-text">5个不用GraphQL的理由</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -576,15 +614,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -592,15 +626,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">echarts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -608,11 +638,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -620,11 +646,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -644,11 +678,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -660,19 +698,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">

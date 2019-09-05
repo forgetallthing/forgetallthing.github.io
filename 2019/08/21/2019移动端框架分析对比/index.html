@@ -17,7 +17,7 @@
 <meta property="og:description" content="框架列表：  React Native weex uni-app Flutter">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190821/Q3KlxN7aAwAa.png?imageslim">
-<meta property="og:updated_time" content="2019-08-21T05:59:22.255Z">
+<meta property="og:updated_time" content="2019-09-05T08:21:32.955Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019移动端框架分析对比">
 <meta name="twitter:description" content="框架列表：  React Native weex uni-app Flutter">
@@ -217,13 +217,16 @@ var _hmt = _hmt || [];
 <p>阿里版本（已不维护）：17000+</p>
 <p>Apache：12000+</p>
 <p>官网：<a href="https://weex.apache.org/zh/guide/introduction.html" target="_blank" rel="external">https://weex.apache.org/zh/guide/introduction.html</a></p>
-<h3 id="uni-app"><a href="#uni-app" class="headerlink" title="uni-app"></a>uni-app</h3><p>Dcloud的移动端框架，基于js的<strong>vue + 小程序</strong>框架，原生能力由<strong>Native.js</strong>提供。</p>
+<h3 id="uni-app、Taro"><a href="#uni-app、Taro" class="headerlink" title="uni-app、Taro"></a>uni-app、Taro</h3><p>Dcloud的移动端框架，基于js的<strong>vue + 小程序</strong>框架，原生能力由<strong>Native.js</strong>提供。</p>
 <p>编写一套代码，可发布到iOS、Android、H5、以及各种小程序（微信/支付宝/百度/头条/QQ/钉钉）等多个平台。</p>
 <p>app中本质是webview中运行html页面，但可以使用 weex 渲染引擎的原生组件，但是用weex 渲染的部分不能编译成小程序，兼容也有一些问题。</p>
 <p>uni-app是目前支持跨平台编译app+小程序的框架中相对比较成熟的框架，社区相对完善，插件质量不高，适合开发比较简单的项目。</p>
 <p>也因为uni-app需要跨平台编译app和各种小程序，所以框架的成熟度有待提高。</p>
 <p>github star：11000+</p>
 <p>官网：<a href="https://uniapp.dcloud.io/" target="_blank" rel="external">https://uniapp.dcloud.io/</a></p>
+<p>同类型的技术还有<strong>Taro</strong>，是由京东 - 凹凸实验室打造的一套遵循 React 语法规范的多端统一开发框架。官方宣传支持微信、百度、支付宝、字节跳动的小程序和H5、APP、rn等，使用和react完全一样的语法，如JSX等。京东的微信小程序商城就是用Taro实现的。缺点也是一样的有待成熟。</p>
+<p>名称来源：👽 Taro[‘tɑ:roʊ]，泰罗·奥特曼，宇宙警备队总教官，实力最强的奥特曼。</p>
+<p>官网：<a href="https://taro.aotu.io/" target="_blank" rel="external">https://taro.aotu.io/</a></p>
 <h3 id="Flutter"><a href="#Flutter" class="headerlink" title="Flutter"></a>Flutter</h3><p>Google在2018出品的跨平台移动UI框架，使用Dart语言开发，可支持Web端、Android端、iOS端等</p>
 <p>Flutter 的编程语言是Dart，所以执行时并不需要 Javascript 引擎，但实际效果最终也通过原生渲染。</p>
 <p>优点：理论上性能最好，兼容谷歌的新操作系统 Fuchsia。</p>
@@ -378,7 +381,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-Native"><span class="toc-number">1.</span> <span class="toc-text">React Native</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weex"><span class="toc-number">2.</span> <span class="toc-text">weex</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#uni-app"><span class="toc-number">3.</span> <span class="toc-text">uni-app</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter"><span class="toc-number">4.</span> <span class="toc-text">Flutter</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Native、weex、Flutter-3种方案横向对比"><span class="toc-number"></span> <span class="toc-text">React Native、weex、Flutter 3种方案横向对比</span></a>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-Native"><span class="toc-number">1.</span> <span class="toc-text">React Native</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weex"><span class="toc-number">2.</span> <span class="toc-text">weex</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#uni-app、Taro"><span class="toc-number">3.</span> <span class="toc-text">uni-app、Taro</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter"><span class="toc-number">4.</span> <span class="toc-text">Flutter</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Native、weex、Flutter-3种方案横向对比"><span class="toc-number"></span> <span class="toc-text">React Native、weex、Flutter 3种方案横向对比</span></a>
                     </div>
                 </span>
             </div>
@@ -498,10 +501,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
@@ -515,6 +514,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -546,11 +549,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -562,7 +561,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -570,7 +569,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -582,19 +585,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">

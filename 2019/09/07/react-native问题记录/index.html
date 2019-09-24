@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190910/3fPiBsqPcBIY.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190910/d9c7zPlmcNOQ.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190910/sTDDrTD4BnS1.png?imageslim">
-<meta property="og:updated_time" content="2019-09-12T01:44:51.511Z">
+<meta property="og:updated_time" content="2019-09-24T08:00:16.760Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react-native问题记录">
 <meta name="twitter:description" content="常用命令react-native init new_project新建rn项目； react-native run-android:启动安卓应用； react-native start:启动react-native的包管理器，此命令一般被设置为：npm start； npm install 某个带有原生依赖的库 + react-native link 某已安装的具体库名:添加包含原生代码的库，rn">
@@ -206,7 +206,13 @@ var _hmt = _hmt || [];
 <p><code>react-native start</code>:启动react-native的包管理器，此命令一般被设置为：<code>npm start</code>；</p>
 <p><code>npm install 某个带有原生依赖的库</code> + <code>react-native link 某已安装的具体库名</code>:添加包含原生代码的库，rn0.6以上会自动link；</p>
 <a id="more"></a>
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h4 id="安卓APP启动不了"><a href="#安卓APP启动不了" class="headerlink" title="安卓APP启动不了"></a>安卓APP启动不了</h4><p>使用vscode启动安卓项目时可能报错的信息不够详细，这时可以关闭vscode的服务，使用<code>react-native run-android</code>运行查看具体错误信息</p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ul>
+<li>yarn和npm命令不要在一个项目里混用；</li>
+<li>安装新npm包的时候要先停掉rn的包管理器和服务，安装成功后再启动；</li>
+</ul>
+<h4 id="react屏幕适配"><a href="#react屏幕适配" class="headerlink" title="react屏幕适配"></a>react屏幕适配</h4><p>分享一个设计稿px转换dp的小函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">const viewPortWidth = 750;``//这里是设计稿的宽度</div><div class="line">const px2dp = (px: number): number =&gt; &#123;</div><div class="line">    ``return` `px * Dimensions.get(``&apos;window&apos;``).width / viewPortWidth</div><div class="line">&#125;</div><div class="line">&lt;View style=&#123;&#123;height:200,width:px2dp(750),backgroundColor:``&apos;yellow&apos;``&#125;&#125;&gt;</div><div class="line">&lt;Text&gt;750&lt;/Text&gt;</div><div class="line">&lt;/View&gt;</div></pre></td></tr></table></figure>
+<h4 id="安卓APP启动不了"><a href="#安卓APP启动不了" class="headerlink" title="安卓APP启动不了"></a>安卓APP启动不了</h4><p>使用vscode启动安卓项目时可能报错的信息不够详细，这时可以关闭vscode的服务，使用<code>react-native run-android</code>运行查看具体错误信息</p>
 <p>一般启动不了的原因是各种包安装失败，一些包要修改原生代码或者配置来安装，弄错了就会报各种奇怪的错。</p>
 <h4 id="无线调试"><a href="#无线调试" class="headerlink" title="无线调试"></a>无线调试</h4><ol>
 <li><p>首先手机和电脑处于同一个局域网，使用手机连接数据线到电脑，运行<code>adb devices</code>查看设备连接情况，如果连接状态为device，则代表连接成功</p>
@@ -238,14 +244,24 @@ var _hmt = _hmt || [];
 <li><p>断开连接：adb disconnect 192.168.1.100:5555</p>
 </li>
 </ol>
-<h4 id="忽略警告"><a href="#忽略警告" class="headerlink" title="忽略警告"></a>忽略警告</h4><p>在默认情况下，开发模式中启用了黄屏警告。可以通过以下代码关闭：</p>
+<h4 id="忽略黄色警告"><a href="#忽略黄色警告" class="headerlink" title="忽略黄色警告"></a>忽略黄色警告</h4><p>在默认情况下，开发模式中启用了黄屏警告。可以通过以下代码关闭：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">console.disableYellowBox = true;</div><div class="line">console.warn(&apos;YellowBox is disabled.&apos;);</div></pre></td></tr></table></figure>
 <p>你也可以通过代码屏蔽指定的警告，像下面这样调用 ignoreWarnings 方法，参数为一个数组：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;YellowBox&#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line">YellowBox.ignoreWarnings([<span class="string">'Warning: ...'</span>]);</div></pre></td></tr></table></figure>
 <p>忽略常见警告：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">YellowBox.ignoreWarnings([</div><div class="line">    <span class="string">'Warning: componentWillMount is deprecated'</span>,</div><div class="line">    <span class="string">'Warning: componentWillReceiveProps is deprecated'</span>,</div><div class="line">    <span class="comment">// 'Warning: BackAndroid is deprecated. Please use BackHandler instead.',</span></div><div class="line">    <span class="comment">// 'source.uri should not be an empty string', </span></div><div class="line">    <span class="comment">// 'Invalid props.style key'</span></div><div class="line">]);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">YellowBox.ignoreWarnings([</div><div class="line">    <span class="string">'Warning: componentWillMount is deprecated'</span>,</div><div class="line">    <span class="string">'Warning: componentWillReceiveProps is deprecated'</span>,</div><div class="line">    <span class="string">'Remote debugger is in a background tab which may cause apps to perform slowly.'</span></div><div class="line">    <span class="comment">// 'Warning: BackAndroid is deprecated. Please use BackHandler instead.',</span></div><div class="line">    <span class="comment">// 'source.uri should not be an empty string', </span></div><div class="line">    <span class="comment">// 'Invalid props.style key'</span></div><div class="line">]);</div></pre></td></tr></table></figure>
+<h4 id="黄色警告Remote-debugger-is-in-a-background-tab"><a href="#黄色警告Remote-debugger-is-in-a-background-tab" class="headerlink" title="黄色警告Remote debugger is in a background tab"></a>黄色警告Remote debugger is in a background tab</h4><p>react-native之黄色警告Remote debugger is in a background tab which may cause apps to perform slowly. Fix this by foregrounding the tab (or opening it in a separate window).<br>只要把调试的那个chrome的Tab页保持最前(选中状态)，浏览器窗口不要最小化即可，建议禁用。</p>
 <h4 id="createDrawerNavigator侧滑菜单问题"><a href="#createDrawerNavigator侧滑菜单问题" class="headerlink" title="createDrawerNavigator侧滑菜单问题"></a>createDrawerNavigator侧滑菜单问题</h4><p>createDrawerNavigator默认需要贴边开始滑动才能拉出侧滑菜单…，设置触发起点范围可用<code>edgeWidth</code></p>
 <p>如果遇到划不出的情况，请参考<a href="https://reactnavigation.org/docs/en/getting-started.html" target="_blank" rel="external">https://reactnavigation.org/docs/en/getting-started.html</a>，检查依赖项（如react-native-gesture-handler）是否安装，Android开发需要修改MainActivity.java或者build.gradle，不要弄错。</p>
+<h4 id="运行报错：Could-not-read-path"><a href="#运行报错：Could-not-read-path" class="headerlink" title="运行报错：Could not read path"></a>运行报错：Could not read path</h4><p>报错内容：<code>Could not read path &#39;C:\Users\123\Desktop\react_native_app\DaysMatter\android\app\build\generated\not_namespaced_r_class_sources\debug\processDebugResources\r\android\arch&#39;</code></p>
+<p>确保开发环境正确搭建且项目依赖安装完成</p>
+<p>进入项目所在目录执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd android</div><div class="line">gradlew clean</div></pre></td></tr></table></figure>
+<p>然后执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd ..</div><div class="line">react-native run-android</div></pre></td></tr></table></figure>
+<h4 id="debug-key丢失"><a href="#debug-key丢失" class="headerlink" title="debug.key丢失"></a>debug.key丢失</h4><p>报类似如下错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rn Keystore file &apos;...\android\app\debug.keystore&apos; not found for signing config &apos;debug&apos;.</div></pre></td></tr></table></figure>
+<p>可以在别的项目拷贝一个过来或者生成一个debug.keystore</p>
 <h2 id="win10搭建Android环境问题"><a href="#win10搭建Android环境问题" class="headerlink" title="win10搭建Android环境问题"></a>win10搭建Android环境问题</h2><h4 id="设备未授权"><a href="#设备未授权" class="headerlink" title="设备未授权"></a>设备未授权</h4><p>设备连接后可在命令行运行：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb devices</div></pre></td></tr></table></figure>
 <p>来查看设备连接情况</p>
@@ -421,7 +437,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用命令"><span class="toc-number">1.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">2.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安卓APP启动不了"><span class="toc-number">2.0.1.</span> <span class="toc-text">安卓APP启动不了</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#无线调试"><span class="toc-number">2.0.2.</span> <span class="toc-text">无线调试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#忽略警告"><span class="toc-number">2.0.3.</span> <span class="toc-text">忽略警告</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#createDrawerNavigator侧滑菜单问题"><span class="toc-number">2.0.4.</span> <span class="toc-text">createDrawerNavigator侧滑菜单问题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#win10搭建Android环境问题"><span class="toc-number">3.</span> <span class="toc-text">win10搭建Android环境问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设备未授权"><span class="toc-number">3.0.1.</span> <span class="toc-text">设备未授权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ADB版本"><span class="toc-number">3.0.2.</span> <span class="toc-text">ADB版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#android-studio的add-configuration"><span class="toc-number">3.0.3.</span> <span class="toc-text">android studio的add configuration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#operation-not-permitted"><span class="toc-number">3.0.4.</span> <span class="toc-text">operation not permitted</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#命令行启动安卓模拟器"><span class="toc-number">3.0.5.</span> <span class="toc-text">命令行启动安卓模拟器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vscode开发环境搭建"><span class="toc-number">4.</span> <span class="toc-text">vscode开发环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-Native-Tools"><span class="toc-number">4.1.</span> <span class="toc-text">React Native Tools</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用命令"><span class="toc-number">1.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">2.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注意事项"><span class="toc-number">2.0.1.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#react屏幕适配"><span class="toc-number">2.0.2.</span> <span class="toc-text">react屏幕适配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安卓APP启动不了"><span class="toc-number">2.0.3.</span> <span class="toc-text">安卓APP启动不了</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#无线调试"><span class="toc-number">2.0.4.</span> <span class="toc-text">无线调试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#忽略黄色警告"><span class="toc-number">2.0.5.</span> <span class="toc-text">忽略黄色警告</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#黄色警告Remote-debugger-is-in-a-background-tab"><span class="toc-number">2.0.6.</span> <span class="toc-text">黄色警告Remote debugger is in a background tab</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#createDrawerNavigator侧滑菜单问题"><span class="toc-number">2.0.7.</span> <span class="toc-text">createDrawerNavigator侧滑菜单问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行报错：Could-not-read-path"><span class="toc-number">2.0.8.</span> <span class="toc-text">运行报错：Could not read path</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#debug-key丢失"><span class="toc-number">2.0.9.</span> <span class="toc-text">debug.key丢失</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#win10搭建Android环境问题"><span class="toc-number">3.</span> <span class="toc-text">win10搭建Android环境问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设备未授权"><span class="toc-number">3.0.1.</span> <span class="toc-text">设备未授权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ADB版本"><span class="toc-number">3.0.2.</span> <span class="toc-text">ADB版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#android-studio的add-configuration"><span class="toc-number">3.0.3.</span> <span class="toc-text">android studio的add configuration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#operation-not-permitted"><span class="toc-number">3.0.4.</span> <span class="toc-text">operation not permitted</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#命令行启动安卓模拟器"><span class="toc-number">3.0.5.</span> <span class="toc-text">命令行启动安卓模拟器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vscode开发环境搭建"><span class="toc-number">4.</span> <span class="toc-text">vscode开发环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-Native-Tools"><span class="toc-number">4.1.</span> <span class="toc-text">React Native Tools</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -549,11 +565,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -561,15 +577,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -581,18 +593,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -601,7 +601,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">

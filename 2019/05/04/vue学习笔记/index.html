@@ -8,22 +8,22 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="![mark](http://qiniuyun.ipromiseyourlife.com/blog/20190111/YJC2Jx0Vu645.jpg?imageslim  本文将记录关于vue的一切">
+  <meta name="description" content="本文将记录关于vue的一切">
 <meta property="og:type" content="article">
 <meta property="og:title" content="张伯伯的BLOG">
 <meta property="og:url" content="http://yoursite.com/2019/05/04/vue学习笔记/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="![mark](http://qiniuyun.ipromiseyourlife.com/blog/20190111/YJC2Jx0Vu645.jpg?imageslim  本文将记录关于vue的一切">
+<meta property="og:description" content="本文将记录关于vue的一切">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190111/YJC2Jx0Vu645.jpg?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191011/R7pRbAdhSUdb.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191011/SCS27Rnlnkyu.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191011/82jAdghQmaaw.png">
-<meta property="og:updated_time" content="2019-10-11T06:37:24.060Z">
+<meta property="og:updated_time" content="2019-10-11T06:44:10.410Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="张伯伯的BLOG">
-<meta name="twitter:description" content="![mark](http://qiniuyun.ipromiseyourlife.com/blog/20190111/YJC2Jx0Vu645.jpg?imageslim  本文将记录关于vue的一切">
-<meta name="twitter:image" content="https://common.cnblogs.com/images/copycode.gif">
+<meta name="twitter:description" content="本文将记录关于vue的一切">
+<meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190111/YJC2Jx0Vu645.jpg?imageslim">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -182,7 +182,7 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>![mark](<a href="http://qiniuyun.ipromiseyourlife.com/blog/20190111/YJC2Jx0Vu645.jpg?imageslim" target="_blank" rel="external">http://qiniuyun.ipromiseyourlife.com/blog/20190111/YJC2Jx0Vu645.jpg?imageslim</a></p>
+        <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190111/YJC2Jx0Vu645.jpg?imageslim" alt="mark"></p>
 <blockquote>
 <p>本文将记录关于vue的一切</p>
 </blockquote>
@@ -204,8 +204,7 @@ var _hmt = _hmt || [];
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    <span class="attr">foo</span>: <span class="string">'foo'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'foo'</span>, &#123;</div><div class="line">    <span class="attr">get</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'将要读取obj.foo属性'</span>);</div><div class="line">    &#125;, </div><div class="line">    <span class="attr">set</span>: <span class="function"><span class="keyword">function</span> (<span class="params">newVal</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'当前值为'</span>, newVal);</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">obj.foo; <span class="comment">// 将要读取obj.foo属性</span></div><div class="line">obj.foo = <span class="string">'name'</span>; <span class="comment">// 当前值为 name</span></div></pre></td></tr></table></figure>
 <p>　　可以看到，get即为我们访问属性时调用，set为我们设置属性值时调用。</p>
 <p>　　</p>
-<h2 id="二、简单的数据双向绑定实现方法"><a href="#二、简单的数据双向绑定实现方法" class="headerlink" title="二、简单的数据双向绑定实现方法"></a>二、简单的数据双向绑定实现方法</h2><p><a href="javascript:void(0" target="_blank" rel="external"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>forvue<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"textInput"</span>&gt;</span></div><div class="line">  输入：<span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"textSpan"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> obj = &#123;&#125;,</div><div class="line">        textInput = <span class="built_in">document</span>.querySelector(<span class="string">'#textInput'</span>),</div><div class="line">        textSpan = <span class="built_in">document</span>.querySelector(<span class="string">'#textSpan'</span>);</div><div class="line"></div><div class="line">    <span class="built_in">Object</span>.defineProperty(obj, <span class="string">'foo'</span>, &#123;</div><div class="line">      <span class="attr">set</span>: <span class="function"><span class="keyword">function</span> (<span class="params">newValue</span>) </span>&#123;</div><div class="line">        textInput.value = newValue;</div><div class="line">        textSpan.innerHTML = newValue;</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    textInput.addEventListener(<span class="string">'keyup'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">        obj.foo = e.target.value;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="二、简单的数据双向绑定实现方法"><a href="#二、简单的数据双向绑定实现方法" class="headerlink" title="二、简单的数据双向绑定实现方法"></a>二、简单的数据双向绑定实现方法</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>forvue<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"textInput"</span>&gt;</span></div><div class="line">  输入：<span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"textSpan"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> obj = &#123;&#125;,</div><div class="line">        textInput = <span class="built_in">document</span>.querySelector(<span class="string">'#textInput'</span>),</div><div class="line">        textSpan = <span class="built_in">document</span>.querySelector(<span class="string">'#textSpan'</span>);</div><div class="line"></div><div class="line">    <span class="built_in">Object</span>.defineProperty(obj, <span class="string">'foo'</span>, &#123;</div><div class="line">      <span class="attr">set</span>: <span class="function"><span class="keyword">function</span> (<span class="params">newValue</span>) </span>&#123;</div><div class="line">        textInput.value = newValue;</div><div class="line">        textSpan.innerHTML = newValue;</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    textInput.addEventListener(<span class="string">'keyup'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">        obj.foo = e.target.value;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>最终效果图：</p>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20191011/R7pRbAdhSUdb.png?imageslim" alt="mark"></p>
 <p>可以看到，实现一个简单的数据双向绑定还是不难的： 使用Object.defineProperty()来定义属性的set函数，属性被赋值的时候，修改Input的value值以及span中的innerHTML；然后监听input的keyup事件，修改对象的属性值，即可实现这样的一个简单的数据双向绑定。</p>
@@ -525,19 +524,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">

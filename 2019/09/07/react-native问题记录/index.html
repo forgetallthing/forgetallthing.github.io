@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190910/3fPiBsqPcBIY.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190910/d9c7zPlmcNOQ.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190910/sTDDrTD4BnS1.png?imageslim">
-<meta property="og:updated_time" content="2019-09-24T08:00:16.760Z">
+<meta property="og:updated_time" content="2019-09-24T09:09:30.143Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react-native问题记录">
 <meta name="twitter:description" content="常用命令react-native init new_project新建rn项目； react-native run-android:启动安卓应用； react-native start:启动react-native的包管理器，此命令一般被设置为：npm start； npm install 某个带有原生依赖的库 + react-native link 某已安装的具体库名:添加包含原生代码的库，rn">
@@ -262,6 +262,10 @@ var _hmt = _hmt || [];
 <h4 id="debug-key丢失"><a href="#debug-key丢失" class="headerlink" title="debug.key丢失"></a>debug.key丢失</h4><p>报类似如下错误：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rn Keystore file &apos;...\android\app\debug.keystore&apos; not found for signing config &apos;debug&apos;.</div></pre></td></tr></table></figure>
 <p>可以在别的项目拷贝一个过来或者生成一个debug.keystore</p>
+<h4 id="打包错误：Could-not-determine-the-dependencies-of-task-‘-app-lintVitalRelease’"><a href="#打包错误：Could-not-determine-the-dependencies-of-task-‘-app-lintVitalRelease’" class="headerlink" title="打包错误：Could not determine the dependencies of task ‘:app:lintVitalRelease’"></a>打包错误：Could not determine the dependencies of task ‘:app:lintVitalRelease’</h4><p>执行<code>./gradlew assembleRelease</code>报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Could not determine the dependencies of task &apos;:app:lintVitalRelease&apos;</div></pre></td></tr></table></figure>
+<p>可在项目目录下的android\app\build.gradle中添加：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">	...</div><div class="line">	<span class="comment">//插入如下部分</span></div><div class="line">    lintOptions &#123;</div><div class="line">        checkReleaseBuilds <span class="literal">false</span></div><div class="line">        abortOnError <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="win10搭建Android环境问题"><a href="#win10搭建Android环境问题" class="headerlink" title="win10搭建Android环境问题"></a>win10搭建Android环境问题</h2><h4 id="设备未授权"><a href="#设备未授权" class="headerlink" title="设备未授权"></a>设备未授权</h4><p>设备连接后可在命令行运行：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb devices</div></pre></td></tr></table></figure>
 <p>来查看设备连接情况</p>
@@ -437,7 +441,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用命令"><span class="toc-number">1.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">2.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注意事项"><span class="toc-number">2.0.1.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#react屏幕适配"><span class="toc-number">2.0.2.</span> <span class="toc-text">react屏幕适配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安卓APP启动不了"><span class="toc-number">2.0.3.</span> <span class="toc-text">安卓APP启动不了</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#无线调试"><span class="toc-number">2.0.4.</span> <span class="toc-text">无线调试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#忽略黄色警告"><span class="toc-number">2.0.5.</span> <span class="toc-text">忽略黄色警告</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#黄色警告Remote-debugger-is-in-a-background-tab"><span class="toc-number">2.0.6.</span> <span class="toc-text">黄色警告Remote debugger is in a background tab</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#createDrawerNavigator侧滑菜单问题"><span class="toc-number">2.0.7.</span> <span class="toc-text">createDrawerNavigator侧滑菜单问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行报错：Could-not-read-path"><span class="toc-number">2.0.8.</span> <span class="toc-text">运行报错：Could not read path</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#debug-key丢失"><span class="toc-number">2.0.9.</span> <span class="toc-text">debug.key丢失</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#win10搭建Android环境问题"><span class="toc-number">3.</span> <span class="toc-text">win10搭建Android环境问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设备未授权"><span class="toc-number">3.0.1.</span> <span class="toc-text">设备未授权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ADB版本"><span class="toc-number">3.0.2.</span> <span class="toc-text">ADB版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#android-studio的add-configuration"><span class="toc-number">3.0.3.</span> <span class="toc-text">android studio的add configuration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#operation-not-permitted"><span class="toc-number">3.0.4.</span> <span class="toc-text">operation not permitted</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#命令行启动安卓模拟器"><span class="toc-number">3.0.5.</span> <span class="toc-text">命令行启动安卓模拟器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vscode开发环境搭建"><span class="toc-number">4.</span> <span class="toc-text">vscode开发环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-Native-Tools"><span class="toc-number">4.1.</span> <span class="toc-text">React Native Tools</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用命令"><span class="toc-number">1.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">2.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注意事项"><span class="toc-number">2.0.1.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#react屏幕适配"><span class="toc-number">2.0.2.</span> <span class="toc-text">react屏幕适配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安卓APP启动不了"><span class="toc-number">2.0.3.</span> <span class="toc-text">安卓APP启动不了</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#无线调试"><span class="toc-number">2.0.4.</span> <span class="toc-text">无线调试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#忽略黄色警告"><span class="toc-number">2.0.5.</span> <span class="toc-text">忽略黄色警告</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#黄色警告Remote-debugger-is-in-a-background-tab"><span class="toc-number">2.0.6.</span> <span class="toc-text">黄色警告Remote debugger is in a background tab</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#createDrawerNavigator侧滑菜单问题"><span class="toc-number">2.0.7.</span> <span class="toc-text">createDrawerNavigator侧滑菜单问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行报错：Could-not-read-path"><span class="toc-number">2.0.8.</span> <span class="toc-text">运行报错：Could not read path</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#debug-key丢失"><span class="toc-number">2.0.9.</span> <span class="toc-text">debug.key丢失</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#打包错误：Could-not-determine-the-dependencies-of-task-‘-app-lintVitalRelease’"><span class="toc-number">2.0.10.</span> <span class="toc-text">打包错误：Could not determine the dependencies of task ‘:app:lintVitalRelease’</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#win10搭建Android环境问题"><span class="toc-number">3.</span> <span class="toc-text">win10搭建Android环境问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设备未授权"><span class="toc-number">3.0.1.</span> <span class="toc-text">设备未授权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ADB版本"><span class="toc-number">3.0.2.</span> <span class="toc-text">ADB版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#android-studio的add-configuration"><span class="toc-number">3.0.3.</span> <span class="toc-text">android studio的add configuration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#operation-not-permitted"><span class="toc-number">3.0.4.</span> <span class="toc-text">operation not permitted</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#命令行启动安卓模拟器"><span class="toc-number">3.0.5.</span> <span class="toc-text">命令行启动安卓模拟器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vscode开发环境搭建"><span class="toc-number">4.</span> <span class="toc-text">vscode开发环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-Native-Tools"><span class="toc-number">4.1.</span> <span class="toc-text">React Native Tools</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -561,11 +565,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -577,11 +581,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -593,11 +597,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -609,7 +609,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -617,7 +621,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">

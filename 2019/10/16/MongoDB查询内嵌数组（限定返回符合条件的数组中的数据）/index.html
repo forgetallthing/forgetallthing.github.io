@@ -6,23 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>chrome的chrome://inspect/#devices工具崩溃解决办法 | 张伯伯的BLOG</title>
+  <title>MongoDB查询内嵌数组（限定返回符合条件的数组中的数据） | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="更新chrome浏览器到63(稳定版)后出现chrome://inspect/#devices工具调试webview崩溃的情况，着实让人心力憔悴，毕竟这是用起来最舒服最强大的调试工具，问题描述如下：">
-<meta name="keywords" content="webview">
+  <meta name="description" content="本文探讨当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。">
+<meta name="keywords" content="mongodb">
 <meta property="og:type" content="article">
-<meta property="og:title" content="chrome的chrome:&#x2F;&#x2F;inspect&#x2F;#devices工具崩溃解决办法">
-<meta property="og:url" content="http://yoursite.com/2018/01/17/chrome的chrome-inspect-devices工具崩溃解决办法/index.html">
+<meta property="og:title" content="MongoDB查询内嵌数组（限定返回符合条件的数组中的数据）">
+<meta property="og:url" content="http://yoursite.com/2019/10/16/MongoDB查询内嵌数组（限定返回符合条件的数组中的数据）/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="更新chrome浏览器到63(稳定版)后出现chrome://inspect/#devices工具调试webview崩溃的情况，着实让人心力憔悴，毕竟这是用起来最舒服最强大的调试工具，问题描述如下：">
+<meta property="og:description" content="本文探讨当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/cf3afe22dccd7453eeb6f4dba2dc8391.jpg">
-<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/1516158237%281%29.jpg">
-<meta property="og:updated_time" content="2018-12-05T08:40:42.000Z">
+<meta property="og:updated_time" content="2019-10-16T03:01:03.516Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="chrome的chrome:&#x2F;&#x2F;inspect&#x2F;#devices工具崩溃解决办法">
-<meta name="twitter:description" content="更新chrome浏览器到63(稳定版)后出现chrome://inspect/#devices工具调试webview崩溃的情况，着实让人心力憔悴，毕竟这是用起来最舒服最强大的调试工具，问题描述如下：">
-<meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/cf3afe22dccd7453eeb6f4dba2dc8391.jpg">
+<meta name="twitter:title" content="MongoDB查询内嵌数组（限定返回符合条件的数组中的数据）">
+<meta name="twitter:description" content="本文探讨当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -176,41 +173,56 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-chrome的chrome-inspect-devices工具崩溃解决办法" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MongoDB查询内嵌数组（限定返回符合条件的数组中的数据）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      chrome的chrome://inspect/#devices工具崩溃解决办法
+      MongoDB查询内嵌数组（限定返回符合条件的数组中的数据）
     </h1>
   
 
         
-        <a href="/2018/01/17/chrome的chrome-inspect-devices工具崩溃解决办法/" class="archive-article-date">
-  	<time datetime="2018-01-17T06:14:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-17</time>
+        <a href="/2019/10/16/MongoDB查询内嵌数组（限定返回符合条件的数组中的数据）/" class="archive-article-date">
+  	<time datetime="2019-10-16T02:43:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://qiniuyun.ipromiseyourlife.com/cf3afe22dccd7453eeb6f4dba2dc8391.jpg" alt></p>
-<p>更新chrome浏览器到63(稳定版)后出现chrome://inspect/#devices工具调试webview崩溃的情况，着实让人心力憔悴，毕竟这是用起来最舒服最强大的调试工具，问题描述如下：</p>
+        <p>本文探讨当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。</p>
 <a id="more"></a>
-<p>如下图：</p>
-<p><img src="http://qiniuyun.ipromiseyourlife.com/1516158237%281%29.jpg" alt></p>
-<p>调试7.0的安卓手机正常，但5.1版本的安卓pad出现了上图所示的页面错乱，更新至chrome浏览器到64(最新测试版)依然不能正常显示。</p>
-<p><strong>解决办法</strong>：回退到chrome 58版本即可，旧版本下载地址：<a href="https://www.portablesoft.org。" target="_blank" rel="noopener">https://www.portablesoft.org。</a></p>
-<p>ps：亲测58.0.3029.81版本可用，其他版本不可靠。</p>
-<p>ps：安装旧版本时还遇到了<strong>双击chrome安装包没反应</strong>的情况。</p>
-<p><strong>解决办法</strong>：</p>
-<ol>
-<li>把电脑上的chrome相关文件夹删掉；</li>
-<li>把注册表HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Google删除；</li>
-<li>重新安装即可。</li>
-</ol>
+<p>原始数据：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5aab3460353df3bd352e0e15"</span>),</span><br><span class="line">    <span class="string">"addTime"</span> : ISODate(<span class="string">"2018-03-16T03:05:04.363Z"</span>),</span><br><span class="line">    <span class="string">"tag"</span> : <span class="string">"test"</span>,</span><br><span class="line">    <span class="string">"userInfo"</span> : [ </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"cj"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"江苏"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">24.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"stu"</span></span><br><span class="line">        &#125;, </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"hj"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"江苏"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">26.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"stu"</span></span><br><span class="line">        &#125;, </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"lbl"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"美国"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">22.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"teach"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>查询条件是<code>tag =“test”  userTag=”teach”</code> 的学生的信息。期望返回的结果如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;_id&quot; : ObjectId(&quot;5aab3460353df3bd352e0e15&quot;),</span><br><span class="line">    &quot;userInfo&quot; : [ </span><br><span class="line">        &#123;</span><br><span class="line">            &quot;name&quot; : &quot;lbl&quot;,</span><br><span class="line">            &quot;address&quot; : &quot;美国&quot;,</span><br><span class="line">            &quot;age&quot; : 22.0,</span><br><span class="line">            &quot;userTag&quot; : &quot;teach&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但结果是这样的:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">db.test.find(&#123;<span class="string">"userInfo.userTag"</span>:<span class="string">"teach"</span>,<span class="string">"tag"</span>:<span class="string">"test"</span>&#125;)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5aab3460353df3bd352e0e15"</span>),</span><br><span class="line">    <span class="string">"addTime"</span> : ISODate(<span class="string">"2018-03-16T03:05:04.363Z"</span>),</span><br><span class="line">    <span class="string">"tag"</span> : <span class="string">"test"</span>,</span><br><span class="line">    <span class="string">"userInfo"</span> : [ </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"cj"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"江苏"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">24.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"stu"</span></span><br><span class="line">        &#125;, </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"hj"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"江苏"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">26.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"stu"</span></span><br><span class="line">        &#125;, </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"lbl"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"美国"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">22.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"teach"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以看到 $elemMatch 是在projections方法下面，projections代表是限制返回字段的方法。<br>修改后的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.test.find(&#123;<span class="string">"userInfo.userTag"</span>:<span class="string">"teach"</span>,<span class="string">"tag"</span>:<span class="string">"test"</span>&#125;,&#123;<span class="string">"userInfo"</span>:&#123;$elemMatch&#123;<span class="string">"userTag"</span>:<span class="string">"teach"</span>&#125;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+<p>执行结果:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5aab3460353df3bd352e0e15"</span>),</span><br><span class="line">    <span class="string">"userInfo"</span> : [ </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"lbl"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"美国"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">22.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"teach"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样就得到了结果。<br>然后尝试获取userInfo.userTag = “stu” 的数据：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.test.find(&#123;<span class="string">"userInfo.userTag"</span>:<span class="string">"teach"</span>,<span class="string">"tag"</span>:<span class="string">"test"</span>&#125;,&#123;<span class="string">"userInfo"</span>:&#123;<span class="attr">$elemMatch</span>:&#123;<span class="string">"userTag"</span>:<span class="string">"stu"</span>&#125;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+<p>但是结果出人意料：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5aab3460353df3bd352e0e15"</span>),</span><br><span class="line">    <span class="string">"userInfo"</span> : [ </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"cj"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"江苏"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">24.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"stu"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>明明是2条stu的结果，为什么至返回一条呢？ 其实$elemMatch 的定义 在官网中已经说过了，这是原话：</p>
+<blockquote>
+<p>The $elemMatch operator limits the contents of an <array> field from the query results to contain only the first element matching the $elemMatch condition.</array></p>
+</blockquote>
+<p>注意 only the first element 也就是仅仅匹配第一个合适的元素。<br>那么 对于数组中只有一个返回元素，我们可以使用$elemMatch来查询，但是对于多个元素$elemMatch 是不适应。</p>
+<p><strong>$Aggregation</strong>介绍<br>文档地址：<a href="https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline/" target="_blank" rel="noopener">https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline/</a></p>
+<p><strong>$unwind</strong>:<br><a href="https://docs.mongodb.com/manual/reference/operator/aggregation/unwind/#pipe._S_unwind" target="_blank" rel="noopener">https://docs.mongodb.com/manual/reference/operator/aggregation/unwind/#pipe._S_unwind</a><br>大概意思就是将数组中的每一个元素转为每一条文档</p>
+<p><strong>$match</strong>:<br><a href="https://docs.mongodb.com/manual/reference/operator/aggregation/match/" target="_blank" rel="noopener">https://docs.mongodb.com/manual/reference/operator/aggregation/match/</a><br>简单的过滤文档，条件查询。</p>
+<p><strong>$project</strong>:<br><a href="https://docs.mongodb.com/manual/reference/operator/aggregation/project/" target="_blank" rel="noopener">https://docs.mongodb.com/manual/reference/operator/aggregation/project/</a><br>修改输入文档的结构<br>执行命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.test.aggregate([&#123;<span class="string">"$unwind"</span>:<span class="string">"$userInfo"</span>&#125;,</span><br><span class="line">&#123;<span class="string">"$match"</span>:&#123;<span class="string">"userInfo.userTag"</span>:<span class="string">"stu"</span>,<span class="string">"tag"</span>:<span class="string">"test"</span>&#125;&#125;,</span><br><span class="line">&#123;<span class="string">"$project"</span>:&#123;<span class="string">"userInfo"</span>:<span class="number">1</span>&#125;&#125;])</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 1 */</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5aab3460353df3bd352e0e15"</span>),</span><br><span class="line">    <span class="string">"userInfo"</span> : &#123;</span><br><span class="line">        <span class="string">"name"</span> : <span class="string">"cj"</span>,</span><br><span class="line">        <span class="string">"address"</span> : <span class="string">"江苏"</span>,</span><br><span class="line">        <span class="string">"age"</span> : <span class="number">24.0</span>,</span><br><span class="line">        <span class="string">"userTag"</span> : <span class="string">"stu"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 2 */</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5aab3460353df3bd352e0e15"</span>),</span><br><span class="line">    <span class="string">"userInfo"</span> : &#123;</span><br><span class="line">        <span class="string">"name"</span> : <span class="string">"hj"</span>,</span><br><span class="line">        <span class="string">"address"</span> : <span class="string">"江苏"</span>,</span><br><span class="line">        <span class="string">"age"</span> : <span class="number">26.0</span>,</span><br><span class="line">        <span class="string">"userTag"</span> : <span class="string">"stu"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样的一个结果就是我们想要的。感兴趣的同学可以分别执行下这个三个操作（比较看看三个结果有什么不同），你就能理解 $unwind、$match、$project 三个方法的作用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.test.aggregate([&#123;&quot;$unwind&quot;:&quot;$userInfo&quot;&#125;])</span><br><span class="line"></span><br><span class="line">db.test.aggregate([&#123;&quot;$unwind&quot;:&quot;$userInfo&quot;&#125;,&#123;&quot;$match&quot;:&#123;&quot;userInfo.userTag&quot;:&quot;stu&quot;,&quot;tag&quot;:&quot;test&quot;&#125;&#125;])</span><br><span class="line"></span><br><span class="line">db.test.aggregate([&#123;&quot;$unwind&quot;:&quot;$userInfo&quot;&#125;,&#123;&quot;$match&quot;:&#123;&quot;userInfo.userTag&quot;:&quot;stu&quot;,&quot;tag&quot;:&quot;test&quot;&#125;&#125;,&#123;&quot;$project&quot;:&#123;&quot;userInfo&quot;:1&#125;&#125;])</span><br></pre></td></tr></table></figure>
 
       
 
@@ -255,7 +267,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">webview</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mongodb</a>
         		</li>
       		
 		</ul>
@@ -311,7 +323,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2018/01/17/chrome的chrome-inspect-devices工具崩溃解决办法/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2019/10/16/MongoDB查询内嵌数组（限定返回符合条件的数组中的数据）/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -325,18 +337,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2018/01/30/Win10找回hosts的命令/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Win10找回hosts的命令
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/01/02/2018没羞没臊的总结文档/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">2018没羞没臊的总结文档</div>
+    <a href="/2019/09/07/react-native问题记录/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">react-native问题记录</div>
       <i class="icon-circle-right"></i>
     </a>
   

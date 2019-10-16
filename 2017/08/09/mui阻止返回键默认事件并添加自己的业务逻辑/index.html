@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>mui阻止返回键默认事件并添加自己的业务逻辑 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -57,7 +57,7 @@ var _hmt = _hmt || [];
 
 
 </head>
-
+</html>
 <body style="height: 100%;overflow: hidden;">
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -195,8 +195,8 @@ var _hmt = _hmt || [];
       
         <p>需求：阻止mui默认点击返回键出发的mui.back()返回上一页，添加两秒内点击两次返回键则退出程序事件，并在第一次点击时弹出提示“再点击一次退出程序”:</p>
 <a id="more"></a>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> backFirst = <span class="literal">null</span>;</div><div class="line"><span class="comment">//mui初始化</span></div><div class="line"> mui.init(&#123;</div><div class="line">	<span class="attr">beforeback</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="comment">//实现自己的逻辑</span></div><div class="line">		<span class="keyword">if</span>(!backFirst) &#123;</div><div class="line">			backFirst = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</div><div class="line">			mui.toast(<span class="string">'再按一次退出应用'</span>);</div><div class="line">			setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">				backFirst = <span class="literal">null</span>;</div><div class="line">			&#125;, <span class="number">2000</span>);</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">if</span>((<span class="keyword">new</span> <span class="built_in">Date</span>()).getTime() - backFirst &lt; <span class="number">2000</span>) &#123;</div><div class="line">				plus.runtime.quit();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//return false时不再执行后退逻辑</span></div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//需要mui v3.5+ 支持，duration可为num和string，</span></div><div class="line"><span class="comment">//num默认单位为ms，string可选long(3500ms),short(2000ms)</span></div><div class="line">mui.toast(<span class="string">'登陆成功'</span>,&#123; <span class="attr">duration</span>:<span class="string">'short'</span>, <span class="attr">type</span>:<span class="string">'div'</span> &#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> backFirst = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">//mui初始化</span></span><br><span class="line"> mui.init(&#123;</span><br><span class="line">	beforeback: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="comment">//实现自己的逻辑</span></span><br><span class="line">		<span class="keyword">if</span>(!backFirst) &#123;</span><br><span class="line">			backFirst = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</span><br><span class="line">			mui.toast(<span class="string">'再按一次退出应用'</span>);</span><br><span class="line">			setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">				backFirst = <span class="literal">null</span>;</span><br><span class="line">			&#125;, <span class="number">2000</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">if</span>((<span class="keyword">new</span> <span class="built_in">Date</span>()).getTime() - backFirst &lt; <span class="number">2000</span>) &#123;</span><br><span class="line">				plus.runtime.quit();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//return false时不再执行后退逻辑</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需要mui v3.5+ 支持，duration可为num和string，</span></span><br><span class="line"><span class="comment">//num默认单位为ms，string可选long(3500ms),short(2000ms)</span></span><br><span class="line">mui.toast(<span class="string">'登陆成功'</span>,&#123; <span class="attr">duration</span>:<span class="string">'short'</span>, <span class="attr">type</span>:<span class="string">'div'</span> &#125;)</span><br></pre></td></tr></table></figure>
       
 
       
@@ -476,11 +476,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -488,11 +492,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -500,7 +504,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -512,23 +524,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -552,11 +552,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">

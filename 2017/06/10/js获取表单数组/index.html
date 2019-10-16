@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>js获取表单数组 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -57,7 +57,7 @@ var _hmt = _hmt || [];
 
 
 </head>
-
+</html>
 <body style="height: 100%;overflow: hidden;">
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -195,8 +195,8 @@ var _hmt = _hmt || [];
       
         <p>此篇为转载前辈封装好的方法，顺便把返回值改为对象，并且增加了几种新表单类型的支持和特殊字符的解码：</p>
 <a id="more"></a>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getElements</span>(<span class="params">formId</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> form = <span class="built_in">document</span>.getElementById(formId);</div><div class="line">	<span class="keyword">var</span> elements = <span class="keyword">new</span> <span class="built_in">Array</span>();</div><div class="line">	<span class="keyword">var</span> tagElements = form.getElementsByTagName(<span class="string">'input'</span>);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; tagElements.length; j++) &#123;</div><div class="line">		elements.push(tagElements[j]);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">var</span> tagElements = form.getElementsByTagName(<span class="string">'select'</span>);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; tagElements.length; j++) &#123;</div><div class="line">		elements.push(tagElements[j]);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">var</span> tagElements = form.getElementsByTagName(<span class="string">'textarea'</span>);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; tagElements.length; j++) &#123;</div><div class="line">		elements.push(tagElements[j]);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> elements;</div><div class="line">&#125;</div><div class="line"><span class="comment">//组合URL </span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">serializeElement</span>(<span class="params">element</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> method = element.tagName.toLowerCase();</div><div class="line">	<span class="keyword">var</span> parameter;</div><div class="line">	<span class="keyword">if</span>(method == <span class="string">'select'</span>) &#123;</div><div class="line">		parameter = [element.name, element.value];</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">switch</span>(element.type.toLowerCase()) &#123;</div><div class="line">		<span class="keyword">case</span> <span class="string">'submit'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'hidden'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'password'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'email'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'range'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'url'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'number'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'text'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'date'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'textarea'</span>:</div><div class="line">			parameter = [element.name, element.value];</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> <span class="string">'checkbox'</span>:</div><div class="line">		<span class="keyword">case</span> <span class="string">'radio'</span>:</div><div class="line">			<span class="keyword">if</span>(element.checked) &#123;</div><div class="line">				parameter = [element.name, element.value];</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span>(parameter) &#123;</div><div class="line">		<span class="keyword">var</span> key = <span class="built_in">encodeURIComponent</span>(parameter[<span class="number">0</span>]);</div><div class="line">		<span class="keyword">if</span>(key.length == <span class="number">0</span>)</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		<span class="keyword">if</span>(parameter[<span class="number">1</span>].constructor != <span class="built_in">Array</span>)</div><div class="line">			parameter[<span class="number">1</span>] = [parameter[<span class="number">1</span>]];</div><div class="line">		<span class="keyword">var</span> values = parameter[<span class="number">1</span>];</div><div class="line">		<span class="keyword">var</span> results = [];</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; values.length; i++) &#123;</div><div class="line">			results.push(key + <span class="string">'='</span> + <span class="built_in">encodeURIComponent</span>(values[i]));</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> results.join(<span class="string">'&amp;'</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//调用方法   </span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">serializeForm</span>(<span class="params">formId</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> elements = getElements(formId);</div><div class="line">	<span class="keyword">var</span> queryComponents = <span class="keyword">new</span> <span class="built_in">Array</span>();</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elements.length; i++) &#123;</div><div class="line">		<span class="keyword">var</span> queryComponent = serializeElement(elements[i]);</div><div class="line">		<span class="keyword">if</span>(queryComponent) &#123;</div><div class="line">			queryComponents.push(queryComponent);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">var</span> result = &#123;&#125;;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> queryComponents) &#123;</div><div class="line">		<span class="keyword">var</span> x = queryComponents[i].split(<span class="string">"="</span>);</div><div class="line">		result[x[<span class="number">0</span>]] = <span class="built_in">decodeURIComponent</span>(x[<span class="number">1</span>])</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>原文：<a href="https://blog.csdn.net/u012841667/article/details/74922939" target="_blank" rel="external">原生js实现获取form表单数据</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getElements</span>(<span class="params">formId</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> form = <span class="built_in">document</span>.getElementById(formId);</span><br><span class="line">	<span class="keyword">var</span> elements = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">	<span class="keyword">var</span> tagElements = form.getElementsByTagName(<span class="string">'input'</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; tagElements.length; j++) &#123;</span><br><span class="line">		elements.push(tagElements[j]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> tagElements = form.getElementsByTagName(<span class="string">'select'</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; tagElements.length; j++) &#123;</span><br><span class="line">		elements.push(tagElements[j]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> tagElements = form.getElementsByTagName(<span class="string">'textarea'</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; tagElements.length; j++) &#123;</span><br><span class="line">		elements.push(tagElements[j]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> elements;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//组合URL </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">serializeElement</span>(<span class="params">element</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> method = element.tagName.toLowerCase();</span><br><span class="line">	<span class="keyword">var</span> parameter;</span><br><span class="line">	<span class="keyword">if</span>(method == <span class="string">'select'</span>) &#123;</span><br><span class="line">		parameter = [element.name, element.value];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">switch</span>(element.type.toLowerCase()) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'submit'</span>:</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'hidden'</span>:</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'password'</span>:</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'email'</span>:</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'range'</span>:</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'url'</span>:</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'number'</span>:</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'text'</span>:</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'date'</span>:</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'textarea'</span>:</span><br><span class="line">			parameter = [element.name, element.value];</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'checkbox'</span>:</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'radio'</span>:</span><br><span class="line">			<span class="keyword">if</span>(element.checked) &#123;</span><br><span class="line">				parameter = [element.name, element.value];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(parameter) &#123;</span><br><span class="line">		<span class="keyword">var</span> key = <span class="built_in">encodeURIComponent</span>(parameter[<span class="number">0</span>]);</span><br><span class="line">		<span class="keyword">if</span>(key.length == <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		<span class="keyword">if</span>(parameter[<span class="number">1</span>].constructor != <span class="built_in">Array</span>)</span><br><span class="line">			parameter[<span class="number">1</span>] = [parameter[<span class="number">1</span>]];</span><br><span class="line">		<span class="keyword">var</span> values = parameter[<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">var</span> results = [];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; values.length; i++) &#123;</span><br><span class="line">			results.push(key + <span class="string">'='</span> + <span class="built_in">encodeURIComponent</span>(values[i]));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> results.join(<span class="string">'&amp;'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//调用方法   </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">serializeForm</span>(<span class="params">formId</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> elements = getElements(formId);</span><br><span class="line">	<span class="keyword">var</span> queryComponents = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elements.length; i++) &#123;</span><br><span class="line">		<span class="keyword">var</span> queryComponent = serializeElement(elements[i]);</span><br><span class="line">		<span class="keyword">if</span>(queryComponent) &#123;</span><br><span class="line">			queryComponents.push(queryComponent);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> result = &#123;&#125;;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> queryComponents) &#123;</span><br><span class="line">		<span class="keyword">var</span> x = queryComponents[i].split(<span class="string">"="</span>);</span><br><span class="line">		result[x[<span class="number">0</span>]] = <span class="built_in">decodeURIComponent</span>(x[<span class="number">1</span>])</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>原文：<a href="https://blog.csdn.net/u012841667/article/details/74922939" target="_blank" rel="noopener">原生js实现获取form表单数据</a></p>
 
       
 
@@ -477,11 +477,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -489,11 +493,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -501,7 +505,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -513,23 +525,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -553,11 +553,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">

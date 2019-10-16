@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>张伯伯的BLOG构建指南 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -67,7 +67,7 @@ var _hmt = _hmt || [];
 
 
 </head>
-
+</html>
 <body style="height: 100%;overflow: hidden;">
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -247,22 +247,22 @@ var _hmt = _hmt || [];
 <li>在博客根目录运行<code>hexo clean</code>  <code>hexo  g</code>  <code>hexo s</code>随后打开浏览器访问提示中的本地4000端口，你期盼已久的BLOG页面出现啦；</li>
 </ul>
 <h4 id="3-yilia主题的安装"><a href="#3-yilia主题的安装" class="headerlink" title="3.yilia主题的安装"></a>3.yilia主题的安装</h4><ul>
-<li><a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external">yilia</a>是litten写的hexo主题，很是简洁漂亮，移动适配也不错，所以我选择这款主题渲染我的blog；</li>
+<li><a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">yilia</a>是litten写的hexo主题，很是简洁漂亮，移动适配也不错，所以我选择这款主题渲染我的blog；</li>
 <li>在github中下载该主题；</li>
 <li>复制并粘贴在blog\themes文件夹下；</li>
 <li>修改根目录中_config.yml中的theme为yilia；</li>
 <li>运行<code>hexo clean</code>  <code>hexo  g</code>  <code>hexo s</code>后可看到yilia主题更换成功；</li>
-<li>其他的一些yilia配置在blog\themes\yilia目录下的_config.yml中，详细修改可见<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external">yilia</a>中的说明文字；</li>
+<li>其他的一些yilia配置在blog\themes\yilia目录下的_config.yml中，详细修改可见<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">yilia</a>中的说明文字；</li>
 </ul>
 <h4 id="3-域名解析"><a href="#3-域名解析" class="headerlink" title="3.域名解析"></a>3.域名解析</h4><ul>
 <li><p>运行<code>hexo clean</code>  <code>hexo  g</code>  <code>hexo d</code>后即可使用发布成功后可在浏览器中使用<code>你的github名.github.io</code>进入你的博客；</p>
 </li>
 <li><p>要是想用自己的域名访问blog的话，首先注册一个域名，把域名解析到你的blog地址即可；</p>
 </li>
-<li><p>在blog的source文件夹下新建一个名添加CNAME文件，注意没有后缀名，windows环境下可以输入CNAME.来创建无后缀名文件，在文件中输入你的域名，如ipromiseyourlife.com。使用<code>hexo clean</code>  <code>hexo  g</code>  <code>hexo d</code>命令更新到github上，可以在你的github中查看：你的blog库-settings-GitHub Pages，出现绿色的 Your site is published at <a href="http://ipromiseyourlife.com/" target="_blank" rel="external">http://ipromiseyourlife.com/</a>即为成功；</p>
+<li><p>在blog的source文件夹下新建一个名添加CNAME文件，注意没有后缀名，windows环境下可以输入CNAME.来创建无后缀名文件，在文件中输入你的域名，如ipromiseyourlife.com。使用<code>hexo clean</code>  <code>hexo  g</code>  <code>hexo d</code>命令更新到github上，可以在你的github中查看：你的blog库-settings-GitHub Pages，出现绿色的 Your site is published at <a href="http://ipromiseyourlife.com/" target="_blank" rel="noopener">http://ipromiseyourlife.com/</a>即为成功；</p>
 </li>
 <li><p>打开命令行工具，使用<code>ping 你的github名.github.io</code>获取你的博客ip（因为A类型的记录只能添加ip），仿照下图红框中的解析方法解析你的域名，记得更改记录值哦；</p>
-<p><img src="http://qiniuyun.ipromiseyourlife.com/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%9C%80%E7%BB%88%E7%89%88.png" alt=""></p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%9C%80%E7%BB%88%E7%89%88.png" alt></p>
 </li>
 <li><p>等待十分钟左右DNS解析生效，就可以使用你的域名访问你的blog啦；</p>
 </li>
@@ -272,13 +272,13 @@ var _hmt = _hmt || [];
 <h4 id="4-写一篇BLOG"><a href="#4-写一篇BLOG" class="headerlink" title="4.写一篇BLOG"></a>4.写一篇BLOG</h4><p>&emsp;&emsp;写博客使用markdown语法，这是最简单的标记语言，花个十分钟入门吧，使用<code>hexo new &quot;文章名字&quot;</code>新建一篇博客，然后在blog\source\_posts中即可找到新建的.md文件，然后编辑你的markdown文件，我使用的是typora编辑器，写好后保存，blog根目录运行<code>hexo  g</code>  <code>hexo d</code>即可同步到github page。</p>
 <h4 id="5-使用七牛云图床"><a href="#5-使用七牛云图床" class="headerlink" title="5.使用七牛云图床"></a>5.使用七牛云图床</h4><p>&emsp;&emsp;七牛云是个免费10g空间，每月10g流量的存储平台，非常适合我这种没几个人看的博客使用，注册登录后新建对象储存，即可上传你的图片和视频，复制外链之后就可以在blog中使用，亲测速度不错哦。</p>
 <p>&emsp;&emsp;ps:七牛云是有免费使用时间的,时间一过,你存上去的图片都下载不下来,要想继续使用,必须配置自己的域名,而且域名必须备案,没错,是用幕布拍照的那种ICP备案,流程大概一个月左右,备案好之后就可以永久使用七牛云了;不然的话,使用qq相册做图床也蛮不错,网上也有自动化工具,但是没有七牛云的MPic.exe好用~</p>
-<h4 id="6-修改你的BLOG样式"><a href="#6-修改你的BLOG样式" class="headerlink" title="6.修改你的BLOG样式"></a>6.修改你的BLOG样式</h4><p>&emsp;&emsp;此处参考<a href="https://github.com/litten/hexo-theme-yilia/wiki/Yilia%E6%BA%90%E7%A0%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%8F%8A%E6%9E%84%E5%BB%BA%E9%A1%BB%E7%9F%A5" target="_blank" rel="external">Yilia源码目录结构及构建须知</a>，</p>
+<h4 id="6-修改你的BLOG样式"><a href="#6-修改你的BLOG样式" class="headerlink" title="6.修改你的BLOG样式"></a>6.修改你的BLOG样式</h4><p>&emsp;&emsp;此处参考<a href="https://github.com/litten/hexo-theme-yilia/wiki/Yilia%E6%BA%90%E7%A0%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%8F%8A%E6%9E%84%E5%BB%BA%E9%A1%BB%E7%9F%A5" target="_blank" rel="noopener">Yilia源码目录结构及构建须知</a>，</p>
 <p>&emsp;&emsp;blog文章分享中的微信二维码生成不可用，我是这样解决的：在yilia\layout_partial\post\share.ejs里第四行加sUrl = sUrl.replace(/yoursite.com/, ‘V’); V为你的网址，如：ipromiseyourlife.com。我在_config.yml中配置url不好用，所以手动替换了微信二维码中的网址。</p>
 <blockquote>
 <p>更改之后记得<code>hexo  g</code>  <code>hexo d</code>查看效果，最好通过<code>hexo  g</code>  <code>hexo s</code>在本地修改好在上传，毕竟本地才是实时的，github反应时间看心情。</p>
 </blockquote>
 <h4 id="7-番外-百度收录问题解决办法"><a href="#7-番外-百度收录问题解决办法" class="headerlink" title="7.番外:百度收录问题解决办法"></a>7.番外:百度收录问题解决办法</h4><p>&emsp;&emsp;在我欢欢喜喜的搭建好github page的时候，我了解到百度蜘蛛抓取不了github构建的网页，原因大体是百度蜘蛛的恐怖抓取给github用户造成影响，所以封禁了，目前也没有要解封的意思，百度药丸啊。</p>
-<p>在百度站长工具上测试：<img src="http://qiniuyun.ipromiseyourlife.com/%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5.png" alt="">&emsp;&emsp;解决百度不能收录的问题主要有两个思路：</p>
+<p>在百度站长工具上测试：<img src="http://qiniuyun.ipromiseyourlife.com/%E6%8A%93%E5%8F%96%E5%A4%B1%E8%B4%A5.png" alt>&emsp;&emsp;解决百度不能收录的问题主要有两个思路：</p>
 <ol>
 <li>利用免费的CDN搞网站镜像或者自己搭建vps。（待更。。。）</li>
 <li>使用coding page（gitcafe被coding收购）搭建有一个网站镜像，设置域名解析即可。</li>
@@ -287,27 +287,27 @@ var _hmt = _hmt || [];
 <h5 id="开启coding-page服务"><a href="#开启coding-page服务" class="headerlink" title="开启coding page服务"></a>开启coding page服务</h5><p>&emsp;&emsp;在coding.net上注册后，创建一个与用户名相同的项目，如用户名是cloudroc，则项目名称也是cloudroc。创建项目后，在项目的Pages页面里，修改Pages服务的关联分支为master，然后开启Pages服务,可能需要完善注册信息升级到银牌会员。再填入你要绑定的域名。注意项目类型我这里设置的是共有。</p>
 <h5 id="在本机建立coding-net的ssh-key，"><a href="#在本机建立coding-net的ssh-key，" class="headerlink" title="在本机建立coding.net的ssh key，"></a>在本机建立coding.net的ssh key，</h5><p>&emsp;&emsp;首先本地需要安装git客户端，在任意路径右键-&gt;git bash here</p>
 <p>输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;yourmail@domain.com&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;yourmail@domain.com&quot;</span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;可以一路按enter键，然后可在C:\Users\主机名.ssh下找到，文件名：id_rsa(私钥)，id_rsa.pub(公钥)</p>
 <p>最后在coding.net，刚建立的pages项目中登记这个公钥即可。添加后，在git bash命令输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@git.coding.net</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@git.coding.net</span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;检测公钥是否添加成功。</p>
 <p>&emsp;&emsp;这一步很重要,当更换电脑时,首先配置好github和coding的公钥,然后就需要在git bash中分别执行:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh -T git@git.coding.net</div><div class="line">ssh -T git@github.com</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@git.coding.net</span><br><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;按照提示输入yew,等待片刻提示<code>forgetallthing，你好，你已经通过 SSH 协议认证 Coding.net 服务，这是一个个人公钥</code> 后,方可执行<code>hexo d</code>成功。</p>
 <h5 id="修改hexo目录的-config-yml，设置多个仓库同步"><a href="#修改hexo目录的-config-yml，设置多个仓库同步" class="headerlink" title="修改hexo目录的_config.yml，设置多个仓库同步"></a>修改hexo目录的_config.yml，设置多个仓库同步</h5><p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: </div><div class="line">    github: https://github.com/cloudroc/cloudroc.github.io.git</div><div class="line">    coding: git@git.coding.net:cloudroc/cloudroc.git</div><div class="line">  branch: master</div><div class="line">  message: a little works</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: </span><br><span class="line">    github: https://github.com/cloudroc/cloudroc.github.io.git</span><br><span class="line">    coding: git@git.coding.net:cloudroc/cloudroc.git</span><br><span class="line">  branch: master</span><br><span class="line">  message: a little works</span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;这里coding的ssh提交不可用，推荐都使用https地址进行配置。提交时可能需要登录coding，在本机配置即可：</p>
-<p>&emsp;&emsp;参考：<a href="https://coding.net/help/faq/git/git.html#push-" target="_blank" rel="external">怎样在每次 Push 时不用重复输入密码？</a></p>
+<p>&emsp;&emsp;参考：<a href="https://coding.net/help/faq/git/git.html#push-" target="_blank" rel="noopener">怎样在每次 Push 时不用重复输入密码？</a></p>
 <h5 id="为域名设置CNAME"><a href="#为域名设置CNAME" class="headerlink" title="为域名设置CNAME"></a>为域名设置CNAME</h5><p>&emsp;&emsp;需要将你的域名cname到pages.coding.me然后，在「Pages 服务」设置页中的自定义域名栏目输入您欲绑定的域名，点击「保存」即可通过自定义域名访问您的网站。</p>
-<p><img src="http://qiniuyun.ipromiseyourlife.com/coding%E8%A7%A3%E6%9E%90.png" alt=""></p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/coding%E8%A7%A3%E6%9E%90.png" alt></p>
 <p>&emsp;&emsp;在百度站长工具上测试：</p>
-<p><img src="http://qiniuyun.ipromiseyourlife.com/coding%E6%8A%93%E5%8F%96.png" alt=""></p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/coding%E6%8A%93%E5%8F%96.png" alt></p>
 <p>&emsp;&emsp;至此可以安心等待百度收录了。</p>
 <p>&emsp;&emsp;在百度搜索 <em>site：你的站点</em> 即可查看收录情况：</p>
-<p><img src="http://qiniuyun.ipromiseyourlife.com/baidu1.png" alt=""></p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/baidu1.png" alt></p>
 <p>&emsp;&emsp;点击提交网址可以加快百度收录速度。</p>
-<p><strong>推荐或者使用<a href="http://tool.chinaz.com/baidu/" target="_blank" rel="external">站长工具</a>查询收录情况</strong></p>
+<p><strong>推荐或者使用<a href="http://tool.chinaz.com/baidu/" target="_blank" rel="noopener">站长工具</a>查询收录情况</strong></p>
 <p>&emsp;&emsp;coding上说</p>
 <blockquote>
 <p>银牌会员的 Coding Pages 在访问时默认会先加载 Pages 跳转页，您可选择在网站首页任意位置放置「Hosted by Coding Pages」的文字版或图片版，然后勾选下方的「已放置 Hosted by Coding Pages」选项，通过审核后您的 Pages 将不会显示跳转页。请务必将「Hosted by Coding Pages」持续保留在网站首页，撤掉后跳转页会再次出现。</p>
@@ -315,15 +315,15 @@ var _hmt = _hmt || [];
 <p>&emsp;&emsp;这个就自己弄吧，毕竟不充钱是不会变强的。</p>
 <hr>
 <p>&emsp;&emsp;好了，我等了一天，百度也没有收录我的网站，记得在站长平台里检测网站评分有接近九十分。对于我来说，百度收录与否是无所谓的事情，只要百度蜘蛛能抓取到，收录只是时间的问题。好啦，这条路已经打通了，但是我并不喜欢这条路，于是我把域名解析改了回来，博客只托管在github page上，最终解析如下：</p>
-<p><img src="http://qiniuyun.ipromiseyourlife.com/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%9C%80%E7%BB%88%E7%89%88.png" alt=""></p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%9C%80%E7%BB%88%E7%89%88.png" alt></p>
 <p>&emsp;&emsp;红色为blog地址解析，蓝色为百度站长认证解析，黄色为腾讯域名邮箱解析（zhangwang@ipromiseyourlife.com）。</p>
 <p>​    PS:后来的后来,我把ipromiseyourlife.com域名备案成功后的某一天,突然有同事用百度搜索问题,搜到了我的博客,于是我查看了一下,百度终于收录了<code>blog.ipromiseyourlife.com</code>,不知两者之间有没有必要联系~</p>
-<h4 id="7-番外-谷歌收录"><a href="#7-番外-谷歌收录" class="headerlink" title="7.番外:谷歌收录"></a>7.番外:谷歌收录</h4><p>&emsp;&emsp;首先翻墙，登陆谷歌的<a href="https://www.google.com/webmasters/tools/home?hl=zh-CN&amp;authuser=0" target="_blank" rel="external">search console</a>按要求登记你的网站，确认你为网站所有者之后（添加域名解析方式最为简单），点击你的网站-抓取-google抓取工具进行抓取测试，完成之后可以请求编入索引即可，我的网站什么优化也没做，站点地图也没有配置，只用了两天时间谷歌就发来邮件：</p>
-<p><img src="http://qiniuyun.ipromiseyourlife.com/%E8%B0%B7%E6%AD%8C%E9%80%9A%E7%9F%A5.png" alt=""></p>
+<h4 id="7-番外-谷歌收录"><a href="#7-番外-谷歌收录" class="headerlink" title="7.番外:谷歌收录"></a>7.番外:谷歌收录</h4><p>&emsp;&emsp;首先翻墙，登陆谷歌的<a href="https://www.google.com/webmasters/tools/home?hl=zh-CN&amp;authuser=0" target="_blank" rel="noopener">search console</a>按要求登记你的网站，确认你为网站所有者之后（添加域名解析方式最为简单），点击你的网站-抓取-google抓取工具进行抓取测试，完成之后可以请求编入索引即可，我的网站什么优化也没做，站点地图也没有配置，只用了两天时间谷歌就发来邮件：</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/%E8%B0%B7%E6%AD%8C%E9%80%9A%E7%9F%A5.png" alt></p>
 <p>&emsp;&emsp;于是我打开谷歌，惊喜的发现已经可以被搜索到了：</p>
-<p><img src="http://qiniuyun.ipromiseyourlife.com/%E8%B0%B7%E6%AD%8C%E6%94%B6%E5%BD%95.png" alt=""></p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/%E8%B0%B7%E6%AD%8C%E6%94%B6%E5%BD%95.png" alt></p>
 <p>&emsp;&emsp;search console中还可以查看流量统计：</p>
-<p><img src="http://qiniuyun.ipromiseyourlife.com/%E8%B0%B7%E6%AD%8C%E6%95%B0%E6%8D%AE.png" alt=""></p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/%E8%B0%B7%E6%AD%8C%E6%95%B0%E6%8D%AE.png" alt></p>
 <p>&emsp;&emsp;等到有空闲时间，我会做网站优化，这样可以大大增加网站点击率。</p>
 <p>（待更）</p>
 
@@ -606,11 +606,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,11 +622,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -630,7 +634,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -642,23 +654,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -682,11 +682,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">

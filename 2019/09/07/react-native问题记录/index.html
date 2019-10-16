@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>react-native问题记录 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -65,7 +65,7 @@ var _hmt = _hmt || [];
 
 
 </head>
-
+</html>
 <body style="height: 100%;overflow: hidden;">
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -211,7 +211,7 @@ var _hmt = _hmt || [];
 <li>安装新npm包的时候要先停掉rn的包管理器和服务，安装成功后再启动；</li>
 </ul>
 <h4 id="react屏幕适配"><a href="#react屏幕适配" class="headerlink" title="react屏幕适配"></a>react屏幕适配</h4><p>分享一个设计稿px转换dp的小函数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">const viewPortWidth = 750;``//这里是设计稿的宽度</div><div class="line">const px2dp = (px: number): number =&gt; &#123;</div><div class="line">    ``return` `px * Dimensions.get(``&apos;window&apos;``).width / viewPortWidth</div><div class="line">&#125;</div><div class="line">&lt;View style=&#123;&#123;height:200,width:px2dp(750),backgroundColor:``&apos;yellow&apos;``&#125;&#125;&gt;</div><div class="line">&lt;Text&gt;750&lt;/Text&gt;</div><div class="line">&lt;/View&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const viewPortWidth = 750;``//这里是设计稿的宽度</span><br><span class="line">const px2dp = (px: number): number =&gt; &#123;</span><br><span class="line">    ``return` `px * Dimensions.get(``&apos;window&apos;``).width / viewPortWidth</span><br><span class="line">&#125;</span><br><span class="line">&lt;View style=&#123;&#123;height:200,width:px2dp(750),backgroundColor:``&apos;yellow&apos;``&#125;&#125;&gt;</span><br><span class="line">&lt;Text&gt;750&lt;/Text&gt;</span><br><span class="line">&lt;/View&gt;</span><br></pre></td></tr></table></figure>
 <h4 id="安卓APP启动不了"><a href="#安卓APP启动不了" class="headerlink" title="安卓APP启动不了"></a>安卓APP启动不了</h4><p>使用vscode启动安卓项目时可能报错的信息不够详细，这时可以关闭vscode的服务，使用<code>react-native run-android</code>运行查看具体错误信息</p>
 <p>一般启动不了的原因是各种包安装失败，一些包要修改原生代码或者配置来安装，弄错了就会报各种奇怪的错。</p>
 <h4 id="无线调试"><a href="#无线调试" class="headerlink" title="无线调试"></a>无线调试</h4><ol>
@@ -222,7 +222,7 @@ var _hmt = _hmt || [];
 <li><p>指定连接到手机：在手机wifi设置里找到手机的ip，如192.168.1.100，执行命令<code>adb connect 192.168.1.100:5555</code>, 如返回：connected to 192.160.1.100:5555则表示连接成功。如果没有成功，执行<code>adb kill-server</code>重启adb服务后再试。</p>
 </li>
 <li><p>如果连接成功的话，执行以下命令查看当前连接的设备列表：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb devices</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb devices</span><br></pre></td></tr></table></figure>
 <p>可以看到连接的设备，像这样</p>
 <blockquote>
 <p>$ adb devices<br>List of devices attached<br>192.168.1.100:5555 device</p>
@@ -245,29 +245,29 @@ var _hmt = _hmt || [];
 </li>
 </ol>
 <h4 id="忽略黄色警告"><a href="#忽略黄色警告" class="headerlink" title="忽略黄色警告"></a>忽略黄色警告</h4><p>在默认情况下，开发模式中启用了黄屏警告。可以通过以下代码关闭：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">console.disableYellowBox = true;</div><div class="line">console.warn(&apos;YellowBox is disabled.&apos;);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.disableYellowBox = true;</span><br><span class="line">console.warn(&apos;YellowBox is disabled.&apos;);</span><br></pre></td></tr></table></figure>
 <p>你也可以通过代码屏蔽指定的警告，像下面这样调用 ignoreWarnings 方法，参数为一个数组：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;YellowBox&#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line">YellowBox.ignoreWarnings([<span class="string">'Warning: ...'</span>]);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;YellowBox&#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</span><br><span class="line">YellowBox.ignoreWarnings([<span class="string">'Warning: ...'</span>]);</span><br></pre></td></tr></table></figure>
 <p>忽略常见警告：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">YellowBox.ignoreWarnings([</div><div class="line">    <span class="string">'Warning: componentWillMount is deprecated'</span>,</div><div class="line">    <span class="string">'Warning: componentWillReceiveProps is deprecated'</span>,</div><div class="line">    <span class="string">'Remote debugger is in a background tab which may cause apps to perform slowly.'</span></div><div class="line">    <span class="comment">// 'Warning: BackAndroid is deprecated. Please use BackHandler instead.',</span></div><div class="line">    <span class="comment">// 'source.uri should not be an empty string', </span></div><div class="line">    <span class="comment">// 'Invalid props.style key'</span></div><div class="line">]);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">YellowBox.ignoreWarnings([</span><br><span class="line">    <span class="string">'Warning: componentWillMount is deprecated'</span>,</span><br><span class="line">    <span class="string">'Warning: componentWillReceiveProps is deprecated'</span>,</span><br><span class="line">    <span class="string">'Remote debugger is in a background tab which may cause apps to perform slowly.'</span></span><br><span class="line">    <span class="comment">// 'Warning: BackAndroid is deprecated. Please use BackHandler instead.',</span></span><br><span class="line">    <span class="comment">// 'source.uri should not be an empty string', </span></span><br><span class="line">    <span class="comment">// 'Invalid props.style key'</span></span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
 <h4 id="黄色警告Remote-debugger-is-in-a-background-tab"><a href="#黄色警告Remote-debugger-is-in-a-background-tab" class="headerlink" title="黄色警告Remote debugger is in a background tab"></a>黄色警告Remote debugger is in a background tab</h4><p>react-native之黄色警告Remote debugger is in a background tab which may cause apps to perform slowly. Fix this by foregrounding the tab (or opening it in a separate window).<br>只要把调试的那个chrome的Tab页保持最前(选中状态)，浏览器窗口不要最小化即可，建议禁用。</p>
 <h4 id="createDrawerNavigator侧滑菜单问题"><a href="#createDrawerNavigator侧滑菜单问题" class="headerlink" title="createDrawerNavigator侧滑菜单问题"></a>createDrawerNavigator侧滑菜单问题</h4><p>createDrawerNavigator默认需要贴边开始滑动才能拉出侧滑菜单…，设置触发起点范围可用<code>edgeWidth</code></p>
-<p>如果遇到划不出的情况，请参考<a href="https://reactnavigation.org/docs/en/getting-started.html" target="_blank" rel="external">https://reactnavigation.org/docs/en/getting-started.html</a>，检查依赖项（如react-native-gesture-handler）是否安装，Android开发需要修改MainActivity.java或者build.gradle，不要弄错。</p>
+<p>如果遇到划不出的情况，请参考<a href="https://reactnavigation.org/docs/en/getting-started.html" target="_blank" rel="noopener">https://reactnavigation.org/docs/en/getting-started.html</a>，检查依赖项（如react-native-gesture-handler）是否安装，Android开发需要修改MainActivity.java或者build.gradle，不要弄错。</p>
 <h4 id="运行报错：Could-not-read-path"><a href="#运行报错：Could-not-read-path" class="headerlink" title="运行报错：Could not read path"></a>运行报错：Could not read path</h4><p>报错内容：<code>Could not read path &#39;C:\Users\123\Desktop\react_native_app\DaysMatter\android\app\build\generated\not_namespaced_r_class_sources\debug\processDebugResources\r\android\arch&#39;</code></p>
 <p>确保开发环境正确搭建且项目依赖安装完成</p>
 <p>进入项目所在目录执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd android</div><div class="line">gradlew clean</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd android</span><br><span class="line">gradlew clean</span><br></pre></td></tr></table></figure>
 <p>然后执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd ..</div><div class="line">react-native run-android</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br><span class="line">react-native run-android</span><br></pre></td></tr></table></figure>
 <h4 id="debug-key丢失"><a href="#debug-key丢失" class="headerlink" title="debug.key丢失"></a>debug.key丢失</h4><p>报类似如下错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rn Keystore file &apos;...\android\app\debug.keystore&apos; not found for signing config &apos;debug&apos;.</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rn Keystore file &apos;...\android\app\debug.keystore&apos; not found for signing config &apos;debug&apos;.</span><br></pre></td></tr></table></figure>
 <p>可以在别的项目拷贝一个过来或者生成一个debug.keystore</p>
 <h4 id="打包错误：Could-not-determine-the-dependencies-of-task-‘-app-lintVitalRelease’"><a href="#打包错误：Could-not-determine-the-dependencies-of-task-‘-app-lintVitalRelease’" class="headerlink" title="打包错误：Could not determine the dependencies of task ‘:app:lintVitalRelease’"></a>打包错误：Could not determine the dependencies of task ‘:app:lintVitalRelease’</h4><p>执行<code>./gradlew assembleRelease</code>报错：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Could not determine the dependencies of task &apos;:app:lintVitalRelease&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Could not determine the dependencies of task &apos;:app:lintVitalRelease&apos;</span><br></pre></td></tr></table></figure>
 <p>可在项目目录下的android\app\build.gradle中添加：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">	...</div><div class="line">	<span class="comment">//插入如下部分</span></div><div class="line">    lintOptions &#123;</div><div class="line">        checkReleaseBuilds <span class="literal">false</span></div><div class="line">        abortOnError <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">	...</span><br><span class="line">	<span class="comment">//插入如下部分</span></span><br><span class="line">    lintOptions &#123;</span><br><span class="line">        checkReleaseBuilds <span class="literal">false</span></span><br><span class="line">        abortOnError <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="win10搭建Android环境问题"><a href="#win10搭建Android环境问题" class="headerlink" title="win10搭建Android环境问题"></a>win10搭建Android环境问题</h2><h4 id="设备未授权"><a href="#设备未授权" class="headerlink" title="设备未授权"></a>设备未授权</h4><p>设备连接后可在命令行运行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb devices</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb devices</span><br></pre></td></tr></table></figure>
 <p>来查看设备连接情况</p>
 <p>如果连接的设备出现unauthorized的状态，则表示需要设备授权调试，进入开发者界面打开debug，或者赋予授权调试信息即可。</p>
 <h4 id="ADB版本"><a href="#ADB版本" class="headerlink" title="ADB版本"></a>ADB版本</h4><p>一个常见的报错：adb server version (32) doesn’t match this client (41);</p>
@@ -411,6 +411,15 @@ var _hmt = _hmt || [];
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/10/16/MongoDB查询内嵌数组（限定返回符合条件的数组中的数据）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          MongoDB查询内嵌数组（限定返回符合条件的数组中的数据）
+        
+      </div>
+    </a>
   
   
     <a href="/2019/08/21/2019移动端框架分析对比/" id="article-nav-older" class="article-nav-link-wrap">
@@ -569,11 +578,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -581,11 +594,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -593,7 +606,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -605,23 +626,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -645,11 +654,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>auto.js的使用以及薅羊毛插件示例 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -61,7 +61,7 @@ var _hmt = _hmt || [];
 
 
 </head>
-
+</html>
 <body style="height: 100%;overflow: hidden;">
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -226,7 +226,7 @@ var _hmt = _hmt || [];
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190627/AUaYSA5pfEoD.png?imageslim" alt="mark"></p>
 <ol>
 <li><p>auto.js提供了很好的手机端辅助编辑工具，我们输入以下代码，这段代码可以实现输入一段文字，并发送给QQ好友：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//本示例来自官方文档，是一个QQ文本消息分享脚本</span></div><div class="line"><span class="keyword">var</span> content = rawInput(<span class="string">'请输入要分享的文本'</span>);</div><div class="line"><span class="comment">//启动QQ发送组件</span></div><div class="line">app.startActivity(&#123;</div><div class="line">    <span class="attr">action</span>: <span class="string">"android.intent.action.SEND"</span>,</div><div class="line">    <span class="attr">type</span>: <span class="string">"text/*"</span>,</div><div class="line">    <span class="attr">extras</span>: &#123;</div><div class="line">      <span class="string">"android.intent.extra.TEXT"</span>: content</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">packageName</span>: <span class="string">"com.tencent.mobileqq"</span>,</div><div class="line">    <span class="attr">className</span>: <span class="string">"com.tencent.mobileqq.activity.JumpActivity"</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//本示例来自官方文档，是一个QQ文本消息分享脚本</span></span><br><span class="line"><span class="keyword">var</span> content = rawInput(<span class="string">'请输入要分享的文本'</span>);</span><br><span class="line"><span class="comment">//启动QQ发送组件</span></span><br><span class="line">app.startActivity(&#123;</span><br><span class="line">    action: <span class="string">"android.intent.action.SEND"</span>,</span><br><span class="line">    type: <span class="string">"text/*"</span>,</span><br><span class="line">    extras: &#123;</span><br><span class="line">      <span class="string">"android.intent.extra.TEXT"</span>: content</span><br><span class="line">    &#125;,</span><br><span class="line">    packageName: <span class="string">"com.tencent.mobileqq"</span>,</span><br><span class="line">    className: <span class="string">"com.tencent.mobileqq.activity.JumpActivity"</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190627/ErIIyyVKAt1k.png?imageslim" alt="mark"></p>
@@ -236,17 +236,17 @@ var _hmt = _hmt || [];
 </li>
 <li><p>发送成功后脚本运行结束，可以在auto.js APP里查看日志，对于循环调用的脚本，推荐在APP设置里打开<strong>音量上键停止所有脚本</strong>，这样可以避免我们不小心写了死循环的情况。</p>
 </li>
-<li>auto.js也可以使用电脑开发，推荐使用<strong>vscode</strong>的<strong>Auto.js-VSCodeExt</strong>插件，使用很简单，详见<a href="https://github.com/hyb1996/Auto.js-VSCode-Extension" target="_blank" rel="external">https://github.com/hyb1996/Auto.js-VSCode-Extension</a></li>
+<li>auto.js也可以使用电脑开发，推荐使用<strong>vscode</strong>的<strong>Auto.js-VSCodeExt</strong>插件，使用很简单，详见<a href="https://github.com/hyb1996/Auto.js-VSCode-Extension" target="_blank" rel="noopener">https://github.com/hyb1996/Auto.js-VSCode-Extension</a></li>
 </ol>
-<h4 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h4><p>官方文档：<a href="https://hyb1996.github.io/AutoJs-Docs/" target="_blank" rel="external">https://hyb1996.github.io/AutoJs-Docs/</a></p>
-<p>Github：<a href="https://github.com/hyb1996/Auto.js" target="_blank" rel="external">https://github.com/hyb1996/Auto.js</a></p>
+<h4 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h4><p>官方文档：<a href="https://hyb1996.github.io/AutoJs-Docs/" target="_blank" rel="noopener">https://hyb1996.github.io/AutoJs-Docs/</a></p>
+<p>Github：<a href="https://github.com/hyb1996/Auto.js" target="_blank" rel="noopener">https://github.com/hyb1996/Auto.js</a></p>
 <p>APP下载地址:</p>
 <ul>
-<li><a href="http://shouji.baidu.com/software/23334313.html" target="_blank" rel="external">百度手机助手</a></li>
-<li><a href="https://www.coolapk.com/apk/129872" target="_blank" rel="external">酷安</a></li>
+<li><a href="http://shouji.baidu.com/software/23334313.html" target="_blank" rel="noopener">百度手机助手</a></li>
+<li><a href="https://www.coolapk.com/apk/129872" target="_blank" rel="noopener">酷安</a></li>
 </ul>
-<p>bilibili视频教程： <a href="https://www.bilibili.com/video/av35582484?from=search&amp;seid=12319191216902661794" target="_blank" rel="external">https://www.bilibili.com/video/av35582484?from=search&amp;seid=12319191216902661794</a></p>
-<p>bilibili文字教程：<a href="https://www.bilibili.com/read/cv1033982" target="_blank" rel="external">https://www.bilibili.com/read/cv1033982</a></p>
+<p>bilibili视频教程： <a href="https://www.bilibili.com/video/av35582484?from=search&amp;seid=12319191216902661794" target="_blank" rel="noopener">https://www.bilibili.com/video/av35582484?from=search&amp;seid=12319191216902661794</a></p>
+<p>bilibili文字教程：<a href="https://www.bilibili.com/read/cv1033982" target="_blank" rel="noopener">https://www.bilibili.com/read/cv1033982</a></p>
 <h3 id="薅羊毛脚本示例"><a href="#薅羊毛脚本示例" class="headerlink" title="薅羊毛脚本示例"></a>薅羊毛脚本示例</h3><p>好了我们进入正题，如何使用自动化脚本薅一把羊毛呢？这让我不得不想到我们小镇的薅羊毛团体：他们白天霸占公园，晚上霸占广场，连朋友圈，都被他们转发的新闻链接霸占~</p>
 <p>没错，他们就是大爷大妈们，他们长期使用东方头条、趣头条等软件，每天手动看新闻刷金币，分享新闻刷金币，最后使用金币兑换人民币并提现，以此达到薅资本主义羊毛的目的。</p>
 <p>我简单了解了一下，新手阶段过去之后，一个APP大概要两三天能得到一元钱，这真是个体力活呢，算时薪的话几乎没法看了~</p>
@@ -255,22 +255,22 @@ var _hmt = _hmt || [];
 <h4 id="腾讯新闻极速版自动读新闻脚本"><a href="#腾讯新闻极速版自动读新闻脚本" class="headerlink" title="腾讯新闻极速版自动读新闻脚本"></a>腾讯新闻极速版自动读新闻脚本</h4><p>我们以腾讯新闻极速版v1.6.20为例，简单介绍一下思路：</p>
 <ol>
 <li><p>首先打开app，如果不是首页的要先回到首页：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">app.launchApp(<span class="string">"腾讯新闻极速版"</span>);</div><div class="line">backHomePage(<span class="number">8</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">backHomePage</span>(<span class="params">flag</span>) </span>&#123;</div><div class="line">    log(<span class="string">"返回主页函数调用次数"</span> + flag)</div><div class="line">    <span class="keyword">if</span> (flag &lt; <span class="number">0</span>) &#123;</div><div class="line">        start();</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!isHomePage()) &#123;</div><div class="line">        back()</div><div class="line">        sleep(<span class="number">1500</span>)</div><div class="line">        backAndEnter(--flag)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isHomePage</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">//判断有无评论组件,防止把视频新闻页面误判为首页</span></div><div class="line">    <span class="keyword">return</span> currentActivity() === <span class="string">"com.tencent.news.activity.SplashActivity"</span> &amp;&amp; id(assemblyId.isHomePage).findOne(<span class="number">200</span>) == <span class="literal">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">app.launchApp(<span class="string">"腾讯新闻极速版"</span>);</span><br><span class="line">backHomePage(<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">backHomePage</span>(<span class="params">flag</span>) </span>&#123;</span><br><span class="line">    log(<span class="string">"返回主页函数调用次数"</span> + flag)</span><br><span class="line">    <span class="keyword">if</span> (flag &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        start();</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!isHomePage()) &#123;</span><br><span class="line">        back()</span><br><span class="line">        sleep(<span class="number">1500</span>)</span><br><span class="line">        backAndEnter(--flag)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isHomePage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//判断有无评论组件,防止把视频新闻页面误判为首页</span></span><br><span class="line">    <span class="keyword">return</span> currentActivity() === <span class="string">"com.tencent.news.activity.SplashActivity"</span> &amp;&amp; id(assemblyId.isHomePage).findOne(<span class="number">200</span>) == <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>获取新闻列表，点击进入新闻页面，判断有没有红包，没有的话返回首页，刷新新闻后重新进入新闻页面：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ar = id(assemblyId.newList).find();</div><div class="line">ar.get([num]).parent().click();</div><div class="line"><span class="keyword">if</span> (id(assemblyId.redPacket).exists()) &#123;</div><div class="line">    sleep(<span class="number">1000</span>);</div><div class="line">    toNextNew();</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    backAndEnter(<span class="number">8</span>)</div><div class="line">    refreshNews()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ar = id(assemblyId.newList).find();</span><br><span class="line">ar.get([num]).parent().click();</span><br><span class="line"><span class="keyword">if</span> (id(assemblyId.redPacket).exists()) &#123;</span><br><span class="line">    sleep(<span class="number">1000</span>);</span><br><span class="line">    toNextNew();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    backAndEnter(<span class="number">8</span>)</span><br><span class="line">    refreshNews()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>如果有红包，则使用swipe模拟滑动到页面最底部，等待红包打开后，上拉进入下个新闻：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">scrollDown();</div><div class="line">log(<span class="string">"滑动完成,等待红包"</span>)</div><div class="line">waitTipOpen(<span class="number">500</span>);</div><div class="line">log(<span class="string">"判断暂无相关内容"</span>)</div><div class="line"><span class="keyword">if</span> (text(<span class="string">"暂无相关内容"</span>).exists()) &#123;</div><div class="line">    backAndEnter(<span class="number">8</span>);</div><div class="line">    refreshNews();</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    randomSwipeDown(<span class="number">1000</span>, <span class="number">300</span>);</div><div class="line">    readNews();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//滑动到最后</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">scrollDown</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">while</span> (!(text(<span class="string">"查看更多评论"</span>).exists() || id(assemblyId.sofa).exists())) &#123;</div><div class="line">        <span class="keyword">if</span> (waitArr[waitFlag]) &#123;</div><div class="line">            sleep(waitArr[waitFlag++])</div><div class="line">        &#125;</div><div class="line">        randomSwipeDown(<span class="number">1100</span>, <span class="number">300</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//等待红包打开,超过8秒未打开则继续</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">waitTipOpen</span>(<span class="params">i</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (id(assemblyId.redPacket).exists() &amp;&amp; i &gt; <span class="number">0</span>) &#123;</div><div class="line">        sleep(<span class="number">10</span>);</div><div class="line">        waitTipOpen(--i);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">scrollDown();</span><br><span class="line">log(<span class="string">"滑动完成,等待红包"</span>)</span><br><span class="line">waitTipOpen(<span class="number">500</span>);</span><br><span class="line">log(<span class="string">"判断暂无相关内容"</span>)</span><br><span class="line"><span class="keyword">if</span> (text(<span class="string">"暂无相关内容"</span>).exists()) &#123;</span><br><span class="line">    backAndEnter(<span class="number">8</span>);</span><br><span class="line">    refreshNews();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    randomSwipeDown(<span class="number">1000</span>, <span class="number">300</span>);</span><br><span class="line">    readNews();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//滑动到最后</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">scrollDown</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (!(text(<span class="string">"查看更多评论"</span>).exists() || id(assemblyId.sofa).exists())) &#123;</span><br><span class="line">        <span class="keyword">if</span> (waitArr[waitFlag]) &#123;</span><br><span class="line">            sleep(waitArr[waitFlag++])</span><br><span class="line">        &#125;</span><br><span class="line">        randomSwipeDown(<span class="number">1100</span>, <span class="number">300</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//等待红包打开,超过8秒未打开则继续</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">waitTipOpen</span>(<span class="params">i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (id(assemblyId.redPacket).exists() &amp;&amp; i &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        sleep(<span class="number">10</span>);</span><br><span class="line">        waitTipOpen(--i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>如果下一条新闻没有红包，那就返回首页，刷新新闻后重新进入新闻页面；</p>
 </li>
 </ol>
 <p>以上几步就可以完成一个简单的自动阅读脚本，运行后就可以不停的阅读新闻了。是不是很简单，但是实际编写测试中会有很多坑，因为脚本运行起来有很多不确定性，经常卡在奇怪的地方，需要花许多时间调试才能获得一个稳定版本。</p>
 <p>建议有兴趣的伙伴，可以自行学习并编写脚本，我已经调试出了一个稳定版本，可以稳定执行到手机没电的那种，下面给出github地址，欢迎感兴趣的朋友交流学习：</p>
-<p><a href="https://github.com/forgetallthing/autojsScripts" target="_blank" rel="external">https://github.com/forgetallthing/autojsScripts</a></p>
+<p><a href="https://github.com/forgetallthing/autojsScripts" target="_blank" rel="noopener">https://github.com/forgetallthing/autojsScripts</a></p>
 <p>脚本增加了休息模式，可以在脚本中编辑工作时长和休息时长：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> config = &#123;</div><div class="line">    <span class="attr">mode</span>: <span class="string">"new"</span>,</div><div class="line">    <span class="attr">startNewNo</span>: <span class="number">7</span>, <span class="comment">//从第几个新闻开始(0-10)</span></div><div class="line">    continuReadNum: <span class="number">20</span>, <span class="comment">//连续阅读数,防止app出现不能通过向上滑动切换新闻的情况</span></div><div class="line">    workTime: <span class="number">60000</span> * <span class="number">45</span>, <span class="comment">//工作时间</span></div><div class="line">    restTime: <span class="number">60000</span> * <span class="number">1</span>, <span class="comment">//休息时间</span></div><div class="line">    noRest: <span class="literal">false</span>, <span class="comment">//不休模式</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> config = &#123;</span><br><span class="line">    mode: <span class="string">"new"</span>,</span><br><span class="line">    startNewNo: <span class="number">7</span>, <span class="comment">//从第几个新闻开始(0-10)</span></span><br><span class="line">    continuReadNum: <span class="number">20</span>, <span class="comment">//连续阅读数,防止app出现不能通过向上滑动切换新闻的情况</span></span><br><span class="line">    workTime: <span class="number">60000</span> * <span class="number">45</span>, <span class="comment">//工作时间</span></span><br><span class="line">    restTime: <span class="number">60000</span> * <span class="number">1</span>, <span class="comment">//休息时间</span></span><br><span class="line">    noRest: <span class="literal">false</span>, <span class="comment">//不休模式</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>github中有安装和使用此脚本的示例gif和视频，我会在github中持续更新脚本，喜欢的点个star，不胜感激。</p>
 
       
@@ -552,11 +552,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -564,11 +568,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -576,7 +580,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -588,23 +600,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -628,11 +628,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">

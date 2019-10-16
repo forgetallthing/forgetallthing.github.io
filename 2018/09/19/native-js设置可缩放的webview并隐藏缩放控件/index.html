@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>native.js设置可缩放的webview并隐藏缩放控件 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -61,7 +61,7 @@ var _hmt = _hmt || [];
 
 
 </head>
-
+</html>
 <body style="height: 100%;overflow: hidden;">
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -201,16 +201,16 @@ var _hmt = _hmt || [];
 <p>需求明确:webview页面可以手指缩放,并且不要那个原生控件;</p>
 <p>实现思路:</p>
 <p>1.使用h5+封装好的方法:设置<code>scalable</code> 属性,并在html中设置meta标签:<code>user-scalable=yes</code> 或不设置,<code>minimum-scale</code> 和<code>maximum-scale</code> 需要注意不要都设为1:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1,minimum-scale=1"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mui.openWindow(&#123;</div><div class="line">	<span class="attr">url</span>: <span class="string">"someThing"</span>,</div><div class="line">	<span class="attr">id</span>: <span class="string">"someThing"</span>,</div><div class="line">	<span class="attr">styles</span>: &#123;</div><div class="line">		<span class="attr">scalable</span>:<span class="literal">true</span></div><div class="line">	&#125;,</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1,minimum-scale=1"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mui.openWindow(&#123;</span><br><span class="line">	url: <span class="string">"someThing"</span>,</span><br><span class="line">	id: <span class="string">"someThing"</span>,</span><br><span class="line">	styles: &#123;</span><br><span class="line">		scalable:<span class="literal">true</span></span><br><span class="line">	&#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>如此一来,webview已经可以实现缩放功能,但是会有安卓原生的缩放控件存在,如下图:</p>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/180919/9l19gDEAE1.png?imageslim" alt="mark"></p>
 <p>如此一个不能更改样式的控件出现在右下角,客户一定会怒发冲冠的,但是在经过研究之后,发现html5plus不提供隐藏这个控件的api,只能通过native.js来写:</p>
 <p>2.native.js的方法依旧需要设置<code>meta</code> 标签,但是记得去掉<code>scalable:true</code> ,这个会覆盖我们的代码:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取WebSettings</span></div><div class="line"><span class="keyword">var</span> Webview = plus.android.importClass(<span class="string">"android.webkit.WebView"</span>);</div><div class="line"><span class="keyword">var</span> WebSettings = plus.android.importClass(<span class="string">"android.webkit.WebSettings"</span>);</div><div class="line"><span class="keyword">var</span> wv = plus.android.currentWebview();</div><div class="line"><span class="keyword">var</span> setting = plus.android.invoke(wv, <span class="string">"getSettings"</span>);</div><div class="line"><span class="built_in">console</span>.log(setting)</div><div class="line"></div><div class="line"><span class="comment">//支持缩放</span></div><div class="line">setting.setSupportZoom(<span class="literal">true</span>);</div><div class="line">setting.setBuiltInZoomControls(<span class="literal">true</span>)</div><div class="line"><span class="comment">//隐藏控件</span></div><div class="line">setting.setDisplayZoomControls(<span class="literal">false</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取WebSettings</span></span><br><span class="line"><span class="keyword">var</span> Webview = plus.android.importClass(<span class="string">"android.webkit.WebView"</span>);</span><br><span class="line"><span class="keyword">var</span> WebSettings = plus.android.importClass(<span class="string">"android.webkit.WebSettings"</span>);</span><br><span class="line"><span class="keyword">var</span> wv = plus.android.currentWebview();</span><br><span class="line"><span class="keyword">var</span> setting = plus.android.invoke(wv, <span class="string">"getSettings"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(setting)</span><br><span class="line"></span><br><span class="line"><span class="comment">//支持缩放</span></span><br><span class="line">setting.setSupportZoom(<span class="literal">true</span>);</span><br><span class="line">setting.setBuiltInZoomControls(<span class="literal">true</span>)</span><br><span class="line"><span class="comment">//隐藏控件</span></span><br><span class="line">setting.setDisplayZoomControls(<span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
 <p>有人在h5+社区里问怎么获取安卓里的<code>WebSettings</code> ,以下就是打印的<code>setting</code> ,可以见到<code>WebSettings</code> 里面的方法都可以调用啦! 各位可以在文档中找到自己需要的:</p>
-<p>WebSettings 官方文档:<a href="https://developer.android.com/reference/android/webkit/WebSettings.html#setBuiltInZoomControls" target="_blank" rel="external">https://developer.android.com/reference/android/webkit/WebSettings.html#setBuiltInZoomControls</a></p>
+<p>WebSettings 官方文档:<a href="https://developer.android.com/reference/android/webkit/WebSettings.html#setBuiltInZoomControls" target="_blank" rel="noopener">https://developer.android.com/reference/android/webkit/WebSettings.html#setBuiltInZoomControls</a></p>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/180919/175bj7cCFk.png?imageslim" alt="mark"></p>
 
       
@@ -492,11 +492,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -504,11 +508,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,7 +520,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -528,23 +540,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -568,11 +568,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">

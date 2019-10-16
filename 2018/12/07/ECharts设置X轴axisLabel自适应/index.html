@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>ECharts设置X轴axisLabel自适应 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -63,7 +63,7 @@ var _hmt = _hmt || [];
 
 
 </head>
-
+</html>
 <body style="height: 100%;overflow: hidden;">
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -210,21 +210,21 @@ var _hmt = _hmt || [];
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20181207/O0nhH7MaTEA9.png?imageslim" alt="mark"></p>
 <p>echarts将柱状图分为grid,X轴Label和Y轴Label三个部分;</p>
 <p>我们首先计算每个X轴Label大致可以显示多少个字:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xAxisData = [<span class="string">"something..."</span>,<span class="string">"something..."</span>,<span class="string">"something..."</span>,<span class="string">"something..."</span>]</div><div class="line"><span class="keyword">var</span> gridWidth = <span class="number">681</span>; <span class="comment">//可以根据canvas的宽度和grid的right,left,width进行计算</span></div><div class="line"><span class="keyword">var</span> fontsize = <span class="number">14</span>; <span class="comment">//字体大小</span></div><div class="line"><span class="keyword">var</span> wordNum = <span class="built_in">parseInt</span>((gridWidth / xAxisData.length) / fontsize);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xAxisData = [<span class="string">"something..."</span>,<span class="string">"something..."</span>,<span class="string">"something..."</span>,<span class="string">"something..."</span>]</span><br><span class="line"><span class="keyword">var</span> gridWidth = <span class="number">681</span>; <span class="comment">//可以根据canvas的宽度和grid的right,left,width进行计算</span></span><br><span class="line"><span class="keyword">var</span> fontsize = <span class="number">14</span>; <span class="comment">//字体大小</span></span><br><span class="line"><span class="keyword">var</span> wordNum = <span class="built_in">parseInt</span>((gridWidth / xAxisData.length) / fontsize);</span><br></pre></td></tr></table></figure>
 <p>然后在xAxis.axisLabel的formatter中设置换行:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">xAxis: &#123;</div><div class="line">    <span class="attr">data</span>: xAxisData,</div><div class="line">    <span class="attr">type</span>: <span class="string">'category'</span>,</div><div class="line">    <span class="attr">axisLabel</span>: &#123;</div><div class="line">        <span class="attr">interval</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">formatter</span>: <span class="function"><span class="keyword">function</span> (<span class="params">value, index</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> strs = value.split(<span class="string">''</span>);</div><div class="line">            <span class="keyword">var</span> str = <span class="string">''</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, s; s = strs[i++];) &#123;</div><div class="line">                str += s;</div><div class="line">                <span class="keyword">if</span> (!(i % wordNum)) str += <span class="string">'\n'</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> str</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">xAxis: &#123;</span><br><span class="line">    data: xAxisData,</span><br><span class="line">    type: <span class="string">'category'</span>,</span><br><span class="line">    axisLabel: &#123;</span><br><span class="line">        interval: <span class="number">0</span>,</span><br><span class="line">        formatter: <span class="function"><span class="keyword">function</span> (<span class="params">value, index</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> strs = value.split(<span class="string">''</span>);</span><br><span class="line">            <span class="keyword">var</span> str = <span class="string">''</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, s; s = strs[i++];) &#123;</span><br><span class="line">                str += s;</span><br><span class="line">                <span class="keyword">if</span> (!(i % wordNum)) str += <span class="string">'\n'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> str</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这时我们发现如果grid的bottom默认为60,意味着x轴到canvas底部只能放下3行文字,所以我们需要调整grid的高度来放下更多的行:</p>
 <p>计算最多有多少行,并根据最大行数设置chart容器高度:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xAxisData = [<span class="string">"something..."</span>, <span class="string">"something..."</span>, <span class="string">"something..."</span>, <span class="string">"something..."</span>]</div><div class="line"><span class="keyword">var</span> gridWidth = <span class="number">681</span>;</div><div class="line"><span class="keyword">var</span> fontsize = <span class="number">14</span>; <span class="comment">//字体大小默认12px,这里设置成14可以保证label之间的间距</span></div><div class="line"><span class="keyword">var</span> wordNum = <span class="built_in">parseInt</span>((gridWidth / xAxisData.length) / fontsize);</div><div class="line"><span class="keyword">var</span> maxLine = <span class="number">0</span>;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; xAxisData.length; i++) &#123;</div><div class="line">    <span class="keyword">var</span> flag = <span class="built_in">parseInt</span>(xAxisData[i].length / wordNum) + <span class="number">1</span>;</div><div class="line">    <span class="keyword">if</span> (flag &gt; maxLine) maxLine = flag;</div><div class="line">&#125;</div><div class="line"><span class="comment">//改变chart容器高度,340为dom的height减去grid的高度和top:</span></div><div class="line"><span class="comment">//此句放在echarts.init(dom)之前:</span></div><div class="line"><span class="built_in">document</span>.getElementById(id).style.height += (<span class="number">340</span> + max * <span class="number">12</span>) + <span class="string">"px"</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xAxisData = [<span class="string">"something..."</span>, <span class="string">"something..."</span>, <span class="string">"something..."</span>, <span class="string">"something..."</span>]</span><br><span class="line"><span class="keyword">var</span> gridWidth = <span class="number">681</span>;</span><br><span class="line"><span class="keyword">var</span> fontsize = <span class="number">14</span>; <span class="comment">//字体大小默认12px,这里设置成14可以保证label之间的间距</span></span><br><span class="line"><span class="keyword">var</span> wordNum = <span class="built_in">parseInt</span>((gridWidth / xAxisData.length) / fontsize);</span><br><span class="line"><span class="keyword">var</span> maxLine = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; xAxisData.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> flag = <span class="built_in">parseInt</span>(xAxisData[i].length / wordNum) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (flag &gt; maxLine) maxLine = flag;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//改变chart容器高度,340为dom的height减去grid的高度和top:</span></span><br><span class="line"><span class="comment">//此句放在echarts.init(dom)之前:</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(id).style.height += (<span class="number">340</span> + max * <span class="number">12</span>) + <span class="string">"px"</span>;</span><br></pre></td></tr></table></figure>
 <p>设置grid的bottom:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">grid: &#123;</div><div class="line">  <span class="attr">bottom</span>: (max + <span class="number">1</span>) * <span class="number">12</span>, <span class="comment">//字体大小默认12px</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grid: &#123;</span><br><span class="line">  bottom: (max + <span class="number">1</span>) * <span class="number">12</span>, <span class="comment">//字体大小默认12px</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这样设置好就可以像上图那样自适应显示</p>
 <p>当我们使用的dataZoom工具是时候:</p>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20181207/gCidh7JYPuKL.png?imageslim" alt="mark"></p>
 <p>为了让我们的缩放grid的时候重新计算每行显示多少字体,我们可以使用监听datazoom事件来完成:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">myChart.on(<span class="string">'datazoom'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">params</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (params.batch) &#123;</div><div class="line">        <span class="keyword">var</span> start = params.batch[<span class="number">0</span>].start;</div><div class="line">        <span class="keyword">var</span> end = params.batch[<span class="number">0</span>].end;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">var</span> start = params.start;</div><div class="line">        <span class="keyword">var</span> end = params.end;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> cur_col_num = ((end - start) / <span class="number">100</span>) * xAxisData.length; <span class="comment">//计算缩放后可以显示几个柱子</span></div><div class="line">    wordNum = <span class="built_in">parseInt</span>(<span class="built_in">Math</span>.ceil((gridWidth / cur_col_num)) / <span class="number">14</span>);<span class="comment">//重新计算wordNum</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">myChart.on(<span class="string">'datazoom'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (params.batch) &#123;</span><br><span class="line">        <span class="keyword">var</span> start = params.batch[<span class="number">0</span>].start;</span><br><span class="line">        <span class="keyword">var</span> end = params.batch[<span class="number">0</span>].end;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> start = params.start;</span><br><span class="line">        <span class="keyword">var</span> end = params.end;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> cur_col_num = ((end - start) / <span class="number">100</span>) * xAxisData.length; <span class="comment">//计算缩放后可以显示几个柱子</span></span><br><span class="line">    wordNum = <span class="built_in">parseInt</span>(<span class="built_in">Math</span>.ceil((gridWidth / cur_col_num)) / <span class="number">14</span>);<span class="comment">//重新计算wordNum</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>因为缩放的时候会触发我们设置的axisLabel的formatter,所以只要重新计算wordNum,我们的label就会随着缩放而改变每行显示的字:</p>
-<p><img src="http://qiniuyun.ipromiseyourlife.com/1234%2000_00_00-00_00_27~3.gif" alt=""></p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/1234%2000_00_00-00_00_27~3.gif" alt></p>
 
       
 
@@ -505,11 +505,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -517,11 +521,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -529,7 +533,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -541,23 +553,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -581,11 +581,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">

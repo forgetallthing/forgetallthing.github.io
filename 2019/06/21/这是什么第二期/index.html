@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>这是什么第二期 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -65,7 +65,7 @@ var _hmt = _hmt || [];
 
 
 </head>
-
+</html>
 <body style="height: 100%;overflow: hidden;">
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -224,7 +224,7 @@ var _hmt = _hmt || [];
 <p>一种解决方案是持久化session数据，写入数据库或文件持久层等。收到请求后，验证服务从持久层请求数据。该解决方案的优点在于架构清晰，而缺点是架构修改比较费劲，整个服务的验证逻辑层都需要重写，工作量相对较大。而且由于依赖于持久层的数据库或者问题系统，会有单点风险，如果持久层失败，整个认证体系都会挂掉。</p>
 <p>而现在流行另外一种灵活的解决方案，通过客户端保存数据，而服务器根本不保存会话数据，每个请求都被发送回服务器。 <strong>JWT</strong>是这种解决方案的代表。</p>
 <h4 id="2-JWT的原则"><a href="#2-JWT的原则" class="headerlink" title="2. JWT的原则"></a><strong>2. JWT的原则</strong></h4><p>JWT的原则是在服务器身份验证之后，将生成一个JSON对象并将其发送回用户，如下所示。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"UserName"</span>: <span class="string">"zhangbobo"</span>,</div><div class="line">    <span class="string">"Role"</span>: <span class="string">"Admin"</span>,</div><div class="line">    <span class="string">"Expire"</span>: <span class="string">"2018-08-08 20:15:56"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"UserName"</span>: <span class="string">"zhangbobo"</span>,</span><br><span class="line">    <span class="string">"Role"</span>: <span class="string">"Admin"</span>,</span><br><span class="line">    <span class="string">"Expire"</span>: <span class="string">"2018-08-08 20:15:56"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>之后，当用户与服务器通信时，客户在请求中发回JSON对象。服务器仅依赖于这个JSON对象来标识用户。为了防止用户篡改数据，服务器将在生成对象时添加签名（有关详细信息，请参阅下文）。</p>
 <p>服务器不保存任何会话数据，即服务器变为无状态，使其更容易扩展。</p>
 <h4 id="3-JWT的数据结构"><a href="#3-JWT的数据结构" class="headerlink" title="3. JWT的数据结构"></a><strong>3. JWT的数据结构</strong></h4><p>典型的，一个JWT看起来如下图。</p>
@@ -232,7 +232,7 @@ var _hmt = _hmt || [];
 <p>JWT的三个部分如下。JWT头、有效载荷和签名，将它们写成一行如下。</p>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190621/LgVHlBaLcunc.png?imageslim" alt="mark"></p>
 <h5 id="3-1-JWT头"><a href="#3-1-JWT头" class="headerlink" title="3.1 JWT头"></a><strong>3.1 JWT头</strong></h5><p>JWT头部分是一个描述JWT元数据的JSON对象，通常如下所示。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"alg"</span>: <span class="string">"HS256"</span>,</div><div class="line">    <span class="string">"typ"</span>: <span class="string">"JWT"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"alg"</span>: <span class="string">"HS256"</span>,</span><br><span class="line">    <span class="string">"typ"</span>: <span class="string">"JWT"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在上面的代码中，alg属性表示签名使用的算法，默认为HMAC SHA256（写为HS256）；typ属性表示令牌的类型，JWT令牌统一写为JWT。</p>
 <p>最后，使用Base64 URL算法将上述JSON对象转换为字符串保存。</p>
 <h5 id="3-2-有效载荷"><a href="#3-2-有效载荷" class="headerlink" title="3.2 有效载荷"></a><strong>3.2 有效载荷</strong></h5><p>有效载荷部分，是JWT的主体内容部分，也是一个JSON对象，包含需要传递的数据。 JWT指定七个默认字段供选择。</p>
@@ -252,19 +252,19 @@ var _hmt = _hmt || [];
 <p>iat：发布时间</p>
 <p>jti：JWT ID用于标识该JWT</p>
 <p>除以上默认字段外，我们还可以自定义私有字段，如下例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//自定义私有字段</span></div><div class="line">&#123;</div><div class="line">    <span class="string">"sub"</span>: <span class="string">"1234567890"</span>,</div><div class="line">    <span class="string">"name"</span>: <span class="string">"chongchong"</span>,</div><div class="line">    <span class="string">"admin"</span>: <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//自定义私有字段</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"sub"</span>: <span class="string">"1234567890"</span>,</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"chongchong"</span>,</span><br><span class="line">    <span class="string">"admin"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>请注意，默认情况下JWT是未加密的，任何人都可以解读其内容，因此不要构建隐私信息字段，存放保密信息，以防止信息泄露。</p>
 <p>JSON对象也使用Base64 URL算法转换为字符串保存。</p>
 <h5 id="3-3-签名哈希"><a href="#3-3-签名哈希" class="headerlink" title="3.3 签名哈希"></a><strong>3.3 签名哈希</strong></h5><p>签名哈希部分是对上面两部分数据签名，通过指定的算法生成哈希，以确保数据不会被篡改。</p>
 <p>首先，需要指定一个密码（secret）。该密码仅仅为保存在服务器中，并且不能向用户公开。然后，使用标头中指定的签名算法（默认情况下为HMAC SHA256）根据以下公式生成签名。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">HMACSHA256(base64UrlEncode(header) + <span class="string">"."</span> + base64UrlEncode(payload),secret)</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HMACSHA256(base64UrlEncode(header) + <span class="string">"."</span> + base64UrlEncode(payload),secret)</span><br></pre></td></tr></table></figure>
 <p>在计算出签名哈希后，JWT头，有效载荷和签名哈希的三个部分组合成一个字符串，每个部分用”.”分隔，就构成整个JWT对象。</p>
 <h5 id="3-4-Base64URL算法"><a href="#3-4-Base64URL算法" class="headerlink" title="3.4 Base64URL算法"></a><strong>3.4 Base64URL算法</strong></h5><p>如前所述，JWT头和有效载荷序列化的算法都用到了<strong>Base64URL</strong>。该算法和常见Base64算法类似，稍有差别。</p>
 <p>作为令牌的JWT可以放在URL中（例如api.example/?token=xxx）。 Base64中用的三个字符是”+”，”/“和”=”，由于在URL中有特殊含义，因此Base64URL中对他们做了替换：”=”去掉，”+”用”-“替换，”/“用”_”替换，这就是Base64URL算法，很简单把。</p>
 <h4 id="4-JWT的用法"><a href="#4-JWT的用法" class="headerlink" title="4. JWT的用法"></a><strong>4. JWT的用法</strong></h4><p>客户端接收服务器返回的JWT，将其存储在Cookie或localStorage中。</p>
 <p>此后，客户端将在与服务器交互中都会带JWT。如果将它存储在Cookie中，就可以自动发送，但是不会跨域</p>
 <p>因此一般是将它放入HTTP请求的Header Authorization字段中。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Authorization: Bearer</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Authorization: Bearer</span><br></pre></td></tr></table></figure>
 <p>当跨域时，也可以将JWT被放置于POST请求的数据主体中。</p>
 <h4 id="5-JWT问题和趋势"><a href="#5-JWT问题和趋势" class="headerlink" title="5. JWT问题和趋势"></a><strong>5. JWT问题和趋势</strong></h4><p>1、JWT默认不加密，但可以加密。生成原始令牌后，可以使用改令牌再次对其进行加密。</p>
 <p>2、当JWT未加密方法时，一些私密数据无法通过JWT传输。 </p>
@@ -272,25 +272,25 @@ var _hmt = _hmt || [];
 <p>4、JWT的最大缺点是服务器不保存会话状态，所以在使用期间不可能取消令牌或更改令牌的权限。也就是说，一旦JWT签发，在有效期内将会一直有效。</p>
 <p>5、JWT本身包含认证信息，因此一旦信息泄露，任何人都可以获得令牌的所有权限。为了减少盗用，JWT的有效期不宜设置太长。对于某些重要操作，用户在使用时应该每次都进行进行身份验证。</p>
 <p>6、为了减少盗用和窃取，JWT不建议使用HTTP协议来传输代码，而是使用加密的HTTPS协议进行传输。</p>
-<p>已上摘自<a href="http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html" target="_blank" rel="external">JSON Web Token 入门教程</a></p>
+<p>已上摘自<a href="http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html" target="_blank" rel="noopener">JSON Web Token 入门教程</a></p>
 <h4 id="6-关于跨域的session丢失问题"><a href="#6-关于跨域的session丢失问题" class="headerlink" title="6.关于跨域的session丢失问题"></a>6.关于跨域的session丢失问题</h4><p>ps: 有人说除了分布式和单点登录, 使用jwt的场景是前后端彻底分离，无法通过cookie + session来认证的情况。我感觉session机智没有那么弱的好吧,跨域无非是cookie在请求中被拦截,导致session会话丢失而已,我简单搜索了一下,就有一大票的解决方案,比如</p>
-<p><a href="https://blog.csdn.net/zhaoenweiex/article/details/77814918" target="_blank" rel="external">服务跨域以及Session保持问题</a></p>
+<p><a href="https://blog.csdn.net/zhaoenweiex/article/details/77814918" target="_blank" rel="noopener">服务跨域以及Session保持问题</a></p>
 <p>简要内容如下:</p>
 <h5 id="前台的Session保持"><a href="#前台的Session保持" class="headerlink" title="前台的Session保持"></a>前台的Session保持</h5><p>前台一般通过各种前后端交互框架实现从后台获取数据的，比如fetch，ajax，http等。下面就从这三个为例子简单介绍一下怎么保持session问题（实际上是携带cookie）。</p>
 <h6 id="Fetch"><a href="#Fetch" class="headerlink" title="Fetch"></a>Fetch</h6><p>设置 credentials: “include”</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">getData: <span class="function"><span class="keyword">function</span> (<span class="params">v,  callback, errorCallBack</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> url = URL + <span class="string">'/list?version='</span>+v;</div><div class="line">    fetch(url, &#123;</div><div class="line">        <span class="attr">method</span>: <span class="string">'GET'</span>,</div><div class="line">        <span class="attr">credentials</span>: <span class="string">"include"</span></div><div class="line">    &#125;).then(<span class="function">(<span class="params">response</span>)=&gt;</span>response.json())</div><div class="line">        .then(<span class="function">(<span class="params">responseJsonData</span>)=&gt;</span> &#123;</div><div class="line">            callback &amp;&amp; callback(responseJsonData);</div><div class="line">        &#125;).catch(<span class="function">(<span class="params">error</span>)=&gt;</span> &#123;     </div><div class="line">        &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">getData: <span class="function"><span class="keyword">function</span> (<span class="params">v,  callback, errorCallBack</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> url = URL + <span class="string">'/list?version='</span>+v;</span><br><span class="line">    fetch(url, &#123;</span><br><span class="line">        method: <span class="string">'GET'</span>,</span><br><span class="line">        credentials: <span class="string">"include"</span></span><br><span class="line">    &#125;).then(<span class="function">(<span class="params">response</span>)=&gt;</span>response.json())</span><br><span class="line">        .then(<span class="function">(<span class="params">responseJsonData</span>)=&gt;</span> &#123;</span><br><span class="line">            callback &amp;&amp; callback(responseJsonData);</span><br><span class="line">        &#125;).catch(<span class="function">(<span class="params">error</span>)=&gt;</span> &#123;     </span><br><span class="line">        &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h6 id="jquery"><a href="#jquery" class="headerlink" title="jquery"></a>jquery</h6><p>一般需要采用全局设置的方式</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$.ajaxSetup(&#123;<span class="attr">xhrFiled</span>:&#123;</div><div class="line">	<span class="string">'withCredentials'</span>:<span class="literal">true</span></div><div class="line">&#125;&#125;)</div><div class="line">$.ajax(url:url,<span class="attr">method</span>:<span class="string">"get"</span>,<span class="attr">success</span>:<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;<span class="built_in">console</span>.log(data)&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$.ajaxSetup(&#123;<span class="attr">xhrFiled</span>:&#123;</span><br><span class="line">	<span class="string">'withCredentials'</span>:<span class="literal">true</span></span><br><span class="line">&#125;&#125;)</span><br><span class="line">$.ajax(url:url,<span class="attr">method</span>:<span class="string">"get"</span>,<span class="attr">success</span>:<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;<span class="built_in">console</span>.log(data)&#125;);</span><br></pre></td></tr></table></figure>
 <h6 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h6><p>设置{‘withCredentials’:true}</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params">$scope,$http</span>)</span>&#123;</div><div class="line"> 	$http.post(url,&#123;<span class="attr">v1</span>:<span class="string">'name_eu'</span>&#125;,&#123;<span class="string">'withCredentials'</span>:<span class="literal">true</span>&#125;).success(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">     	$scope.var= data; </div><div class="line"> 	&#125;); </div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params">$scope,$http</span>)</span>&#123;</span><br><span class="line"> 	$http.post(url,&#123;<span class="attr">v1</span>:<span class="string">'name_eu'</span>&#125;,&#123;<span class="string">'withCredentials'</span>:<span class="literal">true</span>&#125;).success(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">     	$scope.var= data; </span><br><span class="line"> 	&#125;); </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <h5 id="客户端的session保持"><a href="#客户端的session保持" class="headerlink" title="客户端的session保持"></a>客户端的session保持</h5><p>这里的客户端指的是与服务端通讯的java，C#等单独的应用程序，实际上客户端本身是不存在纯粹的跨域问题，因为没有浏览器的同源策略的限制。但仍然存在session保持问题，同时由于不是前台，没有浏览器帮助解决cookie的携带问题，因此客户端的session保持问题需要对验证过程的更深入的理解才能完美解决。<br>在上文中我们已经谈到了实际上客户端（无论是前台还是应用程序）都是拿着sessionId向服务端进行验证的。我们通过浏览器开发工具可以看到，前端的sessionId是服务端写入到Cookie中的，而且一般是httpOnly属性(这也意味着我们不能通过普通的方法从cookie中将这个sessionId取出来)，在向服务端发送请求时浏览器自动携带的，前台完成这一切只需要设置 credentials字段，其余的全部由浏览器或框架自动完成。但在客户端这一过程需要我们手动完成。下面我们就简单介绍以下，这一过程的基本原理。<br>1.向服务端发发送登录请求<br>2.在获取到服务端的反馈结果后，检查是否登录成功<br>3.若登录成功则获取该请求的cookie数据(JSESSIONID)，并记录在缓存中。<br>4.按照业务需求发送其他请求，但要在每次发送时在request的header中添加Cookie,JESSIONID=缓存值(实际工程里我们可以检测每个cookie找到name=jsessionid的项，把整个项缓存起来)</p>
 <p>值得注意的是，很多服务端都是有session过期的问题，因此需要更一段时间登录一次以保证session没有过期。</p>
 <h5 id="代理服务的设置"><a href="#代理服务的设置" class="headerlink" title="代理服务的设置"></a>代理服务的设置</h5><p>这里的代理服务器主要是nginx<br>在设置nginx要注意需要设置cookie的转发，否则这个session是保持不了的<br>在服务器设置部分</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">proxy_set_header Cookie $http_cookie</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header Cookie $http_cookie</span><br></pre></td></tr></table></figure>
 <h5 id="服务端的设置"><a href="#服务端的设置" class="headerlink" title="服务端的设置"></a>服务端的设置</h5><p>服务端的设置<br>最重要的当然是服务端的设置，否则一切都是白扯</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">header(<span class="string">'Access-Control-Allow-Origin:http://127.0.0.1:80'</span>);  </div><div class="line">header(<span class="string">"Access-Control-Allow-Methods:HEAD,POST,GET,PUT,DELETE,OPTIONS"</span>); </div><div class="line">header(<span class="string">'Access-Control-Allow-Credentials: true'</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'Access-Control-Allow-Origin:http://127.0.0.1:80'</span>);  </span><br><span class="line">header(<span class="string">"Access-Control-Allow-Methods:HEAD,POST,GET,PUT,DELETE,OPTIONS"</span>); </span><br><span class="line">header(<span class="string">'Access-Control-Allow-Credentials: true'</span>);</span><br></pre></td></tr></table></figure>
 <p>注意由于设置了Access-Control-Allow-Credentials: true，因此必须设置Origin不能使用通配符(*)。</p>
-<h4 id="关于前后端分离的解读"><a href="#关于前后端分离的解读" class="headerlink" title="关于前后端分离的解读:"></a>关于前后端分离的解读:</h4><p>详见: <a href="https://blog.csdn.net/fuzhongmin05/article/details/81591072" target="_blank" rel="external">前后端分离架构概述</a></p>
+<h4 id="关于前后端分离的解读"><a href="#关于前后端分离的解读" class="headerlink" title="关于前后端分离的解读:"></a>关于前后端分离的解读:</h4><p>详见: <a href="https://blog.csdn.net/fuzhongmin05/article/details/81591072" target="_blank" rel="noopener">前后端分离架构概述</a></p>
 <p><strong>未分离:</strong></p>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190621/HH2sHwBbfkIW.png?imageslim" alt="mark"></p>
 <p><strong>半分离:</strong></p>
@@ -312,7 +312,7 @@ var _hmt = _hmt || [];
 <p>随着科技和硬件设备的进步,我这一代开发者已经很难遇到浏览器渲染慢的问题,大数据量的可以做分页,计算复杂的一般在服务器端计算后返回结果进行渲染,这样一来,在浏览器上使用ajax异步获取数据后渲染页面似乎没什么问题。</p>
 <p>但是seo无法爬取异步渲染的数据,这对新闻网站似乎是致命的,看来还是要根据具体情况来选型,不能一概而论。</p>
 <h3 id="GraphQL"><a href="#GraphQL" class="headerlink" title="GraphQL"></a>GraphQL</h3><p>参考：</p>
-<p><a href="https://blog.csdn.net/VhWfR2u02Q/article/details/99668507" target="_blank" rel="external">https://blog.csdn.net/VhWfR2u02Q/article/details/99668507</a></p>
+<p><a href="https://blog.csdn.net/VhWfR2u02Q/article/details/99668507" target="_blank" rel="noopener">https://blog.csdn.net/VhWfR2u02Q/article/details/99668507</a></p>
 <h4 id="什么是-GraphQL"><a href="#什么是-GraphQL" class="headerlink" title="什么是 GraphQL"></a>什么是 GraphQL</h4><p>GraphQL 是一种面向数据的 API 查询风格。</p>
 <p>传统的 API 拿到的是前后端约定好的数据格式，GraphQL 对 API 中的数据提供了一套易于理解的完整描述，客户端能够准确地获得它需要的数据，没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。</p>
 <h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>前端的开发随着 SPA 框架全面普及，组件化开发也随之成为大势所趋，各个组件分别管理着各自的状态，组件化给前端仔带来便利的同时也带来了一些烦恼。比如，组件需要负责把异步请求的状态分发给子组件或通知给父组件，这个过程中，由组件间通信带来的结构复杂度、来源不明的数据源、不知从何订阅的数据响应会使得数据流变得杂乱无章，也使得代码可读性变差，以及可维护性的降低，为以后项目的迭代带来极大困难。</p>
@@ -326,7 +326,7 @@ var _hmt = _hmt || [];
 <li>mutation 变更：对数据进行变更，比如增加、删除、修改，CRUD 中的 CUD</li>
 <li>substription 订阅：当数据发生更改，进行消息推送</li>
 </ol>
-<p><a href="https://www.jianshu.com/p/12dff5905cf6" target="_blank" rel="external">https://www.jianshu.com/p/12dff5905cf6</a></p>
+<p><a href="https://www.jianshu.com/p/12dff5905cf6" target="_blank" rel="noopener">https://www.jianshu.com/p/12dff5905cf6</a></p>
 <h4 id="5个使用GraphQL的理由"><a href="#5个使用GraphQL的理由" class="headerlink" title="5个使用GraphQL的理由"></a>5个使用GraphQL的理由</h4><p>使用GraphQL的理由， 必然是从讨论RESTful Service的局限性和问题开始。</p>
 <ol>
 <li>数据冗余和请求冗余 (overfetching &amp; underfetching)</li>
@@ -622,11 +622,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -634,11 +638,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -646,7 +650,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -658,23 +670,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -698,11 +698,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">

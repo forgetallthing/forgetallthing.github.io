@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>使用canvas绘制表格斜线 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -60,7 +60,7 @@ var _hmt = _hmt || [];
 
 
 </head>
-
+</html>
 <body style="height: 100%;overflow: hidden;">
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -200,10 +200,10 @@ var _hmt = _hmt || [];
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190322/a4OoaSbMgPYO.png?imageslim" alt="mark"></p>
 <p>这种表头有很多种实现方法,比如使用各种绘图插件绘制斜线,或者加背景图片之类的,这里我先使用原生的canvas做了简单实现,毕竟现在的政府部门也淘汰低版本浏览器了,不用考虑兼容性:</p>
 <a id="more"></a>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">td</span> <span class="attr">style</span>=<span class="string">"width: 16vw;height:12vw;"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">canvas</span> <span class="attr">style</span>=<span class="string">"width: 100%;height:100%"</span> <span class="attr">id</span>=<span class="string">"myCanvas"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">line</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> myCanvas = <span class="built_in">document</span>.getElementById(<span class="string">"myCanvas"</span>);</div><div class="line">	<span class="keyword">var</span> width = myCanvas.width;</div><div class="line">	<span class="keyword">var</span> height = myCanvas.height;</div><div class="line">	<span class="keyword">var</span> ctx = myCanvas.getContext(<span class="string">"2d"</span>);</div><div class="line">	ctx.strokeStyle = <span class="string">"#DDDDDD"</span>;</div><div class="line">	ctx.moveTo(<span class="number">0</span>, <span class="number">0</span>);</div><div class="line">	ctx.lineTo(width, height);</div><div class="line">	ctx.stroke();</div><div class="line"></div><div class="line">	ctx.font = <span class="string">"35px Georgia"</span>;</div><div class="line">	ctx.fillText(<span class="string">"时间"</span>, width / <span class="number">3</span> * <span class="number">1.8</span>, height / <span class="number">3</span>);</div><div class="line">	ctx.fillText(<span class="string">"治疗师"</span>, width / <span class="number">9</span>, height / <span class="number">5</span> * <span class="number">4</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">td</span> <span class="attr">style</span>=<span class="string">"width: 16vw;height:12vw;"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">canvas</span> <span class="attr">style</span>=<span class="string">"width: 100%;height:100%"</span> <span class="attr">id</span>=<span class="string">"myCanvas"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">line</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> myCanvas = <span class="built_in">document</span>.getElementById(<span class="string">"myCanvas"</span>);</span><br><span class="line">	<span class="keyword">var</span> width = myCanvas.width;</span><br><span class="line">	<span class="keyword">var</span> height = myCanvas.height;</span><br><span class="line">	<span class="keyword">var</span> ctx = myCanvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line">	ctx.strokeStyle = <span class="string">"#DDDDDD"</span>;</span><br><span class="line">	ctx.moveTo(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	ctx.lineTo(width, height);</span><br><span class="line">	ctx.stroke();</span><br><span class="line"></span><br><span class="line">	ctx.font = <span class="string">"35px Georgia"</span>;</span><br><span class="line">	ctx.fillText(<span class="string">"时间"</span>, width / <span class="number">3</span> * <span class="number">1.8</span>, height / <span class="number">3</span>);</span><br><span class="line">	ctx.fillText(<span class="string">"治疗师"</span>, width / <span class="number">9</span>, height / <span class="number">5</span> * <span class="number">4</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>上面就是最简单的例子啦,如果不想使用canvas写字,那可以让canvas绝对定位,就不对挤压td中本来的字了,这样可以做到在随意拖拉表头大小的时候字体不变形:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">td</span> <span class="attr">style</span>=<span class="string">"width: 16vw;height:12vw;position: relative;"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">canvas</span> <span class="attr">style</span>=<span class="string">"width: 100%;height: 100%;position: absolute;top: 0;left: 0;"</span> <span class="attr">id</span>=<span class="string">"myCanvas"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">td</span> <span class="attr">style</span>=<span class="string">"width: 16vw;height:12vw;position: relative;"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">canvas</span> <span class="attr">style</span>=<span class="string">"width: 100%;height: 100%;position: absolute;top: 0;left: 0;"</span> <span class="attr">id</span>=<span class="string">"myCanvas"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>最后加上自动编辑,可以达到类似这样的效果:</p>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190322/zNFsSGkANTaL.png?imageslim" alt="mark"></p>
 
@@ -486,11 +486,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -498,11 +502,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -510,7 +514,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -522,23 +534,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -562,11 +562,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">

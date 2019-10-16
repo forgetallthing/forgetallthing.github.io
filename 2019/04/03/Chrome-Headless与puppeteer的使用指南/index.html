@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Chrome Headless与puppeteer的使用指南 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -61,7 +61,7 @@ var _hmt = _hmt || [];
 
 
 </head>
-
+</html>
 <body style="height: 100%;overflow: hidden;">
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -205,15 +205,15 @@ var _hmt = _hmt || [];
 <li>wkhtmltopdf (语言无关,服务器需安装wkhtmltopdf环境);</li>
 <li>Phantomjs (大名鼎鼎,不介绍了);</li>
 </ul>
-<p>提到Phantomjs,我就想起<strong>开发Phantomjs的大牛吵架后停止开发</strong>和<strong>selenium分手Phantomjs</strong>的事,于是想起了现在风头正火的<strong>Headless Chrome</strong>,只要安装了Chrome浏览器就可以使用,更贴合浏览器环境,做测试/爬虫/截图/pdf都超级方便,本文主要将介绍<strong>在nodejs中使用puppeteer打印pdf</strong>,以下就是<a href="https://github.com/GoogleChrome/puppeteer" target="_blank" rel="external">puppeteer</a>的官方介绍:</p>
+<p>提到Phantomjs,我就想起<strong>开发Phantomjs的大牛吵架后停止开发</strong>和<strong>selenium分手Phantomjs</strong>的事,于是想起了现在风头正火的<strong>Headless Chrome</strong>,只要安装了Chrome浏览器就可以使用,更贴合浏览器环境,做测试/爬虫/截图/pdf都超级方便,本文主要将介绍<strong>在nodejs中使用puppeteer打印pdf</strong>,以下就是<a href="https://github.com/GoogleChrome/puppeteer" target="_blank" rel="noopener">puppeteer</a>的官方介绍:</p>
 <a id="more"></a>
 <blockquote>
-<p>Puppeteer is a Node library which provides a high-level API to control Chrome or Chromium over the <a href="https://chromedevtools.github.io/devtools-protocol/" target="_blank" rel="external">DevTools Protocol</a>. Puppeteer runs <a href="https://developers.google.com/web/updates/2017/04/headless-chrome" target="_blank" rel="external">headless</a> by default, but can be configured to run full (non-headless) Chrome or Chromium.</p>
+<p>Puppeteer is a Node library which provides a high-level API to control Chrome or Chromium over the <a href="https://chromedevtools.github.io/devtools-protocol/" target="_blank" rel="noopener">DevTools Protocol</a>. Puppeteer runs <a href="https://developers.google.com/web/updates/2017/04/headless-chrome" target="_blank" rel="noopener">headless</a> by default, but can be configured to run full (non-headless) Chrome or Chromium.</p>
 </blockquote>
 <h3 id="先在windows环境下做个测试"><a href="#先在windows环境下做个测试" class="headerlink" title="先在windows环境下做个测试"></a>先在windows环境下做个测试</h3><p>首先必须安装了60版本以上的Chrome浏览器;</p>
 <p>然后配置个环境变量或者直接在chrome.exe打开命令行工具;</p>
 <p>然后输入以下命令:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chrome --headless --disable-gpu --print-to-pdf=D:\output.pdf https:<span class="comment">//www.google.com/</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chrome --headless --disable-gpu --print-to-pdf=D:\output.pdf https:<span class="comment">//www.google.com/</span></span><br></pre></td></tr></table></figure>
 <p>随后你就可以打开D盘,找到output.pdf啦:</p>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190404/AKWXyugESuao.png?imageslim" alt="mark"></p>
 <p>windows下需要注意:</p>
@@ -222,22 +222,22 @@ var _hmt = _hmt || [];
 <li>必须添加–disable-gpu;</li>
 </ul>
 <p>你还可以试试这个命令来打印dom:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chrome --headless --disable-gpu --enable-logging --dump-dom https:<span class="comment">//www.google.com/</span></div></pre></td></tr></table></figure>
-<p>更多命令请见:<a href="https://developers.google.com/web/updates/2017/04/headless-chrome" target="_blank" rel="external">Getting Started with Headless Chrome</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chrome --headless --disable-gpu --enable-logging --dump-dom https:<span class="comment">//www.google.com/</span></span><br></pre></td></tr></table></figure>
+<p>更多命令请见:<a href="https://developers.google.com/web/updates/2017/04/headless-chrome" target="_blank" rel="noopener">Getting Started with Headless Chrome</a></p>
 <h3 id="开始使用puppeteer"><a href="#开始使用puppeteer" class="headerlink" title="开始使用puppeteer"></a>开始使用puppeteer</h3><p>首先安装npm包,因为我的开发环境已有chrome浏览器,所以我使用的是纯净版的puppeteer:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i puppeteer-core</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i puppeteer-core</span><br></pre></td></tr></table></figure>
 <p>安装好之后就可以使用啦:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> puppeteer = <span class="built_in">require</span>(<span class="string">'puppeteer-core'</span>);</div><div class="line"><span class="keyword">const</span> chromePath = <span class="string">"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"</span>;</div><div class="line"><span class="keyword">const</span> pdfPath = <span class="string">'./puppeteerFiles/test.pdf'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> browser = <span class="keyword">yield</span> puppeteer.launch(&#123;</div><div class="line">  <span class="attr">executablePath</span>: chromePath</div><div class="line">&#125;);</div><div class="line"><span class="keyword">const</span> page = <span class="keyword">yield</span> browser.newPage();</div><div class="line"><span class="keyword">yield</span> page.goto(<span class="string">'https://baidu.com'</span>);</div><div class="line"><span class="comment">//打印pdf</span></div><div class="line"><span class="keyword">yield</span> page.pdf(&#123;</div><div class="line">  <span class="attr">path</span>: pdfPath</div><div class="line">&#125;);</div><div class="line"><span class="keyword">yield</span> browser.close();</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> puppeteer = <span class="built_in">require</span>(<span class="string">'puppeteer-core'</span>);</span><br><span class="line"><span class="keyword">const</span> chromePath = <span class="string">"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"</span>;</span><br><span class="line"><span class="keyword">const</span> pdfPath = <span class="string">'./puppeteerFiles/test.pdf'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> browser = <span class="keyword">yield</span> puppeteer.launch(&#123;</span><br><span class="line">  executablePath: chromePath</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">const</span> page = <span class="keyword">yield</span> browser.newPage();</span><br><span class="line"><span class="keyword">yield</span> page.goto(<span class="string">'https://baidu.com'</span>);</span><br><span class="line"><span class="comment">//打印pdf</span></span><br><span class="line"><span class="keyword">yield</span> page.pdf(&#123;</span><br><span class="line">  path: pdfPath</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">yield</span> browser.close();</span><br></pre></td></tr></table></figure>
 <p>官方的例子使用async,我这里使用了co,各位请自行改写;</p>
 <p>除了goto方法,还可以使用setContent注入html标签(字符串)来生成页面:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> page = <span class="keyword">yield</span> browser.newPage();</div><div class="line"><span class="keyword">yield</span> page.setContent(html);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> page = <span class="keyword">yield</span> browser.newPage();</span><br><span class="line"><span class="keyword">yield</span> page.setContent(html);</span><br></pre></td></tr></table></figure>
 <p>如果不想吧pdf文件保存到磁盘,不给page.pdf()方法传入path即可,page.pdf()会返回pdf buffer:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> pdfBuffer = <span class="keyword">yield</span> page.pdf(&#123;&#125;);</div><div class="line"><span class="comment">//存储进mongoDB</span></div><div class="line"><span class="keyword">let</span> fs = <span class="keyword">new</span> girdFs(mongodb);</div><div class="line"><span class="keyword">let</span> us = fs.openUploadStream(fileName);</div><div class="line"><span class="keyword">yield</span> common.toPromise(<span class="function"><span class="keyword">function</span>(<span class="params">c</span>) </span>&#123;</div><div class="line">  us.end(pdfBuffer, <span class="string">""</span>, c);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pdfBuffer = <span class="keyword">yield</span> page.pdf(&#123;&#125;);</span><br><span class="line"><span class="comment">//存储进mongoDB</span></span><br><span class="line"><span class="keyword">let</span> fs = <span class="keyword">new</span> girdFs(mongodb);</span><br><span class="line"><span class="keyword">let</span> us = fs.openUploadStream(fileName);</span><br><span class="line"><span class="keyword">yield</span> common.toPromise(<span class="function"><span class="keyword">function</span>(<span class="params">c</span>) </span>&#123;</span><br><span class="line">  us.end(pdfBuffer, <span class="string">""</span>, c);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>参考资料:                                                </p>
 <ul>
-<li><a href="https://blog.csdn.net/huyuyang6688/article/details/79710704" target="_blank" rel="external">html页面导出为pdf（jsPDF、iText、wkhtmltopdf）</a></li>
-<li><a href="https://www.jianshu.com/p/31f2b63437ed" target="_blank" rel="external">用Python做爬虫的各位，不要再用PhantomJS了</a></li>
-<li><a href="https://developers.google.com/web/updates/2017/04/headless-chrome" target="_blank" rel="external">Getting Started with Headless Chrome</a></li>
+<li><a href="https://blog.csdn.net/huyuyang6688/article/details/79710704" target="_blank" rel="noopener">html页面导出为pdf（jsPDF、iText、wkhtmltopdf）</a></li>
+<li><a href="https://www.jianshu.com/p/31f2b63437ed" target="_blank" rel="noopener">用Python做爬虫的各位，不要再用PhantomJS了</a></li>
+<li><a href="https://developers.google.com/web/updates/2017/04/headless-chrome" target="_blank" rel="noopener">Getting Started with Headless Chrome</a></li>
 </ul>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190403/rGEGFzoxtMga.jpg?imageslim" alt="mark"></p>
 
@@ -520,11 +520,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,11 +536,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -544,7 +548,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -556,23 +568,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -596,11 +596,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">

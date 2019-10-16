@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>centos云端搭建mongodb环境 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -57,7 +57,7 @@ var _hmt = _hmt || [];
 
 
 </head>
-
+</html>
 <body style="height: 100%;overflow: hidden;">
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -193,21 +193,21 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="1-下载安装包"><a href="#1-下载安装包" class="headerlink" title="1.下载安装包"></a>1.下载<a href="http://fastdl.mongodb.org/linux/mongodb-linux-i686-1.8.2.tgz" target="_blank" rel="external">安装包</a></h4><p>下载完成后解压缩压缩包</p>
+        <h4 id="1-下载安装包"><a href="#1-下载安装包" class="headerlink" title="1.下载安装包"></a>1.下载<a href="http://fastdl.mongodb.org/linux/mongodb-linux-i686-1.8.2.tgz" target="_blank" rel="noopener">安装包</a></h4><p>下载完成后解压缩压缩包</p>
 <p>tar zxf mongodb-linux-i686-1.8.2.tgz</p>
 <h4 id="2-安装准备"><a href="#2-安装准备" class="headerlink" title="2.安装准备"></a>2.安装准备</h4><p>将mongodb移动到/usr/local/server/mongdb文件夹</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mv mongodb-linux-i686-1.8.2 /usr/local/mongodb</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv mongodb-linux-i686-1.8.2 /usr/local/mongodb</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>创建数据库文件夹与日志文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir /usr/local/mongodb/data</div><div class="line"></div><div class="line">touch /usr/local/mongodb/logs</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /usr/local/mongodb/data</span><br><span class="line"></span><br><span class="line">touch /usr/local/mongodb/logs</span><br></pre></td></tr></table></figure>
 <h4 id="3-设置开机自启动"><a href="#3-设置开机自启动" class="headerlink" title="3.设置开机自启动"></a>3.设置开机自启动</h4><p>将mongodb启动项目追加入rc.local保证mongodb在服务器开机时启动</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo &quot;/usr/local/server/mongodb/bin/mongod --dbpath=/usr/local/server/mongodb/data –logpath=/usr/local/server/mongodb/logs –logappend  --auth –port=27017&quot; &gt;&gt; /etc/rc.local</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;/usr/local/server/mongodb/bin/mongod --dbpath=/usr/local/server/mongodb/data –logpath=/usr/local/server/mongodb/logs –logappend  --auth –port=27017&quot; &gt;&gt; /etc/rc.local</span><br></pre></td></tr></table></figure>
 <p>也可直接去修改/etc/rc.local文件<br>在后面添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/server/mongodb/bin/mongod --dbpath=/usr/local/server/mongodb/data –logpath=/usr/local/server/mongodb/logs –logappend  --auth –port=27017</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/server/mongodb/bin/mongod --dbpath=/usr/local/server/mongodb/data –logpath=/usr/local/server/mongodb/logs –logappend  --auth –port=27017</span><br></pre></td></tr></table></figure>
 <h4 id="4-启动mongodb"><a href="#4-启动mongodb" class="headerlink" title="4.启动mongodb"></a>4.启动mongodb</h4><p>cd到mongodb目录下的bin文件夹启动mongodb<br>（启动失败请设置环境变量）<br>//下面这个是需要权限的登录方式, 用户连接需要用户名和密码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/server/mongodb/bin/mongod --dbpath=/usr/local/server/mongodb/data --logpath=/usr/local/server/mongodb/logs --logappend  --auth  --port=27017 --fork</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/server/mongodb/bin/mongod --dbpath=/usr/local/server/mongodb/data --logpath=/usr/local/server/mongodb/logs --logappend  --auth  --port=27017 --fork</span><br></pre></td></tr></table></figure>
 <p>//这个是不需要密码的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/server/mongodb/bin/mongod --dbpath=/usr/local/server/mongodb/data --logpath=/usr/local/server/mongodb/logs --logappend  --port=27017 --fork</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/server/mongodb/bin/mongod --dbpath=/usr/local/server/mongodb/data --logpath=/usr/local/server/mongodb/logs --logappend  --port=27017 --fork</span><br></pre></td></tr></table></figure>
 <h4 id="5-参数解释-–dbpath-数据库路径-数据文件"><a href="#5-参数解释-–dbpath-数据库路径-数据文件" class="headerlink" title="5.参数解释: –dbpath 数据库路径(数据文件)"></a>5.参数解释: –dbpath 数据库路径(数据文件)</h4><p>复制代码</p>
 <p>–logpath 日志文件路径<br>–master 指定为主机器<br>–slave 指定为从机器<br>–source 指定主机器的IP地址<br>–pologSize 指定日志文件大小不超过64M.因为resync是非常操作量大且耗时，最好通过设置一个足够大的oplogSize来避免resync(默认的 oplog大小是空闲磁盘大小的5%)。<br>–logappend 日志文件末尾添加<br>–port 启用端口号<br>–fork 在后台运行<br>–only 指定只复制哪一个数据库<br>–slavedelay 指从复制检测的时间间隔<br>–auth 是否需要验证权限登录(用户名和密码)</p>
 <p>-h [ –help ]             show this usage information<br>–version                 show version information<br>-f [ –config ] arg       configuration file specifying additional options<br>–port arg                specify port number<br>–bind_ip arg             local ip address to bind listener - all local ips<br>                           bound by default<br>-v [ –verbose ]          be more verbose (include multiple times for more<br>                           verbosity e.g. -vvvvv)<br>–dbpath arg (=/data/db/) directory for datafiles    指定数据存放目录<br>–quiet                   quieter output   静默模式<br>–logpath arg             file to send all output to instead of stdout   指定日志存放目录<br>–logappend               appnd to logpath instead of over-writing 指定日志是以追加还是以覆盖的方式写入日志文件<br>–fork                    fork server process   以创建子进程的方式运行<br>–cpu                     periodically show cpu and iowait utilization 周期性的显示cpu和io的使用情况<br>–noauth                  run without security 无认证模式运行<br>–auth                    run with security 认证模式运行<br>–objcheck                inspect client data for validity on receipt 检查客户端输入数据的有效性检查<br>–quota                   enable db quota management   开始数据库配额的管理<br>–quotaFiles arg          number of files allower per db, requires –quota 规定每个数据库允许的文件数<br>–appsrvpath arg          root directory for the babble app server<br>–nocursors               diagnostic/debugging option 调试诊断选项<br>–nohints                 ignore query hints 忽略查询命中率<br>–nohttpinterface         disable http interface 关闭http接口，默认是28017<br>–noscripting             disable scripting engine 关闭脚本引擎<br>–noprealloc              disable data file preallocation 关闭数据库文件大小预分配<br>–smallfiles              use a smaller default file size 使用较小的默认文件大小<br>–nssize arg (=16)        .ns file size (in MB) for new databases 新数据库ns文件的默认大小<br>–diaglog arg             0=off 1=W 2=R 3=both 7=W+some reads 提供的方式，是只读，只写，还是读写都行，还是主要写+部分的读模式<br>–sysinfo                 print some diagnostic system information 打印系统诊断信息<br>–upgrade                 upgrade db if needed 如果需要就更新数据库<br>–repair                  run repair on all dbs 修复所有的数据库<br>–notablescan             do not allow table scans 不运行表扫描<br>–syncdelay arg (=60)     seconds between disk syncs (0 for never) 系统同步刷新磁盘的时间，默认是60s</p>
@@ -505,11 +505,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -517,11 +521,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -529,7 +533,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -541,23 +553,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -581,11 +581,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">

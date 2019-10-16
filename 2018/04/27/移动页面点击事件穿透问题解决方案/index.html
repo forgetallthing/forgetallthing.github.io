@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>移动页面点击事件穿透问题解决方案 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -60,7 +60,7 @@ var _hmt = _hmt || [];
 
 
 </head>
-
+</html>
 <body style="height: 100%;overflow: hidden;">
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -198,8 +198,8 @@ var _hmt = _hmt || [];
       
         <p>在移动端页面上，点击蒙层（mask）上的关闭按钮，蒙层消失后发现触发了按钮下面元素的click事件，这就是标题中的点击事件穿透问题。我的mask层是审核错误的列表，当点击相关错误会立即隐藏蒙版并定位到问卷的某个题目，所以事件穿透会导致点击错误列表的时候误修改了问卷上用户的选择，也就是触发了input或select的click事件。在参考了以下两篇博客后使用<code>pointer-events</code> 解决了问题，链接如下：</p>
 <ol>
-<li><a href="http://www.cnblogs.com/xiaoxingyiyi/p/5447378.html" target="_blank" rel="external">移动端h5页面touch事件与点击穿透问题</a></li>
-<li><a href="https://blog.csdn.net/helloxiaoliang/article/details/51362107" target="_blank" rel="external">移动页面点击穿透问题解决方案</a></li>
+<li><a href="http://www.cnblogs.com/xiaoxingyiyi/p/5447378.html" target="_blank" rel="noopener">移动端h5页面touch事件与点击穿透问题</a></li>
+<li><a href="https://blog.csdn.net/helloxiaoliang/article/details/51362107" target="_blank" rel="noopener">移动页面点击穿透问题解决方案</a></li>
 </ol>
 <p>内容整理如下：</p>
 <h2 id="touch事件的来源"><a href="#touch事件的来源" class="headerlink" title="touch事件的来源"></a>touch事件的来源</h2><p>PC网页上的大部分操作都是用鼠标的，即响应的是鼠标事件，包括<code>mousedown</code>、<code>mouseup</code>、<code>mousemove</code>和<code>click</code>事件。一次点击行为，可被拆解成：<code>mousedown</code> -&gt; <code>click</code> -&gt; <code>mouseup</code>三步。</p>
@@ -232,17 +232,17 @@ var _hmt = _hmt || [];
 </table>
 <h2 id="tap是怎么来的"><a href="#tap是怎么来的" class="headerlink" title="tap是怎么来的"></a>tap是怎么来的</h2><p>用过Zepto或KISSY等移动端js库的人肯定对<code>tap</code>事件不陌生，我们做PC页面时绑定<code>click</code>，相应地手机页面就绑定<code>tap</code>。但原生的touch事件本身是没有tap的，js库里提供的tap事件都是模拟出来的。</p>
 <p>我们在上面看到，手机上响应 click 事件会有300ms的延迟，那么这300ms到底是干嘛了？浏览器在 touchend 后会等待约300ms，原因是判断用户是否有双击（double tap）行为。如果没有 tap 行为，则触发 click 事件，而双击过程中就不适合触发 click 事件了。由此可以看出 click 事件触发代表一轮触摸事件的结束。</p>
-<p>既然说tap事件是模拟出来的，我们可以看下Zepto对 singleTap 事件的处理。<a href="https://github.com/madrobby/zepto/blob/master/src/touch.js#L136-L143" target="_blank" rel="external">见源码 136-143 行</a>，可以看出在 touchend 响应 250ms 无操作后，则触发singleTap。</p>
+<p>既然说tap事件是模拟出来的，我们可以看下Zepto对 singleTap 事件的处理。<a href="https://github.com/madrobby/zepto/blob/master/src/touch.js#L136-L143" target="_blank" rel="noopener">见源码 136-143 行</a>，可以看出在 touchend 响应 250ms 无操作后，则触发singleTap。</p>
 <h2 id="点击穿透的场景"><a href="#点击穿透的场景" class="headerlink" title="点击穿透的场景"></a>点击穿透的场景</h2><p>有了以上的基础，我们就可以理解为什么会出现<em>点击穿透</em>现象了。我们经常会看到“弹窗/浮层”这种东西，我做个了个demo。</p>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/180822/HDiDdBDmA0.png?imageslim" alt="mark"></p>
 <p>整个容器里有一个底层元素的div，和一个弹出层div，为了让弹出层有模态框的效果，我又加了一个遮罩层。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;div class="container"&gt;</div><div class="line">    &lt;div id="underLayer"&gt;底层元素&lt;/div&gt;</div><div class="line"></div><div class="line">    &lt;div id="popupLayer"&gt;</div><div class="line">        &lt;div class="layer-title"&gt;弹出层&lt;/div&gt;</div><div class="line">        &lt;div class="layer-action"&gt;</div><div class="line">            &lt;button class="btn" id="closePopup"&gt;关闭&lt;/button&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;div id="bgMask"&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"container"</span>&gt;</span><br><span class="line">    &lt;div id=<span class="string">"underLayer"</span>&gt;底层元素&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &lt;div id="popupLayer"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;div class="layer-title"&gt;弹出层&lt;/</span>div&gt;</span><br><span class="line">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"layer-action"</span>&gt;</span><br><span class="line">            &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">"btn"</span> id=<span class="string">"closePopup"</span>&gt;关闭&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br><span class="line">&lt;div id=<span class="string">"bgMask"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 <p>然后为底层元素绑定 click 事件，而弹出层的关闭按钮绑定 tap 事件。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#closePopup'</span>).on(<span class="string">'tap'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">    $(<span class="string">'#popupLayer'</span>).hide();</div><div class="line">    $(<span class="string">'#bgMask'</span>).hide();</div><div class="line">&#125;);</div><div class="line"></div><div class="line">$(<span class="string">'#underLayer'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    alert(<span class="string">'underLayer clicked'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#closePopup'</span>).on(<span class="string">'tap'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    $(<span class="string">'#popupLayer'</span>).hide();</span><br><span class="line">    $(<span class="string">'#bgMask'</span>).hide();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="string">'#underLayer'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(<span class="string">'underLayer clicked'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>点击关闭按钮，touchend首先触发tap，弹出层和遮罩就被隐藏了。touchend后继续等待300ms发现没有其他行为了，则继续触发click，由于这时弹出层已经消失，所以当前click事件的target就在底层元素上，于是就alert内容。整个事件触发过程为 touchend -&gt; tap -&gt; click。</p>
 <p>而由于click事件的滞后性（300ms），在这300ms内上层元素隐藏或消失了，下层同样位置的DOM元素触发了click事件（如果是input框则会触发focus事件），看起来就像点击的target“穿透”到下层去了。</p>
 <p>另一种跨页面点击穿透问题：这次没有mask了，直接点击页内按钮跳转至新页，然后发现新页面中对应位置元素的click事件被触发了，原理同上。</p>
-<h3 id="结合Zepto源码的解释"><a href="#结合Zepto源码的解释" class="headerlink" title="结合Zepto源码的解释"></a>结合Zepto源码的解释</h3><p><a href="https://github.com/madrobby/zepto/blob/master/src/touch.js" target="_blank" rel="external">zepto</a>中的 tap 通过兼听绑定在 document 上的 touch 事件来完成 tap 事件的模拟的，是通过事件冒泡实现的。在点击完成时（touchstart / touchend）的 tap 事件需要冒泡到 document 上才会触发。而在冒泡到 document 之前，手指接触和离开屏幕（touchstart / touchend）是会触发 click 事件的。</p>
+<h3 id="结合Zepto源码的解释"><a href="#结合Zepto源码的解释" class="headerlink" title="结合Zepto源码的解释"></a>结合Zepto源码的解释</h3><p><a href="https://github.com/madrobby/zepto/blob/master/src/touch.js" target="_blank" rel="noopener">zepto</a>中的 tap 通过兼听绑定在 document 上的 touch 事件来完成 tap 事件的模拟的，是通过事件冒泡实现的。在点击完成时（touchstart / touchend）的 tap 事件需要冒泡到 document 上才会触发。而在冒泡到 document 之前，手指接触和离开屏幕（touchstart / touchend）是会触发 click 事件的。</p>
 <p>因为 click 事件有延迟（大概是300ms，为了实现safari的双击事件的设计），所以在执行完 tap 事件之后，弹出层立马就隐藏了，此时 click 事件还在延迟的 300ms 之中。当 300ms 到来的时候，click 到的其实是隐藏元素下方的元素。</p>
 <p>如果正下方的元素有绑定 click 事件，此时便会触发，如果没有绑定 click 事件的话就当没发生。如果正下方的是 input 输入框（或是 select / radio / checkbox），点击默认 focus 而弹出输入键盘，也就出现了上面的“点透”现象。</p>
 <h2 id="穿透的解决办法"><a href="#穿透的解决办法" class="headerlink" title="穿透的解决办法"></a>穿透的解决办法</h2><h3 id="1-不要混用touch和click"><a href="#1-不要混用touch和click" class="headerlink" title="1.不要混用touch和click"></a>1.不要混用touch和click</h3><p>既然touch之后300ms会触发click，只用touch或者只用click就自然不会存在问题了</p>
@@ -279,11 +279,11 @@ var _hmt = _hmt || [];
 </tbody>
 </table>
 <p>因此解决“穿透”的办法就很简单，demo如下:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#closePopup'</span>).on(<span class="string">'tap'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">    $(<span class="string">'#popupLayer'</span>).hide();</div><div class="line">    $(<span class="string">'#bgMask'</span>).hide();</div><div class="line"></div><div class="line">    $(<span class="string">'#underLayer'</span>).css(<span class="string">'pointer-events'</span>, <span class="string">'none'</span>);</div><div class="line"></div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        $(<span class="string">'#underLayer'</span>).css(<span class="string">'pointer-events'</span>, <span class="string">'auto'</span>);</div><div class="line">    &#125;, <span class="number">400</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h3 id="4-fastclick"><a href="#4-fastclick" class="headerlink" title="4. fastclick"></a>4. fastclick</h3><p>使用<a href="https://github.com/ftlabs/fastclick" target="_blank" rel="external">fastclick</a>库，其实现思路是，取消 click 事件（<a href="https://github.com/ftlabs/fastclick/blob/master/lib/fastclick.js#L164-L173" target="_blank" rel="external">参看源码 164-173 行</a>），用 touchend 模拟快速点击行为（<a href="https://github.com/ftlabs/fastclick/blob/master/lib/fastclick.js#L521-L610" target="_blank" rel="external">参看源码 521-610 行</a>）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">FastClick.attach(document.body);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#closePopup'</span>).on(<span class="string">'tap'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    $(<span class="string">'#popupLayer'</span>).hide();</span><br><span class="line">    $(<span class="string">'#bgMask'</span>).hide();</span><br><span class="line"></span><br><span class="line">    $(<span class="string">'#underLayer'</span>).css(<span class="string">'pointer-events'</span>, <span class="string">'none'</span>);</span><br><span class="line"></span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        $(<span class="string">'#underLayer'</span>).css(<span class="string">'pointer-events'</span>, <span class="string">'auto'</span>);</span><br><span class="line">    &#125;, <span class="number">400</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="4-fastclick"><a href="#4-fastclick" class="headerlink" title="4. fastclick"></a>4. fastclick</h3><p>使用<a href="https://github.com/ftlabs/fastclick" target="_blank" rel="noopener">fastclick</a>库，其实现思路是，取消 click 事件（<a href="https://github.com/ftlabs/fastclick/blob/master/lib/fastclick.js#L164-L173" target="_blank" rel="noopener">参看源码 164-173 行</a>），用 touchend 模拟快速点击行为（<a href="https://github.com/ftlabs/fastclick/blob/master/lib/fastclick.js#L521-L610" target="_blank" rel="noopener">参看源码 521-610 行</a>）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FastClick.attach(document.body);</span><br></pre></td></tr></table></figure>
 <p>从此所有点击事件都使用<code>click</code>，不会出现“穿透”的问题，并且没有300ms的延迟。</p>
-<p>有人（叶小钗）对事件机制做了详细的剖析，循循善诱，并剖析了fastclick的源码以自己模拟事件的创建。<a href="http://www.cnblogs.com/yexiaochai/p/3462657.html" target="_blank" rel="external">请看这篇文章，看完后一定会对移动端的事件有更深的了解</a></p>
+<p>有人（叶小钗）对事件机制做了详细的剖析，循循善诱，并剖析了fastclick的源码以自己模拟事件的创建。<a href="http://www.cnblogs.com/yexiaochai/p/3462657.html" target="_blank" rel="noopener">请看这篇文章，看完后一定会对移动端的事件有更深的了解</a></p>
 
       
 
@@ -564,11 +564,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -576,11 +580,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -588,7 +592,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -600,23 +612,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -640,11 +640,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">

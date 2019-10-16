@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="本文探讨当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-16T03:01:03.516Z">
+<meta property="og:updated_time" content="2019-10-16T03:03:41.774Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB查询内嵌数组（限定返回符合条件的数组中的数据）">
 <meta name="twitter:description" content="本文探讨当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。">
@@ -222,7 +222,11 @@ var _hmt = _hmt || [];
 <p>结果</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 1 */</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5aab3460353df3bd352e0e15"</span>),</span><br><span class="line">    <span class="string">"userInfo"</span> : &#123;</span><br><span class="line">        <span class="string">"name"</span> : <span class="string">"cj"</span>,</span><br><span class="line">        <span class="string">"address"</span> : <span class="string">"江苏"</span>,</span><br><span class="line">        <span class="string">"age"</span> : <span class="number">24.0</span>,</span><br><span class="line">        <span class="string">"userTag"</span> : <span class="string">"stu"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 2 */</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5aab3460353df3bd352e0e15"</span>),</span><br><span class="line">    <span class="string">"userInfo"</span> : &#123;</span><br><span class="line">        <span class="string">"name"</span> : <span class="string">"hj"</span>,</span><br><span class="line">        <span class="string">"address"</span> : <span class="string">"江苏"</span>,</span><br><span class="line">        <span class="string">"age"</span> : <span class="number">26.0</span>,</span><br><span class="line">        <span class="string">"userTag"</span> : <span class="string">"stu"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这样的一个结果就是我们想要的。感兴趣的同学可以分别执行下这个三个操作（比较看看三个结果有什么不同），你就能理解 $unwind、$match、$project 三个方法的作用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.test.aggregate([&#123;&quot;$unwind&quot;:&quot;$userInfo&quot;&#125;])</span><br><span class="line"></span><br><span class="line">db.test.aggregate([&#123;&quot;$unwind&quot;:&quot;$userInfo&quot;&#125;,&#123;&quot;$match&quot;:&#123;&quot;userInfo.userTag&quot;:&quot;stu&quot;,&quot;tag&quot;:&quot;test&quot;&#125;&#125;])</span><br><span class="line"></span><br><span class="line">db.test.aggregate([&#123;&quot;$unwind&quot;:&quot;$userInfo&quot;&#125;,&#123;&quot;$match&quot;:&#123;&quot;userInfo.userTag&quot;:&quot;stu&quot;,&quot;tag&quot;:&quot;test&quot;&#125;&#125;,&#123;&quot;$project&quot;:&#123;&quot;userInfo&quot;:1&#125;&#125;])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>db.test.aggregate([{“$unwind”:”$userInfo”}])</p>
+<p>db.test.aggregate([{“$unwind”:”$userInfo”},{“$match”:{“userInfo.userTag”:”stu”,”tag”:”test”}}])</p>
+<p>db.test.aggregate([{“$unwind”:”$userInfo”},{“$match”:{“userInfo.userTag”:”stu”,”tag”:”test”}},{“$project”:{“userInfo”:1}}])</p>
+</blockquote>
 
       
 
@@ -494,15 +498,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -510,19 +506,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,7 +518,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -542,7 +534,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -558,11 +562,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">

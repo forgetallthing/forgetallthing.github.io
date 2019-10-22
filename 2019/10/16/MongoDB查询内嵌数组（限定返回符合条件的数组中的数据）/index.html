@@ -16,10 +16,12 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="本文探讨当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-16T03:03:41.774Z">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191022/P7sr653iL2gH.jpg">
+<meta property="og:updated_time" content="2019-10-22T04:46:48.884Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB查询内嵌数组（限定返回符合条件的数组中的数据）">
 <meta name="twitter:description" content="本文探讨当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。">
+<meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191022/P7sr653iL2gH.jpg">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -193,7 +195,8 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本文探讨当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。</p>
+        <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20191022/P7sr653iL2gH.jpg" alt="mark"></p>
+<p>本文探讨当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。</p>
 <a id="more"></a>
 <p>原始数据：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5aab3460353df3bd352e0e15"</span>),</span><br><span class="line">    <span class="string">"addTime"</span> : ISODate(<span class="string">"2018-03-16T03:05:04.363Z"</span>),</span><br><span class="line">    <span class="string">"tag"</span> : <span class="string">"test"</span>,</span><br><span class="line">    <span class="string">"userInfo"</span> : [ </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"cj"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"江苏"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">24.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"stu"</span></span><br><span class="line">        &#125;, </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"hj"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"江苏"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">26.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"stu"</span></span><br><span class="line">        &#125;, </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"lbl"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"美国"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">22.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"teach"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -507,11 +510,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -523,11 +526,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -535,11 +538,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -548,6 +547,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">

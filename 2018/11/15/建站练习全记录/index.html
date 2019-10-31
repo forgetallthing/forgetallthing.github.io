@@ -17,7 +17,7 @@
 <meta property="og:description" content="黄河西来决昆仑，咆哮万里触龙门。 —————– by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20181205/UR7r9tM6kt4r.jpg?imageslim">
-<meta property="og:updated_time" content="2019-03-07T01:21:14.000Z">
+<meta property="og:updated_time" content="2019-10-31T07:01:24.594Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="建站练习全记录">
 <meta name="twitter:description" content="黄河西来决昆仑，咆哮万里触龙门。 —————– by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
@@ -237,6 +237,8 @@ var _hmt = _hmt || [];
 <p>6、建立全局链接</p>
 <p>现在我们的nodejs虽然已经安装成功了，但是还不能全局使用node命令，需要建立软连接，使其变为全局</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s /app/nodejs/bin/npm /usr/local/bin/</span><br><span class="line">ln -s /app/nodejs/bin/node /usr/local/bin/</span><br></pre></td></tr></table></figure>
+<p>如果软件建立错误，我们需要先删除建立的软连接文件再重新建立：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm /usr/local/bin/npm</span><br><span class="line">rm /usr/local/bin/node</span><br></pre></td></tr></table></figure>
 <p>这样，我们就大功告成了，你可以在任何地方通过</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
 <p>进行测试是否安装成功</p>
@@ -318,6 +320,7 @@ var _hmt = _hmt || [];
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -O https:<span class="comment">//fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.2.9.tgz</span></span><br></pre></td></tr></table></figure>
 <p>2.解压</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf mongodb-linux-x86_64<span class="number">-3.2</span><span class="number">.9</span>.tgz</span><br></pre></td></tr></table></figure>
+<p>注意：解压后将mongo文件夹命名为纯字母的名字，不然下面的配置容易出错</p>
 <p>3.创建数据文件夹和日志文件等</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p  /usr/local/mongodb/data</span><br><span class="line">touch /usr/local/mongodb/mongod.log</span><br><span class="line">touch /usr/local/mongodb/mongodb.conf</span><br></pre></td></tr></table></figure>
 <p>4.添加mongod命令到PATH</p>
@@ -363,6 +366,9 @@ var _hmt = _hmt || [];
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start /home/processes.json</span><br></pre></td></tr></table></figure>
 <h4 id="3-MongoDB导出-导入数据文件"><a href="#3-MongoDB导出-导入数据文件" class="headerlink" title="3.MongoDB导出/导入数据文件"></a>3.MongoDB导出/导入数据文件</h4><h5 id="导出数据库文件到json文件中"><a href="#导出数据库文件到json文件中" class="headerlink" title="导出数据库文件到json文件中"></a>导出数据库文件到json文件中</h5><p>使用mongoexport命令，可以将mongodb数据库导出到json/csv文件中。注意，导出时，是按collection逐个导出。命令格式如下：<br>　　<code>mongoexport -d dbname -c collectionname -o file --type json/csv -f field</code><br>　　　　-d ：数据库名<br>　　　　-c ：collection名<br>　　　　-o ：输出的文件名<br>　　　　–type ： 输出的格式，默认为json<br>　　　　-f ：输出的字段，如果-type为csv，则需要加上-f “字段名”，不指定-f时默认输出所有字段<br>　　例：<code>mongoexport -d mongotest -c users -o /home/python/Desktop/mongoDB/users.json --type json -f &quot;_id,user_id,user_name,age,status&quot;</code><br>　　数据库导出完毕后，将json文件打包在一起，通过scp命令传输到服务器。然后服务器解压后，逐个导入到数据库。</p>
 <h5 id="导入json文件"><a href="#导入json文件" class="headerlink" title="导入json文件"></a>导入json文件</h5><p>使用mongoimport命令，可以将json/csv文件中的内容导入到指定数据库指定collection中。命令格式如下：<br>　　<code>mongoimport -d dbname -c collectionname --file filename --headerline --type json/csv -f field</code><br>　　　　–headerline    如果导入的格式是csv，则可以使用第一行的标题作为导入的字段</p>
+<h4 id="4-安装zip"><a href="#4-安装zip" class="headerlink" title="4.安装zip"></a>4.安装zip</h4><p>安装：<strong>yum -y install zip</strong></p>
+<p>​           <strong>yum install -y unzip zip</strong></p>
+<p>解压：<strong>unzip 文件名</strong></p>
 
       
 
@@ -515,7 +521,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、准备服务器和相关工具"><span class="toc-number">1.</span> <span class="toc-text">一、准备服务器和相关工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、搭建个简单的架子"><span class="toc-number">2.</span> <span class="toc-text">二、搭建个简单的架子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-在本地准备个程序"><span class="toc-number">2.1.</span> <span class="toc-text">1.在本地准备个程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-在服务器安装node以及pm2"><span class="toc-number">2.2.</span> <span class="toc-text">2.在服务器安装node以及pm2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-开启端口并启动服务"><span class="toc-number">2.3.</span> <span class="toc-text">3.开启端口并启动服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搭建git服务"><span class="toc-number">3.</span> <span class="toc-text">搭建git服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装git"><span class="toc-number">3.1.</span> <span class="toc-text">1.安装git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2获取公钥"><span class="toc-number">3.2.</span> <span class="toc-text">2获取公钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-连接github仓库"><span class="toc-number">3.3.</span> <span class="toc-text">3.连接github仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-服务器配置文件不更新的命令"><span class="toc-number">3.4.</span> <span class="toc-text">4.服务器配置文件不更新的命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5使用-GitHub的-Webhooks-进行网站自动化部署"><span class="toc-number">3.5.</span> <span class="toc-text">5使用 GitHub的 Webhooks 进行网站自动化部署</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx反向代理"><span class="toc-number">4.</span> <span class="toc-text">nginx反向代理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#反向代理nginx"><span class="toc-number">4.1.</span> <span class="toc-text">反向代理nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装nginx"><span class="toc-number">4.2.</span> <span class="toc-text">安装nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#如果安装nginx的时候报错，可以尝试下面的方法："><span class="toc-number">4.2.1.</span> <span class="toc-text">如果安装nginx的时候报错，可以尝试下面的方法：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反向代理80端口到3000端口"><span class="toc-number">4.3.</span> <span class="toc-text">反向代理80端口到3000端口</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MongoDB的使用"><span class="toc-number">5.</span> <span class="toc-text">MongoDB的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装"><span class="toc-number">5.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动MongoDB"><span class="toc-number">5.2.</span> <span class="toc-text">启动MongoDB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程连接mongodb数据库"><span class="toc-number">5.3.</span> <span class="toc-text">远程连接mongodb数据库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录"><span class="toc-number">6.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-pm2常用命令"><span class="toc-number">6.1.</span> <span class="toc-text">1.pm2常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-pm2启动配置文件"><span class="toc-number">6.2.</span> <span class="toc-text">2.pm2启动配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-MongoDB导出-导入数据文件"><span class="toc-number">6.3.</span> <span class="toc-text">3.MongoDB导出/导入数据文件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#导出数据库文件到json文件中"><span class="toc-number">6.3.1.</span> <span class="toc-text">导出数据库文件到json文件中</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#导入json文件"><span class="toc-number">6.3.2.</span> <span class="toc-text">导入json文件</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、准备服务器和相关工具"><span class="toc-number">1.</span> <span class="toc-text">一、准备服务器和相关工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、搭建个简单的架子"><span class="toc-number">2.</span> <span class="toc-text">二、搭建个简单的架子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-在本地准备个程序"><span class="toc-number">2.1.</span> <span class="toc-text">1.在本地准备个程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-在服务器安装node以及pm2"><span class="toc-number">2.2.</span> <span class="toc-text">2.在服务器安装node以及pm2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-开启端口并启动服务"><span class="toc-number">2.3.</span> <span class="toc-text">3.开启端口并启动服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搭建git服务"><span class="toc-number">3.</span> <span class="toc-text">搭建git服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装git"><span class="toc-number">3.1.</span> <span class="toc-text">1.安装git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2获取公钥"><span class="toc-number">3.2.</span> <span class="toc-text">2获取公钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-连接github仓库"><span class="toc-number">3.3.</span> <span class="toc-text">3.连接github仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-服务器配置文件不更新的命令"><span class="toc-number">3.4.</span> <span class="toc-text">4.服务器配置文件不更新的命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5使用-GitHub的-Webhooks-进行网站自动化部署"><span class="toc-number">3.5.</span> <span class="toc-text">5使用 GitHub的 Webhooks 进行网站自动化部署</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx反向代理"><span class="toc-number">4.</span> <span class="toc-text">nginx反向代理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#反向代理nginx"><span class="toc-number">4.1.</span> <span class="toc-text">反向代理nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装nginx"><span class="toc-number">4.2.</span> <span class="toc-text">安装nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#如果安装nginx的时候报错，可以尝试下面的方法："><span class="toc-number">4.2.1.</span> <span class="toc-text">如果安装nginx的时候报错，可以尝试下面的方法：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反向代理80端口到3000端口"><span class="toc-number">4.3.</span> <span class="toc-text">反向代理80端口到3000端口</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MongoDB的使用"><span class="toc-number">5.</span> <span class="toc-text">MongoDB的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装"><span class="toc-number">5.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动MongoDB"><span class="toc-number">5.2.</span> <span class="toc-text">启动MongoDB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程连接mongodb数据库"><span class="toc-number">5.3.</span> <span class="toc-text">远程连接mongodb数据库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录"><span class="toc-number">6.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-pm2常用命令"><span class="toc-number">6.1.</span> <span class="toc-text">1.pm2常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-pm2启动配置文件"><span class="toc-number">6.2.</span> <span class="toc-text">2.pm2启动配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-MongoDB导出-导入数据文件"><span class="toc-number">6.3.</span> <span class="toc-text">3.MongoDB导出/导入数据文件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#导出数据库文件到json文件中"><span class="toc-number">6.3.1.</span> <span class="toc-text">导出数据库文件到json文件中</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#导入json文件"><span class="toc-number">6.3.2.</span> <span class="toc-text">导入json文件</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-安装zip"><span class="toc-number">6.4.</span> <span class="toc-text">4.安装zip</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -635,15 +641,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,7 +653,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -659,15 +661,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -675,11 +677,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -691,15 +693,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -711,7 +721,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -720,18 +738,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">

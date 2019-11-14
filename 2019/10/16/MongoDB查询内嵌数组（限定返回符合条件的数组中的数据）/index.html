@@ -17,7 +17,7 @@
 <meta property="og:description" content="本文探讨当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191022/P7sr653iL2gH.jpg">
-<meta property="og:updated_time" content="2019-10-22T04:46:48.884Z">
+<meta property="og:updated_time" content="2019-11-04T08:37:55.725Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB查询内嵌数组（限定返回符合条件的数组中的数据）">
 <meta name="twitter:description" content="本文探讨当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。">
@@ -230,6 +230,9 @@ var _hmt = _hmt || [];
 <p>db.test.aggregate([{“$unwind”:”$userInfo”},{“$match”:{“userInfo.userTag”:”stu”,”tag”:”test”}}])</p>
 <p>db.test.aggregate([{“$unwind”:”$userInfo”},{“$match”:{“userInfo.userTag”:”stu”,”tag”:”test”}},{“$project”:{“userInfo”:1}}])</p>
 </blockquote>
+<h3 id="mongodb导出csv"><a href="#mongodb导出csv" class="headerlink" title="mongodb导出csv"></a>mongodb导出csv</h3><p><a href="https://docs.mongodb.com/manual/reference/program/mongoexport/index.html" target="_blank" rel="noopener">官方文档</a></p>
+<p>win10下格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mongoexport -d &quot;rk4&quot; -c &quot;da_data_2&quot; -q=&apos;&#123;\&quot;_tabnum\&quot; :\&quot;sjzx-sjy02\&quot;,\&quot;_per\&quot; :\&quot;20181116\&quot;&#125;&apos; -o</span><br><span class="line">C:\Users\Administrator\Desktop\test.json</span><br></pre></td></tr></table></figure>
 
       
 
@@ -382,7 +385,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mongodb导出csv"><span class="toc-number">1.</span> <span class="toc-text">mongodb导出csv</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -502,15 +505,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">心爱的人</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -522,11 +533,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -538,11 +549,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -554,11 +561,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,10 +582,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -591,14 +602,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">

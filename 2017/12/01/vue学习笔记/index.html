@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191011/R7pRbAdhSUdb.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191011/SCS27Rnlnkyu.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191011/82jAdghQmaaw.png">
-<meta property="og:updated_time" content="2019-10-11T06:49:06.617Z">
+<meta property="og:updated_time" content="2019-12-03T10:44:53.242Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue学习笔记">
 <meta name="twitter:description" content="本文将记录关于vue的一切">
@@ -209,6 +209,18 @@ var _hmt = _hmt || [];
 <p>vue中引用必须以模块引入才能生效:<code>require(&#39;../assets/logo.png&#39;)</code></p>
 <p>如遇到很多图片的情况,网上的解决办法为配置json文件,统一引入:</p>
 <p>详见 : <a href="https://blog.csdn.net/mr_yanyan/article/details/78783091" target="_blank" rel="noopener">vue 动态加载图片src的解决办法</a></p>
+<h2 id="Vue-router-中hash模式和history模式的区别"><a href="#Vue-router-中hash模式和history模式的区别" class="headerlink" title="Vue-router 中hash模式和history模式的区别"></a>Vue-router 中hash模式和history模式的区别</h2><h4 id="hash"><a href="#hash" class="headerlink" title="hash"></a><strong>hash</strong></h4><p> 即地址栏 URL 中的 # 符号（此 hash 不是密码学里的散列运算）。比如这个 URL：<a href="http://www.abc.com/#/hello" target="_blank" rel="noopener">http://www.abc.com/#/hello</a> hash 的值为 #/hello。它的特点在于：hash 虽然出现在 URL 中，但不会被包括在 HTTP 请求中，对后端完全没有影响，因此改变 hash 不会重新加载页面。</p>
+<h4 id="history"><a href="#history" class="headerlink" title="history"></a><strong>history</strong></h4><p> 利用了 HTML5 History Interface 中新增的 pushState() 和 replaceState() 方法。（需要特定浏览器支持）这两个方法应用于浏览器的历史记录栈，在当前已有的 back、forward、go 的基础之上，它们提供了对历史记录进行修改的功能。只是当它们执行修改时，虽然改变了当前的 URL，但浏览器不会立即向后端发送请求。但在用户手动输入 URL 后回车，或者刷新（重启）浏览器的时候，会向后端发送请求。</p>
+<p><strong>hash</strong> <strong>存在的参数问题</strong></p>
+<p>当我们要在url后面携带一些参数的时候，必须写在#前面才能正确的传递：</p>
+<p>如钉钉不会识别？后面的参数：</p>
+<p><a href="http://192.168.1.105/#/evaluate-list?dd_full_screen=true&amp;showmenu=false" target="_blank" rel="noopener">http://192.168.1.105/#/evaluate-list?dd_full_screen=true&amp;showmenu=false</a></p>
+<p>需要将参数写在#前面即可：</p>
+<p><a href="http://192.168.1.105?dd_full_screen=true&amp;showmenu=false/#/evaluate-list" target="_blank" rel="noopener">http://192.168.1.105?dd_full_screen=true&amp;showmenu=false/#/evaluate-list</a></p>
+<p><strong>history存在的手动刷新问题</strong></p>
+<p>history 模式下，前端的 URL 必须和实际向后端发起请求的 URL 一致，如 用户访问的地址是：<a href="http://www.abc.com，使用跳转后地址变为：http://www.abc.com/book/id，此时用户手动刷新页面会对后端发起请求，请求地址为http://www.abc.com/book/id，" target="_blank" rel="noopener">http://www.abc.com，使用跳转后地址变为：http://www.abc.com/book/id，此时用户手动刷新页面会对后端发起请求，请求地址为http://www.abc.com/book/id，</a> 如果后端缺少对 /book/id 的路由处理，将返回 404 错误。</p>
+<p>而hash 模式下，仅 hash 符号之前的内容会被包含在请求中，如 <a href="http://www.abc.com，因此对于后端来说，即使没有做到对路由的全覆盖，也不会返回" target="_blank" rel="noopener">http://www.abc.com，因此对于后端来说，即使没有做到对路由的全覆盖，也不会返回</a> 404 错误。</p>
+<p>Vue-Router 官网里对history 模式如此描述：“不过这种模式要玩好，还需要后台配置支持……所以要在服务端增加一个覆盖所有情况的候选资源：如果 URL 匹配不到任何静态资源，则应该返回同一个 index.html 页面，这个页面就是你 app 依赖的页面。”</p>
 <h1 id="vue中的双向数据绑定详解"><a href="#vue中的双向数据绑定详解" class="headerlink" title="vue中的双向数据绑定详解"></a>vue中的双向数据绑定详解</h1><p>本文修改自：<a href="https://www.cnblogs.com/zhuzhenwei918/p/7309604.html" target="_blank" rel="noopener">vue中的双向数据绑定详解</a></p>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h2><p><strong>什么是数据双向绑定</strong>？ </p>
 <p>　　vue是一个mvvm框架，即数据双向绑定，即当数据发生变化的时候，视图也就发生变化，当视图发生变化的时候，数据也会跟着同步变化。这也算是vue的精髓之处了。<strong>值得注意的是，</strong>我们所说的数据双向绑定，一定是对于UI控件来说的，非UI控件不会涉及到数据双向绑定。 单向数据绑定是使用状态管理工具（如redux）的前提。如果我们使用vuex，那么数据流也是单项的，这时就会和双向数据绑定有冲突，<a href="https://github.com/vuejs/vuex/blob/master/docs/zh-cn/forms.md" target="_blank" rel="noopener">我们可以这么解决</a>。 </p>
@@ -426,7 +438,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vue-动态加载图片src的解决办法"><span class="toc-number">1.</span> <span class="toc-text">vue 动态加载图片src的解决办法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#vue中的双向数据绑定详解"><span class="toc-number"></span> <span class="toc-text">vue中的双向数据绑定详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、访问器属性"><span class="toc-number">2.</span> <span class="toc-text">一、访问器属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、简单的数据双向绑定实现方法"><span class="toc-number">3.</span> <span class="toc-text">二、简单的数据双向绑定实现方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、-实现任务的思路"><span class="toc-number">4.</span> <span class="toc-text">三、 实现任务的思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、DocumentFragment"><span class="toc-number">5.</span> <span class="toc-text">四、DocumentFragment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、初始化数据绑定"><span class="toc-number">6.</span> <span class="toc-text">五、初始化数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、响应式的数据绑定"><span class="toc-number">7.</span> <span class="toc-text">六、响应式的数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、-订阅-发布模式（subscribe-amp-publish）"><span class="toc-number">8.</span> <span class="toc-text">七、 订阅/发布模式（subscribe &amp; publish）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八、-双向绑定的实现"><span class="toc-number">9.</span> <span class="toc-text">八、 双向绑定的实现</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vue-动态加载图片src的解决办法"><span class="toc-number">1.</span> <span class="toc-text">vue 动态加载图片src的解决办法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue-router-中hash模式和history模式的区别"><span class="toc-number">2.</span> <span class="toc-text">Vue-router 中hash模式和history模式的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#hash"><span class="toc-number">2.0.1.</span> <span class="toc-text">hash</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#history"><span class="toc-number">2.0.2.</span> <span class="toc-text">history</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#vue中的双向数据绑定详解"><span class="toc-number"></span> <span class="toc-text">vue中的双向数据绑定详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、访问器属性"><span class="toc-number">2.</span> <span class="toc-text">一、访问器属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、简单的数据双向绑定实现方法"><span class="toc-number">3.</span> <span class="toc-text">二、简单的数据双向绑定实现方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、-实现任务的思路"><span class="toc-number">4.</span> <span class="toc-text">三、 实现任务的思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、DocumentFragment"><span class="toc-number">5.</span> <span class="toc-text">四、DocumentFragment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、初始化数据绑定"><span class="toc-number">6.</span> <span class="toc-text">五、初始化数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、响应式的数据绑定"><span class="toc-number">7.</span> <span class="toc-text">六、响应式的数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、-订阅-发布模式（subscribe-amp-publish）"><span class="toc-number">8.</span> <span class="toc-text">七、 订阅/发布模式（subscribe &amp; publish）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八、-双向绑定的实现"><span class="toc-number">9.</span> <span class="toc-text">八、 双向绑定的实现</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -562,6 +574,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
@@ -570,11 +586,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -582,7 +598,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -594,7 +610,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -602,19 +618,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,15 +638,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -646,15 +662,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">

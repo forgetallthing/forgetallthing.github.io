@@ -17,7 +17,7 @@
 <meta property="og:description" content="黄河西来决昆仑，咆哮万里触龙门。 —————– by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20181205/UR7r9tM6kt4r.jpg?imageslim">
-<meta property="og:updated_time" content="2019-10-31T07:01:24.594Z">
+<meta property="og:updated_time" content="2019-12-09T07:00:23.090Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="建站练习全记录">
 <meta name="twitter:description" content="黄河西来决昆仑，咆哮万里触龙门。 —————– by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
@@ -316,6 +316,13 @@ var _hmt = _hmt || [];
 <p>重启服务即可：nginx -s reload</p>
 <p>之前我想代理到6000,没想到这个端口被浏览器禁用了,大家如果遇到开启服务谷歌访问不了的情况,不妨先改下端口号试试,避免撞车:</p>
 <p><a href="https://www.cnblogs.com/huanxiyun/p/5407932.html" target="_blank" rel="noopener">谷歌浏览器限制的一些端口号</a></p>
+<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><p><strong>start nginx</strong>  启动</p>
+<p><strong>nginx -s stop</strong>  停止</p>
+<p><strong>nginx -s reload</strong>  重启</p>
+<p><strong>nginx -t</strong>  查看配置是否正确</p>
+<p><strong>pkill nginx</strong>  强制关闭</p>
+<p><strong>taskkill /F /FI “imagename eq nginx.exe”</strong>  win10下清理nginx进程</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://blog.csdn.net/duguxiaobiao/article/details/79089660" target="_blank" rel="noopener">Nginx作为静态资源web服务之文件读取</a></p>
 <h3 id="MongoDB的使用"><a href="#MongoDB的使用" class="headerlink" title="MongoDB的使用"></a>MongoDB的使用</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>1.下载mongodb</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -O https:<span class="comment">//fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.2.9.tgz</span></span><br></pre></td></tr></table></figure>
 <p>2.解压</p>
@@ -521,7 +528,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、准备服务器和相关工具"><span class="toc-number">1.</span> <span class="toc-text">一、准备服务器和相关工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、搭建个简单的架子"><span class="toc-number">2.</span> <span class="toc-text">二、搭建个简单的架子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-在本地准备个程序"><span class="toc-number">2.1.</span> <span class="toc-text">1.在本地准备个程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-在服务器安装node以及pm2"><span class="toc-number">2.2.</span> <span class="toc-text">2.在服务器安装node以及pm2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-开启端口并启动服务"><span class="toc-number">2.3.</span> <span class="toc-text">3.开启端口并启动服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搭建git服务"><span class="toc-number">3.</span> <span class="toc-text">搭建git服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装git"><span class="toc-number">3.1.</span> <span class="toc-text">1.安装git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2获取公钥"><span class="toc-number">3.2.</span> <span class="toc-text">2获取公钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-连接github仓库"><span class="toc-number">3.3.</span> <span class="toc-text">3.连接github仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-服务器配置文件不更新的命令"><span class="toc-number">3.4.</span> <span class="toc-text">4.服务器配置文件不更新的命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5使用-GitHub的-Webhooks-进行网站自动化部署"><span class="toc-number">3.5.</span> <span class="toc-text">5使用 GitHub的 Webhooks 进行网站自动化部署</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx反向代理"><span class="toc-number">4.</span> <span class="toc-text">nginx反向代理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#反向代理nginx"><span class="toc-number">4.1.</span> <span class="toc-text">反向代理nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装nginx"><span class="toc-number">4.2.</span> <span class="toc-text">安装nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#如果安装nginx的时候报错，可以尝试下面的方法："><span class="toc-number">4.2.1.</span> <span class="toc-text">如果安装nginx的时候报错，可以尝试下面的方法：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反向代理80端口到3000端口"><span class="toc-number">4.3.</span> <span class="toc-text">反向代理80端口到3000端口</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MongoDB的使用"><span class="toc-number">5.</span> <span class="toc-text">MongoDB的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装"><span class="toc-number">5.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动MongoDB"><span class="toc-number">5.2.</span> <span class="toc-text">启动MongoDB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程连接mongodb数据库"><span class="toc-number">5.3.</span> <span class="toc-text">远程连接mongodb数据库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录"><span class="toc-number">6.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-pm2常用命令"><span class="toc-number">6.1.</span> <span class="toc-text">1.pm2常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-pm2启动配置文件"><span class="toc-number">6.2.</span> <span class="toc-text">2.pm2启动配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-MongoDB导出-导入数据文件"><span class="toc-number">6.3.</span> <span class="toc-text">3.MongoDB导出/导入数据文件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#导出数据库文件到json文件中"><span class="toc-number">6.3.1.</span> <span class="toc-text">导出数据库文件到json文件中</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#导入json文件"><span class="toc-number">6.3.2.</span> <span class="toc-text">导入json文件</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-安装zip"><span class="toc-number">6.4.</span> <span class="toc-text">4.安装zip</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、准备服务器和相关工具"><span class="toc-number">1.</span> <span class="toc-text">一、准备服务器和相关工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、搭建个简单的架子"><span class="toc-number">2.</span> <span class="toc-text">二、搭建个简单的架子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-在本地准备个程序"><span class="toc-number">2.1.</span> <span class="toc-text">1.在本地准备个程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-在服务器安装node以及pm2"><span class="toc-number">2.2.</span> <span class="toc-text">2.在服务器安装node以及pm2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-开启端口并启动服务"><span class="toc-number">2.3.</span> <span class="toc-text">3.开启端口并启动服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搭建git服务"><span class="toc-number">3.</span> <span class="toc-text">搭建git服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装git"><span class="toc-number">3.1.</span> <span class="toc-text">1.安装git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2获取公钥"><span class="toc-number">3.2.</span> <span class="toc-text">2获取公钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-连接github仓库"><span class="toc-number">3.3.</span> <span class="toc-text">3.连接github仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-服务器配置文件不更新的命令"><span class="toc-number">3.4.</span> <span class="toc-text">4.服务器配置文件不更新的命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5使用-GitHub的-Webhooks-进行网站自动化部署"><span class="toc-number">3.5.</span> <span class="toc-text">5使用 GitHub的 Webhooks 进行网站自动化部署</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx反向代理"><span class="toc-number">4.</span> <span class="toc-text">nginx反向代理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#反向代理nginx"><span class="toc-number">4.1.</span> <span class="toc-text">反向代理nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装nginx"><span class="toc-number">4.2.</span> <span class="toc-text">安装nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#如果安装nginx的时候报错，可以尝试下面的方法："><span class="toc-number">4.2.1.</span> <span class="toc-text">如果安装nginx的时候报错，可以尝试下面的方法：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反向代理80端口到3000端口"><span class="toc-number">4.3.</span> <span class="toc-text">反向代理80端口到3000端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用命令"><span class="toc-number">4.4.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考"><span class="toc-number">4.5.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MongoDB的使用"><span class="toc-number">5.</span> <span class="toc-text">MongoDB的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装"><span class="toc-number">5.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动MongoDB"><span class="toc-number">5.2.</span> <span class="toc-text">启动MongoDB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程连接mongodb数据库"><span class="toc-number">5.3.</span> <span class="toc-text">远程连接mongodb数据库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录"><span class="toc-number">6.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-pm2常用命令"><span class="toc-number">6.1.</span> <span class="toc-text">1.pm2常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-pm2启动配置文件"><span class="toc-number">6.2.</span> <span class="toc-text">2.pm2启动配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-MongoDB导出-导入数据文件"><span class="toc-number">6.3.</span> <span class="toc-text">3.MongoDB导出/导入数据文件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#导出数据库文件到json文件中"><span class="toc-number">6.3.1.</span> <span class="toc-text">导出数据库文件到json文件中</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#导入json文件"><span class="toc-number">6.3.2.</span> <span class="toc-text">导入json文件</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-安装zip"><span class="toc-number">6.4.</span> <span class="toc-text">4.安装zip</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -653,10 +660,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
@@ -665,11 +668,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -677,15 +680,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -717,15 +724,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vscode</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">

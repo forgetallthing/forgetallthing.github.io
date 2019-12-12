@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191120/CBa5Q5jlUKFR.jpg">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191120/kBHAOC0FIWV8.png">
-<meta property="og:updated_time" content="2019-11-20T07:04:34.081Z">
+<meta property="og:updated_time" content="2019-12-12T10:23:24.920Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="win10中使用pyenv管理python版本">
 <meta name="twitter:description" content="windows系统安装python地址：https://github.com/pyenv-win/pyenv-win">
@@ -209,6 +209,8 @@ var _hmt = _hmt || [];
 <p>安装2.7.16时遇到vc90报错这个问题引起的根本原因在于windows的服务，而不是vc90 的安装，纠结于vc安装的都是被字面干扰了。</p>
 <p><strong>解决办法：</strong></p>
 <p>开启Windows Modules Installer服务即可。控制台运行services.msc，发现Windows Modules Installer的服务状态是“已启用”，但点不了“停止”和“启用”，两个按钮都是灰色的。此时需要重启系统，重启后Windows Modules Installer服务可点启用或停用了，先停用再启用服务即可。</p>
+<h3 id="安装pipenv"><a href="#安装pipenv" class="headerlink" title="安装pipenv"></a>安装pipenv</h3><p>在安装pipenv成功后需要手动配置环境变量：</p>
+<p><strong>示例路径：D:\pyenv-win\versions\3.6.2\Scripts</strong></p>
 
       
 
@@ -361,7 +363,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用命令"><span class="toc-number">1.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#文件夹内指定python版本"><span class="toc-number">1.1.</span> <span class="toc-text">文件夹内指定python版本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装2-17-XX版本报错解决办法"><span class="toc-number">2.</span> <span class="toc-text">安装2.17.XX版本报错解决办法</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用命令"><span class="toc-number">1.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#文件夹内指定python版本"><span class="toc-number">1.1.</span> <span class="toc-text">文件夹内指定python版本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装2-17-XX版本报错解决办法"><span class="toc-number">2.</span> <span class="toc-text">安装2.17.XX版本报错解决办法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装pipenv"><span class="toc-number">3.</span> <span class="toc-text">安装pipenv</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -493,15 +495,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -521,11 +523,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -537,11 +539,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -549,19 +551,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vscode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">

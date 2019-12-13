@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191120/CBa5Q5jlUKFR.jpg">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191120/kBHAOC0FIWV8.png">
-<meta property="og:updated_time" content="2019-12-12T10:23:24.920Z">
+<meta property="og:updated_time" content="2019-12-13T00:48:29.536Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="win10中使用pyenv管理python版本">
 <meta name="twitter:description" content="windows系统安装python地址：https://github.com/pyenv-win/pyenv-win">
@@ -211,6 +211,14 @@ var _hmt = _hmt || [];
 <p>开启Windows Modules Installer服务即可。控制台运行services.msc，发现Windows Modules Installer的服务状态是“已启用”，但点不了“停止”和“启用”，两个按钮都是灰色的。此时需要重启系统，重启后Windows Modules Installer服务可点启用或停用了，先停用再启用服务即可。</p>
 <h3 id="安装pipenv"><a href="#安装pipenv" class="headerlink" title="安装pipenv"></a>安装pipenv</h3><p>在安装pipenv成功后需要手动配置环境变量：</p>
 <p><strong>示例路径：D:\pyenv-win\versions\3.6.2\Scripts</strong></p>
+<h4 id="pipenv常用命令"><a href="#pipenv常用命令" class="headerlink" title="pipenv常用命令"></a>pipenv常用命令</h4><p><strong>pipenv install</strong> 在当前文件夹创建虚拟环境；</p>
+<p><strong>pipenv shell</strong> 进入当前虚拟环境(未存在虚拟环境可自动创建)；</p>
+<p><strong>exit</strong> 退出当前虚拟环境；</p>
+<p>在虚拟环境中，使用<strong>pipenv</strong>替代<strong>pip</strong>进行报的安装与卸载等；</p>
+<p><strong>pip list</strong>  查看当前python环境中安装的包</p>
+<p><strong>pipenv graph</strong> 环境内包的依赖展示</p>
+<p><strong>pipenv –venv</strong>  查找虚拟环境的路径</p>
+<p>vscode可以在左下角选择python运行环境</p>
 
       
 
@@ -363,7 +371,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用命令"><span class="toc-number">1.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#文件夹内指定python版本"><span class="toc-number">1.1.</span> <span class="toc-text">文件夹内指定python版本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装2-17-XX版本报错解决办法"><span class="toc-number">2.</span> <span class="toc-text">安装2.17.XX版本报错解决办法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装pipenv"><span class="toc-number">3.</span> <span class="toc-text">安装pipenv</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用命令"><span class="toc-number">1.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#文件夹内指定python版本"><span class="toc-number">1.1.</span> <span class="toc-text">文件夹内指定python版本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装2-17-XX版本报错解决办法"><span class="toc-number">2.</span> <span class="toc-text">安装2.17.XX版本报错解决办法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装pipenv"><span class="toc-number">3.</span> <span class="toc-text">安装pipenv</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#pipenv常用命令"><span class="toc-number">3.1.</span> <span class="toc-text">pipenv常用命令</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -495,19 +503,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -519,15 +527,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -547,15 +555,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">

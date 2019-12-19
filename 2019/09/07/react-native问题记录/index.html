@@ -24,7 +24,7 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190910/3fPiBsqPcBIY.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190910/d9c7zPlmcNOQ.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190910/sTDDrTD4BnS1.png?imageslim">
-<meta property="og:updated_time" content="2019-12-19T02:52:02.931Z">
+<meta property="og:updated_time" content="2019-12-19T03:14:05.450Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react-native问题记录">
 <meta name="twitter:description" content="常用命令react-native init new_project新建rn项目； react-native run-android:启动安卓应用； react-native start:启动react-native的包管理器，此命令一般被设置为：npm start； npm install 某个带有原生依赖的库 + react-native link 某已安装的具体库名:添加包含原生代码的库，r">
@@ -260,7 +260,7 @@ var _hmt = _hmt || [];
 <h4 id="RN点击事件报错"><a href="#RN点击事件报错" class="headerlink" title="RN点击事件报错"></a>RN点击事件报错</h4><p><code>Attempted to transition from state RESPONDER_INACTIVE_PRESS_IN to RESPONDER_ACTIVE_LONG_PRESS_IN, which is not supported. This is most likely due to Touchable.longPressDelayTimeout not being cancelled.</code></p>
 <p>上述错误是手机时间与PC时间不一致的原因导致的,只需将模拟器的自动更新时间停掉，设置成和电脑上的时间一模一样即可，秒数也要一模一样，github上有人测试说差7秒的话有1/3的概率触发此bug：</p>
 <p><a href="https://github.com/facebook/react-native/issues/11989#issuecomment-314111441" target="_blank" rel="noopener">github issue</a></p>
-<p>解决办法：使用<strong>TouchableOpacity</strong>包裹点击元素，并将<strong>onPress</strong>方法写在<strong>TouchableOpacity</strong>之中，我原来直接使用react-native-elements提供的ListItem，所以导致此错误。</p>
+<p>另一个解决办法：使用<strong>TouchableOpacity</strong>包裹点击元素，并将<strong>onPress</strong>方法写在<strong>TouchableOpacity</strong>之中，我原来直接使用react-native-elements提供的ListItem，所以导致此错误。</p>
 <h4 id="ReactNative-Android9-0以上打包apk后http请求不到解决方法"><a href="#ReactNative-Android9-0以上打包apk后http请求不到解决方法" class="headerlink" title="ReactNative Android9.0以上打包apk后http请求不到解决方法"></a>ReactNative Android9.0以上打包apk后http请求不到解决方法</h4><p>打开AndroidManifest.xml文件，找到application标签，添加 <code>android:usesCleartextTraffic=&quot;true&quot;</code>。</p>
 <h4 id="使用react-native-vector-icons"><a href="#使用react-native-vector-icons" class="headerlink" title="使用react-native-vector-icons"></a>使用react-native-vector-icons</h4><p>安装：<code>npm install --save react-native-vector-icons</code></p>
 <p>Android端的配置：</p>
@@ -636,19 +636,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,6 +657,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -688,10 +688,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
@@ -701,6 +697,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -716,11 +716,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">

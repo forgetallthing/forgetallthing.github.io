@@ -17,7 +17,7 @@
 <meta property="og:description" content="realm的使用指南">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191120/CQPsR5KaXoDz.jpg">
-<meta property="og:updated_time" content="2019-11-20T07:06:41.752Z">
+<meta property="og:updated_time" content="2019-12-19T03:16:56.509Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react-native篇：realm的使用指南">
 <meta name="twitter:description" content="realm的使用指南">
@@ -199,6 +199,8 @@ var _hmt = _hmt || [];
 <p>realm的使用指南</p>
 <a id="more"></a>
 <h3 id="小知识点"><a href="#小知识点" class="headerlink" title="小知识点"></a>小知识点</h3><h4 id="realm在安卓上的数据库path"><a href="#realm在安卓上的数据库path" class="headerlink" title="realm在安卓上的数据库path"></a>realm在安卓上的数据库path</h4><p>path：<code>/data/data/com.povertyalleviationrn/files/default.realm</code></p>
+<h4 id="遍历realm对象"><a href="#遍历realm对象" class="headerlink" title="遍历realm对象"></a>遍历realm对象</h4><p>可以使用Object.keys(realmObj)获取到key值，再进行遍历；</p>
+<p>不能使用Object.entries(realmObj)获取k-v数组，亲测在chrome-debugger环境可以正常获取，但关闭debug获取到的就是空数组了~</p>
 
       
 
@@ -351,7 +353,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#小知识点"><span class="toc-number">1.</span> <span class="toc-text">小知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#realm在安卓上的数据库path"><span class="toc-number">1.1.</span> <span class="toc-text">realm在安卓上的数据库path</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#小知识点"><span class="toc-number">1.</span> <span class="toc-text">小知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#realm在安卓上的数据库path"><span class="toc-number">1.1.</span> <span class="toc-text">realm在安卓上的数据库path</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#遍历realm对象"><span class="toc-number">1.2.</span> <span class="toc-text">遍历realm对象</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -475,19 +477,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -500,6 +498,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -527,10 +529,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
@@ -540,6 +538,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -555,11 +557,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -17,7 +17,7 @@
 <meta property="og:description" content="为什么是属于react-native篇呢？因为fetch没有超时设置，只能使用AbortController来终止请求，而AbortController是IE全线不兼容性的，所以PC端的项目还是乖乖用Axios吧~ 目前封装功能：  方法：get，post； 网络状况判断； 超时停止请求；">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191030/VwNNP6Sqj8Wi.jpg">
-<meta property="og:updated_time" content="2019-12-16T02:47:24.365Z">
+<meta property="og:updated_time" content="2019-12-27T10:53:07.416Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react-native篇：fetch的简单封装">
 <meta name="twitter:description" content="为什么是属于react-native篇呢？因为fetch没有超时设置，只能使用AbortController来终止请求，而AbortController是IE全线不兼容性的，所以PC端的项目还是乖乖用Axios吧~ 目前封装功能：  方法：get，post； 网络状况判断； 超时停止请求；">
@@ -208,6 +208,8 @@ var _hmt = _hmt || [];
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;Alert&#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;parseParam&#125; <span class="keyword">from</span> <span class="string">'./ToolUtil'</span>;</span><br><span class="line"><span class="keyword">import</span> DeviceInfoUtil <span class="keyword">from</span> <span class="string">'./DeviceInfoUtil'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">ajax</span>(<span class="params">&#123;url = <span class="string">''</span>, timeout = <span class="number">30000</span>, method = <span class="string">'get'</span>, param = &#123;&#125;&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">await</span> DeviceInfoUtil.getNetInfo()) &#123;</span><br><span class="line">        <span class="comment">// 终止请求</span></span><br><span class="line">        <span class="keyword">const</span> controller = <span class="keyword">new</span> AbortController();</span><br><span class="line">        <span class="keyword">const</span> &#123;signal&#125; = controller;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.race([</span><br><span class="line">            timeoutPromise(timeout),</span><br><span class="line">            method === <span class="string">'get'</span> ? ajaxGet(url, param, signal) : ajaxPost(url, param, signal),</span><br><span class="line">        ])</span><br><span class="line">            .then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (response.ok &amp;&amp;</span><br><span class="line">                response.headers.map[<span class="string">'content-type'</span>].includes(<span class="string">'application/json'</span>)) &#123;</span><br><span class="line">                <span class="keyword">return</span> response.json();</span><br><span class="line">                <span class="comment">// response.text().then(text =&gt; console.log(text));</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (response.status === <span class="string">'Timeout'</span>) controller.abort();</span><br><span class="line">            <span class="comment">// 404、500或超时</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`Network response was not ok, code: <span class="subst">$&#123;response.status&#125;</span>`</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">            .then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (res.state === <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">throw</span> res.value;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> res.value;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">            .catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(error);</span><br><span class="line">            Alert.alert(<span class="string">'请求失败'</span>, error.message || <span class="built_in">JSON</span>.stringify(error));</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    Alert.alert(<span class="string">'请求失败'</span>, <span class="string">'检测到网络未连接，请检查'</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajaxGet</span>(<span class="params">url, param, signal</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> getUrl = <span class="string">`<span class="subst">$&#123;url&#125;</span>?<span class="subst">$&#123;parseParam(param)&#125;</span>`</span>;</span><br><span class="line">    <span class="keyword">return</span> fetch(getUrl, &#123;</span><br><span class="line">        credentials: <span class="string">'include'</span>,</span><br><span class="line">        signal,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajaxPost</span>(<span class="params">url, param, signal</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> fetch(url, &#123;</span><br><span class="line">        body: <span class="built_in">JSON</span>.stringify(param),</span><br><span class="line">        method: <span class="string">'POST'</span>,</span><br><span class="line">        headers: &#123;</span><br><span class="line">            <span class="string">'content-type'</span>: <span class="string">'application/json'</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        credentials: <span class="string">'include'</span>,</span><br><span class="line">        signal,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">timeoutPromise</span>(<span class="params">timeout</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            resolve(&#123;</span><br><span class="line">                status: <span class="string">'Timeout'</span>,</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;, timeout);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseParam</span>(<span class="params">param</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Object</span>.keys(param)</span><br><span class="line">        .map(<span class="function"><span class="params">key</span> =&gt;</span> <span class="string">`<span class="subst">$&#123;<span class="built_in">encodeURIComponent</span>(key)&#125;</span>=<span class="subst">$&#123;<span class="built_in">encodeURIComponent</span>(param[key])&#125;</span>`</span>)</span><br><span class="line">        .join(<span class="string">'&amp;'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>获取网络状态的DeviceInfoUtil：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> NetInfo <span class="keyword">from</span> <span class="string">'@react-native-community/netinfo'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">DeviceInfoUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取网络连接情况</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * @static</span></span><br><span class="line"><span class="comment">     * @returns Boolean</span></span><br><span class="line"><span class="comment">     * @memberof DeviceInfoUtil</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">static</span> getNetInfo() &#123;</span><br><span class="line">        <span class="keyword">return</span> NetInfo.fetch().then(<span class="function"><span class="params">state</span> =&gt;</span> state.isConnected);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><p>下面记录两个曾用过的原生XHR的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajaxPost</span>(<span class="params">url, data, callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> XHR = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    XHR.open(<span class="string">'POST'</span>, url, <span class="literal">true</span>); <span class="comment">//true 异步</span></span><br><span class="line">    XHR.setRequestHeader(<span class="string">'Content-type'</span>, <span class="string">'application/x-www-form-urlencoded'</span>);</span><br><span class="line">    XHR.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (XHR.readyState == <span class="number">4</span> &amp;&amp; XHR.status == <span class="number">200</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> data = <span class="built_in">JSON</span>.parse(XHR.responseText);</span><br><span class="line">            callback(data);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    XHR.send(<span class="string">'param='</span> + <span class="built_in">encodeURIComponent</span>(<span class="built_in">JSON</span>.stringify(data)));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajaxGet</span>(<span class="params">url, data, callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> XHR = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    XHR.open(<span class="string">'GET'</span>, url + <span class="string">'?param='</span> + <span class="built_in">JSON</span>.stringify(data), <span class="literal">true</span>); <span class="comment">//true 异步</span></span><br><span class="line">    XHR.setRequestHeader(<span class="string">'Content-type'</span>, <span class="string">'application/x-www-form-urlencoded'</span>);</span><br><span class="line">    XHR.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (XHR.readyState == <span class="number">4</span> &amp;&amp; XHR.status == <span class="number">200</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> data = <span class="built_in">JSON</span>.parse(XHR.responseText);</span><br><span class="line">            callback(data);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    XHR.send(<span class="literal">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -360,7 +362,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#附录"><span class="toc-number">1.</span> <span class="toc-text">附录</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -488,7 +490,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -496,19 +498,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,11 +506,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -540,11 +538,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -552,15 +554,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vscode</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -572,7 +570,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -588,11 +586,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">

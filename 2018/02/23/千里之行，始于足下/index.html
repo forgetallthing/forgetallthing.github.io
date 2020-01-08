@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191226/5OlfWkkXA0vM.webp">
 <meta property="og:image" content="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=334e9beb3b12b31bd361c57be7715d1f/0df431adcbef76090bf59e332cdda3cc7dd99e9b.jpg">
-<meta property="og:updated_time" content="2019-12-26T03:02:57.222Z">
+<meta property="og:updated_time" content="2020-01-07T08:32:41.857Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="千里之行，始于足下">
 <meta name="twitter:description" content="fight or flight？大扎好，我系轱天乐，我四渣渣辉，潜端面世，介四里没有挽过的船新版本，挤需体验三番钟，里造会干我一样，爱象节款面食，系兄弟里就来砍我，潜端面世了丐一蛤！   朴灵的 fks 镇楼 马云云的面试题整理 JS篇—事件循环—宏任务(task),微任务(microtask)和有趣的例子: Tasks, microtasks, queues and schedules 什么是">
@@ -300,6 +300,9 @@ var _hmt = _hmt || [];
 <p>—————— 摘自 &lt;<ecmascript6入门>&gt;</ecmascript6入门></p>
 </blockquote>
 <p>阮一峰的es6那本书里把<strong><a href="http://es6.ruanyifeng.com/#docs/function" target="_blank" rel="noopener">尾调用优化(Tail Call Optimization)</a></strong>和<strong>尾递归</strong>讲的非常清楚,大家去看看吧,ES6第一次明确规定，所有 ECMAScript 的实现，都必须部署“尾调用优化”，所以，不能再说js没尾调用优化啦,但是ES6 的尾调用优化只在严格模式下开启，正常模式是无效的。</p>
+<h3 id="pipeline和compose"><a href="#pipeline和compose" class="headerlink" title="pipeline和compose"></a>pipeline和compose</h3><p>此处参考lodash中的实现：</p>
+<p>pipeline：<a href="https://github.com/lodash/lodash/blob/master/flow.js" target="_blank" rel="noopener">https://github.com/lodash/lodash/blob/master/flow.js</a></p>
+<p>compose：<a href="https://github.com/lodash/lodash/blob/master/flowRight.js" target="_blank" rel="noopener">https://github.com/lodash/lodash/blob/master/flowRight.js</a></p>
 <h3 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h3><p><a href="http://www.cnblogs.com/xiaohuochai/p/5773183.html" target="_blank" rel="noopener">深入理解定时器系列第一篇——理解setTimeout和setInterval</a></p>
 <p><a href="http://www.cnblogs.com/xiaohuochai/p/5777186.html" target="_blank" rel="noopener">深入理解定时器系列第二篇——被誉为神器的requestAnimationFrame</a></p>
 <p>ps：requestAnimationFrame向下兼容可使用setTimeout实现，上文中有具体实现。</p>
@@ -525,7 +528,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JS篇"><span class="toc-number">1.</span> <span class="toc-text">JS篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#—事件循环—"><span class="toc-number">1.1.</span> <span class="toc-text">—事件循环—</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#—-函数—"><span class="toc-number">1.2.</span> <span class="toc-text">—-函数—-</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#—this指针—"><span class="toc-number">1.3.</span> <span class="toc-text">—this指针—</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链"><span class="toc-number">1.4.</span> <span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包"><span class="toc-number">1.5.</span> <span class="toc-text">闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#尾调用优化-Tail-Call-Optimization"><span class="toc-number">1.5.1.</span> <span class="toc-text">尾调用优化(Tail Call Optimization)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定时器"><span class="toc-number">1.6.</span> <span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#delete操作符"><span class="toc-number">1.7.</span> <span class="toc-text">delete操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript严格模式"><span class="toc-number">1.8.</span> <span class="toc-text">javascript严格模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript中的数据类型"><span class="toc-number">1.9.</span> <span class="toc-text">javascript中的数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坑"><span class="toc-number">1.10.</span> <span class="toc-text">坑:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#—正则表达式—"><span class="toc-number">1.11.</span> <span class="toc-text">—正则表达式—</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#react"><span class="toc-number">1.12.</span> <span class="toc-text">react</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么不用jQuery"><span class="toc-number">1.13.</span> <span class="toc-text">为什么不用jQuery</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html-css篇"><span class="toc-number">2.</span> <span class="toc-text">html+css篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重绘和回流"><span class="toc-number">2.1.</span> <span class="toc-text">重绘和回流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟DOM介绍"><span class="toc-number">2.2.</span> <span class="toc-text">虚拟DOM介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vue-虚拟dom实现原理"><span class="toc-number">2.3.</span> <span class="toc-text">vue 虚拟dom实现原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http篇"><span class="toc-number">3.</span> <span class="toc-text">http篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GET和POST两种基本请求方法的区别"><span class="toc-number">3.1.</span> <span class="toc-text">GET和POST两种基本请求方法的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#—-经典面试题—"><span class="toc-number">3.2.</span> <span class="toc-text">—-经典面试题—-</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后的嘱托"><span class="toc-number">4.</span> <span class="toc-text">最后的嘱托</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JS篇"><span class="toc-number">1.</span> <span class="toc-text">JS篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#—事件循环—"><span class="toc-number">1.1.</span> <span class="toc-text">—事件循环—</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#—-函数—"><span class="toc-number">1.2.</span> <span class="toc-text">—-函数—-</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#—this指针—"><span class="toc-number">1.3.</span> <span class="toc-text">—this指针—</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链"><span class="toc-number">1.4.</span> <span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包"><span class="toc-number">1.5.</span> <span class="toc-text">闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#尾调用优化-Tail-Call-Optimization"><span class="toc-number">1.5.1.</span> <span class="toc-text">尾调用优化(Tail Call Optimization)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pipeline和compose"><span class="toc-number">1.6.</span> <span class="toc-text">pipeline和compose</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定时器"><span class="toc-number">1.7.</span> <span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#delete操作符"><span class="toc-number">1.8.</span> <span class="toc-text">delete操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript严格模式"><span class="toc-number">1.9.</span> <span class="toc-text">javascript严格模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript中的数据类型"><span class="toc-number">1.10.</span> <span class="toc-text">javascript中的数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坑"><span class="toc-number">1.11.</span> <span class="toc-text">坑:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#—正则表达式—"><span class="toc-number">1.12.</span> <span class="toc-text">—正则表达式—</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#react"><span class="toc-number">1.13.</span> <span class="toc-text">react</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么不用jQuery"><span class="toc-number">1.14.</span> <span class="toc-text">为什么不用jQuery</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html-css篇"><span class="toc-number">2.</span> <span class="toc-text">html+css篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重绘和回流"><span class="toc-number">2.1.</span> <span class="toc-text">重绘和回流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟DOM介绍"><span class="toc-number">2.2.</span> <span class="toc-text">虚拟DOM介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vue-虚拟dom实现原理"><span class="toc-number">2.3.</span> <span class="toc-text">vue 虚拟dom实现原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http篇"><span class="toc-number">3.</span> <span class="toc-text">http篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GET和POST两种基本请求方法的区别"><span class="toc-number">3.1.</span> <span class="toc-text">GET和POST两种基本请求方法的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#—-经典面试题—"><span class="toc-number">3.2.</span> <span class="toc-text">—-经典面试题—-</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后的嘱托"><span class="toc-number">4.</span> <span class="toc-text">最后的嘱托</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -657,15 +660,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -677,15 +672,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -697,11 +700,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -713,11 +720,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -725,15 +732,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">

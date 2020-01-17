@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>这是什么第二期 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本期名词:  JWT (JSON Web Token)  GraphQL   接口的幂等性">
+  <meta name="description" content="本期名词:  JWT (JSON Web Token) GraphQL  接口的幂等性 JS代码精简：Tree-Shaking JS函数副作用">
 <meta name="keywords" content="something">
 <meta property="og:type" content="article">
 <meta property="og:title" content="这是什么第二期">
 <meta property="og:url" content="http://yoursite.com/2019/06/21/这是什么第二期/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="本期名词:  JWT (JSON Web Token)  GraphQL   接口的幂等性">
+<meta property="og:description" content="本期名词:  JWT (JSON Web Token) GraphQL  接口的幂等性 JS代码精简：Tree-Shaking JS函数副作用">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/gEPCn0GbC9Ay.jpg?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/LgVHlBaLcunc.png?imageslim">
@@ -23,10 +23,22 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/qlmjp3eWc6Qu.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/aIhjjCjKC0RD.png?imageslim">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190903/cdx3SG7zth1V.png?imageslim">
-<meta property="og:updated_time" content="2019-12-19T01:42:13.867Z">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200117/MIoLtoOfdHym.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200117/tyTNy67WshB1.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200117/0sCm9roJczFE.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200117/TavAtB4szL5Q.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200117/wdHWhOJFUIHz.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200117/oda94sHR5Xex.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200117/9mblNY8ABGHV.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200117/zC2mMWyyEV7m.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200117/rEN3xEPRSOpA.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200117/5zOaciC0zGWB.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200117/cPfSc9QaM08H.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200117/iPUxTFewqIr6.png">
+<meta property="og:updated_time" content="2020-01-17T03:30:41.939Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="这是什么第二期">
-<meta name="twitter:description" content="本期名词:  JWT (JSON Web Token)  GraphQL   接口的幂等性">
+<meta name="twitter:description" content="本期名词:  JWT (JSON Web Token) GraphQL  接口的幂等性 JS代码精简：Tree-Shaking JS函数副作用">
 <meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190621/gEPCn0GbC9Ay.jpg?imageslim">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
@@ -204,12 +216,11 @@ var _hmt = _hmt || [];
         <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190621/gEPCn0GbC9Ay.jpg?imageslim" alt="mark"></p>
 <p>本期名词:</p>
 <ul>
-<li><p>JWT (JSON Web Token)</p>
-</li>
-<li><p>GraphQL </p>
-</li>
-<li><p>接口的幂等性</p>
-</li>
+<li>JWT (JSON Web Token)</li>
+<li>GraphQL </li>
+<li>接口的幂等性</li>
+<li>JS代码精简：Tree-Shaking</li>
+<li>JS函数副作用</li>
 </ul>
 <a id="more"></a>
 <h2 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a><strong>JWT</strong></h2><h3 id="10分钟了解JSON-Web令牌"><a href="#10分钟了解JSON-Web令牌" class="headerlink" title="10分钟了解JSON Web令牌"></a>10分钟了解JSON Web令牌</h3><h4 id="1-跨域身份验证"><a href="#1-跨域身份验证" class="headerlink" title="1.跨域身份验证"></a><strong>1.跨域身份验证</strong></h4><p>首先回顾一下我们熟悉的<strong>session模式</strong>:</p>
@@ -360,6 +371,125 @@ var _hmt = _hmt || [];
 </ol>
 <p>参考:</p>
 <p><a href="https://www.cnblogs.com/huaixiaonian/p/9577567.html" target="_blank" rel="noopener">接口的幂等性</a></p>
+<h2 id="JS代码精简：Tree-Shaking"><a href="#JS代码精简：Tree-Shaking" class="headerlink" title="JS代码精简：Tree-Shaking"></a>JS代码精简：Tree-Shaking</h2><h3 id="什么是Tree-Shaking"><a href="#什么是Tree-Shaking" class="headerlink" title="什么是Tree-Shaking"></a>什么是Tree-Shaking</h3><p>在现代前端开发项目(webpack) 项目中，有一个入口文件，相当于一棵树的主干，入口文件有很多依赖的模块，相当于树枝。实际情况中，虽然依赖了某个模块，但其实只使用其中的某些功能。通过 tree-shaking，将没有使用的模块摇掉，这样来达到删除无用代码的目的。</p>
+<p>支持Tree-shaking的打包工具有很多，我们以最流行的webpack为例讲解Tree-shaking。</p>
+<h3 id="Tree-Shaking的原理"><a href="#Tree-Shaking的原理" class="headerlink" title="Tree-Shaking的原理"></a>Tree-Shaking的原理</h3><p>Tree-shaking的本质是消除无用的js代码。无用代码消除在广泛存在于传统的编程语言编译器中，编译器可以判断出某些代码根本不影响输出，然后消除这些代码，这个称之为DCE（dead code elimination）。</p>
+<p>Tree-shaking 是 DCE 的一种新的实现，Javascript同传统的编程语言不同的是，javascript绝大多数情况需要通过网络进行加载，然后执行，加载的文件大小越小，整体执行时间更短，所以去除无用代码以减少文件体积，对javascript来说更有意义。</p>
+<p>Tree-shaking 和传统的 DCE的方法又不太一样，传统的DCE 消灭不可能执行的代码，而Tree-shaking 更关注宇消除没有用到的代码。下面详细介绍一下DCE和Tree-shaking。</p>
+<h4 id="DCE消除大法"><a href="#DCE消除大法" class="headerlink" title="DCE消除大法"></a><strong>DCE消除大法</strong></h4><p>Dead Code 一般具有以下几个特征</p>
+<ul>
+<li><p>代码不会被执行，不可到达（如return后面的代码）</p>
+</li>
+<li><p>代码执行的结果不会被用到</p>
+</li>
+<li><p>代码只会影响死变量（只写不读）</p>
+</li>
+</ul>
+<p>传统编译型的语言中，都是由编译器将Dead Code从AST（抽象语法树）中删除，那javascript中是由谁做DCE呢？</p>
+<p>首先肯定不是浏览器做DCE，因为当我们的代码送到浏览器，那还谈什么消除无法执行的代码来优化呢，所以肯定是送到浏览器之前的步骤进行优化。</p>
+<p>其实也不是上面提到的三个工具，rollup，webpack，cc做的，而是著名的代码压缩优化工具uglify，uglify完成了javascript的DCE。</p>
+<h4 id="Tree-shaking消除大法"><a href="#Tree-shaking消除大法" class="headerlink" title="Tree-shaking消除大法"></a><strong>Tree-shaking消除大法</strong></h4><p>前面提到了tree-shaking更关注于无用模块的消除，消除那些引用了但并没有被使用的模块。</p>
+<p>先思考一个问题，为什么tree-shaking是最近几年流行起来了？而前端模块化概念已经有很多年历史了，其实tree-shaking的消除原理是依赖于ES6的模块特性。</p>
+<p>ES6 module 特点：</p>
+<ul>
+<li>只能作为模块顶层的语句出现</li>
+<li>import 的模块名只能是字符串常量</li>
+<li>import binding 是 immutable（不可变）的</li>
+</ul>
+<p>ES6模块依赖关系是确定的，和运行时的状态无关，可以进行可靠的静态分析，这就是tree-shaking的基础。</p>
+<p>所谓静态分析就是不执行代码，从字面量上对代码进行分析，ES6之前的模块化，比如我们可以动态require一个模块，只有执行后才知道引用的什么模块，这个就不能通过静态分析去做优化。</p>
+<p>这是 ES6 modules 在设计时的一个重要考量，也是为什么没有直接采用 CommonJS，正是基于这个基础上，才使得 tree-shaking 成为可能，这也是为什么 rollup 和 webpack 2 都要用 ES6 module syntax（设置不将es6的import转化为commonjs的reqiure, webpack 3及以后的版本不需要） 才能 tree-shaking。</p>
+<p>我们还是通过例子来详细了解一下</p>
+<p>面向过程编程函数和面向对象编程是javascript最常用的编程模式和代码组织方式，从这两个方面来实验：</p>
+<ul>
+<li>函数消除实验</li>
+<li>类消除实验</li>
+</ul>
+<p><strong>先看下函数消除实验</strong></p>
+<p>utils中get方法没有被使用到，我们期望的是get方法最终被消除。</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200117/MIoLtoOfdHym.png" alt="mark"></p>
+<p>注意，uglify目前不会跨文件去做DCE，所以上面这种情况，uglify是不能优化的。</p>
+<p><strong>先看看rollup的打包结果</strong></p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200117/tyTNy67WshB1.png" alt="mark"></p>
+<p>完全符合预期，最终结果中没有get方法</p>
+<p><strong>再看看webpack的结果</strong></p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200117/0sCm9roJczFE.png" alt="mark"></p>
+<p>也符合预期，最终结果中没有get方法</p>
+<p><strong>再来看下类消除实验</strong></p>
+<p>增加了对menu.js的引用，但其实代码中并没有用到menu的任何方法和变量，所以我们的期望是，最终代码中menu.js里的内容被消除</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200117/TavAtB4szL5Q.png" alt="mark"></p>
+<p>main.js</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200117/wdHWhOJFUIHz.png" alt="mark"></p>
+<p>menu.js</p>
+<p><strong>rollup打包结果</strong></p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200117/oda94sHR5Xex.png" alt="mark"></p>
+<p>包中竟然包含了menu.js的全部代码</p>
+<p><strong>webpack打包结果</strong></p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200117/9mblNY8ABGHV.png" alt="mark"></p>
+<p>包中竟然也包含了menu.js的全部代码</p>
+<p>这跟我们想象的完全不一样啊？为什么呢？无用的类不能消除，这还能叫做tree-shaking吗？我当时一度怀疑自己的demo有问题，后来各种网上搜索，才明白demo没有错。</p>
+<p>下面摘取了rollup核心贡献者的的一些回答：</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200117/zC2mMWyyEV7m.png" alt="mark"></p>
+<p>图7</p>
+<ul>
+<li>rollup只处理函数和顶层的import/export变量，不能把没用到的类的方法消除掉</li>
+<li>javascript动态语言的特性使得静态分析比较困难</li>
+<li>图7下部分的代码就是副作用的一个例子，如果静态分析的时候删除里run或者jump，程序运行时就可能报错，那就本末倒置了，我们的目的是优化，肯定不能影响执行</li>
+</ul>
+<p>再举个例子说明下为什么不能消除menu.js，比如下面这个场景</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Menu</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">Menu.prototype.show = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.prototype.unique = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;     </span><br><span class="line">    <span class="comment">// 将 array 中的重复元素去除 </span></span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Menu;</span><br></pre></td></tr></table></figure>
+<p>如果删除里menu.js，那对Array的扩展也会被删除，就会影响功能。那也许你会问，难道rollup，webpack不能区分是定义Menu的proptotype 还是定义Array的proptotype吗？当然如果代码写成上面这种形式是可以区分的，如果我写成这样呢？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Menu</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Menu.prototype.show = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">'Arr'</span> + <span class="string">'ay'</span></span><br><span class="line"><span class="keyword">var</span> b</span><br><span class="line"><span class="keyword">if</span>(a == <span class="string">'Array'</span>) &#123;</span><br><span class="line">    b = <span class="built_in">Array</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    b = Menu</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">b.prototype.unique = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 将 array 中的重复元素去除</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Menu;</span><br></pre></td></tr></table></figure>
+<p>这种代码，静态分析是分析不了的，就算能静态分析代码，想要正确完全的分析也比较困难。</p>
+<p>更多关于副作用的讨论，可以看这个<a href="http://link.zhihu.com/?target=https%3A//github.com/rollup/rollup/issues/349" target="_blank" rel="noopener">Tree shaking class methods · Issue #349 · rollup/rollupgithub.com</a></p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200117/rEN3xEPRSOpA.png" alt="mark"></p>
+<p><strong>side effect</strong>(副作用) 的定义是，在导入时会执行特殊行为的代码，而不是仅仅暴露一个 export 或多个 export。举例说明，例如 polyfill，它影响全局作用域，并且通常不提供 export。关于更多副作用的概念，请参考本文中的<strong>JS函数副作用</strong>部分</p>
+<p>函数的副作用相对较少，顶层函数相对来说更容易分析，加上babel默认都是”use strict”严格模式，减少顶层函数的动态访问的方式，也更容易分析。</p>
+<p>我们开始说的三个工具，rollup和webpack表现不理想，那closure compiler又如何呢？</p>
+<p>将示例中的代码用cc打包后得到的结果如下：</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200117/5zOaciC0zGWB.png" alt="mark"></p>
+<p>天啊，这不就是我们要的结果吗？完美消除所有无用代码的结果，输出的结果非常性感。</p>
+<p>可是不能高兴得太早，能得到这么完美结果是需要条件的，那就是cc的侵入式约束规范。必须在代码里添加这样的代码，看红线框标示的：</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200117/cPfSc9QaM08H.png" alt="mark"></p>
+<p>google定义一整套注解规范Annotating JavaScript for the Closure Compiler，想更多了解的，可以去看下官网。</p>
+<p>侵入式这个就让人很不爽，google Closure Compiler是java写的，和我们基于node的各种构建库不可能兼容（不过目前好像已经有nodejs版 Closure Compiler），Closure Compiler使用起来也比较麻烦，所以虽然效果很赞，但比较难以应用到项目中，迁移成本较大。</p>
+<p>三大工具的tree-shaking对于无用代码，无用模块的消除，都是有限的，有条件的。closure compiler是最好的，但与我们日常的基于node的开发流很难兼容。</p>
+<p>tree-shaking对web意义重大，但目前还处在发展阶段，还比较困难。</p>
+<h3 id="最新消息："><a href="#最新消息：" class="headerlink" title="最新消息："></a>最新消息：</h3><p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200117/iPUxTFewqIr6.png" alt="mark"></p>
+<p>因为副作用的原因webpack等打包工具不能消除类，在最新的webpack4中给出了解决方案，可以通过 <code>package.json</code> 的 <code>&quot;sideEffects&quot;</code> 属性作为标记，向 compiler 提供提示，表明项目中的哪些文件是 “pure(纯的 ES2015 模块)”，由此可以安全地删除文件中未使用的部分：</p>
+<p>如果所有代码都不包含 side effect，我们就可以简单地将该属性标记为 <code>false</code>，来告知 webpack，它可以安全地删除未用到的 export。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"your-project"</span>,</span><br><span class="line">  <span class="attr">"sideEffects"</span>: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你的代码确实有一些副作用，可以改为提供一个数组：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"your-project"</span>,</span><br><span class="line">  <span class="attr">"sideEffects"</span>: [</span><br><span class="line">    <span class="string">"./src/some-side-effectful-file.js"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在webpack中使用Tree-Shaking注意点：</p>
+<ul>
+<li>使用 ES2015 模块语法（即 <code>import</code> 和 <code>export</code>）。</li>
+<li>确保没有 compiler 将 ES2015 模块语法转换为 CommonJS 模块（这也是流行的 Babel preset 中 @babel/preset-env 的默认行为 - 更多详细信息请查看 <a href="https://babel.docschina.org/docs/en/babel-preset-env#modules" target="_blank" rel="noopener">文档</a>）。</li>
+<li>在项目 <code>package.json</code> 文件中，添加一个 “sideEffects” 属性。</li>
+<li>通过将 <code>mode</code> 选项设置为 <a href="https://webpack.docschina.org/concepts/mode/#mode-production" target="_blank" rel="noopener"><code>production</code></a>，启用 minification(代码压缩) 和 tree shaking。</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://juejin.im/post/5a4dc842518825698e7279a9" target="_blank" rel="noopener">Tree-Shaking性能优化实践 - 原理篇</a></p>
+<p><a href="https://juejin.im/post/5a4dca1d518825128654fa78" target="_blank" rel="noopener">Tree-Shaking性能优化实践 - 实践篇</a></p>
+<p><a href="https://webpack.docschina.org/guides/tree-shaking/#src/components/Sidebar/Sidebar.jsx" target="_blank" rel="noopener">webpack文档：tree shaking</a></p>
+<h2 id="JS函数副作用"><a href="#JS函数副作用" class="headerlink" title="JS函数副作用"></a>JS函数副作用</h2><h3 id="什么是函数副作用？"><a href="#什么是函数副作用？" class="headerlink" title="什么是函数副作用？"></a>什么是函数副作用？</h3><p>函数副作用(<strong>side effect</strong>)是指当调用函数时，除了返回函数值之外，还对主调用函数产生附加的影响。副作用的函数不仅仅只是返回了一个值，而且还做了其他的事情，比如：</p>
+<p>1、修改了一个变量<br>2、直接修改数据结构<br>3、设置一个对象的成员<br>4、抛出一个异常或以一个错误终止<br>5、打印到终端或读取用户输入<br>6、读取或写入一个文件<br>7、在屏幕上画图</p>
+<p>函数副作用会给程序设计带来不必要的麻烦，给程序带来十分难以查找的错误，并且降低程序的可读性，严格的函数式语言要求函数必须无副作用。</p>
+<h3 id="纯函数-Pure-Function"><a href="#纯函数-Pure-Function" class="headerlink" title="纯函数 ( Pure Function )"></a>纯函数 ( Pure Function )</h3><p>输入输出数据流全是显式（Explicit）的。 </p>
+<p>显式（Explicit）的意思是，函数与外界交换数据只有一个唯一渠道——参数和返回值。函数从函数外部接受的所有输入信息都通过参数传递到该函数内部。函数输出到函数外部的所有信息都通过返回值传递到该函数外部。</p>
+<h3 id="非纯函数-Impure-Function"><a href="#非纯函数-Impure-Function" class="headerlink" title="非纯函数 ( Impure Function )"></a>非纯函数 ( Impure Function )</h3><p>输入输出数据流含有是隐式（Implicit）的部分。 </p>
+<p>与显式（Explicit）相反。 隐式（Implicit）的意思是，函数通过参数和返回值以外的渠道，和外界进行数据交换。比如读取/修改全局变量，都叫作以隐式的方式和外界进行数据交换。</p>
+<h3 id="引用透明-Referential-Transparent"><a href="#引用透明-Referential-Transparent" class="headerlink" title="引用透明 ( Referential Transparent )"></a>引用透明 ( Referential Transparent )</h3><p>引用透明的概念与函数的副作用相关，且受其影响。 如果程序中两个相同值得表达式能在该程序的任何地方互相替换，而不影响程序的动作，那么该程序就具有引用透明性。它的优点是比非引用透明的语言的语义更容易理解，不那么晦涩。纯函数式语言没有变量，所以它们都具有引用透明性。 </p>
+<p>以下示例说明了引用透明与函数副作用的结合，代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> c = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> fun=<span class="function">(<span class="params">x</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">result1 = (fun(a) + b) / (fun(a) -c); </span><br><span class="line">temp = fun(a); </span><br><span class="line">result2 = (temp + b) / (temp -c);</span><br></pre></td></tr></table></figure>
+<p>如果函数没有副作用，那么result1和result2将是等价的。然而如果fun有副作用，比如让b或c加1，那么result1和result2将不相等:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> c = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> fun=<span class="function">(<span class="params">x</span>)=&gt;</span>&#123;</span><br><span class="line">    b++;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">result1 = (fun(a) + b) / (fun(a) -c); </span><br><span class="line">temp = fun(a); </span><br><span class="line">result2 = (temp + b) / (temp -c);</span><br></pre></td></tr></table></figure>
+<p>因此，副作用违背了引用透明性。 </p>
+<p>在JavaScript中，引入了函数。但显然JS中的函数可以访问、修改全局变量（或定义在函数外的变量），如下 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">5</span>; </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    a = <span class="number">10</span>; </span><br><span class="line">&#125; </span><br><span class="line">fun(); <span class="comment">// a 变成了10</span></span><br></pre></td></tr></table></figure>
+<p>JS中要想保证函数无副作用这项特性，只能依靠编程人员的习惯，即 </p>
+<blockquote>
+<p>1，函数入口使用参数运算，而不修改它<br>2，函数内不修改函数外的变量，如全局变量<br>3，运算结果通过函数返回给外部（出口）  </p>
+</blockquote>
 
       
 
@@ -512,7 +642,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JWT"><span class="toc-number">1.</span> <span class="toc-text">JWT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10分钟了解JSON-Web令牌"><span class="toc-number">1.1.</span> <span class="toc-text">10分钟了解JSON Web令牌</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-跨域身份验证"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.跨域身份验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-JWT的原则"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. JWT的原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-JWT的数据结构"><span class="toc-number">1.1.3.</span> <span class="toc-text">3. JWT的数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-JWT头"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">3.1 JWT头</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-有效载荷"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">3.2 有效载荷</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-签名哈希"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">3.3 签名哈希</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-4-Base64URL算法"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">3.4 Base64URL算法</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-JWT的用法"><span class="toc-number">1.1.4.</span> <span class="toc-text">4. JWT的用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-JWT问题和趋势"><span class="toc-number">1.1.5.</span> <span class="toc-text">5. JWT问题和趋势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-关于跨域的session丢失问题"><span class="toc-number">1.1.6.</span> <span class="toc-text">6.关于跨域的session丢失问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#前台的Session保持"><span class="toc-number">1.1.6.1.</span> <span class="toc-text">前台的Session保持</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Fetch"><span class="toc-number">1.1.6.1.1.</span> <span class="toc-text">Fetch</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#jquery"><span class="toc-number">1.1.6.1.2.</span> <span class="toc-text">jquery</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Angular"><span class="toc-number">1.1.6.1.3.</span> <span class="toc-text">Angular</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#客户端的session保持"><span class="toc-number">1.1.6.2.</span> <span class="toc-text">客户端的session保持</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#代理服务的设置"><span class="toc-number">1.1.6.3.</span> <span class="toc-text">代理服务的设置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#服务端的设置"><span class="toc-number">1.1.6.4.</span> <span class="toc-text">服务端的设置</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于前后端分离的解读"><span class="toc-number">1.1.7.</span> <span class="toc-text">关于前后端分离的解读:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GraphQL"><span class="toc-number">2.</span> <span class="toc-text">GraphQL</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是-GraphQL"><span class="toc-number">2.0.1.</span> <span class="toc-text">什么是 GraphQL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概述"><span class="toc-number">2.0.2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GraphQL-能力"><span class="toc-number">2.0.3.</span> <span class="toc-text">GraphQL 能力</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5个使用GraphQL的理由"><span class="toc-number">2.0.4.</span> <span class="toc-text">5个使用GraphQL的理由</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5个不用GraphQL的理由"><span class="toc-number">2.0.5.</span> <span class="toc-text">5个不用GraphQL的理由</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#接口的幂等性"><span class="toc-number">3.</span> <span class="toc-text">接口的幂等性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#接口调用存在的问题"><span class="toc-number">3.0.1.</span> <span class="toc-text">接口调用存在的问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是接口幂等性"><span class="toc-number">3.0.2.</span> <span class="toc-text">什么是接口幂等性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么情况下需要保证接口的幂等性"><span class="toc-number">3.0.3.</span> <span class="toc-text">什么情况下需要保证接口的幂等性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#那么如何设计接口才能做到幂等呢？"><span class="toc-number">3.0.4.</span> <span class="toc-text">那么如何设计接口才能做到幂等呢？</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JWT"><span class="toc-number">1.</span> <span class="toc-text">JWT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10分钟了解JSON-Web令牌"><span class="toc-number">1.1.</span> <span class="toc-text">10分钟了解JSON Web令牌</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-跨域身份验证"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.跨域身份验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-JWT的原则"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. JWT的原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-JWT的数据结构"><span class="toc-number">1.1.3.</span> <span class="toc-text">3. JWT的数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-JWT头"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">3.1 JWT头</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-有效载荷"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">3.2 有效载荷</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-签名哈希"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">3.3 签名哈希</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-4-Base64URL算法"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">3.4 Base64URL算法</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-JWT的用法"><span class="toc-number">1.1.4.</span> <span class="toc-text">4. JWT的用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-JWT问题和趋势"><span class="toc-number">1.1.5.</span> <span class="toc-text">5. JWT问题和趋势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-关于跨域的session丢失问题"><span class="toc-number">1.1.6.</span> <span class="toc-text">6.关于跨域的session丢失问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#前台的Session保持"><span class="toc-number">1.1.6.1.</span> <span class="toc-text">前台的Session保持</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Fetch"><span class="toc-number">1.1.6.1.1.</span> <span class="toc-text">Fetch</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#jquery"><span class="toc-number">1.1.6.1.2.</span> <span class="toc-text">jquery</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Angular"><span class="toc-number">1.1.6.1.3.</span> <span class="toc-text">Angular</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#客户端的session保持"><span class="toc-number">1.1.6.2.</span> <span class="toc-text">客户端的session保持</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#代理服务的设置"><span class="toc-number">1.1.6.3.</span> <span class="toc-text">代理服务的设置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#服务端的设置"><span class="toc-number">1.1.6.4.</span> <span class="toc-text">服务端的设置</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于前后端分离的解读"><span class="toc-number">1.1.7.</span> <span class="toc-text">关于前后端分离的解读:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GraphQL"><span class="toc-number">2.</span> <span class="toc-text">GraphQL</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是-GraphQL"><span class="toc-number">2.0.1.</span> <span class="toc-text">什么是 GraphQL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概述"><span class="toc-number">2.0.2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GraphQL-能力"><span class="toc-number">2.0.3.</span> <span class="toc-text">GraphQL 能力</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5个使用GraphQL的理由"><span class="toc-number">2.0.4.</span> <span class="toc-text">5个使用GraphQL的理由</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5个不用GraphQL的理由"><span class="toc-number">2.0.5.</span> <span class="toc-text">5个不用GraphQL的理由</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#接口的幂等性"><span class="toc-number">3.</span> <span class="toc-text">接口的幂等性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#接口调用存在的问题"><span class="toc-number">3.0.1.</span> <span class="toc-text">接口调用存在的问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是接口幂等性"><span class="toc-number">3.0.2.</span> <span class="toc-text">什么是接口幂等性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么情况下需要保证接口的幂等性"><span class="toc-number">3.0.3.</span> <span class="toc-text">什么情况下需要保证接口的幂等性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#那么如何设计接口才能做到幂等呢？"><span class="toc-number">3.0.4.</span> <span class="toc-text">那么如何设计接口才能做到幂等呢？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS代码精简：Tree-Shaking"><span class="toc-number">4.</span> <span class="toc-text">JS代码精简：Tree-Shaking</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Tree-Shaking"><span class="toc-number">4.1.</span> <span class="toc-text">什么是Tree-Shaking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tree-Shaking的原理"><span class="toc-number">4.2.</span> <span class="toc-text">Tree-Shaking的原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DCE消除大法"><span class="toc-number">4.2.1.</span> <span class="toc-text">DCE消除大法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Tree-shaking消除大法"><span class="toc-number">4.2.2.</span> <span class="toc-text">Tree-shaking消除大法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最新消息："><span class="toc-number">4.3.</span> <span class="toc-text">最新消息：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">4.4.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS函数副作用"><span class="toc-number">5.</span> <span class="toc-text">JS函数副作用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是函数副作用？"><span class="toc-number">5.1.</span> <span class="toc-text">什么是函数副作用？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#纯函数-Pure-Function"><span class="toc-number">5.2.</span> <span class="toc-text">纯函数 ( Pure Function )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非纯函数-Impure-Function"><span class="toc-number">5.3.</span> <span class="toc-text">非纯函数 ( Impure Function )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引用透明-Referential-Transparent"><span class="toc-number">5.4.</span> <span class="toc-text">引用透明 ( Referential Transparent )</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -640,10 +770,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
@@ -652,7 +778,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -660,19 +786,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -684,11 +802,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -696,19 +818,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vscode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">

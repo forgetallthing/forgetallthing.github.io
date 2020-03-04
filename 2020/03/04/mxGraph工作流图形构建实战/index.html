@@ -25,7 +25,9 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200304/fniMGAnvYgbw.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200304/mU0xGDGbc4lM.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200304/dc9h4REWzHRL.png">
-<meta property="og:updated_time" content="2020-03-04T03:59:47.503Z">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200304/GMhb4KMDMpsf.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200304/059U6co5kGBB.png">
+<meta property="og:updated_time" content="2020-03-04T04:52:25.438Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mxGraph工作流图形构建实战">
 <meta name="twitter:description" content="mxGraph简介什么是mxGraphmxGraph是一个强大到令人发指的 JS 绘图组件，用于在网页中设计/编辑 Workflow/BPM流程图、图表、网络图和普通图形的 Web 应用程序。 大名鼎鼎的在线绘图（flow chart）网站draw.io就是基于这个库开发出来的。 具体介绍请见官网、github。 官方提供了大量实例，可以参考：JavaScript demo 这个库拥有超大量的ap">
@@ -314,7 +316,21 @@ var _hmt = _hmt || [];
 <p>注释的意思是：更新给定DOM节点的内容以显示与当前编辑器状态关联的任务。只要编辑器中的状态可能发生更改，就会调用此命令，默认实现为空。</p>
 <p>没错，官方就是这么调皮，让在外部重写这个方法即可。</p>
 <p>并且在选择/取消选择或拖动图形、改变图形属性等情况发生时，都会调用createTasks函数（showTasks函数中进行绑定）。</p>
-<h4 id="实现一个自己的属性编辑器"><a href="#实现一个自己的属性编辑器" class="headerlink" title="实现一个自己的属性编辑器"></a>实现一个自己的属性编辑器</h4>
+<h4 id="实现一个自己的属性编辑器"><a href="#实现一个自己的属性编辑器" class="headerlink" title="实现一个自己的属性编辑器"></a>实现一个自己的属性编辑器</h4><p>工作流画完流程图之后，就需要给每个节点添加很多自定义属性了，那我们可以重写一个属性定义器，官方提供的属性定义器是由createProperties、hideProperties、showProperties三个函数组成，我们只需要将他们复制出来，改写即可，内部代码比较简单，请自行查阅：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">mxEditor.prototype.myShowProperties = <span class="function"><span class="keyword">function</span>(<span class="params">cell</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 显示属性表单核心代码</span></span><br><span class="line">    <span class="keyword">var</span> cell = cell || <span class="keyword">this</span>.graph.getSelectionCell();</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">var</span> node = <span class="keyword">this</span>.myCreateProperties(cell);</span><br><span class="line">    <span class="keyword">if</span> (node != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.myProperties = <span class="keyword">new</span> mxWindow(<span class="string">'节点配置'</span>, node);</span><br><span class="line">		...</span><br><span class="line">        <span class="keyword">this</span>.myProperties.addListener(mxEvent.CLOSE, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">            controls.editor.myHideProperties();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mxEditor.prototype.myCreateProperties = <span class="function"><span class="keyword">function</span>(<span class="params">cell</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 创建属性表单核心代码</span></span><br><span class="line">    <span class="keyword">var</span> form = <span class="keyword">new</span> mxForm(<span class="string">'myProperties'</span>);</span><br><span class="line">    <span class="keyword">var</span> id = form.addText(<span class="string">'ID'</span>, cell.getId());</span><br><span class="line">    id.setAttribute(<span class="string">'readonly'</span>, <span class="string">'true'</span>);</span><br><span class="line">    <span class="comment">// 绘制表单</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">var</span> okFunction = mxUtils.bind(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.myHideProperties();</span><br><span class="line">            model.beginUpdate();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">var</span> tabel = form.getTable();</span><br><span class="line">                <span class="keyword">var</span> result = [];</span><br><span class="line">                <span class="comment">// 获取表单数据，写到result中</span></span><br><span class="line">                ...</span><br><span class="line">                <span class="comment">// 遍历result，将表单数据赋值给节点</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; result.length; i++) &#123;</span><br><span class="line">                    <span class="keyword">var</span> edit = <span class="keyword">new</span> mxCellAttributeChange(cell, result[i].key, result[i].value);</span><br><span class="line">                    model.execute(edit);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                model.endUpdate();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> cancelFunction = mxUtils.bind(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.myHideProperties();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    form.addButtons(okFunction, cancelFunction);</span><br><span class="line">    <span class="keyword">return</span> form.table;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">mxEditor.prototype.myHideProperties = <span class="function"><span class="keyword">function</span>(<span class="params">cell</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 隐藏属性表单核心代码</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.myProperties != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.myProperties.destroy();</span><br><span class="line">        <span class="keyword">this</span>.myProperties = <span class="literal">null</span>;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是showProperties会向mxEditor示例上添加一个对象properties，用来保存弹出表单的mxWindow对象，所以你自定义的myShowProperties可以向mxEditor示例上添加一个对象myProperties对象，避免覆盖。</p>
+<p>createProperties中使用了mxForm来构建表单，这个mxForm代码很简单，封装的功能有限，如果有复杂需求的话建议自己实现一个表单即可。</p>
+<h5 id="添加属性编辑器到右键菜单"><a href="#添加属性编辑器到右键菜单" class="headerlink" title="添加属性编辑器到右键菜单"></a>添加属性编辑器到右键菜单</h5><p>实现了自己的属性编辑器后，可以将它绑定到右键菜单中：</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200304/GMhb4KMDMpsf.png" alt="mark"></p>
+<p>右键菜单的配置在editor-commons.xml中：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mxDefaultPopupMenu</span> <span class="attr">as</span>=<span class="string">"popupHandler"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">add</span> <span class="attr">as</span>=<span class="string">"cut"</span> <span class="attr">action</span>=<span class="string">"cut"</span> <span class="attr">icon</span>=<span class="string">"images/cut.gif"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">add</span> <span class="attr">as</span>=<span class="string">"copy"</span> <span class="attr">action</span>=<span class="string">"copy"</span> <span class="attr">icon</span>=<span class="string">"images/copy.gif"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">add</span> <span class="attr">as</span>=<span class="string">"paste"</span> <span class="attr">action</span>=<span class="string">"paste"</span> <span class="attr">icon</span>=<span class="string">"images/paste.gif"</span>/&gt;</span></span><br><span class="line">    ......</span><br><span class="line">    <span class="tag">&lt;<span class="name">separator</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">add</span> <span class="attr">as</span>=<span class="string">"节点属性"</span> <span class="attr">action</span>=<span class="string">"showProperties"</span> <span class="attr">icon</span>=<span class="string">"images/properties.gif"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">add</span> <span class="attr">as</span>=<span class="string">"节点配置"</span> <span class="attr">action</span>=<span class="string">"myShowProperties"</span> <span class="attr">icon</span>=<span class="string">"images/properties.gif"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mxDefaultPopupMenu</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如上述代码所述，添加一个<code>&lt;add&gt;</code>标签，将action指向我们的自定义函数myShowProperties即可。</p>
+<p>我们也可以在keyhandler-commons.xml中，为myShowProperties函数添加快捷键：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mxDefaultKeyHandler</span> <span class="attr">as</span>=<span class="string">"keyHandler"</span>&gt;</span>	</span><br><span class="line">	......</span><br><span class="line">	<span class="tag">&lt;<span class="name">add</span> <span class="attr">as</span>=<span class="string">"121"</span> <span class="attr">action</span>=<span class="string">"myShowProperties"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mxDefaultKeyHandler</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>默认的showProperties绑定的快捷键是F12，非常不友好，这里我们将myShowProperties函数绑定到F10之上，F10的编码就是121。</p>
+<p>最终效果如下：</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200304/059U6co5kGBB.png" alt="mark"></p>
+
       
 
       
@@ -457,7 +473,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mxGraph简介"><span class="toc-number">1.</span> <span class="toc-text">mxGraph简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是mxGraph"><span class="toc-number">1.1.</span> <span class="toc-text">什么是mxGraph</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模块介绍"><span class="toc-number">1.2.</span> <span class="toc-text">模块介绍</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mxEditor操作指南"><span class="toc-number">2.</span> <span class="toc-text">mxEditor操作指南</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#说明"><span class="toc-number">2.1.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引入mxGraph"><span class="toc-number">2.2.</span> <span class="toc-text">引入mxGraph</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建mxEditor"><span class="toc-number">2.3.</span> <span class="toc-text">创建mxEditor</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Toolbar的配置解析"><span class="toc-number">2.4.</span> <span class="toc-text">Toolbar的配置解析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#action"><span class="toc-number">2.4.1.</span> <span class="toc-text">action</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mode"><span class="toc-number">2.4.2.</span> <span class="toc-text">mode</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#template"><span class="toc-number">2.4.3.</span> <span class="toc-text">template</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#task窗口是哪里来的？"><span class="toc-number">2.5.</span> <span class="toc-text">task窗口是哪里来的？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实现一个自己的属性编辑器"><span class="toc-number">2.6.</span> <span class="toc-text">实现一个自己的属性编辑器</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mxGraph简介"><span class="toc-number">1.</span> <span class="toc-text">mxGraph简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是mxGraph"><span class="toc-number">1.1.</span> <span class="toc-text">什么是mxGraph</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模块介绍"><span class="toc-number">1.2.</span> <span class="toc-text">模块介绍</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mxEditor操作指南"><span class="toc-number">2.</span> <span class="toc-text">mxEditor操作指南</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#说明"><span class="toc-number">2.1.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引入mxGraph"><span class="toc-number">2.2.</span> <span class="toc-text">引入mxGraph</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建mxEditor"><span class="toc-number">2.3.</span> <span class="toc-text">创建mxEditor</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Toolbar的配置解析"><span class="toc-number">2.4.</span> <span class="toc-text">Toolbar的配置解析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#action"><span class="toc-number">2.4.1.</span> <span class="toc-text">action</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mode"><span class="toc-number">2.4.2.</span> <span class="toc-text">mode</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#template"><span class="toc-number">2.4.3.</span> <span class="toc-text">template</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#task窗口是哪里来的？"><span class="toc-number">2.5.</span> <span class="toc-text">task窗口是哪里来的？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实现一个自己的属性编辑器"><span class="toc-number">2.6.</span> <span class="toc-text">实现一个自己的属性编辑器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#添加属性编辑器到右键菜单"><span class="toc-number">2.6.1.</span> <span class="toc-text">添加属性编辑器到右键菜单</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -589,15 +605,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -605,11 +617,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -617,7 +629,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -629,15 +649,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -657,15 +673,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">

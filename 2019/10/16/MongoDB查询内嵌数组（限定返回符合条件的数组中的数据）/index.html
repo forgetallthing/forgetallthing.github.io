@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>MongoDB查询内嵌数组（限定返回符合条件的数组中的数据） | 张伯伯的BLOG</title>
+  <title>MongoDB相关操作记录 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文探讨当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。">
+  <meta name="description" content="mongoDB相关操作：  mongo查询内嵌数组（限定返回符合条件的数组中的数据） 使用mongoexport导出数据 mongostat查看mongodb运行状态使用命令">
 <meta name="keywords" content="mongodb">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MongoDB查询内嵌数组（限定返回符合条件的数组中的数据）">
+<meta property="og:title" content="MongoDB相关操作记录">
 <meta property="og:url" content="http://yoursite.com/2019/10/16/MongoDB查询内嵌数组（限定返回符合条件的数组中的数据）/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="本文探讨当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。">
+<meta property="og:description" content="mongoDB相关操作：  mongo查询内嵌数组（限定返回符合条件的数组中的数据） 使用mongoexport导出数据 mongostat查看mongodb运行状态使用命令">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191022/P7sr653iL2gH.jpg">
-<meta property="og:updated_time" content="2019-11-04T08:37:55.725Z">
+<meta property="og:updated_time" content="2020-03-09T09:19:00.137Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MongoDB查询内嵌数组（限定返回符合条件的数组中的数据）">
-<meta name="twitter:description" content="本文探讨当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。">
+<meta name="twitter:title" content="MongoDB相关操作记录">
+<meta name="twitter:description" content="mongoDB相关操作：  mongo查询内嵌数组（限定返回符合条件的数组中的数据） 使用mongoexport导出数据 mongostat查看mongodb运行状态使用命令">
 <meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191022/P7sr653iL2gH.jpg">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
@@ -182,7 +182,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      MongoDB查询内嵌数组（限定返回符合条件的数组中的数据）
+      MongoDB相关操作记录
     </h1>
   
 
@@ -196,8 +196,14 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20191022/P7sr653iL2gH.jpg" alt="mark"></p>
-<p>本文探讨当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。</p>
+<p>mongoDB相关操作：</p>
+<ul>
+<li>mongo查询内嵌数组（限定返回符合条件的数组中的数据）</li>
+<li>使用mongoexport导出数据</li>
+<li>mongostat查看mongodb运行状态使用命令</li>
+</ul>
 <a id="more"></a>
+<h3 id="mongo查询内嵌数组（限定返回符合条件的数组中的数据）"><a href="#mongo查询内嵌数组（限定返回符合条件的数组中的数据）" class="headerlink" title="mongo查询内嵌数组（限定返回符合条件的数组中的数据）"></a>mongo查询内嵌数组（限定返回符合条件的数组中的数据）</h3><p>当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。</p>
 <p>原始数据：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5aab3460353df3bd352e0e15"</span>),</span><br><span class="line">    <span class="string">"addTime"</span> : ISODate(<span class="string">"2018-03-16T03:05:04.363Z"</span>),</span><br><span class="line">    <span class="string">"tag"</span> : <span class="string">"test"</span>,</span><br><span class="line">    <span class="string">"userInfo"</span> : [ </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"cj"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"江苏"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">24.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"stu"</span></span><br><span class="line">        &#125;, </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"hj"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"江苏"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">26.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"stu"</span></span><br><span class="line">        &#125;, </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"lbl"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"美国"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">22.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"teach"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>查询条件是<code>tag =“test”  userTag=”teach”</code> 的学生的信息。期望返回的结果如下所示：</p>
@@ -230,9 +236,37 @@ var _hmt = _hmt || [];
 <p>db.test.aggregate([{“$unwind”:”$userInfo”},{“$match”:{“userInfo.userTag”:”stu”,”tag”:”test”}}])</p>
 <p>db.test.aggregate([{“$unwind”:”$userInfo”},{“$match”:{“userInfo.userTag”:”stu”,”tag”:”test”}},{“$project”:{“userInfo”:1}}])</p>
 </blockquote>
-<h3 id="mongodb导出csv"><a href="#mongodb导出csv" class="headerlink" title="mongodb导出csv"></a>mongodb导出csv</h3><p><a href="https://docs.mongodb.com/manual/reference/program/mongoexport/index.html" target="_blank" rel="noopener">官方文档</a></p>
+<h3 id="mongoexport导出数据"><a href="#mongoexport导出数据" class="headerlink" title="mongoexport导出数据"></a>mongoexport导出数据</h3><p><a href="https://docs.mongodb.com/manual/reference/program/mongoexport/index.html" target="_blank" rel="noopener">官方文档</a></p>
 <p>win10下格式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mongoexport -d &quot;rk4&quot; -c &quot;da_data_2&quot; -q=&apos;&#123;\&quot;_tabnum\&quot; :\&quot;sjzx-sjy02\&quot;,\&quot;_per\&quot; :\&quot;20181116\&quot;&#125;&apos; -o</span><br><span class="line">C:\Users\Administrator\Desktop\test.json</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mongoexport -d "rk4" -c "da_data_2" -q='&#123;\"_tabnum\" :\"sjzx-sjy02\",\"_per\" :\"20181116\"&#125;' -o</span><br><span class="line">C:\Users\Administrator\Desktop\test.json</span><br></pre></td></tr></table></figure>
+<p>centos：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mongoexport -h 127.0.0.1:3333 -d "rk" -c "mobile_message" -q='&#123;"batch" :891&#125;' -o /data/mobileMassage/test.json</span><br></pre></td></tr></table></figure>
+<p>导出csv：(如果以 csv 格式导出，需要指定导出集合的字段)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mongoexport -h 127.0.0.1:3333 -d "rk" -c "mobile_message" -q='&#123;"batch" :891&#125;' -o /data/mobileMassage/test.csv</span><br></pre></td></tr></table></figure>
+<p>-h 表示主机IP或主机名;<br>-d 表示数据库名;<br>-c 表示集合名;<br>-f 表示所选集合的字段;<br>-o 表示导出的文件名。</p>
+<h3 id="mongostat查看mongodb运行状态使用命令"><a href="#mongostat查看mongodb运行状态使用命令" class="headerlink" title="mongostat查看mongodb运行状态使用命令"></a>mongostat查看mongodb运行状态使用命令</h3><p>mongostat是mongodb自带的一个用来查看mongodb运行状态的工具</p>
+<p><strong>使用说明</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongostat -h 127.0.0.1:12345</span><br></pre></td></tr></table></figure>
+<p><strong>字段说明</strong></p>
+<p>启用后的状况是这样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">insert query update delete getmore command dirty used flushes vsize res qrw arw net_in net_out conn time</span><br><span class="line">*0 *0 *0 *0 0 1|0 0.0% 0.0% 0 3.11G 34.0M 0|0 1|0 157b 57.1k 1 Aug 11 07:59:21.760</span><br><span class="line">*0 *0 *0 *0 0 2|0 0.0% 0.0% 0 3.11G 34.0M 0|0 1|0 158b 57.1k 1 Aug 11 07:59:22.760</span><br><span class="line">*0 *0 *0 *0 0 1|0 0.0% 0.0% 0 3.11G 34.0M 0|0 1|0 157b 57.0k 1 Aug 11 07:59:23.761</span><br><span class="line">*0 *0 *0 *0 0 1|0 0.0% 0.0% 0 3.11G 34.0M 0|0 1|0 157b 57.1k 1 Aug 11 07:59:24.762</span><br><span class="line">*0 *0 *0 *0 0 1|0 0.0% 0.0% 0 3.11G 34.0M 0|0 1|0 157b 57.0k 1 Aug 11 07:59:25.764</span><br><span class="line">*0 *0 *0 *0 0 1|0 0.0% 0.0% 0 3.11G 34.0M 0|0 1|0 157b 57.1k 1 Aug 11 07:59:26.764</span><br><span class="line">*0 *0 *0 *0 0 1|0 0.0% 0.0% 0 3.11G 34.0M 0|0 1|0 157b 57.1k 1 Aug 11 07:59:27.764</span><br><span class="line">*0 *0 *0 *0 0 2|0 0.0% 0.0% 1 3.11G 34.0M 0|0 1|0 159b 57.5k 1 Aug 11 07:59:28.757</span><br></pre></td></tr></table></figure>
+<p>inserts:当前mongodb插入数量;</p>
+<p>query:当前mongodb的查询数量，数量以每秒为单位;</p>
+<p>update:当前mongodb的更新数量;</p>
+<p>delete:当前mongodb的删除数量;</p>
+<p>getmore:在进行mongodb查询时，每次并不是返回所有的数据，比如要一次查询一百万条，每次只会返回一定量的数据，当每次find的时候，getmore用来获取以后的数据;</p>
+<p>command:执行命令的数量;</p>
+<p>flushes:在mongodb写入数据，查询数据时，我们看到的数据是在内存中，实际上并不是在内存中，有些是在硬盘上的，每个一段时间，mongodb会把内存数据刷到硬盘上，flushes就是看mongodb隔多久往磁盘上刷一次;</p>
+<p>mapped,vsize,res：mongodb所占据到磁盘空间大小和申请的内存大小;</p>
+<p>faults：如果数据没有加塞到内存中，需要到硬盘上读取;</p>
+<p>locked:锁的情况;</p>
+<p>ids miss：表明当前查询没有使用索引的情况;</p>
+<p>qr|qw：在写入或读取数据时，并不是来个请求就处理，而是放到队列中，如果请求比较多，或者mongodb处理比较慢，这样qr,qw比较高，一般到qr,qw比较高时，比如几百上千，mongodb的性能会出现明显的下降;</p>
+<p>ar|aw：当前活跃的客户端的数目;</p>
+<p>netIn,netOut：mongodb使用网卡的输入流量;</p>
+<p>conn:连接到mongodb到连接数量;</p>
+<p><strong>重要字段</strong></p>
+<p>对于性能，我们比较关心的是，qr,读队列，如果读队列比较多，说明系统的读请求负载比较高，会出现比较严重的性能问题，qw，写队列，这两个一般能直观的反应系统的性能状况，如果他们的数字大幅度提高，mongodb会立刻遇到问题</p>
 
       
 
@@ -385,7 +419,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mongodb导出csv"><span class="toc-number">1.</span> <span class="toc-text">mongodb导出csv</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mongo查询内嵌数组（限定返回符合条件的数组中的数据）"><span class="toc-number">1.</span> <span class="toc-text">mongo查询内嵌数组（限定返回符合条件的数组中的数据）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongoexport导出数据"><span class="toc-number">2.</span> <span class="toc-text">mongoexport导出数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongostat查看mongodb运行状态使用命令"><span class="toc-number">3.</span> <span class="toc-text">mongostat查看mongodb运行状态使用命令</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -509,23 +543,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -533,7 +555,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -545,11 +587,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -557,19 +599,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -577,11 +611,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
+                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
               </li>
              
               <li class="article-tag-list-item">

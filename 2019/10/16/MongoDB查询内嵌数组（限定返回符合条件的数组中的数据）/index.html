@@ -17,7 +17,7 @@
 <meta property="og:description" content="mongoDB相关操作：  mongo查询内嵌数组（限定返回符合条件的数组中的数据） 使用mongoexport导出数据 mongostat查看mongodb运行状态使用命令">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191022/P7sr653iL2gH.jpg">
-<meta property="og:updated_time" content="2020-03-09T09:19:00.137Z">
+<meta property="og:updated_time" content="2020-03-09T12:24:17.958Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB相关操作记录">
 <meta name="twitter:description" content="mongoDB相关操作：  mongo查询内嵌数组（限定返回符合条件的数组中的数据） 使用mongoexport导出数据 mongostat查看mongodb运行状态使用命令">
@@ -244,6 +244,8 @@ var _hmt = _hmt || [];
 <p>导出csv：(如果以 csv 格式导出，需要指定导出集合的字段)</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mongoexport -h 127.0.0.1:3333 -d "rk" -c "mobile_message" -q='&#123;"batch" :891&#125;' -o /data/mobileMassage/test.csv</span><br></pre></td></tr></table></figure>
 <p>-h 表示主机IP或主机名;<br>-d 表示数据库名;<br>-c 表示集合名;<br>-f 表示所选集合的字段;<br>-o 表示导出的文件名。</p>
+<h5 id="打开csv乱码解决办法"><a href="#打开csv乱码解决办法" class="headerlink" title="打开csv乱码解决办法"></a>打开csv乱码解决办法</h5><p>在简体中文环境下，excel打开的csv文件默认是ANSI编码，如果CSV文件的编码方式为utf-8、Unicode等编码可能就会出现文件乱码的情况。</p>
+<p>解决办法：<br>使用记事本打开csv文件；<br>点击菜单：文件-另存为，编码方式选择ANSI；<br>保存后，再用Excel打开这个文件就不会出现乱码的情况了。</p>
 <h3 id="mongostat查看mongodb运行状态使用命令"><a href="#mongostat查看mongodb运行状态使用命令" class="headerlink" title="mongostat查看mongodb运行状态使用命令"></a>mongostat查看mongodb运行状态使用命令</h3><p>mongostat是mongodb自带的一个用来查看mongodb运行状态的工具</p>
 <p><strong>使用说明</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongostat -h 127.0.0.1:12345</span><br></pre></td></tr></table></figure>
@@ -419,7 +421,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mongo查询内嵌数组（限定返回符合条件的数组中的数据）"><span class="toc-number">1.</span> <span class="toc-text">mongo查询内嵌数组（限定返回符合条件的数组中的数据）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongoexport导出数据"><span class="toc-number">2.</span> <span class="toc-text">mongoexport导出数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongostat查看mongodb运行状态使用命令"><span class="toc-number">3.</span> <span class="toc-text">mongostat查看mongodb运行状态使用命令</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mongo查询内嵌数组（限定返回符合条件的数组中的数据）"><span class="toc-number">1.</span> <span class="toc-text">mongo查询内嵌数组（限定返回符合条件的数组中的数据）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongoexport导出数据"><span class="toc-number">2.</span> <span class="toc-text">mongoexport导出数据</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#打开csv乱码解决办法"><span class="toc-number">2.0.1.</span> <span class="toc-text">打开csv乱码解决办法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongostat查看mongodb运行状态使用命令"><span class="toc-number">3.</span> <span class="toc-text">mongostat查看mongodb运行状态使用命令</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -543,15 +545,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -559,7 +553,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,15 +561,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,7 +593,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -599,27 +609,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vscode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -627,11 +617,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">

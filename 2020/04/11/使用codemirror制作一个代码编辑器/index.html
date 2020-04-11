@@ -19,7 +19,8 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200411/hct8shzTUNaq.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200411/TB2XbazltwFp.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200411/1QuXPHI2u7v6.png">
-<meta property="og:updated_time" content="2020-04-11T11:00:34.597Z">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200411/NlFEvvmU8naE.png">
+<meta property="og:updated_time" content="2020-04-11T14:40:07.893Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用codemirror制作一个代码编辑器">
 <meta name="twitter:description" content="本文介绍如何使用codemirror来搭建自己的在线代码编辑器！">
@@ -207,6 +208,28 @@ var _hmt = _hmt || [];
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200411/1QuXPHI2u7v6.png" alt="mark"></p>
 <p>这里最开始使用了可编辑的div来模拟编辑器，但是这里需要大量操作选中区域的内容，比如在点击处粘贴值，替换选中的值等等等等，导致在各种内核的浏览器中出现了许多问题，所以最后决定一劳永逸，直接用codemirror来实现一个高度兼容的编辑区域，还自带代码提示等丰富的插件，真香~</p>
 <h3 id="基本应用"><a href="#基本应用" class="headerlink" title="基本应用"></a>基本应用</h3><p>codemirror的使用非常简单，这里就给一个简单地实现就好：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">// 基础库</span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"./lib/codemirror.css"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./lib/codemirror.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// mode</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./mode/javascript/javascript.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// 代码提示</span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"./addon/hint/show-hint.css"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./addon/hint/show-hint.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./addon/hint/javascript-hint.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// 键盘映射</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./keymap/sublime.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// 注释插件</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./addon/comment/comment.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 滚动条样式美化插件</span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"./addon/scroll/simplescrollbars.css"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./addon/scroll/simplescrollbars.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    // 设置样式即可改变行高，字体大小等属性</span></span><br><span class="line"><span class="undefined">    .code-mirror &#123;</span></span><br><span class="line"><span class="undefined">        font-size: 14px;</span></span><br><span class="line"><span class="undefined">        line-height: 15px;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"mydiv"</span> <span class="attr">class</span>=<span class="string">"code-mirror"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">const</span> myCodeMirror = CodeMirror(mydiv, &#123;</span></span><br><span class="line"><span class="javascript">        value: <span class="string">""</span>,</span></span><br><span class="line"><span class="javascript">        mode: <span class="string">"javascript"</span>,</span></span><br><span class="line"><span class="javascript">        keyMap: <span class="string">"sublime"</span>, <span class="comment">// 键盘映射</span></span></span><br><span class="line"><span class="javascript">        scrollbarStyle: <span class="string">"simple"</span>, <span class="comment">// 滚动条样式</span></span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>mode的文档写的比较齐全：<a href="https://codemirror.net/doc/manual.html#usage，基本读一遍也花不了一个小时，读完即可上手开发，内置上百种的语言mode，还有十多种插件，并且可以高度自由定制，确实好用。" target="_blank" rel="noopener">https://codemirror.net/doc/manual.html#usage，基本读一遍也花不了一个小时，读完即可上手开发，内置上百种的语言mode，还有十多种插件，并且可以高度自由定制，确实好用。</a></p>
+<h3 id="代码提示"><a href="#代码提示" class="headerlink" title="代码提示"></a>代码提示</h3><p>代码提示功能比较方便，单有两点值得记录一下：</p>
+<h4 id="绑定的事件"><a href="#绑定的事件" class="headerlink" title="绑定的事件"></a>绑定的事件</h4><p>编辑器的代码提示是需要我们手动调用的，通常要做到用户边输入边提示，亲测绑定在inputRead事件上比较靠谱：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">myCodeMirror.on(<span class="string">"inputRead"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    myCodeMirror.showHint(&#123;</span><br><span class="line">        completeSingle: <span class="literal">false</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>inputRead事件说明：</p>
+<blockquote>
+<p>inputRead：Fired whenever new input is read from the hidden textarea (typed or pasted by the user).</p>
+</blockquote>
+<p>其他教程有的绑定在change上，或者cursorActivity上，都有坑，具体大家可以自己尝试一下。</p>
+<p>showHint函数的配置项：completeSingle参数代表只有一个参数可用的时候自动补全，这个比较坑，建议设置为false。</p>
+<h4 id="在没有任何输入的时候就会弹出所有的提示关键词"><a href="#在没有任何输入的时候就会弹出所有的提示关键词" class="headerlink" title="在没有任何输入的时候就会弹出所有的提示关键词"></a>在没有任何输入的时候就会弹出所有的提示关键词</h4><p>官方的说法是在没找到匹配的选项时，会列举所有的选项，这导致我们只要点击个空白就会弹出所有的提示关键词，这里只需要改一下对应hint文件中的处理函数即可，如javascript-hint.js中的getCompletions函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCompletions</span>(<span class="params">token, context, keywords,options</span>) </span>&#123;</span><br><span class="line">        <span class="comment">//添加以下三行代码</span></span><br><span class="line">        <span class="keyword">if</span> (token.string == <span class="string">""</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;<span class="attr">list</span>:&#123;&#125;&#125;;;</span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的token参数就是要拿去进行比对的值，如果是空的，我们直接返回空列表，就解决了这个问题。</p>
+<h3 id="实现一个高度可拖拽的div"><a href="#实现一个高度可拖拽的div" class="headerlink" title="实现一个高度可拖拽的div"></a>实现一个高度可拖拽的div</h3><p>这个功能和编辑器本身是没关系的，只要给编辑器设置高度：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myCodeMirror.setSize(<span class="literal">null</span>, <span class="string">'100%'</span>);</span><br></pre></td></tr></table></figure>
+<p>编辑器就可以自适应高度，但内容区域还是需要调用refresh方法来重置滚动条状态。</p>
+<p>下面就只需要让父元素可以拖拽即可，思路是在div下方放一个高度为3px的横线形状的div，给div的css设置cursor: n-resize，即可在鼠标悬浮在横线上时，显示一个上下的箭头图标：</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200411/NlFEvvmU8naE.png" alt="mark"></p>
+<p>接着在鼠标按下(mousedown)时注册鼠标移动事件(mousemove)，就可以根据鼠标移动的距离来设置div的高度了，需要注意的是在鼠标抬起(mouseup)事件中解绑：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 编辑器绑定的节点：mydiv</span></span><br><span class="line"><span class="keyword">var</span> mydiv = <span class="built_in">document</span>.getElementById(<span class="string">'mydiv'</span>);</span><br><span class="line"><span class="comment">// mydiv下方横线</span></span><br><span class="line"><span class="keyword">var</span> oLine = <span class="built_in">document</span>.getElementById(<span class="string">'line'</span>);</span><br><span class="line"></span><br><span class="line">oLine.onmousedown = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 初始鼠标位置</span></span><br><span class="line">    <span class="keyword">var</span> disY = (e || event).clientY;</span><br><span class="line">    oLine.top = oLine.offsetTop;</span><br><span class="line">    <span class="built_in">document</span>.onmousemove = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 计算出新的高度</span></span><br><span class="line">        <span class="keyword">var</span> height = oLine.top + ((e || event).clientY - disY);</span><br><span class="line">        <span class="comment">// 最小高度与最大高度设置</span></span><br><span class="line">        <span class="keyword">if</span> (height &lt; that.editorMinHeight) &#123;</span><br><span class="line">            height = that.editorMinHeight;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (height &gt; that.editorMaxHeight) &#123;</span><br><span class="line">            height = that.editorMaxHeight;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 记录当前高度，供展开折叠功能使用</span></span><br><span class="line">        that.editorCurHeight = height;</span><br><span class="line">        <span class="comment">// 设置mydiv的高度</span></span><br><span class="line">        mydiv.style.height = height + <span class="string">'px'</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">document</span>.onmouseup = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">document</span>.onmousemove = <span class="literal">null</span>;</span><br><span class="line">        <span class="built_in">document</span>.onmouseup = <span class="literal">null</span>;</span><br><span class="line">        oLine.releaseCapture &amp;&amp; oLine.releaseCapture();</span><br><span class="line">        <span class="comment">// 重置编辑器状态</span></span><br><span class="line">        that.refreshSize();</span><br><span class="line">    &#125;;</span><br><span class="line">    oLine.setCapture &amp;&amp; oLine.setCapture();</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="相关资源"><a href="#相关资源" class="headerlink" title="相关资源"></a>相关资源</h3><p><a href="https://segmentfault.com/a/1190000016136831" target="_blank" rel="noopener">Javascript codemirror 高级应用</a></p>
 
       
 
@@ -350,7 +373,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#需求的产生"><span class="toc-number">1.</span> <span class="toc-text">需求的产生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本应用"><span class="toc-number">2.</span> <span class="toc-text">基本应用</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#需求的产生"><span class="toc-number">1.</span> <span class="toc-text">需求的产生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本应用"><span class="toc-number">2.</span> <span class="toc-text">基本应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码提示"><span class="toc-number">3.</span> <span class="toc-text">代码提示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#绑定的事件"><span class="toc-number">3.1.</span> <span class="toc-text">绑定的事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在没有任何输入的时候就会弹出所有的提示关键词"><span class="toc-number">3.2.</span> <span class="toc-text">在没有任何输入的时候就会弹出所有的提示关键词</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现一个高度可拖拽的div"><span class="toc-number">4.</span> <span class="toc-text">实现一个高度可拖拽的div</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相关资源"><span class="toc-number">5.</span> <span class="toc-text">相关资源</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -474,7 +497,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -482,11 +505,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -498,15 +517,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,11 +549,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -542,15 +561,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -559,6 +578,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -6,24 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Chrome Headless与puppeteer的使用指南 | 张伯伯的BLOG</title>
+  <title>Archives: 2020/4 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于打印输出pdf文件这一块,有以下几种方式可以选择:  html2canvas+jsPDF (纯前端:用图片来冒充pdf,内容容易失真); iText (java插件,html标签必须严格闭合,后端实现复杂,服务器需要安装字体,图片渲染有问题); wkhtmltopdf (语言无关,服务器需安装wkhtmltopdf环境); Phantomjs (大名鼎鼎,不介绍了);  提到Phantomj">
-<meta name="keywords" content="node">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Chrome Headless与puppeteer的使用指南">
-<meta property="og:url" content="http://yoursite.com/2019/04/03/Chrome-Headless与puppeteer的使用指南/index.html">
+  <meta name="description" content="哪里有幸福可借">
+<meta property="og:type" content="website">
+<meta property="og:title" content="张伯伯的BLOG">
+<meta property="og:url" content="http://yoursite.com/archives/2020/04/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="关于打印输出pdf文件这一块,有以下几种方式可以选择:  html2canvas+jsPDF (纯前端:用图片来冒充pdf,内容容易失真); iText (java插件,html标签必须严格闭合,后端实现复杂,服务器需要安装字体,图片渲染有问题); wkhtmltopdf (语言无关,服务器需安装wkhtmltopdf环境); Phantomjs (大名鼎鼎,不介绍了);  提到Phantomj">
+<meta property="og:description" content="哪里有幸福可借">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190404/JScrGcphSFnc.jpg?imageslim">
-<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190404/AKWXyugESuao.png?imageslim">
-<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190403/rGEGFzoxtMga.jpg?imageslim">
-<meta property="og:updated_time" content="2019-05-16T02:17:11.746Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chrome Headless与puppeteer的使用指南">
-<meta name="twitter:description" content="关于打印输出pdf文件这一块,有以下几种方式可以选择:  html2canvas+jsPDF (纯前端:用图片来冒充pdf,内容容易失真); iText (java插件,html标签必须严格闭合,后端实现复杂,服务器需要安装字体,图片渲染有问题); wkhtmltopdf (语言无关,服务器需安装wkhtmltopdf环境); Phantomjs (大名鼎鼎,不介绍了);  提到Phantomj">
-<meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190404/JScrGcphSFnc.jpg?imageslim">
+<meta name="twitter:title" content="张伯伯的BLOG">
+<meta name="twitter:description" content="哪里有幸福可借">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -177,239 +171,60 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Chrome-Headless与puppeteer的使用指南" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Chrome Headless与puppeteer的使用指南
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/04/11/使用codemirror制作一个代码编辑器/" class="archive-article-date">
+  	<time datetime="2020-04-11T10:33:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-11</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/04/11/使用codemirror制作一个代码编辑器/">使用codemirror制作一个代码编辑器</a>
     </h1>
   
 
-        
-        <a href="/2019/04/03/Chrome-Headless与puppeteer的使用指南/" class="archive-article-date">
-  	<time datetime="2019-04-03T09:57:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190404/JScrGcphSFnc.jpg?imageslim" alt="mark"></p>
-<p>关于打印输出pdf文件这一块,有以下几种方式可以选择:</p>
-<ul>
-<li>html2canvas+jsPDF (纯前端:用图片来冒充pdf,内容容易失真);</li>
-<li>iText (java插件,html标签必须严格闭合,后端实现复杂,服务器需要安装字体,图片渲染有问题);</li>
-<li>wkhtmltopdf (语言无关,服务器需安装wkhtmltopdf环境);</li>
-<li>Phantomjs (大名鼎鼎,不介绍了);</li>
-</ul>
-<p>提到Phantomjs,我就想起<strong>开发Phantomjs的大牛吵架后停止开发</strong>和<strong>selenium分手Phantomjs</strong>的事,于是想起了现在风头正火的<strong>Headless Chrome</strong>,只要安装了Chrome浏览器就可以使用,更贴合浏览器环境,做测试/爬虫/截图/pdf都超级方便,本文主要将介绍<strong>在nodejs中使用puppeteer打印pdf</strong>,以下就是<a href="https://github.com/GoogleChrome/puppeteer" target="_blank" rel="noopener">puppeteer</a>的官方介绍:</p>
-<a id="more"></a>
-<blockquote>
-<p>Puppeteer is a Node library which provides a high-level API to control Chrome or Chromium over the <a href="https://chromedevtools.github.io/devtools-protocol/" target="_blank" rel="noopener">DevTools Protocol</a>. Puppeteer runs <a href="https://developers.google.com/web/updates/2017/04/headless-chrome" target="_blank" rel="noopener">headless</a> by default, but can be configured to run full (non-headless) Chrome or Chromium.</p>
-</blockquote>
-<h3 id="先在windows环境下做个测试"><a href="#先在windows环境下做个测试" class="headerlink" title="先在windows环境下做个测试"></a>先在windows环境下做个测试</h3><p>首先必须安装了60版本以上的Chrome浏览器;</p>
-<p>然后配置个环境变量或者直接在chrome.exe打开命令行工具;</p>
-<p>然后输入以下命令:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chrome --headless --disable-gpu --print-to-pdf=D:\output.pdf https:<span class="comment">//www.google.com/</span></span><br></pre></td></tr></table></figure>
-<p>随后你就可以打开D盘,找到output.pdf啦:</p>
-<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190404/AKWXyugESuao.png?imageslim" alt="mark"></p>
-<p>windows下需要注意:</p>
-<ul>
-<li>必须指定输出文件;</li>
-<li>必须添加–disable-gpu;</li>
-</ul>
-<p>你还可以试试这个命令来打印dom:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chrome --headless --disable-gpu --enable-logging --dump-dom https:<span class="comment">//www.google.com/</span></span><br></pre></td></tr></table></figure>
-<p>更多命令请见:<a href="https://developers.google.com/web/updates/2017/04/headless-chrome" target="_blank" rel="noopener">Getting Started with Headless Chrome</a></p>
-<h3 id="开始使用puppeteer"><a href="#开始使用puppeteer" class="headerlink" title="开始使用puppeteer"></a>开始使用puppeteer</h3><p>首先安装npm包,因为我的开发环境已有chrome浏览器,所以我使用的是纯净版的puppeteer:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i puppeteer-core</span><br></pre></td></tr></table></figure>
-<p>安装好之后就可以使用啦:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> puppeteer = <span class="built_in">require</span>(<span class="string">'puppeteer-core'</span>);</span><br><span class="line"><span class="keyword">const</span> chromePath = <span class="string">"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"</span>;</span><br><span class="line"><span class="keyword">const</span> pdfPath = <span class="string">'./puppeteerFiles/test.pdf'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> browser = <span class="keyword">yield</span> puppeteer.launch(&#123;</span><br><span class="line">  executablePath: chromePath</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">const</span> page = <span class="keyword">yield</span> browser.newPage();</span><br><span class="line"><span class="keyword">yield</span> page.goto(<span class="string">'https://baidu.com'</span>);</span><br><span class="line"><span class="comment">//打印pdf</span></span><br><span class="line"><span class="keyword">yield</span> page.pdf(&#123;</span><br><span class="line">  path: pdfPath</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">yield</span> browser.close();</span><br></pre></td></tr></table></figure>
-<p>官方的例子使用async,我这里使用了co,各位请自行改写;</p>
-<p>除了goto方法,还可以使用setContent注入html标签(字符串)来生成页面:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> page = <span class="keyword">yield</span> browser.newPage();</span><br><span class="line"><span class="keyword">yield</span> page.setContent(html);</span><br></pre></td></tr></table></figure>
-<p>如果不想吧pdf文件保存到磁盘,不给page.pdf()方法传入path即可,page.pdf()会返回pdf buffer:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pdfBuffer = <span class="keyword">yield</span> page.pdf(&#123;&#125;);</span><br><span class="line"><span class="comment">//存储进mongoDB</span></span><br><span class="line"><span class="keyword">let</span> fs = <span class="keyword">new</span> girdFs(mongodb);</span><br><span class="line"><span class="keyword">let</span> us = fs.openUploadStream(fileName);</span><br><span class="line"><span class="keyword">yield</span> common.toPromise(<span class="function"><span class="keyword">function</span>(<span class="params">c</span>) </span>&#123;</span><br><span class="line">  us.end(pdfBuffer, <span class="string">""</span>, c);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>参考资料:                                                </p>
-<ul>
-<li><a href="https://blog.csdn.net/huyuyang6688/article/details/79710704" target="_blank" rel="noopener">html页面导出为pdf（jsPDF、iText、wkhtmltopdf）</a></li>
-<li><a href="https://www.jianshu.com/p/31f2b63437ed" target="_blank" rel="noopener">用Python做爬虫的各位，不要再用PhantomJS了</a></li>
-<li><a href="https://developers.google.com/web/updates/2017/04/headless-chrome" target="_blank" rel="noopener">Getting Started with Headless Chrome</a></li>
-</ul>
-<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190403/rGEGFzoxtMga.jpg?imageslim" alt="mark"></p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>你转给我的不是钱，只是数字<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/zhifubao.jpg">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/weixin.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">node</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2019/04/03/Chrome-Headless与puppeteer的使用指南/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/05/22/百度地图，在线飙车/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          百度地图，在线飙车
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/03/22/使用canvas绘制表格斜线/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">使用canvas绘制表格斜线</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#先在windows环境下做个测试"><span class="toc-number">1.</span> <span class="toc-text">先在windows环境下做个测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始使用puppeteer"><span class="toc-number">2.</span> <span class="toc-text">开始使用puppeteer</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
+    
 
 
           </div>
@@ -444,8 +259,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

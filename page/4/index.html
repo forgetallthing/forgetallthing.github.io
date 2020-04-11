@@ -173,6 +173,87 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-native-js设置可缩放的webview并隐藏缩放控件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/19/native-js设置可缩放的webview并隐藏缩放控件/">native.js设置可缩放的webview并隐藏缩放控件</a>
+    </h1>
+  
+
+        
+        <a href="/2018/09/19/native-js设置可缩放的webview并隐藏缩放控件/" class="archive-article-date">
+  	<time datetime="2018-09-19T06:20:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/180919/A0dbHH83mk.jpg?imageslim" alt="mark"></p>
+<p>需求明确:webview页面可以手指缩放,并且不要那个原生控件;</p>
+<p>实现思路:</p>
+<p>1.使用h5+封装好的方法:设置<code>scalable</code> 属性,并在html中设置meta标签:<code>user-scalable=yes</code> 或不设置,<code>minimum-scale</code> 和<code>maximum-scale</code> 需要注意不要都设为1:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1,minimum-scale=1"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mui.openWindow(&#123;</span><br><span class="line">	url: <span class="string">"someThing"</span>,</span><br><span class="line">	id: <span class="string">"someThing"</span>,</span><br><span class="line">	styles: &#123;</span><br><span class="line">		scalable:<span class="literal">true</span></span><br><span class="line">	&#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2018/09/19/native-js设置可缩放的webview并隐藏缩放控件/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">mui</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/09/19/native-js设置可缩放的webview并隐藏缩放控件/">打开看看 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-这是什么第一期" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -897,113 +978,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-千里之行，始于足下" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/23/千里之行，始于足下/">千里之行，始于足下</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/23/千里之行，始于足下/" class="archive-article-date">
-  	<time datetime="2018-02-23T01:37:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>fight or flight？大扎好，我系轱天乐，我四渣渣辉，潜端面世，介四里没有挽过的船新版本，挤需体验三番钟，里造会干我一样，爱象节款面食，系兄弟里就来砍我，潜端面世了丐一蛤！</p>
-</blockquote>
-<p> <a href="https://github.com/JacksonTian/fks" target="_blank" rel="noopener">朴灵的 fks 镇楼</a></p>
-<p><a href="https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions" target="_blank" rel="noopener">马云云的面试题整理</a></p>
-<p><a href="https://www.jianshu.com/p/0858f0ee85fd" target="_blank" rel="noopener">react和vue区别以及为什么会说react适合大型项目</a></p>
-<h2 id="JS篇"><a href="#JS篇" class="headerlink" title="JS篇"></a>JS篇</h2><h3 id="—事件循环—"><a href="#—事件循环—" class="headerlink" title="—事件循环—"></a>—事件循环—</h3><p>宏任务(task),微任务(microtask)和有趣的例子:</p>
-<p><a href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/" target="_blank" rel="noopener">Tasks, microtasks, queues and schedules</a></p>
-<p><a href="https://segmentfault.com/a/1190000010622146" target="_blank" rel="noopener">什么是浏览器的事件循环（Event Loop）？</a></p>
-<p>看一下HTML标准阐述的事件循环的进程模型：</p>
-<blockquote>
-<ol>
-<li>选择当前要执行的任务队列，选择一个最先进入任务队列的任务，如果没有任务可以选择，则会跳转至microtask的执行步骤。</li>
-<li>将事件循环的当前运行任务设置为已选择的任务。</li>
-<li>运行任务。</li>
-<li>将事件循环的当前运行任务设置为null。</li>
-<li>将运行完的任务从任务队列中移除。</li>
-<li>microtasks步骤：进入microtask检查点（performing a microtask checkpoint ）。</li>
-<li>更新界面渲染。</li>
-<li>返回第一步。</li>
-</ol>
-</blockquote>
-<p>执行进入microtask检查点时，用户代理会执行以下步骤：</p>
-<blockquote>
-<ol>
-<li>设置进入microtask检查点的标志为true。</li>
-<li>当事件循环的微任务队列不为空时：选择一个最先进入microtask队列的microtask；设置事件循环的当前运行任务为已选择的microtask；运行microtask；设置事件循环的当前运行任务为null；将运行结束的microtask从microtask队列中移除。</li>
-<li>对于相应事件循环的每个环境设置对象（environment settings object）,通知它们哪些promise为rejected。</li>
-<li>清理indexedDB的事务。</li>
-<li>设置进入microtask检查点的标志为false。</li>
-</ol>
-</blockquote>
-        
-          <a class="article-more-a" href="/2018/02/23/千里之行，始于足下/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">quiz</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/23/千里之行，始于足下/">打开看看 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -1115,10 +1089,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
@@ -1127,11 +1097,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1139,7 +1113,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1147,15 +1121,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1167,19 +1137,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -6,18 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018 | 张伯伯的BLOG</title>
+  <title>如何使用位运算符设计接口参数 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="哪里有幸福可借">
-<meta property="og:type" content="website">
-<meta property="og:title" content="张伯伯的BLOG">
-<meta property="og:url" content="http://yoursite.com/archives/2018/page/2/index.html">
+  <meta name="description" content="在使用spreadjs家的在线excel控件时发现了一个有趣的接口参数设计，使用位运算符来传递和解析参数：">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何使用位运算符设计接口参数">
+<meta property="og:url" content="http://yoursite.com/2020/06/15/如何使用位运算符设计接口参数/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="哪里有幸福可借">
+<meta property="og:description" content="在使用spreadjs家的在线excel控件时发现了一个有趣的接口参数设计，使用位运算符来传递和解析参数：">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200615/aR6rzsrfnoao.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200615/aeVmfCr9La8n.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200615/bn8hqwrFEGCK.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200615/s3tM8dv3YIuo.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200615/N7orqO466E1T.png">
+<meta property="og:updated_time" content="2020-06-15T08:56:03.499Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="张伯伯的BLOG">
-<meta name="twitter:description" content="哪里有幸福可借">
+<meta name="twitter:title" content="如何使用位运算符设计接口参数">
+<meta name="twitter:description" content="在使用spreadjs家的在线excel控件时发现了一个有趣的接口参数设计，使用位运算符来传递和解析参数：">
+<meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200615/aR6rzsrfnoao.png">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -171,367 +179,329 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-如何使用位运算符设计接口参数" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      如何使用位运算符设计接口参数
+    </h1>
+  
+
+        
+        <a href="/2020/06/15/如何使用位运算符设计接口参数/" class="archive-article-date">
+  	<time datetime="2020-06-15T07:47:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-15</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在使用spreadjs家的在线excel控件时发现了一个有趣的接口参数设计，使用位运算符来传递和解析参数：</p>
+<a id="more"></a>
+<p>改接口实现的excel中的复制区域到其他区域的功能：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activeSheet.copyTo(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,GC.Spread.Sheets.CopyToOptions.value);</span><br></pre></td></tr></table></figure>
+<p>前六个参数都是划选区域用的，最后一个参数代表复制的内容，<code>GC.Spread.Sheets.CopyToOptions.value</code>为仅复制数值，有如下取值：</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200615/aR6rzsrfnoao.png" alt="mark"></p>
+<p>打印出<code>GC.Spread.Sheets.CopyToOptions</code>我们发现这是一个枚举：</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200615/aeVmfCr9La8n.png" alt="mark"></p>
+<p>其中枚举的索引很有意思，都是2^n的数值；</p>
+<p>在使用这个接口时，如果既想复制value，又想复制公式怎么办？可以这样调用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activeSheet.copyTo(<span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">-1</span>, GC.Spread.Sheets.CopyToOptions.style | GC.Spread.Sheets.CopyToOptions.formula)</span><br></pre></td></tr></table></figure>
+<p>在这里使用了按位或<code>|</code>来传递多个要复制选项，传递多个也是可以的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activeSheet.copyTo(<span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">-1</span>, GC.Spread.Sheets.CopyToOptions.style | GC.Spread.Sheets.CopyToOptions.formula | GC.Spread.Sheets.CopyToOptions.value)</span><br></pre></td></tr></table></figure>
+<p>为了弄懂如何使用按位或传递参数，让我们先复习一下按位或是怎么计算的：</p>
+<p>“|”运算符（位或）用于对两个二进制操作数逐位进行比较，并根据如表格所示的换算表返回结果。</p>
+<table>
+<thead>
+<tr>
+<th>第一个数的位值</th>
+<th>第二个数的位值</th>
+<th>运算结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>12 和 5 进行位或运算，则返回值为 13。</p>
+<p>下图以算式的形式解析了 12 和 5 进行位或运算的过程。通过位或运算，除第 2 位的值为 false 外，其他位均返回 true。</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200615/bn8hqwrFEGCK.png" alt="mark"></p>
+<p>在让我们看看CopyToOptions中设置的索引</p>
+<table>
+<thead>
+<tr>
+<th>索引</th>
+<th>索引的二进制表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>10</td>
+</tr>
+<tr>
+<td>4</td>
+<td>100</td>
+</tr>
+<tr>
+<td>8</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>16</td>
+<td>10000</td>
+</tr>
+<tr>
+<td>32</td>
+<td>100000</td>
+</tr>
+</tbody>
+</table>
+<p>可以看出这些索引的1都在第一个位上，也就是这些索引之间使用<code>|</code>运算时，结果会和十进制加法一样，因为不会有相同位都为1的情况出现，比如以上六个数计算<code>|</code>，二进制结果是：111111，十进制结果是63。</p>
+<p>所以这种写法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activeSheet.copyTo(<span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">-1</span>, GC.Spread.Sheets.CopyToOptions.style | GC.Spread.Sheets.CopyToOptions.formula | GC.Spread.Sheets.CopyToOptions.value)</span><br></pre></td></tr></table></figure>
+<p>传递进去的参数就是1+2+64 = 67，二进制是1000011。</p>
+<p>参数传进去了，怎么解析呢？追踪函数调用，得到了下图：</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200615/s3tM8dv3YIuo.png" alt="mark"></p>
+<p>上图中红框中的p为传进来的参数，答案揭晓了，使用按位与来处理！！！</p>
+<p>再复习一下按位与：</p>
+<p>“&amp;”运算符（位与）用于对两个二进制操作数逐位进行比较，并根据下表所示的换算表返回结果。</p>
+<table>
+<thead>
+<tr>
+<th>第一个数的位值</th>
+<th>第二个数的位值</th>
+<th>运算结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>在位运算中，数值 1 表示 true，0 表示 false，反之亦然。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(12 &amp; 5);  //返回值4</span><br></pre></td></tr></table></figure>
+<p>下图以算式的形式解析了 12 和 5 进行位与运算的过程。通过位与运算，只有第 3 位的值为全为 true，故返回 true，其他位均返回 false。</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20200615/N7orqO466E1T.png" alt="mark"></p>
+<p>继续上面的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activeSheet.copyTo(<span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">-1</span>, GC.Spread.Sheets.CopyToOptions.style | GC.Spread.Sheets.CopyToOptions.formula | GC.Spread.Sheets.CopyToOptions.value)</span><br></pre></td></tr></table></figure>
+<p>得到参数就是1+2+64 = 67，二进制是1000011，这里如何判断67包不包含value（1）呢</p>
+<p>直接判断<code>(1 &amp; 67)&gt;0</code>即可！即为67的二进制表示1000011的和1的二进制表示1进行按位与，结果为0000001，也就是十进制1，大于0！判断包不包含formula和style的算法一样，分别是<code>(2 &amp; 67)&gt;0</code>和<code>(64 &amp; 67)&gt;0</code></p>
+<p>由此我们得出结论<strong>如果包含，则同一位上一定有两个1存在，运算之后的二进制结果中该位上是1，其他位都是0，结果一定大于0。</strong></p>
+<p>这种设计很巧妙，让我想起了之前老鼠试验毒药的算法题：</p>
+<p><strong>问题描述：</strong>有1000桶酒，其中1桶有毒。而一旦吃了，毒性会在1周后发作。现在我们用小老鼠做实验，要在1周后找出那桶毒酒，问最少需要多少老鼠。</p>
+<p><strong>答案：</strong>老鼠个位为：10只， 2^10 = 1024 &gt; 1000</p>
+<p>解题：</p>
+<p>(1)把10只老鼠依次排队为：0 - 9，关在笼子里</p>
+<p>(2)把1000只桶酒依次编号，并换算成二进制，如 8 = 1000，根据二进制中出现1的位数对相应位置小鼠酒。 因为我们选择的是10只</p>
+<pre><code>小鼠，2^10 = 1024 &gt; 1000,能够保证所有的编号的酒都能被喂小鼠而不会遗漏被转为二进制的1的位.
+</code></pre><p>(3)长时间的等待，等待小鼠的死亡</p>
+<p>(4)把死亡小鼠的依次记录，如 00001 00010 = 34</p>
+<p>分析：我们记得两数进行或“ | ”操作，只要有1结果总是1，就是这个原理，当有毒的酒被编号二进制喂给小鼠，只有被喂食的小鼠都会死掉，正是死掉的小鼠记录了有毒酒的二进制。记录的结果就是有毒酒的二进制，转化就可以得到其编号。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>你转给我的不是钱，只是数字<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/20/git指北/" class="archive-article-date">
-  	<time datetime="2018-05-20T08:44:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/20/git指北/">git指北</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2020/06/15/如何使用位运算符设计接口参数/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/27/移动页面点击事件穿透问题解决方案/" class="archive-article-date">
-  	<time datetime="2018-04-27T09:08:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-27</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/04/11/使用codemirror制作一个代码编辑器/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用codemirror制作一个代码编辑器</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/27/移动页面点击事件穿透问题解决方案/">移动页面点击事件穿透问题解决方案</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/30/win10家庭版关闭自动更新/" class="archive-article-date">
-  	<time datetime="2018-03-30T02:02:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-30</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/30/win10家庭版关闭自动更新/">win10家庭版关闭自动更新</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">win</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/13/使用amr-js播放amr格式的录音文件/" class="archive-article-date">
-  	<time datetime="2018-03-13T03:51:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/13/使用amr-js播放amr格式的录音文件/">使用amr.js播放&quot;amr&quot;格式的录音文件</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/25/Node爬取拍信网图片/" class="archive-article-date">
-  	<time datetime="2018-02-25T06:14:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/25/Node爬取拍信网图片/">Node爬取拍信网图片</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">node.js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/23/千里之行，始于足下/" class="archive-article-date">
-  	<time datetime="2018-02-23T01:37:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/23/千里之行，始于足下/">千里之行，始于足下</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">quiz</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/30/Win10找回hosts的命令/" class="archive-article-date">
-  	<time datetime="2018-01-30T02:07:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/30/Win10找回hosts的命令/">Win10找回hosts的命令</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">system</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/17/chrome的chrome-inspect-devices工具崩溃解决办法/" class="archive-article-date">
-  	<time datetime="2018-01-17T06:14:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/17/chrome的chrome-inspect-devices工具崩溃解决办法/">chrome的chrome://inspect/#devices工具崩溃解决办法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">webview</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/02/2018没羞没臊的总结文档/" class="archive-article-date">
-  	<time datetime="2018-01-02T02:38:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/02/2018没羞没臊的总结文档/">2018没羞没臊的总结文档</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">心爱的人</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2018/">&laquo; Prev</a><a class="page-number" href="/archives/2018/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -567,8 +537,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

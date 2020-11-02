@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="张伯伯的BLOG">
 <meta property="og:description" content="git提交四部曲： git pull origin master  将GitHub上仓库的内容pull到本地仓库，两者保持一致； git add 需要上传的文件    添加文件到本地库，全部文件：git add .； git commit -m “add a cat” 提交文件到本地库； git push origin master 上传文件；">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-21T08:49:35.105Z">
+<meta property="og:updated_time" content="2020-11-02T02:45:51.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git指北">
 <meta name="twitter:description" content="git提交四部曲： git pull origin master  将GitHub上仓库的内容pull到本地仓库，两者保持一致； git add 需要上传的文件    添加文件到本地库，全部文件：git add .； git commit -m “add a cat” 提交文件到本地库； git push origin master 上传文件；">
@@ -218,6 +218,12 @@ var _hmt = _hmt || [];
 <p><code>git rm -r --cached</code> 文件名   删除文件;</p>
 <p><code>git commit -m “delete dir”</code>  提交并添加说明;</p>
 <p><code>git push origin master</code> 将本次更改更新到github项目上去;</p>
+<h4 id="ssh-connect-to-host-github-com-port-22-Connection-timed-out-解决方案"><a href="#ssh-connect-to-host-github-com-port-22-Connection-timed-out-解决方案" class="headerlink" title="ssh: connect to host github.com port 22: Connection timed out 解决方案"></a>ssh: connect to host github.com port 22: Connection timed out 解决方案</h4><p>这个问题是很多人都遇到过的，确定公钥已经配置成功，那就是网关的问题，对我来说生效的解决办法是改端口：</p>
+<p><a href="https://stackoverflow.com/questions/15589682/ssh-connect-to-host-github-com-port-22-connection-timed-out#" target="_blank" rel="noopener">https://stackoverflow.com/questions/15589682/ssh-connect-to-host-github-com-port-22-connection-timed-out#</a></p>
+<p>在.ssh文件夹下添加config，config中写入以下内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line"> Hostname ssh.github.com</span><br><span class="line"> Port 443</span><br></pre></td></tr></table></figure>
+<p>然后，运行命令<code>ssh -T git@github.com</code>以确认问题是否已解决。</p>
+<p>运行命令时提示是否连接，输入yes即可。</p>
 
       
 
@@ -370,7 +376,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#常用命令"><span class="toc-number">1.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#初始化的工作"><span class="toc-number">2.</span> <span class="toc-text">初始化的工作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#添加SSH-Key"><span class="toc-number">2.1.</span> <span class="toc-text">添加SSH Key</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#配置用户：引号内的填写你注册github时的用户名和密码"><span class="toc-number">2.2.</span> <span class="toc-text">配置用户：引号内的填写你注册github时的用户名和密码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#将github上的代码库克隆到本地"><span class="toc-number">2.3.</span> <span class="toc-text">将github上的代码库克隆到本地</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除远程仓库里的文件"><span class="toc-number">3.</span> <span class="toc-text">删除远程仓库里的文件</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#常用命令"><span class="toc-number">1.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#初始化的工作"><span class="toc-number">2.</span> <span class="toc-text">初始化的工作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#添加SSH-Key"><span class="toc-number">2.1.</span> <span class="toc-text">添加SSH Key</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#配置用户：引号内的填写你注册github时的用户名和密码"><span class="toc-number">2.2.</span> <span class="toc-text">配置用户：引号内的填写你注册github时的用户名和密码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#将github上的代码库克隆到本地"><span class="toc-number">2.3.</span> <span class="toc-text">将github上的代码库克隆到本地</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除远程仓库里的文件"><span class="toc-number">3.</span> <span class="toc-text">删除远程仓库里的文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ssh-connect-to-host-github-com-port-22-Connection-timed-out-解决方案"><span class="toc-number">4.</span> <span class="toc-text">ssh: connect to host github.com port 22: Connection timed out 解决方案</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -494,6 +500,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
@@ -502,19 +516,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -522,11 +524,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -538,7 +540,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -547,6 +553,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -566,10 +580,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vscode</a>
               </li>
              
@@ -582,19 +592,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -602,7 +604,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">

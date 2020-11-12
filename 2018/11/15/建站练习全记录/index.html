@@ -17,7 +17,7 @@
 <meta property="og:description" content="黄河西来决昆仑，咆哮万里触龙门。 —————– by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20181205/UR7r9tM6kt4r.jpg?imageslim">
-<meta property="og:updated_time" content="2020-05-01T11:32:59.154Z">
+<meta property="og:updated_time" content="2020-11-12T08:23:42.550Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="建站练习全记录">
 <meta name="twitter:description" content="黄河西来决昆仑，咆哮万里触龙门。 —————– by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
@@ -354,14 +354,16 @@ var _hmt = _hmt || [];
 <p>赋予的角色为userAdminAnyDatabase,这个角色可以管理27017下所有数据库的用户;</p>
 <p><a href="https://docs.mongodb.com/manual/reference/built-in-roles/#dbOwner" target="_blank" rel="noopener">具体角色分类请看官网</a></p>
 <p>添加用户密码成功后，将数据库配置文件mongodb.conf中的auth修改为true，再次启动服务器。这样，下次再连接数据库，就需要使用用户和密码登录，才能权限操作数据库:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.auth(<span class="string">"adminUser"</span>,<span class="string">"adminPass"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use admin</span><br><span class="line">db.auth(<span class="string">"adminUser"</span>,<span class="string">"adminPass"</span>)</span><br></pre></td></tr></table></figure>
 <p>通常不能直接使用local或者admin库为业务数据库,我们需要授权admin中的用户管理其他数据库:</p>
 <p>下面我们在admin库中执行以下命令：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">use admin</span><br><span class="line">db.grantRolesToUser(<span class="string">"adminUser"</span>, [ &#123; <span class="attr">role</span>:<span class="string">"dbOwner"</span>, <span class="attr">db</span>:<span class="string">"test"</span>&#125; ])</span><br><span class="line">##admin  指的是用户名  test 指的要授权的数据库</span><br><span class="line">use test</span><br><span class="line">db.auth(<span class="string">"adminUser"</span>,<span class="string">"adminPass"</span>)</span><br><span class="line">db.createCollection(<span class="string">"newCollection"</span>)</span><br><span class="line">&#123; <span class="string">"ok"</span> : <span class="number">1</span> &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">use admin</span><br><span class="line">db.auth(<span class="string">"adminUser"</span>,<span class="string">"adminPass"</span>)</span><br><span class="line">db.grantRolesToUser(<span class="string">"adminUser"</span>, [ &#123; <span class="attr">role</span>:<span class="string">"dbOwner"</span>, <span class="attr">db</span>:<span class="string">"test"</span>&#125; ])</span><br><span class="line">##admin  指的是用户名  test 指的要授权的数据库</span><br><span class="line">use test</span><br><span class="line">db.createCollection(<span class="string">"newCollection"</span>)</span><br><span class="line">&#123; <span class="string">"ok"</span> : <span class="number">1</span> &#125;</span><br></pre></td></tr></table></figure>
 <p>我们将dbOwner角色赋予了adminUser,这代表adminUser可以在test数据库上执行任何管理操作,包含 readWrite, dbAdmin and userAdmin roles;</p>
 <p>5.设置随开机自启</p>
 <p>在<code>/etc/rc.local</code> 中添加启动命令即可</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/rc.local</span><br><span class="line">mongod --config /service/mongodb/bin/mongodb.conf</span><br></pre></td></tr></table></figure>
+<p>5.修改数据库用户密码：修改一个超级复杂的密码吧，防止数据被盗！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.changeUserPassword(<span class="string">'adminUser'</span>,<span class="string">'chaojifuza'</span>);</span><br></pre></td></tr></table></figure>
 <h4 id="远程连接mongodb数据库"><a href="#远程连接mongodb数据库" class="headerlink" title="远程连接mongodb数据库"></a>远程连接mongodb数据库</h4><p>1.在阿里云实例安全组中开启27017端口(需重启服务器);</p>
 <p>2.使用mongobooster可视化管理工具链接数据库新建一个连接,在basic选项卡的server处输入公网ip和端口;</p>
 <p>3.在authentication选项卡中:mode选择basic(username/password),然后设置好database,用户名和密码;</p>
@@ -662,19 +664,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -682,11 +672,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -694,7 +696,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -706,7 +708,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -718,7 +720,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -726,11 +728,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -738,15 +744,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">

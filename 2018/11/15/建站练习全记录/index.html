@@ -17,7 +17,7 @@
 <meta property="og:description" content="黄河西来决昆仑，咆哮万里触龙门。 —————– by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20181205/UR7r9tM6kt4r.jpg?imageslim">
-<meta property="og:updated_time" content="2020-11-12T08:23:42.550Z">
+<meta property="og:updated_time" content="2020-11-18T09:06:43.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="建站练习全记录">
 <meta name="twitter:description" content="黄河西来决昆仑，咆哮万里触龙门。 —————– by 李白 公无渡河  写在前面:  起源是18年双十一购买的阿里云剁手服务器(ps:超便宜,298三年还返现170),正好域名需要icp备案才能使用七牛云的图床,为了icp备案,所以才有了此次建站练习, 因为有大学玩学生服务器的经验,这次建站就凭着我超bu强ting的de记bai忆du顺利开展起来,本篇博客随时更新,记录网站建设中值得分享的点。">
@@ -368,6 +368,16 @@ var _hmt = _hmt || [];
 <p>2.使用mongobooster可视化管理工具链接数据库新建一个连接,在basic选项卡的server处输入公网ip和端口;</p>
 <p>3.在authentication选项卡中:mode选择basic(username/password),然后设置好database,用户名和密码;</p>
 <p>4.点击save&amp;connect即可连接;</p>
+<h3 id="配置nginx转发https到http"><a href="#配置nginx转发https到http" class="headerlink" title="配置nginx转发https到http"></a>配置nginx转发https到http</h3><p>做小程序需要https协议，所以在阿里云申请了免费的ssl证书，申请过程很简单，免费级的申请审批会直接通过，接下来下载你申请的证书，解压后文件有两个：pem和key。</p>
+<h4 id="配置ca证书"><a href="#配置ca证书" class="headerlink" title="配置ca证书"></a>配置ca证书</h4><p>nginx的安装目录为：/etc/nginx/。进入目录，增加cert文件夹，把刚刚下载的两个文件上传到cert/文件夹中。</p>
+<p>接下来配置nginx.conf,添加监听443接口（注意检查阿里云的安全组是否放开了443端口，默认不放开）：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">443</span>;</span><br><span class="line">    <span class="attribute">server_name</span>  _;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">ssl</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">ssl_certificate</span> /etc/nginx/cert/your.pem;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> /etc/nginx/cert/your.key;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">ssl_session_timeout</span> <span class="number">1d</span>;</span><br><span class="line">    <span class="attribute">ssl_session_cache</span> shared:SSL:<span class="number">50m</span>;</span><br><span class="line">    <span class="attribute">ssl_session_tickets</span> <span class="literal">off</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span>   http://ABC.com;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置完成后，检查一下nginx配置文件是否可用，有successful表示可用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nginx -t // 检查nginx配置文件</span><br></pre></td></tr></table></figure>
+<p>配置正确后，重新加载配置文件使配置生效：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nginx -s reload // 使配置生效</span><br></pre></td></tr></table></figure>
+<p>如需重启nginx，用以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ service nginx stop // 停止</span><br><span class="line">$ service nginx start // 启动</span><br><span class="line">$ service nginx restart // 重启</span><br></pre></td></tr></table></figure>
 <h3 id="mdx-deck打包后修改资源路径"><a href="#mdx-deck打包后修改资源路径" class="headerlink" title="mdx-deck打包后修改资源路径"></a>mdx-deck打包后修改资源路径</h3><p>我使用<a href="https://github.com/jxnblk/mdx-deck" target="_blank" rel="noopener">mdx-deck</a>和<a href="https://github.com/pomber/code-surfer" target="_blank" rel="noopener">code-surfer</a>实现了一个eventLoop面试题的动态讲解，在打包后部署到服务器上时遇到了一个问题，那就是mdx-deck无法指定资源路径，所以只好手动修改打包后的文件：</p>
 <ol>
 <li>将index.html中的路径全部修改：<code>=&quot;/</code>替换成<code>=&quot;/yourPath/</code></li>
@@ -536,7 +546,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、准备服务器和相关工具"><span class="toc-number">1.</span> <span class="toc-text">一、准备服务器和相关工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、搭建个简单的架子"><span class="toc-number">2.</span> <span class="toc-text">二、搭建个简单的架子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-在本地准备个程序"><span class="toc-number">2.1.</span> <span class="toc-text">1.在本地准备个程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-在服务器安装node以及pm2"><span class="toc-number">2.2.</span> <span class="toc-text">2.在服务器安装node以及pm2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-开启端口并启动服务"><span class="toc-number">2.3.</span> <span class="toc-text">3.开启端口并启动服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搭建git服务"><span class="toc-number">3.</span> <span class="toc-text">搭建git服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装git"><span class="toc-number">3.1.</span> <span class="toc-text">1.安装git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2获取公钥"><span class="toc-number">3.2.</span> <span class="toc-text">2获取公钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-连接github仓库"><span class="toc-number">3.3.</span> <span class="toc-text">3.连接github仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-服务器配置文件不更新的命令"><span class="toc-number">3.4.</span> <span class="toc-text">4.服务器配置文件不更新的命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5使用-GitHub的-Webhooks-进行网站自动化部署"><span class="toc-number">3.5.</span> <span class="toc-text">5使用 GitHub的 Webhooks 进行网站自动化部署</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx反向代理"><span class="toc-number">4.</span> <span class="toc-text">nginx反向代理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#反向代理nginx"><span class="toc-number">4.1.</span> <span class="toc-text">反向代理nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装nginx"><span class="toc-number">4.2.</span> <span class="toc-text">安装nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#如果安装nginx的时候报错，可以尝试下面的方法："><span class="toc-number">4.2.1.</span> <span class="toc-text">如果安装nginx的时候报错，可以尝试下面的方法：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反向代理80端口到3000端口"><span class="toc-number">4.3.</span> <span class="toc-text">反向代理80端口到3000端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用命令"><span class="toc-number">4.4.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考"><span class="toc-number">4.5.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MongoDB的使用"><span class="toc-number">5.</span> <span class="toc-text">MongoDB的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装"><span class="toc-number">5.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动MongoDB"><span class="toc-number">5.2.</span> <span class="toc-text">启动MongoDB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程连接mongodb数据库"><span class="toc-number">5.3.</span> <span class="toc-text">远程连接mongodb数据库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mdx-deck打包后修改资源路径"><span class="toc-number">6.</span> <span class="toc-text">mdx-deck打包后修改资源路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录"><span class="toc-number">7.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-pm2常用命令"><span class="toc-number">7.1.</span> <span class="toc-text">1.pm2常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-pm2启动配置文件"><span class="toc-number">7.2.</span> <span class="toc-text">2.pm2启动配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-MongoDB导出-导入数据文件"><span class="toc-number">7.3.</span> <span class="toc-text">3.MongoDB导出/导入数据文件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#导出数据库文件到json文件中"><span class="toc-number">7.3.1.</span> <span class="toc-text">导出数据库文件到json文件中</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#导入json文件"><span class="toc-number">7.3.2.</span> <span class="toc-text">导入json文件</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-安装zip"><span class="toc-number">7.4.</span> <span class="toc-text">4.安装zip</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、准备服务器和相关工具"><span class="toc-number">1.</span> <span class="toc-text">一、准备服务器和相关工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、搭建个简单的架子"><span class="toc-number">2.</span> <span class="toc-text">二、搭建个简单的架子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-在本地准备个程序"><span class="toc-number">2.1.</span> <span class="toc-text">1.在本地准备个程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-在服务器安装node以及pm2"><span class="toc-number">2.2.</span> <span class="toc-text">2.在服务器安装node以及pm2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-开启端口并启动服务"><span class="toc-number">2.3.</span> <span class="toc-text">3.开启端口并启动服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搭建git服务"><span class="toc-number">3.</span> <span class="toc-text">搭建git服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装git"><span class="toc-number">3.1.</span> <span class="toc-text">1.安装git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2获取公钥"><span class="toc-number">3.2.</span> <span class="toc-text">2获取公钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-连接github仓库"><span class="toc-number">3.3.</span> <span class="toc-text">3.连接github仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-服务器配置文件不更新的命令"><span class="toc-number">3.4.</span> <span class="toc-text">4.服务器配置文件不更新的命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5使用-GitHub的-Webhooks-进行网站自动化部署"><span class="toc-number">3.5.</span> <span class="toc-text">5使用 GitHub的 Webhooks 进行网站自动化部署</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx反向代理"><span class="toc-number">4.</span> <span class="toc-text">nginx反向代理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#反向代理nginx"><span class="toc-number">4.1.</span> <span class="toc-text">反向代理nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装nginx"><span class="toc-number">4.2.</span> <span class="toc-text">安装nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#如果安装nginx的时候报错，可以尝试下面的方法："><span class="toc-number">4.2.1.</span> <span class="toc-text">如果安装nginx的时候报错，可以尝试下面的方法：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反向代理80端口到3000端口"><span class="toc-number">4.3.</span> <span class="toc-text">反向代理80端口到3000端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用命令"><span class="toc-number">4.4.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考"><span class="toc-number">4.5.</span> <span class="toc-text">参考</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MongoDB的使用"><span class="toc-number">5.</span> <span class="toc-text">MongoDB的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装"><span class="toc-number">5.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动MongoDB"><span class="toc-number">5.2.</span> <span class="toc-text">启动MongoDB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程连接mongodb数据库"><span class="toc-number">5.3.</span> <span class="toc-text">远程连接mongodb数据库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置nginx转发https到http"><span class="toc-number">6.</span> <span class="toc-text">配置nginx转发https到http</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置ca证书"><span class="toc-number">6.1.</span> <span class="toc-text">配置ca证书</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mdx-deck打包后修改资源路径"><span class="toc-number">7.</span> <span class="toc-text">mdx-deck打包后修改资源路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录"><span class="toc-number">8.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-pm2常用命令"><span class="toc-number">8.1.</span> <span class="toc-text">1.pm2常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-pm2启动配置文件"><span class="toc-number">8.2.</span> <span class="toc-text">2.pm2启动配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-MongoDB导出-导入数据文件"><span class="toc-number">8.3.</span> <span class="toc-text">3.MongoDB导出/导入数据文件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#导出数据库文件到json文件中"><span class="toc-number">8.3.1.</span> <span class="toc-text">导出数据库文件到json文件中</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#导入json文件"><span class="toc-number">8.3.2.</span> <span class="toc-text">导入json文件</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-安装zip"><span class="toc-number">8.4.</span> <span class="toc-text">4.安装zip</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -664,7 +674,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -672,11 +682,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -684,11 +690,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -696,11 +702,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -712,11 +730,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -725,10 +739,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -756,11 +766,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">

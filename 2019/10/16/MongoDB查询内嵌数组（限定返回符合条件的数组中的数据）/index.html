@@ -17,7 +17,7 @@
 <meta property="og:description" content="mongoDB相关操作：  mongo查询内嵌数组（限定返回符合条件的数组中的数据） 使用mongoexport导出数据 mongostat查看mongodb运行状态使用命令">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191022/P7sr653iL2gH.jpg">
-<meta property="og:updated_time" content="2020-03-09T12:24:17.958Z">
+<meta property="og:updated_time" content="2020-12-16T07:53:37.802Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB相关操作记录">
 <meta name="twitter:description" content="mongoDB相关操作：  mongo查询内嵌数组（限定返回符合条件的数组中的数据） 使用mongoexport导出数据 mongostat查看mongodb运行状态使用命令">
@@ -242,7 +242,11 @@ var _hmt = _hmt || [];
 <p>centos：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mongoexport -h 127.0.0.1:3333 -d "rk" -c "mobile_message" -q='&#123;"batch" :891&#125;' -o /data/mobileMassage/test.json</span><br></pre></td></tr></table></figure>
 <p>导出csv：(如果以 csv 格式导出，需要指定导出集合的字段)</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mongoexport -h 127.0.0.1:3333 -d "rk" -c "mobile_message" -q='&#123;"batch" :891&#125;' -o /data/mobileMassage/test.csv</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mongoexport -h 127.0.0.1:3333 -d "rk" -c "mobile_message" -q='&#123;"batch" :891&#125;' -f _id,colName1,colName2 -o /data/mobileMassage/test.csv</span><br></pre></td></tr></table></figure>
+<p>指定<code>--type csv --fields icode,code,name</code> 后csv可按照正常的表格排列，导出请使用以下写法:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mongoexport -h 127.0.0.1:3333 -d "rk" -c "mobile_message" -q='&#123;"batch" :891&#125;' --type csv --fields _id,colName1,colName2 -o /data/mobileMassage/test.csv</span><br></pre></td></tr></table></figure>
+<p>如需登录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./mongoexport -h 127.0.0.1:3333 --username "yourname" --password "password" --authenticationDatabase "admin" -d "rk" -c "mobile_message" -q='&#123;"batch" :891&#125;' --type csv --fields _id,colName1,colName2 -o /data/mobileMassage/test.csv</span><br></pre></td></tr></table></figure>
 <p>-h 表示主机IP或主机名;<br>-d 表示数据库名;<br>-c 表示集合名;<br>-f 表示所选集合的字段;<br>-o 表示导出的文件名。</p>
 <h5 id="打开csv乱码解决办法"><a href="#打开csv乱码解决办法" class="headerlink" title="打开csv乱码解决办法"></a>打开csv乱码解决办法</h5><p>在简体中文环境下，excel打开的csv文件默认是ANSI编码，如果CSV文件的编码方式为utf-8、Unicode等编码可能就会出现文件乱码的情况。</p>
 <p>解决办法：<br>使用记事本打开csv文件；<br>点击菜单：文件-另存为，编码方式选择ANSI；<br>保存后，再用Excel打开这个文件就不会出现乱码的情况了。</p>
@@ -557,6 +561,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
@@ -565,19 +573,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -585,15 +581,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -602,6 +598,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">mongod</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -629,11 +633,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -641,11 +645,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">

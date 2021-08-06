@@ -29,9 +29,9 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200304/GMhb4KMDMpsf.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20200304/059U6co5kGBB.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20210806110033.png">
-<meta property="og:image" content="c:/Users/zhangw/AppData/Roaming/Typora/typora-user-images/image-20210806160858256.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blogimage-20210806160858256.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog2021-08-06-16-16-41.gif">
-<meta property="og:updated_time" content="2021-08-06T08:18:40.474Z">
+<meta property="og:updated_time" content="2021-08-06T08:28:12.575Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mxGraph工作流图形构建实战">
 <meta name="twitter:description" content="mxGraph简介什么是mxGraphmxGraph是一个强大到令人发指的 JS 绘图组件，用于在网页中设计/编辑 Workflow/BPM流程图、图表、网络图和普通图形的 Web 应用程序。 大名鼎鼎的在线绘图（flow chart）网站draw.io就是基于这个库开发出来的。 具体介绍请见官网、github。 官方提供了大量实例，可以参考：JavaScript demo 这个库拥有超大量的a">
@@ -358,7 +358,7 @@ var _hmt = _hmt || [];
 <p>注：下面的CE为controls.editor的缩写，CEG为controls.editor.graph的缩写；</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">nodeList.forEach(<span class="function">(<span class="params">v</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (v.tier === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">// 分组相关，省略</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (v.tier === <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="comment">// 取出节点配置</span></span><br><span class="line">        <span class="keyword">let</span> curInfo = nodeInfo[v.code];</span><br><span class="line">        <span class="comment">// curNodeBox 为容器dom</span></span><br><span class="line">        curNodeBox.appendChild(getNodeDom(curInfo));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成列表节点</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNodeDom</span>(<span class="params">info</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个图片</span></span><br><span class="line">    <span class="keyword">var</span> img = mxUtils.createImage(info.icon); </span><br><span class="line">    img.classList.add(<span class="string">'nodeImg'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建悬浮的占位预览框</span></span><br><span class="line">    <span class="keyword">var</span> dragElt = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</span><br><span class="line">    dragElt.style.border = <span class="string">'dashed black 1px'</span>;</span><br><span class="line">    dragElt.style.width = info.width || <span class="string">'32px'</span>;</span><br><span class="line">    dragElt.style.height = info.height || <span class="string">'32px'</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 取出模板中的图形节点</span></span><br><span class="line">    <span class="keyword">var</span> newCell = CE.templates[info.template];</span><br><span class="line">    <span class="keyword">if</span> (!newCell) <span class="keyword">return</span> dhtmlxAlert(<span class="string">'节点未配置:'</span> + info.code);</span><br><span class="line">    newCell = CEG.cloneCell(newCell);</span><br><span class="line">    <span class="comment">// 设置自定义样式</span></span><br><span class="line">    <span class="keyword">if</span> (info.style) newCell.setStyle(info.style);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 拖拽结束的处理函数</span></span><br><span class="line">    <span class="keyword">var</span> funct = <span class="function"><span class="keyword">function</span> (<span class="params">graph, evt, cell, x, y</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> pt = graph.getPointForEvent(evt);</span><br><span class="line">        <span class="keyword">var</span> vertex = CEG.cloneCell(newCell);</span><br><span class="line">        <span class="comment">// 这里必须用editor的添加图形方式，否则添加泳道图时会采用默认的无背景颜色</span></span><br><span class="line">        CE.addVertex(cell, vertex, pt.x, pt.y);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注册拖拽</span></span><br><span class="line">    <span class="keyword">var</span> ds = mxUtils.makeDraggable(img, CEG, funct, dragElt, <span class="literal">null</span>, <span class="literal">null</span>, CEG.autoscroll, <span class="literal">true</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 参考线相关</span></span><br><span class="line">    ds.isGuidesEnabled = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> CEG.graphHandler.guidesEnabled;</span><br><span class="line">    &#125;;</span><br><span class="line">    ds.createDragElement = mxDragSource.prototype.createDragElement;</span><br><span class="line">    <span class="keyword">return</span> img;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当前的效果图：</p>
-<p><img src="C:\Users\zhangw\AppData\Roaming\Typora\typora-user-images\image-20210806160858256.png" alt="image-20210806160858256"></p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blogimage-20210806160858256.png" alt></p>
 <p>上图红色虚线是参考线，黑色正方形虚线是我鼠标从节点列表拖动message节点过来，还没松开鼠标的效果。</p>
 <p>动图演示：</p>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog2021-08-06-16-16-41.gif" alt></p>
@@ -641,11 +641,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -653,7 +649,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,11 +661,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -673,19 +673,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -693,19 +681,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -717,6 +693,34 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vscode</a>
               </li>
              
@@ -725,23 +729,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">

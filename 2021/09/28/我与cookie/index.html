@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: websql | 张伯伯的BLOG</title>
+  <title>我与cookie | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="哪里有幸福可借">
-<meta property="og:type" content="website">
-<meta property="og:title" content="张伯伯的BLOG">
-<meta property="og:url" content="http://yoursite.com/tags/websql/index.html">
+  <meta name="description" content="项目中遇到的cookie相关知识">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我与cookie">
+<meta property="og:url" content="http://yoursite.com/2021/09/28/我与cookie/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="哪里有幸福可借">
+<meta property="og:description" content="项目中遇到的cookie相关知识">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-09-28T11:56:40.543Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="张伯伯的BLOG">
-<meta name="twitter:description" content="哪里有幸福可借">
+<meta name="twitter:title" content="我与cookie">
+<meta name="twitter:description" content="项目中遇到的cookie相关知识">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -171,60 +173,343 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-我与cookie" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/25/websql使用指南/" class="archive-article-date">
-  	<time datetime="2017-08-25T08:14:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-25</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/25/websql使用指南/">websql使用指南</a>
+    <h1 class="article-title" itemprop="name">
+      我与cookie
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/09/28/我与cookie/" class="archive-article-date">
+  	<time datetime="2021-09-28T08:07:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>项目中遇到的cookie相关知识</p>
+<a id="more"></a>
+<h3 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h3><p>遇到了同一个域名多系统的情况，出现了一个登录之后，另一个的登录态丢失的问题：</p>
+<ul>
+<li><a href="http://wonendie.com/" target="_blank" rel="noopener">http://wonendie.com/</a>  主系统</li>
+<li><a href="http://wonendie.com/sys" target="_blank" rel="noopener">http://wonendie.com/sys</a> 子系统</li>
+</ul>
+<p>原因是这两个cookie的domian都是<code>wonendie.com</code>,而path在后台设置sessionId的cookie时，都设成了<code>/</code>,所以导致了cookie作用域相同，互相覆盖了，只要改下配置即可，于是在nginx中改配置如下：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#主系统：</span></span><br><span class="line"><span class="attribute">location</span> / &#123;</span><br><span class="line">    <span class="attribute">proxy_cookie_path</span> /sys /</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#子系统：</span></span><br><span class="line">location /sys/ &#123;</span><br><span class="line">    <span class="attribute">proxy_cookie_path</span> / /sys</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样子系统存储sessionId的cookie的path为<code>/sys</code>，而主系统的path是<code>/</code>;这样就隔离开了。</p>
+<p><strong>proxy_cookie_path</strong> 的作用是用来改变cookie的路径：</p>
+<p>语法： proxy_cookie_path  <code>path</code>  <code>replacement</code>;</p>
+<p><code>path</code>就是你要替换的路径 <code>replacement</code> 就是要替换的值；</p>
+<p>详见：<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html?&amp;_ga=1.161910972.1696054694.1422417685#proxy_cookie_path" target="_blank" rel="noopener">nginx proxy_cookie_path 文档</a></p>
+<h3 id="cookie的作用域"><a href="#cookie的作用域" class="headerlink" title="cookie的作用域"></a>cookie的作用域</h3><p>以下内容是拷贝后进行部分修改，<a href="https://www.cnblogs.com/chenqianpeng/archive/2012/04/24/2468642.html" target="_blank" rel="noopener">原文</a>。</p>
+<h4 id="domain"><a href="#domain" class="headerlink" title="domain"></a>domain</h4><p>今天我们就来探讨一下domain，因为它决定了cookie的作用域。</p>
+<p>现在有如下3个域名，一个顶级域名、一个二级域名和一个三级域名：</p>
+<p><strong>① zydya.com</strong><br><strong>②blog.zyday.com</strong><br><strong>③one.blog.zyday.com</strong></p>
+<ul>
+<li>首先在①zyday.com域名下设置cookie，做四次测试，分别设置domain参数为空、’zyday.com’、’blog.zyday.com’与’one.blog.zyday.com’。<br>√表示该域名下能取到cookie，×表示不能取到cookie</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>domain参数</th>
+<th><strong><em>zydya.com\</em></strong></th>
+<th>blog.zyday.com</th>
+<th>one.blog.zyday.com</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>setcookie(‘name’,1,time()+1)</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>setcookie(‘name’,1,time()+1,’/‘,’zyday.com’)</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>setcookie(‘name’,1,time() +1,’/‘,’blog.zyday.com’)</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td>setcookie(‘name’,1,time() +1,’/‘,’one.blog.zyday.com’)</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+</tbody>
+</table>
+<p>当domain设置为空时，domain默认为当前域名，并且该域名下的子域名都可以接收到cookie。<br>但是domain参数设置其子域名时，所有域名就接收不到了，包括那个子域名。</p>
+<ul>
+<li>然后在②blog.zyday.com域名下设置cookie，测试条件同上</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>domain参数</th>
+<th>zydya.com</th>
+<th><strong><em>blog.zyday.com</em></strong></th>
+<th>one.blog.zyday.com</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>setcookie(‘name’,1,time() +1)</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>setcookie(‘name’,1,time()+1,’/‘,’zyday.com’)</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>setcookie(‘name’,1,time()+1,’/‘,’blog.zyday.com’)</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>setcookie(‘name’,1,time()+1,’/‘,one.blog.zyday.com’)</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+</tbody>
+</table>
+<p>看第二行，domain参数是zyday.com，是blog.zyday.com的父域名，那么zyday.com下所有子域名(包括zyday.com、blog.zyday.com、one.blog.zyday.com)都能接收到cookie。<br>当domain为自身域名时，那么其父域名不受影响，其本身与其子域名可以接收到cookie。<br>而设置其子域名或其他域名时，所有域名都接收不到cookie了。</p>
+<ul>
+<li>最后在③one.blog.zyday.com域名下设置cookie</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>domain参数</th>
+<th>zydya.com</th>
+<th>blog.zyday.com</th>
+<th><strong><em>one.blog.zyday.com</em></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>setcookie(‘name’,1,time() +1)</td>
+<td>×</td>
+<td>×</td>
+<td>√</td>
+</tr>
+<tr>
+<td>setcookie(‘name’,1,time()+1,’/‘,’zyday.com’)</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>setcookie(‘name’,1,time()+1,’/‘,’blog.zyday.com’)</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>setcookie(‘name’,1,time()+1,’/‘,one.blog.zyday.com’)</td>
+<td>×</td>
+<td>×</td>
+<td>√</td>
+</tr>
+</tbody>
+</table>
+<p>第三个测试得出的结论在上面已经总结了。再看一遍，这里就不多解释了。</p>
+<p>domain的设置，有两点要注意：</p>
+<p>1.在setcookie中省略domain参数，那么domain默认为当前域名。</p>
+<p>2.domain参数可以设置父域名以及自身，但<strong>不能</strong>设置其它域名，包括子域名，否则cookie不起作用。</p>
+<p>那么cookie的作用域：</p>
+<p><strong>cookie的作用域是domain本身以及domain下的所有子域名。</strong></p>
+<h4 id="path规则"><a href="#path规则" class="headerlink" title="path规则"></a>path规则</h4><p>path表示cookie所在的目录，asp.net默认为/，就是根目录。在同一个服务器上有目录如下：<code>/test/</code>,<code>/test/cd/</code>,<code>/test/dd/</code>，现设一个cookie1的path为<code>/test/</code>，cookie2的path为<code>/test/cd/</code>，那么test下的所有页面都可以访问到cookie1，而<code>/test/</code>和<code>/test/dd/</code>的子页面不能访问cookie2。这是因为cookie能让其path路径下的页面访问。</p>
+<ul>
+<li><p><strong>设置cookie</strong>——js设置path要以<code>/</code>开头，比如html路径为<code>/zt/20160623/</code>,路径可以设置成<code>/</code>或<code>/zt</code>。</p>
+</li>
+<li><p><strong>获取cookie</strong>——使用js只能获取path大于等于当前页面path的cookie，比如html路径为<code>/zt/20160623/</code>,使用js只能获取<code>/zt/20160623/</code>和<code>/zt</code>和<code>/</code>路径下的cookie。不能获取其他路径下的cookie</p>
+</li>
+<li><p><strong>删除cookie</strong>——要删除一个cookie，domain和path必须完全相同。。</p>
+</li>
+<li><p><strong>错误</strong>——如果path不是以<code>/</code>开头的则创建cookie的path使用默认的path；如果是以<code>/</code>开头但是设置错了，路径名不存在或者直接设置成子路径。比如设置成<code>/20160623</code>或者<code>/zt1</code>,该cookie将不会被创建，并且后续对cookie的操作不论正确与否都会被浏览器禁止。</p>
+</li>
+<li><p>浏览器会将domain和path都相同的cookie保存在一个文件里，cookie间用*隔开。</p>
+</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>你转给我的不是钱，只是数字<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">websql</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2021/09/28/我与cookie/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2021/09/01/如何在老一代项目中启用eslint/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">如何在老一代项目中启用eslint</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题记录"><span class="toc-number">1.</span> <span class="toc-text">问题记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cookie的作用域"><span class="toc-number">2.</span> <span class="toc-text">cookie的作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#domain"><span class="toc-number">2.1.</span> <span class="toc-text">domain</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#path规则"><span class="toc-number">2.2.</span> <span class="toc-text">path规则</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -259,9 +544,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

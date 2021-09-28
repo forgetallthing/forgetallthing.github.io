@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20210901205411.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20210901205551.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blogb9f9169c9194fd8cb0cf9aaa0e34648.png">
-<meta property="og:updated_time" content="2021-09-01T13:19:01.509Z">
+<meta property="og:updated_time" content="2021-09-28T12:02:47.320Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何在老一代项目中启用eslint">
 <meta name="twitter:description" content="公司的主体产品是一个很久的大项目，基于express + mongodb + dhtmlx研发，代码的体积都已超过3个G。在这样含有大量老式代码的项目上，想用新东西是非常难的，无法像新开始的项目一样babel、eslint、ts以及各种工程化、新框架、新技术无脑上，这就是所谓的历史包袱吧… 在这样的场景下，随着项目组人员越来越多，不得不开始采用一些方案保证代码的质量，于是有了这一篇文章:如何在老一">
@@ -233,7 +233,7 @@ var _hmt = _hmt || [];
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blogb9f9169c9194fd8cb0cf9aaa0e34648.png" alt></p>
 <p>在左下角的问题列表可以看到不符合eslint规则的明细。</p>
 <p>经过对这个文件的改造，我在airbnb规则的基础上，加了很多对我们项目开发习惯相匹配的规则，下面是记录，注释部分为解释为什么这样改，现在我刚刚开始使用，以后逐渐完善的内容我也会随时更新在这里：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="comment">// airbnb-base规则，较严谨，建议后端采用</span></span><br><span class="line">    files: [<span class="string">'*budgetInvest*'</span>],</span><br><span class="line">    excludedFiles: <span class="string">''</span>,</span><br><span class="line">    extends: <span class="string">'../eslintModule/airbnb.js'</span>,</span><br><span class="line">    rules: &#123;</span><br><span class="line">        <span class="string">'linebreak-style'</span>: [<span class="string">'error'</span>, <span class="string">'windows'</span>], <span class="comment">// window的换行符</span></span><br><span class="line">        indent: [<span class="string">'error'</span>, <span class="number">4</span>], <span class="comment">// 四个空格</span></span><br><span class="line">        <span class="string">'max-len'</span>: [<span class="string">'error'</span>, &#123; <span class="attr">code</span>: <span class="number">1000</span> &#125;], <span class="comment">// 单场长度限制放开</span></span><br><span class="line">        <span class="string">'no-plusplus'</span>: [<span class="string">'off'</span>], <span class="comment">// 允许使用++和--</span></span><br><span class="line">        <span class="string">'prefer-const'</span>: [<span class="string">'off'</span>], <span class="comment">// 允许为改变的变量使用let</span></span><br><span class="line">        <span class="string">'comma-dangle'</span>: [<span class="string">'error'</span>, <span class="string">'only-multiline'</span>], <span class="comment">// 当最后一个元素或属性与闭括号 ] 或 &#125; 在 不同的行时，允许（但不要求）使用拖尾逗号；当在 同一行时，禁止使用拖尾逗号</span></span><br><span class="line">        <span class="string">'func-names'</span>: [<span class="string">'off'</span>], <span class="comment">// 允许使用匿名函数</span></span><br><span class="line">        <span class="string">'no-param-reassign'</span>: [<span class="string">'error'</span>, &#123; <span class="attr">props</span>: <span class="literal">false</span> &#125;], <span class="comment">// 允许修改对象类型参数的属性</span></span><br><span class="line">        <span class="string">'no-underscore-dangle'</span>: [<span class="string">'off'</span>], <span class="comment">// 允许在标识符使用下划线(_)</span></span><br><span class="line">        <span class="string">'no-return-assign'</span>: [<span class="string">'error'</span>, <span class="string">'except-parens'</span>], <span class="comment">// 禁止出现赋值语句，除非使用括号把它们括起来</span></span><br><span class="line">        <span class="string">'object-curly-newline'</span>: [<span class="string">'error'</span>, &#123; <span class="attr">multiline</span>: <span class="literal">true</span> &#125;], <span class="comment">// 如果在属性内部或属性之间有换行符或，就要求有换行符</span></span><br><span class="line">        <span class="string">'no-unused-expressions'</span>: [<span class="string">'error'</span>, &#123; <span class="attr">allowShortCircuit</span>: <span class="literal">true</span>, <span class="attr">allowTernary</span>: <span class="literal">true</span> &#125;], <span class="comment">// 禁止未使用过的表达式,但允许你在表达式中使用逻辑短路求值和三元运算符</span></span><br><span class="line">    &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="comment">// airbnb-base规则，较严谨，建议后端采用</span></span><br><span class="line">    files: [<span class="string">'*budgetInvest*'</span>],</span><br><span class="line">    excludedFiles: <span class="string">''</span>,</span><br><span class="line">    extends: <span class="string">'../eslintModule/airbnb.js'</span>,</span><br><span class="line">    rules: &#123;</span><br><span class="line">        <span class="string">'linebreak-style'</span>: [<span class="string">'error'</span>, <span class="string">'windows'</span>], <span class="comment">// window的换行符</span></span><br><span class="line">        indent: [<span class="string">'error'</span>, <span class="number">4</span>], <span class="comment">// 四个空格</span></span><br><span class="line">        <span class="string">'max-len'</span>: [<span class="string">'error'</span>, &#123; <span class="attr">code</span>: <span class="number">1000</span> &#125;], <span class="comment">// 单场长度限制放开</span></span><br><span class="line">        <span class="string">'no-plusplus'</span>: [<span class="string">'off'</span>], <span class="comment">// 允许使用++和--</span></span><br><span class="line">        <span class="string">'prefer-const'</span>: [<span class="string">'off'</span>], <span class="comment">// 允许为改变的变量使用let</span></span><br><span class="line">        <span class="string">'comma-dangle'</span>: [<span class="string">'error'</span>, <span class="string">'only-multiline'</span>], <span class="comment">// 当最后一个元素或属性与闭括号 ] 或 &#125; 在 不同的行时，允许（但不要求）使用拖尾逗号；当在 同一行时，禁止使用拖尾逗号</span></span><br><span class="line">        <span class="string">'func-names'</span>: [<span class="string">'off'</span>], <span class="comment">// 允许使用匿名函数</span></span><br><span class="line">        <span class="string">'no-param-reassign'</span>: [<span class="string">'error'</span>, &#123; <span class="attr">props</span>: <span class="literal">false</span> &#125;], <span class="comment">// 允许修改对象类型参数的属性</span></span><br><span class="line">        <span class="string">'no-underscore-dangle'</span>: [<span class="string">'off'</span>], <span class="comment">// 允许在标识符使用下划线(_)</span></span><br><span class="line">        <span class="string">'no-return-assign'</span>: [<span class="string">'error'</span>, <span class="string">'except-parens'</span>], <span class="comment">// 禁止出现赋值语句，除非使用括号把它们括起来</span></span><br><span class="line">        <span class="string">'object-curly-newline'</span>: [<span class="string">'error'</span>, &#123; <span class="attr">multiline</span>: <span class="literal">true</span> &#125;], <span class="comment">// 如果在属性内部或属性之间有换行符或，就要求有换行符</span></span><br><span class="line">        <span class="string">'no-unused-expressions'</span>: [<span class="string">'off'</span>, &#123; <span class="attr">allowShortCircuit</span>: <span class="literal">true</span>, <span class="attr">allowTernary</span>: <span class="literal">true</span> &#125;], <span class="comment">// 禁止未使用过的表达式,但允许你在表达式中使用逻辑短路求值和三元运算符。此处无法识别?.所以停用</span></span><br><span class="line">        <span class="string">'no-multi-assign'</span>: <span class="string">'off'</span>, <span class="comment">// 允许连续赋值</span></span><br><span class="line">        <span class="string">'no-use-before-define'</span>: [<span class="string">'error'</span>, &#123; <span class="attr">functions</span>: <span class="literal">false</span> &#125;], <span class="comment">// 禁止定义前使用,但不检测函数的声明</span></span><br><span class="line">        <span class="string">'consistent-return'</span>: <span class="string">'off'</span>, <span class="comment">// 关闭要求return语句要么总是指定返回的值，要么不指定，为兼容前端快速提示写法</span></span><br><span class="line">        <span class="string">'no-continue'</span>: <span class="string">'off'</span>, <span class="comment">// 允许使用continue</span></span><br><span class="line">    &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 
       
 
@@ -510,10 +510,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
@@ -522,7 +518,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,7 +526,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -542,7 +538,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -550,7 +546,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -562,27 +558,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -594,7 +570,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -602,7 +594,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -614,11 +614,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">

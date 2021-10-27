@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20210806110033.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blogimage-20210806160858256.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog2021-08-06-16-16-41.gif">
-<meta property="og:updated_time" content="2021-08-06T08:28:12.575Z">
+<meta property="og:updated_time" content="2021-10-27T12:41:38.680Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mxGraph工作流图形构建实战">
 <meta name="twitter:description" content="mxGraph简介什么是mxGraphmxGraph是一个强大到令人发指的 JS 绘图组件，用于在网页中设计/编辑 Workflow/BPM流程图、图表、网络图和普通图形的 Web 应用程序。 大名鼎鼎的在线绘图（flow chart）网站draw.io就是基于这个库开发出来的。 具体介绍请见官网、github。 官方提供了大量实例，可以参考：JavaScript demo 这个库拥有超大量的a">
@@ -353,7 +353,7 @@ var _hmt = _hmt || [];
 <p>在模板的基础上，我们可以通过设置style的方式改变图形样式。</p>
 <p>假设我有这样一组元数据配置：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"swimlane"</span>: &#123;</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"泳道"</span>, <span class="comment">// 名称</span></span><br><span class="line">        <span class="string">"template"</span>: <span class="string">"swimlane"</span>, <span class="comment">// 指定模板</span></span><br><span class="line">        <span class="string">"icon"</span>: <span class="string">"../images/swimlane.gif"</span>, <span class="comment">// 显示在左侧列表的图标</span></span><br><span class="line">        <span class="string">"width"</span>: <span class="string">"300px"</span>, <span class="comment">// 占位预览框宽度，默认32px</span></span><br><span class="line">        <span class="string">"height"</span>: <span class="string">"160px"</span> <span class="comment">// 占位预览框宽度，默认32px</span></span><br><span class="line">        <span class="string">"style"</span>: <span class="string">""</span> <span class="comment">// 样式，若和模板一致则此项不填</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"ellipse"</span>: &#123;</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"椭圆"</span>,</span><br><span class="line">        <span class="string">"template"</span>: <span class="string">"shape"</span>,</span><br><span class="line">        <span class="string">"icon"</span>: <span class="string">"../images/ellipse.gif"</span>,</span><br><span class="line">        <span class="string">"style"</span>: <span class="string">"ellipse"</span> </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="string">"message"</span>: &#123;</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"消息"</span>,</span><br><span class="line">        <span class="string">"template"</span>: <span class="string">"symbol"</span>,</span><br><span class="line">        <span class="string">"icon"</span>: <span class="string">"../images/symbols/message.png"</span>,</span><br><span class="line">        <span class="string">"style"</span>: <span class="string">"symbol;image=../images/symbols/message.png"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上述的结构可以描述我们系统汇总的自定义节点</p>
+<p>上述的结构可以描述我们系统中的自定义节点</p>
 <p>可以通过一个for循环解析到左侧列表中：</p>
 <p>注：下面的CE为controls.editor的缩写，CEG为controls.editor.graph的缩写；</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">nodeList.forEach(<span class="function">(<span class="params">v</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (v.tier === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">// 分组相关，省略</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (v.tier === <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="comment">// 取出节点配置</span></span><br><span class="line">        <span class="keyword">let</span> curInfo = nodeInfo[v.code];</span><br><span class="line">        <span class="comment">// curNodeBox 为容器dom</span></span><br><span class="line">        curNodeBox.appendChild(getNodeDom(curInfo));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成列表节点</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNodeDom</span>(<span class="params">info</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个图片</span></span><br><span class="line">    <span class="keyword">var</span> img = mxUtils.createImage(info.icon); </span><br><span class="line">    img.classList.add(<span class="string">'nodeImg'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建悬浮的占位预览框</span></span><br><span class="line">    <span class="keyword">var</span> dragElt = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</span><br><span class="line">    dragElt.style.border = <span class="string">'dashed black 1px'</span>;</span><br><span class="line">    dragElt.style.width = info.width || <span class="string">'32px'</span>;</span><br><span class="line">    dragElt.style.height = info.height || <span class="string">'32px'</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 取出模板中的图形节点</span></span><br><span class="line">    <span class="keyword">var</span> newCell = CE.templates[info.template];</span><br><span class="line">    <span class="keyword">if</span> (!newCell) <span class="keyword">return</span> dhtmlxAlert(<span class="string">'节点未配置:'</span> + info.code);</span><br><span class="line">    newCell = CEG.cloneCell(newCell);</span><br><span class="line">    <span class="comment">// 设置自定义样式</span></span><br><span class="line">    <span class="keyword">if</span> (info.style) newCell.setStyle(info.style);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 拖拽结束的处理函数</span></span><br><span class="line">    <span class="keyword">var</span> funct = <span class="function"><span class="keyword">function</span> (<span class="params">graph, evt, cell, x, y</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> pt = graph.getPointForEvent(evt);</span><br><span class="line">        <span class="keyword">var</span> vertex = CEG.cloneCell(newCell);</span><br><span class="line">        <span class="comment">// 这里必须用editor的添加图形方式，否则添加泳道图时会采用默认的无背景颜色</span></span><br><span class="line">        CE.addVertex(cell, vertex, pt.x, pt.y);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注册拖拽</span></span><br><span class="line">    <span class="keyword">var</span> ds = mxUtils.makeDraggable(img, CEG, funct, dragElt, <span class="literal">null</span>, <span class="literal">null</span>, CEG.autoscroll, <span class="literal">true</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 参考线相关</span></span><br><span class="line">    ds.isGuidesEnabled = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> CEG.graphHandler.guidesEnabled;</span><br><span class="line">    &#125;;</span><br><span class="line">    ds.createDragElement = mxDragSource.prototype.createDragElement;</span><br><span class="line">    <span class="keyword">return</span> img;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -641,11 +641,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -657,11 +661,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -669,11 +669,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -681,11 +677,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,19 +705,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -729,19 +729,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -749,7 +741,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
               </li>
              
               <li class="article-tag-list-item">

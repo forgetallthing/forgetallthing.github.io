@@ -8,23 +8,25 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>codewhy node课程学习笔记 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近在学习codewhy老师的node课程，在此做个学习笔记">
+  <meta name="description" content="最近在学习codewhy老师的node课程，在此做个学习笔记  V8编译优化策略">
 <meta name="keywords" content="node">
 <meta property="og:type" content="article">
 <meta property="og:title" content="codewhy node课程学习笔记">
 <meta property="og:url" content="http://yoursite.com/2021/10/22/codewhy-node课程学习笔记/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="最近在学习codewhy老师的node课程，在此做个学习笔记">
+<meta property="og:description" content="最近在学习codewhy老师的node课程，在此做个学习笔记  V8编译优化策略">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211022163743.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211022164644.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211022170253.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211022170434.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211027202711.png">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211027202745.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211022172614.png">
-<meta property="og:updated_time" content="2021-10-25T07:17:38.707Z">
+<meta property="og:updated_time" content="2021-10-27T12:30:57.300Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="codewhy node课程学习笔记">
-<meta name="twitter:description" content="最近在学习codewhy老师的node课程，在此做个学习笔记">
+<meta name="twitter:description" content="最近在学习codewhy老师的node课程，在此做个学习笔记  V8编译优化策略">
 <meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211022163743.png">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
@@ -202,12 +204,23 @@ var _hmt = _hmt || [];
         <blockquote>
 <p>最近在学习codewhy老师的node课程，在此做个学习笔记</p>
 </blockquote>
-<a id="more"></a>
-<h2 id="V8编译优化策略"><a href="#V8编译优化策略" class="headerlink" title="V8编译优化策略"></a>V8编译优化策略</h2><p><img src="http://qiniuyun.ipromiseyourlife.com/blog20211022163743.png" alt></p>
+<h2 id="V8编译优化策略"><a href="#V8编译优化策略" class="headerlink" title="V8编译优化策略"></a>V8编译优化策略</h2><a id="more"></a>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog20211022163743.png" alt></p>
 <p>我们知道<strong>字节码</strong>需要编译成<strong>机器码</strong>才能被机器执行，所以为了加快速度，调用多次的函数会被标志为<strong>热点函数</strong>，热点函数会编译为<strong>优化的机器码</strong>，这样可以省掉字节码那一步，但有一些限制，比如<strong>函数的参数类型</strong>不能改变，改变的话机器码会<strong>反编译</strong>为<strong>字节码</strong>进行执行，由上述可知：尽<strong>量写参数类型不变的函数可以加快V8引擎运行你的代码</strong>。</p>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog20211022164644.png" alt></p>
 <h2 id="node架构图"><a href="#node架构图" class="headerlink" title="node架构图"></a>node架构图</h2><p><img src="http://qiniuyun.ipromiseyourlife.com/blog20211022170253.png" alt></p>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog20211022170434.png" alt></p>
+<h2 id="CommonJS与ES-Module"><a href="#CommonJS与ES-Module" class="headerlink" title="CommonJS与ES Module"></a>CommonJS与ES Module</h2><p>这两者众所周知的差异是阮一峰总结的：</p>
+<blockquote>
+<ul>
+<li>CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。</li>
+<li>CommonJS 模块是运行时加载，ES6 模块是编译时输出接口。</li>
+<li>CommonJS 模块的<code>require()</code>是同步加载模块，ES6 模块的<code>import</code>命令是异步加载，有一个独立的模块依赖的解析阶段。</li>
+</ul>
+</blockquote>
+<p>这里贴一下老师教程里的加载方式总结：</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog20211027202711.png" alt></p>
+<p> <img src="http://qiniuyun.ipromiseyourlife.com/blog20211027202745.png" alt></p>
 <h2 id="自定义脚手架"><a href="#自定义脚手架" class="headerlink" title="自定义脚手架"></a>自定义脚手架</h2><h3 id="安装node代码提示"><a href="#安装node代码提示" class="headerlink" title="安装node代码提示"></a>安装node代码提示</h3><p>写代码前先安装个代码提示：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D @types/node</span><br></pre></td></tr></table></figure>
 <h3 id="node-shebang"><a href="#node-shebang" class="headerlink" title="node shebang"></a>node shebang</h3><ol>
@@ -365,7 +378,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#V8编译优化策略"><span class="toc-number">1.</span> <span class="toc-text">V8编译优化策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#node架构图"><span class="toc-number">2.</span> <span class="toc-text">node架构图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义脚手架"><span class="toc-number">3.</span> <span class="toc-text">自定义脚手架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装node代码提示"><span class="toc-number">3.1.</span> <span class="toc-text">安装node代码提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#node-shebang"><span class="toc-number">3.2.</span> <span class="toc-text">node shebang</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#V8编译优化策略"><span class="toc-number">1.</span> <span class="toc-text">V8编译优化策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#node架构图"><span class="toc-number">2.</span> <span class="toc-text">node架构图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CommonJS与ES-Module"><span class="toc-number">3.</span> <span class="toc-text">CommonJS与ES Module</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义脚手架"><span class="toc-number">4.</span> <span class="toc-text">自定义脚手架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装node代码提示"><span class="toc-number">4.1.</span> <span class="toc-text">安装node代码提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#node-shebang"><span class="toc-number">4.2.</span> <span class="toc-text">node shebang</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -489,11 +502,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -501,7 +514,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -509,11 +522,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -521,7 +534,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -529,15 +542,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -549,10 +562,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
@@ -561,19 +570,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vscode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -585,7 +590,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -597,15 +606,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">something</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">something</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

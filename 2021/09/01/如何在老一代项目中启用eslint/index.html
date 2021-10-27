@@ -8,22 +8,23 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>如何在老一代项目中启用eslint | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="公司的主体产品是一个很久的大项目，基于express + mongodb + dhtmlx研发，代码的体积都已超过3个G。在这样含有大量老式代码的项目上，想用新东西是非常难的，无法像新开始的项目一样babel、eslint、ts以及各种工程化、新框架、新技术无脑上，这就是所谓的历史包袱吧… 在这样的场景下，随着项目组人员越来越多，不得不开始采用一些方案保证代码的质量，于是有了这一篇文章:如何在老一">
+  <meta name="description" content="公司的主体产品是一个很久的大项目，基于express + mongodb + dhtmlx研发，代码的体积都已超过3个G。在这样含有大量老式代码的项目上，想用新东西是非常难的，无法像新开始的项目一样babel、eslint、ts以及各种工程化、新框架、新技术无脑上，这就是所谓的历史包袱吧… 在这样的场景下，随着项目组人员越来越多，不得不开始采用一些方案保证代码的质量，于是有了这一篇文章:如何在老">
 <meta name="keywords" content="eslint">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何在老一代项目中启用eslint">
 <meta property="og:url" content="http://yoursite.com/2021/09/01/如何在老一代项目中启用eslint/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="公司的主体产品是一个很久的大项目，基于express + mongodb + dhtmlx研发，代码的体积都已超过3个G。在这样含有大量老式代码的项目上，想用新东西是非常难的，无法像新开始的项目一样babel、eslint、ts以及各种工程化、新框架、新技术无脑上，这就是所谓的历史包袱吧… 在这样的场景下，随着项目组人员越来越多，不得不开始采用一些方案保证代码的质量，于是有了这一篇文章:如何在老一">
+<meta property="og:description" content="公司的主体产品是一个很久的大项目，基于express + mongodb + dhtmlx研发，代码的体积都已超过3个G。在这样含有大量老式代码的项目上，想用新东西是非常难的，无法像新开始的项目一样babel、eslint、ts以及各种工程化、新框架、新技术无脑上，这就是所谓的历史包袱吧… 在这样的场景下，随着项目组人员越来越多，不得不开始采用一些方案保证代码的质量，于是有了这一篇文章:如何在老">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blogerik-mclean-ccF-8lNGJr4-unsplash.jpg">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20210901205411.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20210901205551.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blogb9f9169c9194fd8cb0cf9aaa0e34648.png">
-<meta property="og:updated_time" content="2021-09-28T12:02:47.320Z">
+<meta property="og:updated_time" content="2021-10-27T13:04:24.348Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何在老一代项目中启用eslint">
-<meta name="twitter:description" content="公司的主体产品是一个很久的大项目，基于express + mongodb + dhtmlx研发，代码的体积都已超过3个G。在这样含有大量老式代码的项目上，想用新东西是非常难的，无法像新开始的项目一样babel、eslint、ts以及各种工程化、新框架、新技术无脑上，这就是所谓的历史包袱吧… 在这样的场景下，随着项目组人员越来越多，不得不开始采用一些方案保证代码的质量，于是有了这一篇文章:如何在老一">
-<meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog20210901205411.png">
+<meta name="twitter:description" content="公司的主体产品是一个很久的大项目，基于express + mongodb + dhtmlx研发，代码的体积都已超过3个G。在这样含有大量老式代码的项目上，想用新东西是非常难的，无法像新开始的项目一样babel、eslint、ts以及各种工程化、新框架、新技术无脑上，这就是所谓的历史包袱吧… 在这样的场景下，随着项目组人员越来越多，不得不开始采用一些方案保证代码的质量，于是有了这一篇文章:如何在老">
+<meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blogerik-mclean-ccF-8lNGJr4-unsplash.jpg">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -197,7 +198,8 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>公司的主体产品是一个很久的大项目，基于express + mongodb + dhtmlx研发，代码的体积都已超过3个G。在这样含有大量老式代码的项目上，想用新东西是非常难的，无法像新开始的项目一样babel、eslint、ts以及各种工程化、新框架、新技术无脑上，这就是所谓的历史包袱吧…</p>
+        <p><img src="http://qiniuyun.ipromiseyourlife.com/blogerik-mclean-ccF-8lNGJr4-unsplash.jpg" alt></p>
+<p>公司的主体产品是一个很久的大项目，基于express + mongodb + dhtmlx研发，代码的体积都已超过3个G。在这样含有大量老式代码的项目上，想用新东西是非常难的，无法像新开始的项目一样babel、eslint、ts以及各种工程化、新框架、新技术无脑上，这就是所谓的历史包袱吧…</p>
 <p>在这样的场景下，随着项目组人员越来越多，不得不开始采用一些方案保证代码的质量，于是有了这一篇文章:如何在老一代项目中启用eslint。</p>
 <a id="more"></a>
 <h3 id="安装eslint"><a href="#安装eslint" class="headerlink" title="安装eslint"></a>安装eslint</h3><p>首先公司的node_modules中已有大版本是3的eslint，但是没有强制开发启用，所以基本都是关闭的。</p>
@@ -514,19 +516,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -538,11 +536,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -550,11 +544,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -562,7 +552,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -578,11 +576,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -590,15 +592,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vscode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -606,11 +600,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -622,11 +624,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">something</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">something</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

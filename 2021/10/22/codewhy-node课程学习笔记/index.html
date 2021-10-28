@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>codewhy node课程学习笔记 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近在学习codewhy老师的node课程，在此做个学习笔记。  V8编译优化策略">
+  <meta name="description" content="最近在学习codewhy老师的node课程，在此做个学习笔记。 V8编译优化策略">
 <meta name="keywords" content="node">
 <meta property="og:type" content="article">
 <meta property="og:title" content="codewhy node课程学习笔记">
 <meta property="og:url" content="http://yoursite.com/2021/10/22/codewhy-node课程学习笔记/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="最近在学习codewhy老师的node课程，在此做个学习笔记。  V8编译优化策略">
+<meta property="og:description" content="最近在学习codewhy老师的node课程，在此做个学习笔记。 V8编译优化策略">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blogjon-asleeb-ZjZBL8V1nMM-unsplash.jpg">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211022163743.png">
@@ -24,10 +24,10 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211027202711.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211027202745.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211022172614.png">
-<meta property="og:updated_time" content="2021-10-28T12:04:06.255Z">
+<meta property="og:updated_time" content="2021-10-28T12:06:20.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="codewhy node课程学习笔记">
-<meta name="twitter:description" content="最近在学习codewhy老师的node课程，在此做个学习笔记。  V8编译优化策略">
+<meta name="twitter:description" content="最近在学习codewhy老师的node课程，在此做个学习笔记。 V8编译优化策略">
 <meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blogjon-asleeb-ZjZBL8V1nMM-unsplash.jpg">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
@@ -203,9 +203,7 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <p><img src="http://qiniuyun.ipromiseyourlife.com/blogjon-asleeb-ZjZBL8V1nMM-unsplash.jpg" alt></p>
-<blockquote>
 <p>最近在学习codewhy老师的node课程，在此做个学习笔记。</p>
-</blockquote>
 <h2 id="V8编译优化策略"><a href="#V8编译优化策略" class="headerlink" title="V8编译优化策略"></a>V8编译优化策略</h2><a id="more"></a>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog20211022163743.png" alt></p>
 <p>我们知道<strong>字节码</strong>需要编译成<strong>机器码</strong>才能被机器执行，所以为了加快速度，调用多次的函数会被标志为<strong>热点函数</strong>，热点函数会编译为<strong>优化的机器码</strong>，这样可以省掉字节码那一步，但有一些限制，比如<strong>函数的参数类型</strong>不能改变，改变的话机器码会<strong>反编译</strong>为<strong>字节码</strong>进行执行，由上述可知：尽<strong>量写参数类型不变的函数可以加快V8引擎运行你的代码</strong>。</p>
@@ -504,10 +502,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
@@ -520,15 +514,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -536,7 +526,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -544,7 +534,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -564,15 +562,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -580,7 +574,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -588,7 +582,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -596,7 +594,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">

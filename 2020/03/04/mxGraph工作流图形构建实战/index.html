@@ -31,7 +31,8 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20210806110033.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blogimage-20210806160858256.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog2021-08-06-16-16-41.gif">
-<meta property="og:updated_time" content="2021-10-27T12:41:38.680Z">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog2021-11-01-11-08-41.gif">
+<meta property="og:updated_time" content="2021-11-01T03:14:57.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mxGraph工作流图形构建实战">
 <meta name="twitter:description" content="mxGraph简介什么是mxGraphmxGraph是一个强大到令人发指的 JS 绘图组件，用于在网页中设计/编辑 Workflow/BPM流程图、图表、网络图和普通图形的 Web 应用程序。 大名鼎鼎的在线绘图（flow chart）网站draw.io就是基于这个库开发出来的。 具体介绍请见官网、github。 官方提供了大量实例，可以参考：JavaScript demo 这个库拥有超大量的a">
@@ -365,6 +366,15 @@ var _hmt = _hmt || [];
 <p>我上面拖拽式显示的悬浮物是个占位框，如想用和默认工具栏一样使用节点图标，可以参考mxDefaultToolbar.js中的addPrototype。</p>
 <hr>
 <p>以上是添加节点图形的方式，添加线段的等我用到了再更新</p>
+<h3 id="右侧属性编辑器"><a href="#右侧属性编辑器" class="headerlink" title="右侧属性编辑器"></a>右侧属性编辑器</h3><p>右侧的编辑器十分简单，只要监听graph上的点击事件，根据点击的节点不同而显示不同的编辑界面，同时监听编辑窗口的用户输入行为，变化之后同步更改graph的节点属性即可。</p>
+<p>mxgraph上的点击事件：</p>
+<p>代码中CEGM = editor.graph.model;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">addListener() &#123;</span><br><span class="line">     <span class="comment">// 监听用户点击节点</span></span><br><span class="line">    CEG.addListener(mxEvent.CLICK, (graph, evt)=&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> cell = evt.getProperty(<span class="string">'cell'</span>) || graph.getCurrentRoot() || CEGM.getRoot();</span><br><span class="line">        controls.curCell = cell;</span><br><span class="line">        <span class="keyword">this</span>.refreshNodeAttrEditor();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 节点属性改变时，刷新编辑器</span></span><br><span class="line">    CEGM.addListener(mxEvent.CHANGE, ()=&gt; &#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.refreshNodeAttrEditor());</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一个示例处理方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">refreshNodeAttrEditor() &#123;</span><br><span class="line">    <span class="comment">// 销毁之前的编辑器</span></span><br><span class="line">    <span class="keyword">if</span> (controls.nodeAttrForm) controls.nodeAttrForm.unload?.();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> cell = controls.curCell &amp;&amp; CEGM.getCell(controls.curCell.id);</span><br><span class="line">    <span class="keyword">if</span> (!cell) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取节点信息</span></span><br><span class="line">    <span class="keyword">let</span> cellObj = cell.getValue();</span><br><span class="line">    <span class="keyword">let</span> attrs = cellObj.attributes;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 根据类型不同做的特殊处理</span></span><br><span class="line">    <span class="keyword">if</span> (cell.value.nodeName === <span class="string">'Workflow'</span>) &#123;</span><br><span class="line">        <span class="comment">// 顶层节点</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (cell.value.nodeName === <span class="string">'Group'</span>) &#123;</span><br><span class="line">        <span class="comment">// 分组</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (cell.isVertex()) &#123;</span><br><span class="line">        <span class="comment">// 图形</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (cell.isEdge()) &#123;</span><br><span class="line">        <span class="comment">// 线</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 绘制你的编辑器</span></span><br><span class="line">    <span class="keyword">this</span>.initNodeAttrForm();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">initNodeAttrForm()&#123;</span><br><span class="line">    <span class="comment">// 绘制编辑器</span></span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 监听用户操作</span></span><br><span class="line">    editor.attachEvent(<span class="string">'onChange'</span>, haddleFormChange);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">haddleFormChange(name, value, state) &#123;</span><br><span class="line">    CEGM.beginUpdate();</span><br><span class="line">    <span class="comment">// 拿到新的属性值，赋值到节点</span></span><br><span class="line">    <span class="keyword">let</span> newAttr = value !== <span class="literal">null</span> ? value : state;</span><br><span class="line">    <span class="keyword">let</span> edit = <span class="keyword">new</span> mxCellAttributeChange(controls.curCell, name, newAttr);</span><br><span class="line">    CEGM.execute(edit);</span><br><span class="line">    CEGM.endUpdate();</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog2021-11-01-11-08-41.gif" alt></p>
+<p>这里初步只实现了节点属性编辑，节点样式编辑原理也差不多，可以参照你的需求实现一下。</p>
 
       
 
@@ -517,7 +527,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mxGraph简介"><span class="toc-number">1.</span> <span class="toc-text">mxGraph简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是mxGraph"><span class="toc-number">1.1.</span> <span class="toc-text">什么是mxGraph</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模块介绍"><span class="toc-number">1.2.</span> <span class="toc-text">模块介绍</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mxEditor操作指南"><span class="toc-number">2.</span> <span class="toc-text">mxEditor操作指南</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#说明"><span class="toc-number">2.1.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引入mxGraph"><span class="toc-number">2.2.</span> <span class="toc-text">引入mxGraph</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建mxEditor"><span class="toc-number">2.3.</span> <span class="toc-text">创建mxEditor</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Toolbar的配置解析"><span class="toc-number">2.4.</span> <span class="toc-text">Toolbar的配置解析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#action"><span class="toc-number">2.4.1.</span> <span class="toc-text">action</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mode"><span class="toc-number">2.4.2.</span> <span class="toc-text">mode</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#template"><span class="toc-number">2.4.3.</span> <span class="toc-text">template</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#task窗口是哪里来的？"><span class="toc-number">2.5.</span> <span class="toc-text">task窗口是哪里来的？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实现一个自己的属性编辑器"><span class="toc-number">2.6.</span> <span class="toc-text">实现一个自己的属性编辑器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#添加属性编辑器到右键菜单"><span class="toc-number">2.6.1.</span> <span class="toc-text">添加属性编辑器到右键菜单</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义editor"><span class="toc-number"></span> <span class="toc-text">自定义editor</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#隐藏默认的工具栏"><span class="toc-number">1.</span> <span class="toc-text">隐藏默认的工具栏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作按钮移到上方"><span class="toc-number">2.</span> <span class="toc-text">操作按钮移到上方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#左侧节点列表"><span class="toc-number">3.</span> <span class="toc-text">左侧节点列表</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mxGraph简介"><span class="toc-number">1.</span> <span class="toc-text">mxGraph简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是mxGraph"><span class="toc-number">1.1.</span> <span class="toc-text">什么是mxGraph</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模块介绍"><span class="toc-number">1.2.</span> <span class="toc-text">模块介绍</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mxEditor操作指南"><span class="toc-number">2.</span> <span class="toc-text">mxEditor操作指南</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#说明"><span class="toc-number">2.1.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引入mxGraph"><span class="toc-number">2.2.</span> <span class="toc-text">引入mxGraph</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建mxEditor"><span class="toc-number">2.3.</span> <span class="toc-text">创建mxEditor</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Toolbar的配置解析"><span class="toc-number">2.4.</span> <span class="toc-text">Toolbar的配置解析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#action"><span class="toc-number">2.4.1.</span> <span class="toc-text">action</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mode"><span class="toc-number">2.4.2.</span> <span class="toc-text">mode</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#template"><span class="toc-number">2.4.3.</span> <span class="toc-text">template</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#task窗口是哪里来的？"><span class="toc-number">2.5.</span> <span class="toc-text">task窗口是哪里来的？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实现一个自己的属性编辑器"><span class="toc-number">2.6.</span> <span class="toc-text">实现一个自己的属性编辑器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#添加属性编辑器到右键菜单"><span class="toc-number">2.6.1.</span> <span class="toc-text">添加属性编辑器到右键菜单</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义editor"><span class="toc-number"></span> <span class="toc-text">自定义editor</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#隐藏默认的工具栏"><span class="toc-number">1.</span> <span class="toc-text">隐藏默认的工具栏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作按钮移到上方"><span class="toc-number">2.</span> <span class="toc-text">操作按钮移到上方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#左侧节点列表"><span class="toc-number">3.</span> <span class="toc-text">左侧节点列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#右侧属性编辑器"><span class="toc-number">4.</span> <span class="toc-text">右侧属性编辑器</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -649,7 +659,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -657,7 +667,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -673,18 +683,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
@@ -693,7 +691,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -705,11 +707,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -721,11 +731,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -737,15 +747,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">

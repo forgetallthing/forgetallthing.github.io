@@ -24,7 +24,8 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211027202711.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211027202745.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211022172614.png">
-<meta property="og:updated_time" content="2021-10-28T12:06:20.165Z">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211108193631.png">
+<meta property="og:updated_time" content="2021-11-08T11:36:39.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="codewhy node课程学习笔记">
 <meta name="twitter:description" content="最近在学习codewhy老师的node课程，在此做个学习笔记。 V8编译优化策略">
@@ -235,6 +236,11 @@ var _hmt = _hmt || [];
 </li>
 </ol>
 <p><img src="http://qiniuyun.ipromiseyourlife.com/blog20211022172614.png" alt></p>
+<h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h2><p><img src="http://qiniuyun.ipromiseyourlife.com/blog20211108193631.png" alt></p>
+<h2 id="课程中推荐的node库"><a href="#课程中推荐的node库" class="headerlink" title="课程中推荐的node库"></a>课程中推荐的node库</h2><ol>
+<li>sharp 图片裁剪库</li>
+<li>chalk 打印彩色文字</li>
+</ol>
 
       
 
@@ -378,7 +384,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#V8编译优化策略"><span class="toc-number">1.</span> <span class="toc-text">V8编译优化策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#node架构图"><span class="toc-number">2.</span> <span class="toc-text">node架构图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CommonJS与ES-Module"><span class="toc-number">3.</span> <span class="toc-text">CommonJS与ES Module</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义脚手架"><span class="toc-number">4.</span> <span class="toc-text">自定义脚手架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装node代码提示"><span class="toc-number">4.1.</span> <span class="toc-text">安装node代码提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#node-shebang"><span class="toc-number">4.2.</span> <span class="toc-text">node shebang</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#V8编译优化策略"><span class="toc-number">1.</span> <span class="toc-text">V8编译优化策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#node架构图"><span class="toc-number">2.</span> <span class="toc-text">node架构图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CommonJS与ES-Module"><span class="toc-number">3.</span> <span class="toc-text">CommonJS与ES Module</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义脚手架"><span class="toc-number">4.</span> <span class="toc-text">自定义脚手架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装node代码提示"><span class="toc-number">4.1.</span> <span class="toc-text">安装node代码提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#node-shebang"><span class="toc-number">4.2.</span> <span class="toc-text">node shebang</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件循环"><span class="toc-number">5.</span> <span class="toc-text">事件循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#课程中推荐的node库"><span class="toc-number">6.</span> <span class="toc-text">课程中推荐的node库</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -510,7 +516,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -518,11 +524,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,15 +532,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -546,7 +548,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -558,11 +564,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -570,11 +576,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -582,15 +588,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vscode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -598,7 +596,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -610,15 +612,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">something</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">something</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

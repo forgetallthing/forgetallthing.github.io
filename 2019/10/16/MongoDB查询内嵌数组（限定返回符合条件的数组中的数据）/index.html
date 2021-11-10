@@ -17,7 +17,7 @@
 <meta property="og:description" content="mongoDB相关操作：  mongo查询内嵌数组（限定返回符合条件的数组中的数据） 使用mongoexport导出数据 mongostat查看mongodb运行状态使用命令">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191022/P7sr653iL2gH.jpg">
-<meta property="og:updated_time" content="2021-01-26T07:31:20.389Z">
+<meta property="og:updated_time" content="2021-11-10T07:16:48.201Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB相关操作记录">
 <meta name="twitter:description" content="mongoDB相关操作：  mongo查询内嵌数组（限定返回符合条件的数组中的数据） 使用mongoexport导出数据 mongostat查看mongodb运行状态使用命令">
@@ -203,6 +203,10 @@ var _hmt = _hmt || [];
 <li>mongostat查看mongodb运行状态使用命令</li>
 </ul>
 <a id="more"></a>
+<h3 id="node-mongodb-native相关操作"><a href="#node-mongodb-native相关操作" class="headerlink" title="node-mongodb-native相关操作"></a>node-mongodb-native相关操作</h3><p><a href="http://mongodb.github.io/node-mongodb-native/3.6/api/index.html" target="_blank" rel="noopener">官方文档</a></p>
+<h4 id="获取所有集合名称"><a href="#获取所有集合名称" class="headerlink" title="获取所有集合名称"></a>获取所有集合名称</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> list = <span class="keyword">await</span> db.listCollections().toArray(); <span class="comment">// node</span></span><br><span class="line"><span class="keyword">let</span> list = db.getCollectionInfos() <span class="comment">// mongo原生</span></span><br></pre></td></tr></table></figure>
+<h4 id="获取所有集合所有索引"><a href="#获取所有集合所有索引" class="headerlink" title="获取所有集合所有索引"></a>获取所有集合所有索引</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> indexList = <span class="keyword">await</span> db.collection(<span class="string">'user'</span>).indexes(); <span class="comment">// nodes</span></span><br></pre></td></tr></table></figure>
+<h4 id="设置索引"><a href="#设置索引" class="headerlink" title="设置索引"></a>设置索引</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">index = &#123; <span class="attr">name</span>: <span class="number">1</span>, <span class="attr">age</span>: <span class="number">1</span>&#125;;</span><br><span class="line"><span class="keyword">await</span> db.collection(<span class="string">'user'</span>).createIndex(index, &#123;<span class="attr">background</span>: <span class="literal">true</span>&#125;) <span class="comment">// nodes</span></span><br></pre></td></tr></table></figure>
 <h3 id="mongo查询内嵌数组（限定返回符合条件的数组中的数据）"><a href="#mongo查询内嵌数组（限定返回符合条件的数组中的数据）" class="headerlink" title="mongo查询内嵌数组（限定返回符合条件的数组中的数据）"></a>mongo查询内嵌数组（限定返回符合条件的数组中的数据）</h3><p>当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。</p>
 <p>原始数据：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5aab3460353df3bd352e0e15"</span>),</span><br><span class="line">    <span class="string">"addTime"</span> : ISODate(<span class="string">"2018-03-16T03:05:04.363Z"</span>),</span><br><span class="line">    <span class="string">"tag"</span> : <span class="string">"test"</span>,</span><br><span class="line">    <span class="string">"userInfo"</span> : [ </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"cj"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"江苏"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">24.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"stu"</span></span><br><span class="line">        &#125;, </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"hj"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"江苏"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">26.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"stu"</span></span><br><span class="line">        &#125;, </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"lbl"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"美国"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">22.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"teach"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -477,7 +481,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mongo查询内嵌数组（限定返回符合条件的数组中的数据）"><span class="toc-number">1.</span> <span class="toc-text">mongo查询内嵌数组（限定返回符合条件的数组中的数据）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更多mongo查询内嵌数组方式"><span class="toc-number">2.</span> <span class="toc-text">更多mongo查询内嵌数组方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、数组元素模糊匹配"><span class="toc-number">2.1.</span> <span class="toc-text">1、数组元素模糊匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、数组元素精确-全-匹配"><span class="toc-number">2.2.</span> <span class="toc-text">2、数组元素精确(全)匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、通过数组下标返回指定的文档"><span class="toc-number">2.3.</span> <span class="toc-text">3、通过数组下标返回指定的文档</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、范围条件任意元素匹配查询"><span class="toc-number">2.4.</span> <span class="toc-text">4、范围条件任意元素匹配查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、数组内嵌文档查询"><span class="toc-number">2.5.</span> <span class="toc-text">5、数组内嵌文档查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、数组元素操作符-elemMatch"><span class="toc-number">2.6.</span> <span class="toc-text">6、数组元素操作符$elemMatch</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、数组元素操作符-all"><span class="toc-number">2.7.</span> <span class="toc-text">7、数组元素操作符$all</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8、数组元素操作符-size"><span class="toc-number">2.8.</span> <span class="toc-text">8、数组元素操作符$size</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9、数组元素操作符-slice"><span class="toc-number">2.9.</span> <span class="toc-text">9、数组元素操作符$slice</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10、-占位符，返回数组中第一个匹配的数组元素值-子集"><span class="toc-number">2.10.</span> <span class="toc-text">10、$占位符，返回数组中第一个匹配的数组元素值(子集)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、小结"><span class="toc-number">2.11.</span> <span class="toc-text">三、小结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongoexport导出数据"><span class="toc-number">3.</span> <span class="toc-text">mongoexport导出数据</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#打开csv乱码解决办法"><span class="toc-number">3.0.1.</span> <span class="toc-text">打开csv乱码解决办法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongostat查看mongodb运行状态使用命令"><span class="toc-number">4.</span> <span class="toc-text">mongostat查看mongodb运行状态使用命令</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#node-mongodb-native相关操作"><span class="toc-number">1.</span> <span class="toc-text">node-mongodb-native相关操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#获取所有集合名称"><span class="toc-number">1.1.</span> <span class="toc-text">获取所有集合名称</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取所有集合所有索引"><span class="toc-number">1.2.</span> <span class="toc-text">获取所有集合所有索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置索引"><span class="toc-number">1.3.</span> <span class="toc-text">设置索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongo查询内嵌数组（限定返回符合条件的数组中的数据）"><span class="toc-number">2.</span> <span class="toc-text">mongo查询内嵌数组（限定返回符合条件的数组中的数据）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更多mongo查询内嵌数组方式"><span class="toc-number">3.</span> <span class="toc-text">更多mongo查询内嵌数组方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、数组元素模糊匹配"><span class="toc-number">3.1.</span> <span class="toc-text">1、数组元素模糊匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、数组元素精确-全-匹配"><span class="toc-number">3.2.</span> <span class="toc-text">2、数组元素精确(全)匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、通过数组下标返回指定的文档"><span class="toc-number">3.3.</span> <span class="toc-text">3、通过数组下标返回指定的文档</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、范围条件任意元素匹配查询"><span class="toc-number">3.4.</span> <span class="toc-text">4、范围条件任意元素匹配查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、数组内嵌文档查询"><span class="toc-number">3.5.</span> <span class="toc-text">5、数组内嵌文档查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、数组元素操作符-elemMatch"><span class="toc-number">3.6.</span> <span class="toc-text">6、数组元素操作符$elemMatch</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、数组元素操作符-all"><span class="toc-number">3.7.</span> <span class="toc-text">7、数组元素操作符$all</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8、数组元素操作符-size"><span class="toc-number">3.8.</span> <span class="toc-text">8、数组元素操作符$size</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9、数组元素操作符-slice"><span class="toc-number">3.9.</span> <span class="toc-text">9、数组元素操作符$slice</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10、-占位符，返回数组中第一个匹配的数组元素值-子集"><span class="toc-number">3.10.</span> <span class="toc-text">10、$占位符，返回数组中第一个匹配的数组元素值(子集)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、小结"><span class="toc-number">3.11.</span> <span class="toc-text">三、小结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongoexport导出数据"><span class="toc-number">4.</span> <span class="toc-text">mongoexport导出数据</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#打开csv乱码解决办法"><span class="toc-number">4.0.1.</span> <span class="toc-text">打开csv乱码解决办法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongostat查看mongodb运行状态使用命令"><span class="toc-number">5.</span> <span class="toc-text">mongostat查看mongodb运行状态使用命令</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -609,7 +613,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -617,11 +621,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -629,15 +629,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -645,7 +645,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -657,11 +661,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -669,11 +673,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -681,15 +685,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vscode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -697,7 +693,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -709,15 +709,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">something</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">something</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211111145929.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211111152601.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211111152708.png">
-<meta property="og:updated_time" content="2021-11-11T07:34:12.476Z">
+<meta property="og:updated_time" content="2021-11-11T07:45:20.276Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何在老一代项目中启用babel">
 <meta name="twitter:description" content="这一篇是如何在老一代项目中启用eslint的续篇，babel的建立实际上更早，但最近又有了变动，于是在这里记录一下思路。">
@@ -212,7 +212,7 @@ var _hmt = _hmt || [];
 <h3 id="实现转化脚本"><a href="#实现转化脚本" class="headerlink" title="实现转化脚本"></a>实现转化脚本</h3><p>接着写个脚本<strong>run.js</strong>：</p>
 <p>思路是假设你有个<strong>foo.js</strong>需要babel编译，那你就先把这个文件配置到<strong>babelFileList.js</strong>:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 需要编译的文件列表，只支持.js类型</span></span><br><span class="line">exports.fileList = [</span><br><span class="line">    <span class="string">'foo/foo.js'</span>,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
-<p>接着下面的脚本会读取<strong>babelFileList.js</strong>，在<strong>babelFileList.js</strong>同位置生成一个<strong>foo<em>b</em>.js</strong>,这个新生成的_b_结尾的文件就是经过babel编译之后的文件，里面已正常转化为你兼容低版本浏览器的语法。</p>
+<p>接着下面的脚本会读取<strong>babelFileList.js</strong>，在<strong>babelFileList.js</strong>同位置生成一个<strong>foo_b_.js</strong>,这个新生成的_b_结尾的文件就是经过babel编译之后的文件，里面已正常转化为你兼容低版本浏览器的语法。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> babel = <span class="built_in">require</span>(<span class="string">'@babel/core'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> configFile = process.argv[<span class="number">2</span>] || <span class="string">'./babel.config.json'</span>;</span><br><span class="line"><span class="keyword">const</span> basicPath = <span class="string">'../yscode/public/'</span>;</span><br><span class="line"><span class="comment">//是否强制编译所有文件</span></span><br><span class="line"><span class="keyword">const</span> isForce = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 需要编译的文件列表，只支持.js类型</span></span><br><span class="line"><span class="keyword">let</span> &#123; fileList &#125; = <span class="built_in">require</span>(<span class="string">'../yscode/babelFileList'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> transTasks = [];</span><br><span class="line">fileList.forEach(<span class="function">(<span class="params">v</span>) =&gt;</span> &#123;</span><br><span class="line">    transTasks.push(</span><br><span class="line">        <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">            v = path.join(basicPath, v);</span><br><span class="line">            <span class="keyword">let</span> JsPathInfo = path.parse(v);</span><br><span class="line">            <span class="keyword">let</span> newJsPath = path.join(JsPathInfo.dir, <span class="string">`<span class="subst">$&#123;JsPathInfo.name&#125;</span>_b_.js`</span>);</span><br><span class="line">            <span class="keyword">if</span> (!isForce &amp;&amp; fs.existsSync(newJsPath)) &#123;</span><br><span class="line">                <span class="comment">// 对比时间，无变动的文件则不进行编译</span></span><br><span class="line">                <span class="keyword">let</span> fileMT = fs.statSync(v).mtimeMs;</span><br><span class="line">                <span class="keyword">let</span> fileBMT = fs.statSync(newJsPath).mtimeMs;</span><br><span class="line">                <span class="keyword">if</span> (fileMT &lt; fileBMT) <span class="keyword">return</span> resolve(JsPathInfo.name + <span class="string">' not changed'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">           </span><br><span class="line">            <span class="comment">// 编译文件</span></span><br><span class="line">            babel.transformFile(v, &#123; configFile &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">err, result</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (err) <span class="keyword">return</span> reject(err);</span><br><span class="line">                fs.writeFileSync(newJsPath, result.code);</span><br><span class="line">                resolve(JsPathInfo.name + <span class="string">' success'</span>);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;)</span><br><span class="line">    );</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.all(transTasks).then(</span><br><span class="line">    (res) =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'编译完成\r\n'</span> + res.join(<span class="string">'\r\n'</span>));</span><br><span class="line">    &#125;,</span><br><span class="line">    (err) =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'编译失败'</span> + err);</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <p>接着你在引用<strong>foo.js</strong>的文件里可以使用了：<code>&lt;script src=&quot;foo_b_.js&quot;&gt;&lt;/script&gt;</code></p>
 <p>此时浏览器加载的是压缩过得代码，如果你在开发环境还想继续使用编译前的代码怎么办？</p>
@@ -531,7 +531,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -539,11 +539,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -563,6 +563,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
@@ -575,11 +579,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,15 +591,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -607,15 +607,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vscode</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -631,11 +631,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">babel</a>
+                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+                <a href="javascript:void(0)" class="js-tag color1">babel</a>
               </li>
              
               <li class="article-tag-list-item">

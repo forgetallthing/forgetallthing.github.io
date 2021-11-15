@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020/6 | 张伯伯的BLOG</title>
+  <title>使用node批量下载七牛云图片 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="哪里有幸福可借">
-<meta property="og:type" content="website">
-<meta property="og:title" content="张伯伯的BLOG">
-<meta property="og:url" content="http://yoursite.com/archives/2020/06/index.html">
+  <meta name="description" content="一直使用七牛云做图床，最近突然想做个备份，却发现官方网站提供的批量导出竟然是一张图片打开一个浏览器tab页进行下载，我现在两百多张图片，一下子打开两百多tab页，最后只成功了十几张，多数都断开了连接。 看了下官方的api，要安装这个，要配置那个实在麻烦，懒得弄，最后发现这里可以下载所有图片的url地址：">
+<meta name="keywords" content="node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用node批量下载七牛云图片">
+<meta property="og:url" content="http://yoursite.com/2021/11/15/使用node批量下载七牛云图片/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="哪里有幸福可借">
+<meta property="og:description" content="一直使用七牛云做图床，最近突然想做个备份，却发现官方网站提供的批量导出竟然是一张图片打开一个浏览器tab页进行下载，我现在两百多张图片，一下子打开两百多tab页，最后只成功了十几张，多数都断开了连接。 看了下官方的api，要安装这个，要配置那个实在麻烦，懒得弄，最后发现这里可以下载所有图片的url地址：">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211115152638.png">
+<meta property="og:updated_time" content="2021-11-15T07:33:27.729Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="张伯伯的BLOG">
-<meta name="twitter:description" content="哪里有幸福可借">
+<meta name="twitter:title" content="使用node批量下载七牛云图片">
+<meta name="twitter:description" content="一直使用七牛云做图床，最近突然想做个备份，却发现官方网站提供的批量导出竟然是一张图片打开一个浏览器tab页进行下载，我现在两百多张图片，一下子打开两百多tab页，最后只成功了十几张，多数都断开了连接。 看了下官方的api，要安装这个，要配置那个实在麻烦，懒得弄，最后发现这里可以下载所有图片的url地址：">
+<meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211115152638.png">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -171,60 +175,196 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-使用node批量下载七牛云图片" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/15/如何使用位运算符设计接口参数/" class="archive-article-date">
-  	<time datetime="2020-06-15T07:47:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-15</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/15/如何使用位运算符设计接口参数/">如何使用位运算符设计接口参数</a>
+    <h1 class="article-title" itemprop="name">
+      使用node批量下载七牛云图片
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/11/15/使用node批量下载七牛云图片/" class="archive-article-date">
+  	<time datetime="2021-11-15T07:20:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一直使用七牛云做图床，最近突然想做个备份，却发现官方网站提供的批量导出竟然是一张图片打开一个浏览器tab页进行下载，我现在两百多张图片，一下子打开两百多tab页，最后只成功了十几张，多数都断开了连接。</p>
+<p>看了下官方的api，要安装这个，要配置那个实在麻烦，懒得弄，最后发现这里可以下载所有图片的url地址：</p>
+<a id="more"></a>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog20211115152638.png" alt></p>
+<p>下载之后是这种东西：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;object&quot;,&quot;url&quot;</span><br><span class="line">&quot;000.png&quot;,&quot;http://qiniuyun.lalala.com/000.png&quot;</span><br><span class="line">&quot;0000.png&quot;,&quot;http://qiniuyun.lalala.com/0000.png&quot;</span><br><span class="line">&quot;001.png&quot;,&quot;http://qiniuyun.lalala.com/001.png&quot;</span><br><span class="line">&quot;002.png&quot;,&quot;http://qiniuyun.lalala.com/002.png&quot;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>那我们只需要拿到这个列表，写个node脚本保存文件到本地即可：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">'request'</span>);</span><br><span class="line"><span class="keyword">const</span> filePath = <span class="string">'./export_urls_2021-11-15-10-09-20'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> content = fs.readFileSync(filePath).toString();</span><br><span class="line">content = content.replace(<span class="regexp">/"/g</span>, <span class="string">''</span>);</span><br><span class="line"><span class="keyword">let</span> list = content.split(<span class="regexp">/\n/g</span>);</span><br><span class="line">list.shift();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 开始下载</span></span><br><span class="line">downloadPic(list);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">downloadPic</span>(<span class="params">list</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> maxNum = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">let</span> batchSum = <span class="built_in">Math</span>.ceil(list.length / maxNum);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; batchSum; i++) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`批次：<span class="subst">$&#123;i&#125;</span>`</span>);</span><br><span class="line">        <span class="keyword">let</span> tasks = [];</span><br><span class="line">        <span class="keyword">let</span> curInd = i * maxNum;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = curInd; j &lt; curInd + maxNum; j++) &#123;</span><br><span class="line">            tasks.push(</span><br><span class="line">                <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">let</span> [name, src, err] = list[j].split(<span class="string">','</span>);</span><br><span class="line">                    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                        <span class="built_in">console</span>.log(<span class="string">`分割出错：<span class="subst">$&#123;err&#125;</span>`</span>);</span><br><span class="line">                        reject();</span><br><span class="line">                    &#125;</span><br><span class="line">                    name = name.split(<span class="string">'/'</span>).pop();</span><br><span class="line">                    <span class="keyword">let</span> dest = <span class="string">'./pic/'</span> + name;</span><br><span class="line"></span><br><span class="line">                    request(src)</span><br><span class="line">                        .pipe(fs.createWriteStream(dest))</span><br><span class="line">                        .on(<span class="string">'close'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                            resolve();</span><br><span class="line">                        &#125;);</span><br><span class="line">                &#125;)</span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">await</span> <span class="built_in">Promise</span>.all(tasks);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`完成`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的分批我本打算一批执行20个，但是下载了六七批之后七牛云那边返回的很慢，但我图片也不多，就改小了同时执行的数量，最后完成了下载。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>你转给我的不是钱，只是数字<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">node</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2021/11/15/使用node批量下载七牛云图片/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2021/11/11/如何在老一代项目中启用babel/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">如何在老一代项目中启用babel</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -259,8 +399,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

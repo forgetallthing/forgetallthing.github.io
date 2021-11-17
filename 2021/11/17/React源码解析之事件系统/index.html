@@ -6,23 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>2019移动端框架分析对比 | 张伯伯的BLOG</title>
+  <title>React源码解析之事件系统 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="框架列表：  React Native weex uni-app/Taro Flutter">
-<meta name="keywords" content="js">
+  <meta name="description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。 概述react根据W3C规范来定义自己的事件系统，其事件被称之为合成事件（SyntheticEvent）。 react事件分为委托事件（delegatedEvents）和非委托事件（nonDelegatedEvents）">
+<meta name="keywords" content="react">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2019移动端框架分析对比">
-<meta property="og:url" content="http://yoursite.com/2019/08/21/2019移动端框架分析对比/index.html">
+<meta property="og:title" content="React源码解析之事件系统">
+<meta property="og:url" content="http://yoursite.com/2021/11/17/React源码解析之事件系统/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="框架列表：  React Native weex uni-app/Taro Flutter">
+<meta property="og:description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。 概述react根据W3C规范来定义自己的事件系统，其事件被称之为合成事件（SyntheticEvent）。 react事件分为委托事件（delegatedEvents）和非委托事件（nonDelegatedEvents）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191022/kT3shviRW46h.jpg">
-<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20190821/Q3KlxN7aAwAa.png?imageslim">
-<meta property="og:updated_time" content="2019-10-22T07:37:52.229Z">
+<meta property="og:updated_time" content="2021-11-17T03:23:59.437Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2019移动端框架分析对比">
-<meta name="twitter:description" content="框架列表：  React Native weex uni-app/Taro Flutter">
-<meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191022/kT3shviRW46h.jpg">
+<meta name="twitter:title" content="React源码解析之事件系统">
+<meta name="twitter:description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。 概述react根据W3C规范来定义自己的事件系统，其事件被称之为合成事件（SyntheticEvent）。 react事件分为委托事件（delegatedEvents）和非委托事件（nonDelegatedEvents）">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -176,71 +173,158 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-2019移动端框架分析对比" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-React源码解析之事件系统" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      2019移动端框架分析对比
+      React源码解析之事件系统
     </h1>
   
 
         
-        <a href="/2019/08/21/2019移动端框架分析对比/" class="archive-article-date">
-  	<time datetime="2019-08-21T01:24:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-21</time>
+        <a href="/2021/11/17/React源码解析之事件系统/" class="archive-article-date">
+  	<time datetime="2021-11-17T03:19:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20191022/kT3shviRW46h.jpg" alt="mark"></p>
-<p>框架列表：</p>
-<ul>
-<li>React Native</li>
-<li>weex</li>
-<li>uni-app/Taro</li>
-<li>Flutter</li>
-</ul>
+        <blockquote>
+<p>本文来自xmas投稿，稿费0元~</p>
+</blockquote>
+<p>近期梳理React源码看到了React的事件系统，这里记录一下。</p>
+<h4 id="React版本号"><a href="#React版本号" class="headerlink" title="React版本号"></a>React版本号</h4><p>本文以React v17.0.2版本为基础，进行源码分析。</p>
+<h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>react根据W3C规范来定义自己的事件系统，其事件被称之为合成事件（SyntheticEvent）。</p>
+<p>react事件分为委托事件（delegatedEvents）和非委托事件（nonDelegatedEvents），nonDelegatedEvents只注册捕获事件。</p>
+<p>同时，react将事件分为3种类型——discreteEvent、userBlockingEvent、continuousEvent，它们拥有不同的优先级，在绑定事件处理函数时会使用不同的回调函数。</p>
+<p>react事件建立在原生基础上，模拟了一套冒泡和捕获的事件机制，当某一个dom元素触发事件后，会冒泡到react绑定在root节点的处理函数，通过target获取触发事件的dom对象和对应的fiber节点，由该fiber节点向上层父级遍历，收集一条事件队列，再遍历该队列触发队列中每个fiber对象对应的事件处理函数，正向遍历模拟冒泡，反向遍历模拟捕获，捕获事件（例如，<code>onClickCapture</code>）现在使用的是实际浏览器中的捕获机制。</p>
 <a id="more"></a>
-<h3 id="React-Native"><a href="#React-Native" class="headerlink" title="React Native"></a>React Native</h3><p>Facebook的移动端框架，基于js的<strong>React</strong>框架，原生能力由<strong>JavaScriptCore、jsc.so</strong>提供，</p>
-<p>react native 用了 react 的设计模式，但UI渲染、动画效果、网络请求等均由原生端实现。开发者编写的js代码，通过 react native 的中间层转化为原生控件和操作，比ionic等跨平台应用，大大提高了的用户体验。</p>
-<p>目前是成熟度最高，社区最完善的混合开发框架。支持安卓4.1以上。</p>
-<p>曾有License风波：2017 年 7 月，开源组织 Apache 软件基金会将基于 Facebook BSD+Patents 协议的开源软件列入黑名单让事情出现了转机，同年 9 月，WordPress、百度等大型公司宣布停用 React（Native) 开源项目以规避风险，此后，Facebook 才公开发表声明，表示从 v16 开始，React 将不再使用 BSD+Patents 协议，而是采用 MIT 协议。</p>
-<p>缺点是开发难度和维护成本较大。</p>
-<p>github star：80000+</p>
-<p>官网：<a href="https://reactnative.cn/" target="_blank" rel="noopener">https://reactnative.cn/</a></p>
-<h3 id="weex"><a href="#weex" class="headerlink" title="weex"></a>weex</h3><p>阿里的移动端框架，基于js的<strong>vue</strong>框架，原生能力由内置的<strong>JS Bridge</strong>提供，</p>
-<p>weex 所有的标签也不是真实控件，JS 代码中所生成的 dom，最后都是由 Native 端解析，再得到对应的Native控件渲染，如 Android 中 标签对应 WXTextView 控件，原生渲染使性能得到很高的提升。</p>
-<p>曾长时间不维护，现在由Apache基金会维护，社区不如React Native健全。支持安卓4.0以上，打包优化做的比较好。</p>
-<p>github star：</p>
-<p>阿里版本（已不维护）：17000+</p>
-<p>Apache：12000+</p>
-<p>官网：<a href="https://weex.apache.org/zh/guide/introduction.html" target="_blank" rel="noopener">https://weex.apache.org/zh/guide/introduction.html</a></p>
-<p>参考资料：<a href="https://www.cnblogs.com/lhb25/p/weex-ui-conf.html" target="_blank" rel="noopener">飞猪：Weex Ui - Weex Conf 2018 干货分享</a></p>
-<h3 id="uni-app、Taro"><a href="#uni-app、Taro" class="headerlink" title="uni-app、Taro"></a>uni-app、Taro</h3><p>Dcloud的移动端框架，基于js的<strong>vue + 小程序</strong>框架，原生能力由<strong>Native.js</strong>提供。</p>
-<p>编写一套代码，可发布到iOS、Android、H5、以及各种小程序（微信/支付宝/百度/头条/QQ/钉钉）等多个平台。</p>
-<p>app中本质是webview中运行html页面，但可以使用 weex 渲染引擎的原生组件，但是用weex 渲染的部分不能编译成小程序，兼容也有一些问题。</p>
-<p>uni-app是目前支持跨平台编译app+小程序的框架中相对比较成熟的框架，社区相对完善，插件质量不高，适合开发比较简单的项目。</p>
-<p>也因为uni-app需要跨平台编译app和各种小程序，所以框架的成熟度有待提高。</p>
-<p>github star：11000+</p>
-<p>官网：<a href="https://uniapp.dcloud.io/" target="_blank" rel="noopener">https://uniapp.dcloud.io/</a></p>
-<p>同类型的技术还有<strong>Taro</strong>，是由京东 - 凹凸实验室打造的一套遵循 React 语法规范的多端统一开发框架。官方宣传支持微信、百度、支付宝、字节跳动的小程序和H5、APP、rn等，使用和react完全一样的语法，如JSX等。京东的微信小程序商城就是用Taro实现的。缺点也是一样的有待成熟。</p>
-<p>名称来源：👽 Taro[‘tɑ:roʊ]，泰罗·奥特曼，宇宙警备队总教官，实力最强的奥特曼。</p>
-<p>官网：<a href="https://taro.aotu.io/" target="_blank" rel="noopener">https://taro.aotu.io/</a></p>
-<h3 id="Flutter"><a href="#Flutter" class="headerlink" title="Flutter"></a>Flutter</h3><p>Google在2018出品的跨平台移动UI框架，使用Dart语言开发，可支持Web端、Android端、iOS端等</p>
-<p>Flutter 的编程语言是Dart，所以执行时并不需要 Javascript 引擎，但实际效果最终也通过原生渲染。</p>
-<p>优点：理论上性能最好，兼容谷歌的新操作系统 Fuchsia。</p>
-<p>缺点：很新的技术，成熟度不高，社区支持不完善。</p>
-<p>github star：73000+</p>
-<p>官网：<a href="https://flutterchina.club/" target="_blank" rel="noopener">https://flutterchina.club/</a></p>
-<h2 id="React-Native、weex、Flutter-3种方案横向对比"><a href="#React-Native、weex、Flutter-3种方案横向对比" class="headerlink" title="React Native、weex、Flutter 3种方案横向对比"></a>React Native、weex、Flutter 3种方案横向对比</h2><p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20190821/Q3KlxN7aAwAa.png?imageslim" alt="mark"></p>
-<p>上图中Apk大小是通过 react-native init、weex create 和 flutter 创建出的工程后，直接不添加任何代码，打包出来的 release 签名 apk 大小。</p>
-<p>参考：</p>
-<p><a href="https://zhuanlan.zhihu.com/p/41900859" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/41900859</a></p>
-<p><a href="https://mp.weixin.qq.com/s/32e-V9K2-VX97PAYVitUPQ" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/32e-V9K2-VX97PAYVitUPQ</a></p>
+<h4 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h4><ul>
+<li>抹平不同浏览器之间的兼容性差异，提供一个抽象跨平台的事件机制。</li>
+<li>事件“合成”，即事件自定义。事件合成可以处理兼容性问题，也可以用来自定义事件（例如，React的onChange事件）。</li>
+<li>可以做更多优化。利用事件委托机制，几乎所有事件的触发都带理到了根节点，而不是DOM节点本身，简化了DOM事件处理逻辑，减小了内存开销</li>
+<li>可以干预事件的分发。v16引入Fiber架构，React可以通过干预事件的分发以优化用户的交互体验。</li>
+</ul>
+<h4 id="事件注册"><a href="#事件注册" class="headerlink" title="事件注册"></a>事件注册</h4><ul>
+<li>ReactDom通过createRootImpl方法创建整个应用的根节点，之后会调用listenToAllSupportedEvents方法，此方法为事件注册的入口函数。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">listenToAllSupportedEvents</span>(<span class="params">rootContainerElement</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//省略...</span></span><br><span class="line">    </span><br><span class="line">  allNativeEvents.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">domEventName</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//注册冒泡事件 </span></span><br><span class="line">    <span class="keyword">if</span> (!nonDelegatedEvents.has(domEventName)) &#123;</span><br><span class="line">      listenToNativeEvent(domEventName, <span class="literal">false</span>, rootContainerElement, <span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//注册捕获事件</span></span><br><span class="line">    listenToNativeEvent(domEventName, <span class="literal">true</span>, rootContainerElement, <span class="literal">null</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
+<li><p>allNativeEvents是一个包含浏览器支持的所有事件的数组，这里会遍历allNativeEvents，根据事件类型调用listenToNativeEvent函数。区别在于第二个参数，代表捕获或者冒泡。rootContainerElement是应用的根节点，即ReactDom.render()传入的第二个参数，这里将事件注册到根节点上。</p>
+</li>
+<li><p>nonDelegatedEvents包含cancel、close、invalid、load、scroll、toggle和媒体事件类型（例如video、audio的暂停、播放事件等），以上事件类型只注册捕获事件。</p>
+</li>
+<li><p>同时支持冒泡和捕获的事件会注册两个事件监听器。</p>
+</li>
+</ol>
+<ul>
+<li>listenToNativeEvent：不同事件类型绑定到不同目标节点上，事件绑定前，将事件名在dom上标记。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">listenToNativeEvent</span>(<span class="params">domEventName, isCapturePhaseListener, rootContainerElement, targetElement</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> target = rootContainerElement; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (domEventName === <span class="string">'selectionchange'</span> &amp;&amp; rootContainerElement.nodeType !== DOCUMENT_NODE) &#123;</span><br><span class="line">      target = rootContainerElement.ownerDocument;</span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (targetElement !== <span class="literal">null</span> &amp;&amp; !isCapturePhaseListener &amp;&amp; nonDelegatedEvents.has(domEventName)) &#123;</span><br><span class="line">      <span class="keyword">if</span> (domEventName !== <span class="string">'scroll'</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      target = targetElement;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//listenerSet 用于在目标节点上存储事件名称，标记dom元素</span></span><br><span class="line">    <span class="keyword">var</span> listenerSet = getEventListenerSet(target);</span><br><span class="line">    <span class="comment">//获取事件名称</span></span><br><span class="line">    <span class="keyword">var</span> listenerSetKey = getListenerSetKey(domEventName, isCapturePhaseListener); <span class="comment">// If the listener entry is empty or we should upgrade, then</span></span><br><span class="line">    <span class="comment">// we need to trap an event listener onto the target.</span></span><br><span class="line">    <span class="comment">//判断目标节点target上是否为当前事件domEventName添加过监听器</span></span><br><span class="line">    <span class="keyword">if</span> (!listenerSet.has(listenerSetKey)) &#123;</span><br><span class="line">      <span class="comment">//省略...</span></span><br><span class="line">        </span><br><span class="line">      <span class="comment">//为事件添加事件监听器</span></span><br><span class="line">      addTrappedEventListener(target, domEventName, eventSystemFlags, isCapturePhaseListener);</span><br><span class="line">      listenerSet.add(listenerSetKey);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="代码解析-1"><a href="#代码解析-1" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
+<li><p>selectionchange事件在文档上的当前文本选择被改变时触发，事件绑定到document上。</p>
+</li>
+<li><p>onScroll事件不再冒泡。</p>
+</li>
+<li><p>getEventListenerSet函数用于在dom上存储事件名称。</p>
+</li>
+<li><p>getListenerSetKey函数根据捕获或者冒泡类型，得到事件命名（例如click<strong>capture、click</strong>bubble）。</p>
+</li>
+<li><p>根据事件名称，判断target节点是否注册过当前事件。</p>
+</li>
+</ol>
+<ul>
+<li>addTrappedEventListener：绑定事件监听器。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addTrappedEventListener</span>(<span class="params">targetContainer, domEventName, eventSystemFlags, isCapturePhaseListener, isDeferredListenerForLegacyFBSupport</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//根据事件优先级，创建事件监听函数</span></span><br><span class="line">    <span class="keyword">var</span> listener = createEventListenerWrapperWithPriority(targetContainer, domEventName, eventSystemFlags); </span><br><span class="line"></span><br><span class="line">    <span class="comment">//省略...</span></span><br><span class="line">    </span><br><span class="line">    targetContainer =  targetContainer;</span><br><span class="line">    <span class="keyword">var</span> unsubscribeListener; </span><br><span class="line">    <span class="comment">//在根节点上绑定事件</span></span><br><span class="line">    <span class="keyword">if</span> (isCapturePhaseListener) &#123;</span><br><span class="line">      <span class="comment">//捕获</span></span><br><span class="line">      <span class="keyword">if</span> (isPassiveListener !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">        unsubscribeListener = addEventCaptureListenerWithPassiveFlag(targetContainer, domEventName, listener, isPassiveListener);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        unsubscribeListener = addEventCaptureListener(targetContainer, domEventName, listener);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">//冒泡</span></span><br><span class="line">      <span class="keyword">if</span> (isPassiveListener !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">        unsubscribeListener = addEventBubbleListenerWithPassiveFlag(targetContainer, domEventName, listener, isPassiveListener);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        unsubscribeListener = addEventBubbleListener(targetContainer, domEventName, listener);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h6 id="代码解析-2"><a href="#代码解析-2" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
+<li>根据事件名获取事件监听器函数。</li>
+<li>isCapturePhaseListener用于判断当前是冒泡还是捕获阶段，针对不同阶段调用不同函数进行事件绑定。</li>
+<li>addEventCaptureListener、addEventBubbleListener调用原生的target.addEventListener来绑定事件。</li>
+</ol>
+<h4 id="事件处理函数"><a href="#事件处理函数" class="headerlink" title="事件处理函数"></a>事件处理函数</h4><ul>
+<li>createEventListenerWrapperWithPriority：事件处理函数。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createEventListenerWrapperWithPriority</span>(<span class="params">targetContainer, domEventName, eventSystemFlags</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//获取事件优先级</span></span><br><span class="line">    <span class="keyword">var</span> eventPriority = getEventPriorityForPluginSystem(domEventName);</span><br><span class="line">    <span class="keyword">var</span> listenerWrapper;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (eventPriority) &#123;</span><br><span class="line">      <span class="keyword">case</span> DiscreteEvent:</span><br><span class="line">        listenerWrapper = dispatchDiscreteEvent;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">case</span> UserBlockingEvent:</span><br><span class="line">        listenerWrapper = dispatchUserBlockingUpdate;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">case</span> ContinuousEvent:</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        listenerWrapper = dispatchEvent;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//事件监听函数</span></span><br><span class="line">    <span class="keyword">return</span> listenerWrapper.bind(<span class="literal">null</span>, domEventName, eventSystemFlags, targetContainer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="代码解析-3"><a href="#代码解析-3" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
+<li>根据事件名称，获取事件优先级。</li>
+<li>根据事件优先级，取到对应优先级的listener函数。</li>
+<li>dispatchDiscreteEvent方法和dispatchUserBlockingUpdate方法内部其实都调用的dispatchEvent方法。</li>
+<li>dispatchEvent方法中调用attemptToDispatchEvent，用于逻辑处理，这里不做过多介绍（暂时没看），其内部关键的触发函数是dispatchEventsForPlugins。</li>
+</ol>
+<ul>
+<li>dispatchEventsForPlugins：使用订阅-发布模式，对事件进行处理。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dispatchEventsForPlugins</span>(<span class="params">domEventName, eventSystemFlags, nativeEvent, targetInst, targetContainer</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> nativeEventTarget = getEventTarget(nativeEvent);</span><br><span class="line">    <span class="comment">//注册中心</span></span><br><span class="line">    <span class="keyword">var</span> dispatchQueue = [];</span><br><span class="line">    <span class="comment">//订阅</span></span><br><span class="line">    extractEvents$<span class="number">5</span>(dispatchQueue, domEventName, targetInst, nativeEvent, nativeEventTarget, eventSystemFlags);</span><br><span class="line">    <span class="comment">//发布</span></span><br><span class="line">    processDispatchQueue(dispatchQueue, eventSystemFlags);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="代码解析-4"><a href="#代码解析-4" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
+<li>当事件触发时，收集各个层级对应的处理函数，并执行它们。</li>
+<li>extractEvents$5函数用于事件收集。</li>
+<li>processDispatchQueue函数用于回调函数的执行。</li>
+</ol>
+<ul>
+<li>extractEvents$5</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _listeners = accumulateSinglePhaseListeners(targetInst, reactName, nativeEvent.type, inCapturePhase, accumulateTargetOnly);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (_listeners.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">//event对象</span></span><br><span class="line">    <span class="keyword">var</span> _event = <span class="keyword">new</span> SyntheticEventCtor(reactName, reactEventType, <span class="literal">null</span>, nativeEvent, nativeEventTarget);</span><br><span class="line">    <span class="comment">//订阅，dispatchQueue存入对象包含合成事件类型和监听器</span></span><br><span class="line">    dispatchQueue.push(&#123;</span><br><span class="line">        event: _event,</span><br><span class="line">        listeners: _listeners</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="代码解析-5"><a href="#代码解析-5" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
+<li><p>该函数针对不同类型的事件创建对应的合成事件，将各个层级的listener收集起来，保存到dispatchQueue中，用来模拟冒泡。</p>
+</li>
+<li><p>dispatchQueue的结构：</p>
+<p>[{</p>
+<pre><code>event: _event,
+listeners: _listeners
+</code></pre><p>}]</p>
+<p>event：合成事件对象；</p>
+<p>listeners：该事件对应各个层级的回调函数；</p>
+</li>
+</ol>
+<ul>
+<li>accumulateSinglePhaseListeners：一个队列，记录了此次触发事件需要执行的回调函数。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">accumulateSinglePhaseListeners</span>(<span class="params">targetFiber, reactName, nativeEventType, inCapturePhase, accumulateTargetOnly</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> captureName = reactName !== <span class="literal">null</span> ? reactName + <span class="string">'Capture'</span> : <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">var</span> reactEventName = inCapturePhase ? captureName : reactName;</span><br><span class="line">    <span class="keyword">var</span> listeners = [];</span><br><span class="line">    <span class="keyword">var</span> instance = targetFiber;</span><br><span class="line">    <span class="keyword">var</span> lastHostComponent = <span class="literal">null</span>; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (instance !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> _instance2 = instance,</span><br><span class="line">            stateNode = _instance2.stateNode,</span><br><span class="line">            tag = _instance2.tag; </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (tag === HostComponent &amp;&amp; stateNode !== <span class="literal">null</span>) &#123;</span><br><span class="line">            lastHostComponent = stateNode; </span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (reactEventName !== <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="comment">//listener就是我们在jsx中写的onClick对应的函数</span></span><br><span class="line">                <span class="keyword">var</span> listener = getListener(instance, reactEventName);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (listener != <span class="literal">null</span>) &#123;</span><br><span class="line">                    listeners.push(createDispatchListener(instance, listener, lastHostComponent));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        instance = instance.return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> listeners;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="代码解析-6"><a href="#代码解析-6" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
+<li><p>该函数会从目标Fiber节点向上层遍历，取出各个层级节点对应事件的listener函数。</p>
+</li>
+<li><p>listeners的结构：</p>
+<p>[{</p>
+<p>   instance: instance,</p>
+<p>   listener: listener,</p>
+<p>   currentTarget: currentTarget</p>
+<p>}]</p>
+<p>currentTarget：目标节点；</p>
+<p>instance：目标节点对应的fiber节点；</p>
+<p>listener：回调函数；</p>
+</li>
+</ol>
+<ul>
+<li><p>SyntheticEnentCtor：React根据不同类型的事件，将对应的创建合成事件的方法赋值给SyntheticEnentCtor。</p>
+<p>这里以click事件为例，以下是创建click合成事件的关键函数。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createSyntheticEvent</span>(<span class="params">Interface</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">SyntheticBaseEvent</span>(<span class="params">reactName, reactEventType, targetInst, nativeEvent, nativeEventTarget</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>._reactName = reactName;</span><br><span class="line">        <span class="keyword">this</span>._targetInst = targetInst;</span><br><span class="line">        <span class="keyword">this</span>.type = reactEventType;</span><br><span class="line">        <span class="keyword">this</span>.nativeEvent = nativeEvent; <span class="comment">//原生事件</span></span><br><span class="line">        <span class="keyword">this</span>.target = nativeEventTarget; <span class="comment">//目标节点</span></span><br><span class="line">        <span class="keyword">this</span>.currentTarget = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> defaultPrevented = nativeEvent.defaultPrevented != <span class="literal">null</span> ? nativeEvent.defaultPrevented : nativeEvent.returnValue === <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (defaultPrevented) &#123;</span><br><span class="line">            <span class="keyword">this</span>.isDefaultPrevented = functionThatReturnsTrue;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.isDefaultPrevented = functionThatReturnsFalse;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.isPropagationStopped = functionThatReturnsFalse;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    _assign(SyntheticBaseEvent.prototype, &#123;</span><br><span class="line">        <span class="comment">//阻止默认行为</span></span><br><span class="line">        preventDefault: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.defaultPrevented = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">var</span> event = <span class="keyword">this</span>.nativeEvent;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!event) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (event.preventDefault) &#123;</span><br><span class="line">                event.preventDefault(); </span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> event.returnValue !== <span class="string">'unknown'</span>) &#123;</span><br><span class="line">                event.returnValue = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.isDefaultPrevented = functionThatReturnsTrue;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//阻止事件传播</span></span><br><span class="line">        stopPropagation: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> event = <span class="keyword">this</span>.nativeEvent;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!event) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (event.stopPropagation) &#123;</span><br><span class="line">                event.stopPropagation(); </span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> event.cancelBubble !== <span class="string">'unknown'</span>) &#123;</span><br><span class="line">                event.cancelBubble = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.isPropagationStopped = functionThatReturnsTrue;</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        <span class="comment">//省略...</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> SyntheticBaseEvent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="代码解析-7"><a href="#代码解析-7" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
+<li>React合成的click事件对象，是SyntheticBaseEvent类的一个实例。</li>
+<li>合成事件对象内部有一个nativeEvent指针，指向原生event对象。</li>
+<li>SyntheticBaseEvent.prototype上绑定stopPropagation、preventDefault函数。</li>
+</ol>
+<ul>
+<li>processDispatchQueue：用于事件发布。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">processDispatchQueue</span>(<span class="params">dispatchQueue, eventSystemFlags</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> inCapturePhase = (eventSystemFlags &amp; IS_CAPTURE_PHASE) !== <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; dispatchQueue.length; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> _dispatchQueue$i = dispatchQueue[i],</span><br><span class="line">            event = _dispatchQueue$i.event,</span><br><span class="line">            listeners = _dispatchQueue$i.listeners;</span><br><span class="line">        processDispatchQueueItemsInOrder(event, listeners, inCapturePhase);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="代码解析-8"><a href="#代码解析-8" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
+<li>遍历dispatchQueue，dispatchQueue中的每一项在processDispatchQueueItemsInOrder函数里遍历执行。</li>
+</ol>
+<ul>
+<li>processDispatchQueueItemsInOrder</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">processDispatchQueueItemsInOrder</span>(<span class="params">event, dispatchListeners, inCapturePhase</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> previousInstance;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (inCapturePhase) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = dispatchListeners.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">var</span> _dispatchListeners$i = dispatchListeners[i],</span><br><span class="line">                instance = _dispatchListeners$i.instance,</span><br><span class="line">                currentTarget = _dispatchListeners$i.currentTarget,</span><br><span class="line">                listener = _dispatchListeners$i.listener;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (instance !== previousInstance &amp;&amp; event.isPropagationStopped()) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            executeDispatch(event, listener, currentTarget);</span><br><span class="line">            previousInstance = instance;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> _i = <span class="number">0</span>; _i &lt; dispatchListeners.length; _i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> _dispatchListeners$_i = dispatchListeners[_i],</span><br><span class="line">                _instance = _dispatchListeners$_i.instance,</span><br><span class="line">                _currentTarget = _dispatchListeners$_i.currentTarget,</span><br><span class="line">                _listener = _dispatchListeners$_i.listener;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (_instance !== previousInstance &amp;&amp; event.isPropagationStopped()) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            executeDispatch(event, _listener, _currentTarget);</span><br><span class="line">            previousInstance = _instance;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="代码解析-9"><a href="#代码解析-9" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
+<li>函数里会根据判断来正向、反向的遍历来模拟冒泡和捕获。</li>
+<li>executeDispatch用来执行回调函数。</li>
+</ol>
 
       
 
@@ -285,7 +369,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
         		</li>
       		
 		</ul>
@@ -341,7 +425,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2019/08/21/2019移动端框架分析对比/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2021/11/17/React源码解析之事件系统/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -355,18 +439,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2019/09/07/react-native问题记录/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          react-native问题记录
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/07/25/类数组对象转化为数组的几种方法/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">类数组对象转化为数组的几种方法</div>
+    <a href="/2021/11/15/使用node批量下载七牛云图片/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用node批量下载七牛云图片</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -393,7 +468,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-Native"><span class="toc-number">1.</span> <span class="toc-text">React Native</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weex"><span class="toc-number">2.</span> <span class="toc-text">weex</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#uni-app、Taro"><span class="toc-number">3.</span> <span class="toc-text">uni-app、Taro</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter"><span class="toc-number">4.</span> <span class="toc-text">Flutter</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Native、weex、Flutter-3种方案横向对比"><span class="toc-number"></span> <span class="toc-text">React Native、weex、Flutter 3种方案横向对比</span></a>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#React版本号"><span class="toc-number">1.</span> <span class="toc-text">React版本号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概述"><span class="toc-number">2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#动机"><span class="toc-number">3.</span> <span class="toc-text">动机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件注册"><span class="toc-number">4.</span> <span class="toc-text">事件注册</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析"><span class="toc-number">4.0.1.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-1"><span class="toc-number">4.0.2.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-2"><span class="toc-number">4.0.3.</span> <span class="toc-text">代码解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件处理函数"><span class="toc-number">5.</span> <span class="toc-text">事件处理函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-3"><span class="toc-number">5.0.1.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-4"><span class="toc-number">5.0.2.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-5"><span class="toc-number">5.0.3.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-6"><span class="toc-number">5.0.4.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-7"><span class="toc-number">5.0.5.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-8"><span class="toc-number">5.0.6.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-9"><span class="toc-number">5.0.7.</span> <span class="toc-text">代码解析</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>

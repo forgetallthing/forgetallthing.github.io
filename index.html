@@ -173,6 +173,90 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-React源码解析之事件系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/17/React源码解析之事件系统/">React源码解析之事件系统</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/17/React源码解析之事件系统/" class="archive-article-date">
+  	<time datetime="2021-11-17T03:19:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>本文来自xmas投稿，稿费0元~</p>
+</blockquote>
+<p>近期梳理React源码看到了React的事件系统，这里记录一下。</p>
+<h4 id="React版本号"><a href="#React版本号" class="headerlink" title="React版本号"></a>React版本号</h4><p>本文以React v17.0.2版本为基础，进行源码分析。</p>
+<h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>react根据W3C规范来定义自己的事件系统，其事件被称之为合成事件（SyntheticEvent）。</p>
+<p>react事件分为委托事件（delegatedEvents）和非委托事件（nonDelegatedEvents），nonDelegatedEvents只注册捕获事件。</p>
+<p>同时，react将事件分为3种类型——discreteEvent、userBlockingEvent、continuousEvent，它们拥有不同的优先级，在绑定事件处理函数时会使用不同的回调函数。</p>
+<p>react事件建立在原生基础上，模拟了一套冒泡和捕获的事件机制，当某一个dom元素触发事件后，会冒泡到react绑定在root节点的处理函数，通过target获取触发事件的dom对象和对应的fiber节点，由该fiber节点向上层父级遍历，收集一条事件队列，再遍历该队列触发队列中每个fiber对象对应的事件处理函数，正向遍历模拟冒泡，反向遍历模拟捕获，捕获事件（例如，<code>onClickCapture</code>）现在使用的是实际浏览器中的捕获机制。</p>
+        
+          <a class="article-more-a" href="/2021/11/17/React源码解析之事件系统/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/17/React源码解析之事件系统/">打开看看 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-使用node批量下载七牛云图片" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -876,89 +960,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-mxGraph工作流图形构建实战" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/04/mxGraph工作流图形构建实战/">mxGraph工作流图形构建实战</a>
-    </h1>
-  
-
-        
-        <a href="/2020/03/04/mxGraph工作流图形构建实战/" class="archive-article-date">
-  	<time datetime="2020-03-04T03:53:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20201102/2W0915GVvYgy.jpg?imageslim" alt="mark"></p>
-<h3 id="mxGraph简介"><a href="#mxGraph简介" class="headerlink" title="mxGraph简介"></a>mxGraph简介</h3><h4 id="什么是mxGraph"><a href="#什么是mxGraph" class="headerlink" title="什么是mxGraph"></a>什么是mxGraph</h4><p>mxGraph是一个强大到令人发指的 JS 绘图组件，用于在网页中设计/编辑 Workflow/BPM流程图、图表、网络图和普通图形的 Web 应用程序。</p>
-<p>大名鼎鼎的在线绘图（flow chart）网站<a href="http://www.draw.io/" target="_blank" rel="noopener">draw.io</a>就是基于这个库开发出来的。</p>
-<p>具体介绍请见<a href="https://jgraph.github.io/mxgraph/" target="_blank" rel="noopener">官网</a>、<a href="https://github.com/jgraph/mxgraph" target="_blank" rel="noopener">github</a>。</p>
-<p>官方提供了大量实例，可以参考：<a href="https://jgraph.github.io/mxgraph/javascript/index.html" target="_blank" rel="noopener">JavaScript demo</a></p>
-<p>这个库拥有超大量的api，建议仔细查阅：<a href="https://jgraph.github.io/mxgraph/docs/js-api/files/index-txt.html" target="_blank" rel="noopener">JavaScript api</a></p>
-<p>本文不会重复一些网上已有的教程，下面是入门使用教程的链接：</p>
-<p><a href="https://www.cnblogs.com/shawWey/p/7116548.html" target="_blank" rel="noopener">Mxgraph使用总结</a></p>
-        
-          <a class="article-more-a" href="/2020/03/04/mxGraph工作流图形构建实战/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/04/mxGraph工作流图形构建实战/">打开看看 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1074,11 +1075,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1087,14 +1096,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1114,11 +1115,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1127,18 +1144,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">mongod</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1158,15 +1163,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1174,11 +1175,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">babel</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">babel</a>
               </li>
              
               <li class="article-tag-list-item">

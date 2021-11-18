@@ -17,7 +17,7 @@
 <meta property="og:description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blogibrahim-boran-P7z3tdMcLzk-unsplash.jpg">
-<meta property="og:updated_time" content="2021-11-18T02:14:55.600Z">
+<meta property="og:updated_time" content="2021-11-18T02:16:39.272Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React源码解析之事件系统">
 <meta name="twitter:description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。">
@@ -238,9 +238,7 @@ var _hmt = _hmt || [];
 <li><p>根据事件名称，判断target节点是否注册过当前事件。</p>
 </li>
 </ol>
-<ul>
-<li>addTrappedEventListener：绑定事件监听器。</li>
-</ul>
+<p>addTrappedEventListener：绑定事件监听器。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addTrappedEventListener</span>(<span class="params">targetContainer, domEventName, eventSystemFlags, isCapturePhaseListener, isDeferredListenerForLegacyFBSupport</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//根据事件优先级，创建事件监听函数</span></span><br><span class="line">    <span class="keyword">var</span> listener = createEventListenerWrapperWithPriority(targetContainer, domEventName, eventSystemFlags); </span><br><span class="line"></span><br><span class="line">    <span class="comment">//省略...</span></span><br><span class="line">    </span><br><span class="line">    targetContainer =  targetContainer;</span><br><span class="line">    <span class="keyword">var</span> unsubscribeListener; </span><br><span class="line">    <span class="comment">//在根节点上绑定事件</span></span><br><span class="line">    <span class="keyword">if</span> (isCapturePhaseListener) &#123;</span><br><span class="line">      <span class="comment">//捕获</span></span><br><span class="line">      <span class="keyword">if</span> (isPassiveListener !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">        unsubscribeListener = addEventCaptureListenerWithPassiveFlag(targetContainer, domEventName, listener, isPassiveListener);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        unsubscribeListener = addEventCaptureListener(targetContainer, domEventName, listener);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">//冒泡</span></span><br><span class="line">      <span class="keyword">if</span> (isPassiveListener !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">        unsubscribeListener = addEventBubbleListenerWithPassiveFlag(targetContainer, domEventName, listener, isPassiveListener);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        unsubscribeListener = addEventBubbleListener(targetContainer, domEventName, listener);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <h6 id="代码解析-2"><a href="#代码解析-2" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
 <li>根据事件名获取事件监听器函数。</li>
@@ -599,11 +597,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -611,7 +605,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -619,11 +613,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -635,7 +629,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -647,15 +657,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -664,10 +666,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -699,19 +697,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">babel</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
               </li>
              
               <li class="article-tag-list-item">

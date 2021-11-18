@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>React源码解析之事件系统 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文来自xmas投稿，稿费0元~  React源码解析之事件系统近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。">
+  <meta name="description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。">
 <meta name="keywords" content="react">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React源码解析之事件系统">
 <meta property="og:url" content="http://yoursite.com/2021/11/17/React源码解析之事件系统/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="本文来自xmas投稿，稿费0元~  React源码解析之事件系统近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。">
+<meta property="og:description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blogibrahim-boran-P7z3tdMcLzk-unsplash.jpg">
-<meta property="og:updated_time" content="2021-11-17T11:15:08.603Z">
+<meta property="og:updated_time" content="2021-11-18T02:14:55.600Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React源码解析之事件系统">
-<meta name="twitter:description" content="本文来自xmas投稿，稿费0元~  React源码解析之事件系统近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。">
+<meta name="twitter:description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。">
 <meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blogibrahim-boran-P7z3tdMcLzk-unsplash.jpg">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
@@ -199,7 +199,7 @@ var _hmt = _hmt || [];
 <blockquote>
 <p>本文来自xmas投稿，稿费0元~</p>
 </blockquote>
-<h2 id="React源码解析之事件系统"><a href="#React源码解析之事件系统" class="headerlink" title="React源码解析之事件系统"></a>React源码解析之事件系统</h2><p>近期梳理React源码看到了React的事件系统，这里记录一下。</p>
+<p>近期梳理React源码看到了React的事件系统，这里记录一下。</p>
 <h4 id="React版本号"><a href="#React版本号" class="headerlink" title="React版本号"></a>React版本号</h4><p>本文以React v17.0.2版本为基础，进行源码分析。</p>
 <a id="more"></a>
 <h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>react根据W3C规范来定义自己的事件系统，其事件被称之为合成事件（SyntheticEvent）。</p>
@@ -471,7 +471,7 @@ listeners: _listeners
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#React源码解析之事件系统"><span class="toc-number">1.</span> <span class="toc-text">React源码解析之事件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#React版本号"><span class="toc-number">1.0.1.</span> <span class="toc-text">React版本号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概述"><span class="toc-number">1.0.2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#动机"><span class="toc-number">1.0.3.</span> <span class="toc-text">动机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件注册"><span class="toc-number">1.0.4.</span> <span class="toc-text">事件注册</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析"><span class="toc-number">1.0.4.0.1.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-1"><span class="toc-number">1.0.4.0.2.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-2"><span class="toc-number">1.0.4.0.3.</span> <span class="toc-text">代码解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件处理函数"><span class="toc-number">1.0.5.</span> <span class="toc-text">事件处理函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-3"><span class="toc-number">1.0.5.0.1.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-4"><span class="toc-number">1.0.5.0.2.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-5"><span class="toc-number">1.0.5.0.3.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-6"><span class="toc-number">1.0.5.0.4.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-7"><span class="toc-number">1.0.5.0.5.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-8"><span class="toc-number">1.0.5.0.6.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-9"><span class="toc-number">1.0.5.0.7.</span> <span class="toc-text">代码解析</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#React版本号"><span class="toc-number">1.</span> <span class="toc-text">React版本号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概述"><span class="toc-number">2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#动机"><span class="toc-number">3.</span> <span class="toc-text">动机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件注册"><span class="toc-number">4.</span> <span class="toc-text">事件注册</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析"><span class="toc-number">4.0.1.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-1"><span class="toc-number">4.0.2.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-2"><span class="toc-number">4.0.3.</span> <span class="toc-text">代码解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件处理函数"><span class="toc-number">5.</span> <span class="toc-text">事件处理函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-3"><span class="toc-number">5.0.1.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-4"><span class="toc-number">5.0.2.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-5"><span class="toc-number">5.0.3.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-6"><span class="toc-number">5.0.4.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-7"><span class="toc-number">5.0.5.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-8"><span class="toc-number">5.0.6.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-9"><span class="toc-number">5.0.7.</span> <span class="toc-text">代码解析</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -603,7 +603,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -611,7 +611,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -619,7 +619,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -631,15 +639,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+                <a href="javascript:void(0)" class="js-tag color4">bat</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,6 +659,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
@@ -659,23 +671,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mongod</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -683,11 +679,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -695,11 +687,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">babel</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -708,6 +700,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">babel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -17,7 +17,7 @@
 <meta property="og:description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blogibrahim-boran-P7z3tdMcLzk-unsplash.jpg">
-<meta property="og:updated_time" content="2021-11-18T03:12:55.613Z">
+<meta property="og:updated_time" content="2021-11-18T03:24:37.511Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React源码解析之事件系统">
 <meta name="twitter:description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。">
@@ -251,29 +251,20 @@ var _hmt = _hmt || [];
 </ol>
 <h4 id="事件订阅"><a href="#事件订阅" class="headerlink" title="事件订阅"></a>事件订阅</h4><p>extractEvents$5</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//scroll事件不再冒泡的标志</span></span><br><span class="line"><span class="keyword">var</span> accumulateTargetOnly = !inCapturePhase &amp;&amp; domEventName === <span class="string">'scroll'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> _listeners = accumulateSinglePhaseListeners(targetInst, reactName, nativeEvent.type, inCapturePhase, accumulateTargetOnly);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (_listeners.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">//event对象</span></span><br><span class="line">    <span class="keyword">var</span> _event = <span class="keyword">new</span> SyntheticEventCtor(reactName, reactEventType, <span class="literal">null</span>, nativeEvent, nativeEventTarget);</span><br><span class="line">    <span class="comment">//订阅，dispatchQueue存入对象包含合成事件类型和监听器</span></span><br><span class="line">    dispatchQueue.push(&#123;</span><br><span class="line">        event: _event,</span><br><span class="line">        listeners: _listeners</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h6 id="代码解析-5"><a href="#代码解析-5" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
-<li><p>onScroll事件不再冒泡。</p>
-</li>
-<li><p>该函数针对不同类型的事件创建对应的合成事件，将各个层级的listener收集起来，保存到dispatchQueue中，用来模拟冒泡。</p>
-</li>
-<li><p>dispatchQueue的结构：</p>
+<h6 id="代码解析-5"><a href="#代码解析-5" class="headerlink" title="代码解析"></a>代码解析</h6><p>onScroll事件不再冒泡。</p>
+<p>该函数针对不同类型的事件创建对应的合成事件，将各个层级的listener收集起来，保存到dispatchQueue中，用来模拟冒泡。</p>
+<p>dispatchQueue的结构：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[&#123;</span><br><span class="line">    event: _event,</span><br><span class="line">    listeners: _listeners</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
 <p>event：合成事件对象；</p>
 <p>listeners：该事件对应各个层级的回调函数；</p>
-</li>
-</ol>
 <h4 id="收集回调函数"><a href="#收集回调函数" class="headerlink" title="收集回调函数"></a>收集回调函数</h4><p>accumulateSinglePhaseListeners：一个队列，记录了此次触发事件需要执行的回调函数。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">accumulateSinglePhaseListeners</span>(<span class="params">targetFiber, reactName, nativeEventType, inCapturePhase, accumulateTargetOnly</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> captureName = reactName !== <span class="literal">null</span> ? reactName + <span class="string">'Capture'</span> : <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">var</span> reactEventName = inCapturePhase ? captureName : reactName;</span><br><span class="line">    <span class="keyword">var</span> listeners = [];</span><br><span class="line">    <span class="keyword">var</span> instance = targetFiber;</span><br><span class="line">    <span class="keyword">var</span> lastHostComponent = <span class="literal">null</span>; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (instance !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> _instance2 = instance,</span><br><span class="line">            stateNode = _instance2.stateNode,</span><br><span class="line">            tag = _instance2.tag; </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (tag === HostComponent &amp;&amp; stateNode !== <span class="literal">null</span>) &#123;</span><br><span class="line">            lastHostComponent = stateNode; </span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (reactEventName !== <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="comment">//listener就是我们在jsx中写的onClick对应的函数</span></span><br><span class="line">                <span class="keyword">var</span> listener = getListener(instance, reactEventName);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (listener != <span class="literal">null</span>) &#123;</span><br><span class="line">                    listeners.push(createDispatchListener(instance, listener, lastHostComponent));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">        </span><br><span class="line">        <span class="comment">//scroll事件不再冒泡的处理</span></span><br><span class="line">        <span class="keyword">if</span> (accumulateTargetOnly) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        instance = instance.return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> listeners;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h6 id="代码解析-6"><a href="#代码解析-6" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
-<li><p>该函数会从目标Fiber节点向上层遍历，取出各个层级节点对应事件的listener函数。</p>
-</li>
-<li><p>listeners的结构：</p>
+<h6 id="代码解析-6"><a href="#代码解析-6" class="headerlink" title="代码解析"></a>代码解析</h6><p>该函数会从目标Fiber节点向上层遍历，取出各个层级节点对应事件的listener函数。</p>
+<p>listeners的结构：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[&#123;</span><br><span class="line">    instance: instance,</span><br><span class="line">    listener: listener,</span><br><span class="line">    currentTarget: currentTarget</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
 <p>currentTarget：目标节点；</p>
 <p>instance：目标节点对应的fiber节点；</p>
 <p>listener：回调函数；</p>
-</li>
-</ol>
 <h4 id="合成事件构造函数"><a href="#合成事件构造函数" class="headerlink" title="合成事件构造函数"></a>合成事件构造函数</h4><p>SyntheticEnentCtor：React根据不同类型的事件，将对应的创建合成事件的方法赋值给SyntheticEnentCtor。</p>
 <p>这里以click事件为例，以下是创建click合成事件的关键函数。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createSyntheticEvent</span>(<span class="params">Interface</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">SyntheticBaseEvent</span>(<span class="params">reactName, reactEventType, targetInst, nativeEvent, nativeEventTarget</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>._reactName = reactName;</span><br><span class="line">        <span class="keyword">this</span>._targetInst = targetInst;</span><br><span class="line">        <span class="keyword">this</span>.type = reactEventType;</span><br><span class="line">        <span class="keyword">this</span>.nativeEvent = nativeEvent; <span class="comment">//原生事件</span></span><br><span class="line">        <span class="keyword">this</span>.target = nativeEventTarget; <span class="comment">//目标节点</span></span><br><span class="line">        <span class="keyword">this</span>.currentTarget = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> defaultPrevented = nativeEvent.defaultPrevented != <span class="literal">null</span> ? nativeEvent.defaultPrevented : nativeEvent.returnValue === <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (defaultPrevented) &#123;</span><br><span class="line">            <span class="keyword">this</span>.isDefaultPrevented = functionThatReturnsTrue;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.isDefaultPrevented = functionThatReturnsFalse;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.isPropagationStopped = functionThatReturnsFalse;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    _assign(SyntheticBaseEvent.prototype, &#123;</span><br><span class="line">        <span class="comment">//阻止默认行为</span></span><br><span class="line">        preventDefault: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.defaultPrevented = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">var</span> event = <span class="keyword">this</span>.nativeEvent;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!event) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (event.preventDefault) &#123;</span><br><span class="line">                event.preventDefault(); </span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> event.returnValue !== <span class="string">'unknown'</span>) &#123;</span><br><span class="line">                event.returnValue = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.isDefaultPrevented = functionThatReturnsTrue;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//阻止事件传播</span></span><br><span class="line">        stopPropagation: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> event = <span class="keyword">this</span>.nativeEvent;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!event) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (event.stopPropagation) &#123;</span><br><span class="line">                event.stopPropagation(); </span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> event.cancelBubble !== <span class="string">'unknown'</span>) &#123;</span><br><span class="line">                event.cancelBubble = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.isPropagationStopped = functionThatReturnsTrue;</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        <span class="comment">//省略...</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> SyntheticBaseEvent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -568,11 +559,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -592,15 +583,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -609,6 +596,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -628,15 +619,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -648,10 +639,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
@@ -660,7 +647,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -668,7 +655,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">babel</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -676,7 +667,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+                <a href="javascript:void(0)" class="js-tag color1">babel</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -17,7 +17,7 @@
 <meta property="og:description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blogibrahim-boran-P7z3tdMcLzk-unsplash.jpg">
-<meta property="og:updated_time" content="2021-11-18T02:16:39.272Z">
+<meta property="og:updated_time" content="2021-11-18T02:19:05.337Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React源码解析之事件系统">
 <meta name="twitter:description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。">
@@ -229,16 +229,12 @@ var _hmt = _hmt || [];
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">listenToNativeEvent</span>(<span class="params">domEventName, isCapturePhaseListener, rootContainerElement, targetElement</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> target = rootContainerElement; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (domEventName === <span class="string">'selectionchange'</span> &amp;&amp; rootContainerElement.nodeType !== DOCUMENT_NODE) &#123;</span><br><span class="line">      target = rootContainerElement.ownerDocument;</span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="comment">//listenerSet 用于在目标节点上存储事件名称，标记dom元素</span></span><br><span class="line">    <span class="keyword">var</span> listenerSet = getEventListenerSet(target);</span><br><span class="line">    <span class="comment">//获取事件名称</span></span><br><span class="line">    <span class="keyword">var</span> listenerSetKey = getListenerSetKey(domEventName, isCapturePhaseListener);</span><br><span class="line">    <span class="comment">//判断目标节点target上是否为当前事件domEventName添加过监听器</span></span><br><span class="line">    <span class="keyword">if</span> (!listenerSet.has(listenerSetKey)) &#123;</span><br><span class="line">      <span class="comment">//省略...</span></span><br><span class="line">        </span><br><span class="line">      <span class="comment">//为事件添加事件监听器</span></span><br><span class="line">      addTrappedEventListener(target, domEventName, eventSystemFlags, isCapturePhaseListener);</span><br><span class="line">      listenerSet.add(listenerSetKey);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h6 id="代码解析-1"><a href="#代码解析-1" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
-<li><p>selectionchange事件在文档上的当前文本选择被改变时触发，事件绑定到document上。</p>
-</li>
-<li><p>getEventListenerSet函数用于在dom上存储事件名称。</p>
-</li>
-<li><p>getListenerSetKey函数根据捕获或者冒泡类型，得到事件命名（例如click<strong>capture、click</strong>bubble）。</p>
-</li>
-<li><p>根据事件名称，判断target节点是否注册过当前事件。</p>
-</li>
+<li>selectionchange事件在文档上的当前文本选择被改变时触发，事件绑定到document上。</li>
+<li>getEventListenerSet函数用于在dom上存储事件名称。</li>
+<li>getListenerSetKey函数根据捕获或者冒泡类型，得到事件命名（例如click__capture、click__bubble）。</li>
+<li>根据事件名称，判断target节点是否注册过当前事件。</li>
 </ol>
-<p>addTrappedEventListener：绑定事件监听器。</p>
+<h4 id="事件监听器"><a href="#事件监听器" class="headerlink" title="事件监听器"></a>事件监听器</h4><p>addTrappedEventListener：绑定事件监听器。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addTrappedEventListener</span>(<span class="params">targetContainer, domEventName, eventSystemFlags, isCapturePhaseListener, isDeferredListenerForLegacyFBSupport</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//根据事件优先级，创建事件监听函数</span></span><br><span class="line">    <span class="keyword">var</span> listener = createEventListenerWrapperWithPriority(targetContainer, domEventName, eventSystemFlags); </span><br><span class="line"></span><br><span class="line">    <span class="comment">//省略...</span></span><br><span class="line">    </span><br><span class="line">    targetContainer =  targetContainer;</span><br><span class="line">    <span class="keyword">var</span> unsubscribeListener; </span><br><span class="line">    <span class="comment">//在根节点上绑定事件</span></span><br><span class="line">    <span class="keyword">if</span> (isCapturePhaseListener) &#123;</span><br><span class="line">      <span class="comment">//捕获</span></span><br><span class="line">      <span class="keyword">if</span> (isPassiveListener !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">        unsubscribeListener = addEventCaptureListenerWithPassiveFlag(targetContainer, domEventName, listener, isPassiveListener);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        unsubscribeListener = addEventCaptureListener(targetContainer, domEventName, listener);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">//冒泡</span></span><br><span class="line">      <span class="keyword">if</span> (isPassiveListener !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">        unsubscribeListener = addEventBubbleListenerWithPassiveFlag(targetContainer, domEventName, listener, isPassiveListener);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        unsubscribeListener = addEventBubbleListener(targetContainer, domEventName, listener);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <h6 id="代码解析-2"><a href="#代码解析-2" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
 <li>根据事件名获取事件监听器函数。</li>
@@ -469,7 +465,7 @@ listeners: _listeners
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#React版本号"><span class="toc-number">1.</span> <span class="toc-text">React版本号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概述"><span class="toc-number">2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#动机"><span class="toc-number">3.</span> <span class="toc-text">动机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件注册"><span class="toc-number">4.</span> <span class="toc-text">事件注册</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析"><span class="toc-number">4.0.1.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-1"><span class="toc-number">4.0.2.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-2"><span class="toc-number">4.0.3.</span> <span class="toc-text">代码解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件处理函数"><span class="toc-number">5.</span> <span class="toc-text">事件处理函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-3"><span class="toc-number">5.0.1.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-4"><span class="toc-number">5.0.2.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-5"><span class="toc-number">5.0.3.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-6"><span class="toc-number">5.0.4.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-7"><span class="toc-number">5.0.5.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-8"><span class="toc-number">5.0.6.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-9"><span class="toc-number">5.0.7.</span> <span class="toc-text">代码解析</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#React版本号"><span class="toc-number">1.</span> <span class="toc-text">React版本号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#概述"><span class="toc-number">2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#动机"><span class="toc-number">3.</span> <span class="toc-text">动机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件注册"><span class="toc-number">4.</span> <span class="toc-text">事件注册</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析"><span class="toc-number">4.0.1.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-1"><span class="toc-number">4.0.2.</span> <span class="toc-text">代码解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件监听器"><span class="toc-number">5.</span> <span class="toc-text">事件监听器</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-2"><span class="toc-number">5.0.1.</span> <span class="toc-text">代码解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件处理函数"><span class="toc-number">6.</span> <span class="toc-text">事件处理函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-3"><span class="toc-number">6.0.1.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-4"><span class="toc-number">6.0.2.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-5"><span class="toc-number">6.0.3.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-6"><span class="toc-number">6.0.4.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-7"><span class="toc-number">6.0.5.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-8"><span class="toc-number">6.0.6.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-9"><span class="toc-number">6.0.7.</span> <span class="toc-text">代码解析</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -597,10 +593,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
@@ -609,11 +601,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -621,19 +613,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -645,7 +629,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -654,10 +654,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">mongod</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -681,7 +677,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -689,7 +685,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,15 +701,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">

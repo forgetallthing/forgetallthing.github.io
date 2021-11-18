@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>JS中Selection和Range的应用 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文记录一些Selection对象和Range对象的应用：  在input输入框中的鼠标点击位置插入字符； 在富文本编辑器中的鼠标点击位置插入字符； 在可编辑的div中的鼠标点击位置插入字符; 替换选中区域的内容； 插入dom到光标位置；">
+  <meta name="description" content="本文记录一些开发中遇到的，对Selection对象和Range对象的应用：  在input输入框中的鼠标点击位置插入字符； 在富文本编辑器中的鼠标点击位置插入字符； 在可编辑的div中的鼠标点击位置插入字符; 替换选中区域的内容； 插入dom到光标位置； 数据加工后复制到粘贴板思路；">
 <meta name="keywords" content="js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS中Selection和Range的应用">
 <meta property="og:url" content="http://yoursite.com/2020/03/26/JS中Selection和Range的应用/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="本文记录一些Selection对象和Range对象的应用：  在input输入框中的鼠标点击位置插入字符； 在富文本编辑器中的鼠标点击位置插入字符； 在可编辑的div中的鼠标点击位置插入字符; 替换选中区域的内容； 插入dom到光标位置；">
+<meta property="og:description" content="本文记录一些开发中遇到的，对Selection对象和Range对象的应用：  在input输入框中的鼠标点击位置插入字符； 在富文本编辑器中的鼠标点击位置插入字符； 在可编辑的div中的鼠标点击位置插入字符; 替换选中区域的内容； 插入dom到光标位置； 数据加工后复制到粘贴板思路；">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20201102/5NGW38gJFMQM.jpg?imageslim">
-<meta property="og:updated_time" content="2020-11-02T03:15:05.615Z">
+<meta property="og:updated_time" content="2021-11-18T01:52:07.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS中Selection和Range的应用">
-<meta name="twitter:description" content="本文记录一些Selection对象和Range对象的应用：  在input输入框中的鼠标点击位置插入字符； 在富文本编辑器中的鼠标点击位置插入字符； 在可编辑的div中的鼠标点击位置插入字符; 替换选中区域的内容； 插入dom到光标位置；">
+<meta name="twitter:description" content="本文记录一些开发中遇到的，对Selection对象和Range对象的应用：  在input输入框中的鼠标点击位置插入字符； 在富文本编辑器中的鼠标点击位置插入字符； 在可编辑的div中的鼠标点击位置插入字符; 替换选中区域的内容； 插入dom到光标位置； 数据加工后复制到粘贴板思路；">
 <meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20201102/5NGW38gJFMQM.jpg?imageslim">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
@@ -196,13 +196,14 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <p><img src="http://qiniuyun.ipromiseyourlife.com/blog/20201102/5NGW38gJFMQM.jpg?imageslim" alt="mark"></p>
-<p>本文记录一些Selection对象和Range对象的应用：</p>
+<p>本文记录一些开发中遇到的，对Selection对象和Range对象的应用：</p>
 <ul>
 <li>在input输入框中的鼠标点击位置插入字符；</li>
 <li>在富文本编辑器中的鼠标点击位置插入字符；</li>
 <li>在可编辑的div中的鼠标点击位置插入字符;</li>
 <li>替换选中区域的内容；</li>
 <li>插入dom到光标位置；</li>
+<li>数据加工后复制到粘贴板思路；</li>
 </ul>
 <a id="more"></a>
 <h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Selection" target="_blank" rel="noopener">Selection</a></p>
@@ -218,6 +219,13 @@ var _hmt = _hmt || [];
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">replaceRangeContent: <span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> selecter = <span class="built_in">window</span>.getSelection();</span><br><span class="line">    <span class="keyword">var</span> rang = selecter.getRangeAt(<span class="number">0</span>);</span><br><span class="line">    rang.deleteContents();</span><br><span class="line">    rang.insertNode(<span class="built_in">document</span>.createTextNode(str));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="插入dom到光标位置"><a href="#插入dom到光标位置" class="headerlink" title="插入dom到光标位置"></a>插入dom到光标位置</h3><p>用div模拟输入框的时候，部分浏览器点击回车会插入div而不是br，这会导致很多麻烦，所以下面的做法统一了浏览器的行为:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置输入框点击回车时，插入br</span></span><br><span class="line"><span class="keyword">this</span>.etExcelEditor.addEventListener(<span class="string">'keydown'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event.keyCode == <span class="number">13</span> || event.charCode == <span class="number">13</span>) &#123;</span><br><span class="line">        etUtils.insertHtmlToRange(<span class="built_in">document</span>.createElement(<span class="string">'br'</span>), <span class="keyword">this</span>);</span><br><span class="line">        event.preventDefault();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertHtmlToRange</span>(<span class="params">domNode, inputTarget</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (domNode == <span class="literal">null</span> || inputTarget == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> sel = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">var</span> rang = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.getSelection()) &#123;</span><br><span class="line">        sel = <span class="built_in">window</span>.getSelection();</span><br><span class="line">        rang = sel.rangeCount &gt; <span class="number">0</span> ? sel.getRangeAt(<span class="number">0</span>) : <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (rang === <span class="literal">null</span>) &#123;</span><br><span class="line">            dhtmlxAlert(<span class="string">'无法插入内容'</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        rang.deleteContents();</span><br><span class="line">        <span class="comment">// 如果选择的对象是输入框时执行操作</span></span><br><span class="line">        <span class="keyword">if</span> (sel.focusNode === inputTarget.innerHTML || sel.focusNode.parentElement === inputTarget || sel.focusNode === inputTarget) &#123;</span><br><span class="line">            <span class="comment">// 在最后一行的末尾回车则插入两个&lt;br&gt;，以达到另起一行的效果</span></span><br><span class="line">            <span class="keyword">if</span> (inputTarget.lastChild === rang.startContainer &amp;&amp; inputTarget.lastChild.length === rang.startOffset) &#123;</span><br><span class="line">                rang.insertNode(<span class="built_in">document</span>.createElement(<span class="string">'br'</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            rang.insertNode(domNode);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            dhtmlxAlert(<span class="string">'无法插入内容，请检查焦点是否在输入框中'</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//光标移动至末尾</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">document</span>.implementation &amp;&amp; <span class="built_in">document</span>.implementation.hasFeature &amp;&amp; <span class="built_in">document</span>.implementation.hasFeature(<span class="string">'Range'</span>, <span class="string">'2.0'</span>)) &#123;</span><br><span class="line">            <span class="keyword">var</span> tempRange = <span class="built_in">document</span>.createRange();</span><br><span class="line">            <span class="keyword">var</span> chatmessage = inputTarget;</span><br><span class="line">            tempRange.selectNodeContents(chatmessage);</span><br><span class="line">            tempRange.setStart(rang.endContainer, rang.endOffset);</span><br><span class="line">            tempRange.setEnd(rang.endContainer, rang.endOffset);</span><br><span class="line">            sel.removeAllRanges();</span><br><span class="line">            sel.addRange(tempRange);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//ie9 以下版本</span></span><br><span class="line">        textRange = <span class="built_in">document</span>.selection.createRange();</span><br><span class="line">        <span class="keyword">if</span> (textRange === <span class="literal">null</span>) &#123;</span><br><span class="line">            dhtmlxAlert(<span class="string">'无法插入内容'</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//插入 dom节点</span></span><br><span class="line">        textRange.collapse(<span class="literal">false</span>);</span><br><span class="line">        textRange.pasteHTML(domNode.outerHTML);</span><br><span class="line">        textRange.select();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="数据加工后复制到粘贴板思路"><a href="#数据加工后复制到粘贴板思路" class="headerlink" title="数据加工后复制到粘贴板思路"></a>数据加工后复制到粘贴板思路</h3><p>有时用户选中了你的复杂组件的一部分区域，想通过ctrl+c复制内容到粘贴板，但复制的内容需要你的代码进行过滤和组织，你可以这样做：</p>
+<p>以下代码摘自dhtmlx.js中的grid组件，功能为拖动选中grid表格中的区域，键盘点击ctrl+c会复制加工之后的内容：</p>
+<p>首先构造grid组件时会生成一个隐藏的<strong>textarea</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造函数中</span></span><br><span class="line"><span class="keyword">var</span> area = <span class="keyword">this</span>._clip_area = <span class="built_in">document</span>.createElement(<span class="string">"textarea"</span>);</span><br><span class="line">area.style.cssText = <span class="string">"position:absolute; width:1px; height:1px; overflow:hidden; color:transparent; background-color:transparent; bottom:1px; right:1px; border:none;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.body.insertBefore(<span class="keyword">this</span>._clip_area,<span class="built_in">document</span>.body.firstChild);</span><br></pre></td></tr></table></figure>
+<p>grid实例上监听<strong>onKeyPress</strong>事件，拦截到ctrl+c时，将文字设置到<strong>textarea</strong>上，并设置<strong>textarea</strong>的文字选中，然后<strong>onKeyPress</strong>事件继续执行，复制的内容就会变成<strong>textarea</strong>中的文字：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">grid.enableBlockSelection(<span class="literal">true</span>);</span><br><span class="line">grid.attachEvent(<span class="string">'onKeyPress'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">code, cFlag, sFlag</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (code == <span class="number">67</span> &amp;&amp; cFlag) &#123;</span><br><span class="line">        <span class="comment">// 设置多段内容之间的分隔符</span></span><br><span class="line">        grid.setCSVDelimiter(<span class="string">'\t'</span>);</span><br><span class="line">        <span class="comment">// 生成复制的内容到_clip_area</span></span><br><span class="line">        grid.copyBlockToClipboard();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">dhtmlXGridObject.prototype.copyBlockToClipboard = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>._clip_area) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( <span class="keyword">this</span>._selectionArea != <span class="literal">null</span> ) &#123;</span><br><span class="line">        <span class="keyword">var</span> serialized = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>._mathSerialization)</span><br><span class="line">            <span class="keyword">this</span>._agetm=<span class="string">"getMathValue"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>._strictText)</span><br><span class="line">            <span class="keyword">this</span>._agetm=<span class="string">"getTitle"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">this</span>._agetm=<span class="string">"getValue"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>._serialize_visible = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 处理需复制的文字内容</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="keyword">this</span>._selectionArea.LeftTopRow; i&lt;=<span class="keyword">this</span>._selectionArea.RightBottomRow; i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> data = <span class="keyword">this</span>._serializeRowToCVS(<span class="keyword">this</span>.rowsBuffer[i], <span class="literal">null</span>,  <span class="keyword">this</span>._selectionArea.LeftTopCol, <span class="keyword">this</span>._selectionArea.RightBottomCol+<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (!<span class="keyword">this</span>._csvAID)</span><br><span class="line">                serialized[serialized.length] = data.substr( data.indexOf( <span class="keyword">this</span>.csv.cell ) + <span class="number">1</span> );	<span class="comment">//remove row ID and add to array</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                serialized[serialized.length] = data;</span><br><span class="line">        &#125;</span><br><span class="line">        serialized = serialized.join(<span class="keyword">this</span>._CSVRowDelimiter);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 设置内容到_clip_area，并选中_clip_area中的全部文字</span></span><br><span class="line">        <span class="keyword">this</span>._clip_area.value = serialized;</span><br><span class="line">        <span class="keyword">this</span>._clip_area.select();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>._serialize_visible = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -370,7 +378,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关资料"><span class="toc-number">1.</span> <span class="toc-text">相关资料</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在input输入框中的鼠标点击位置插入字符"><span class="toc-number">2.</span> <span class="toc-text">在input输入框中的鼠标点击位置插入字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在富文本编辑器中的鼠标点击位置插入字符"><span class="toc-number">3.</span> <span class="toc-text">在富文本编辑器中的鼠标点击位置插入字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在可编辑的div中的鼠标点击位置插入字符"><span class="toc-number">4.</span> <span class="toc-text">在可编辑的div中的鼠标点击位置插入字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#替换选中区域的内容"><span class="toc-number">5.</span> <span class="toc-text">替换选中区域的内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插入dom到光标位置"><span class="toc-number">6.</span> <span class="toc-text">插入dom到光标位置</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关资料"><span class="toc-number">1.</span> <span class="toc-text">相关资料</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在input输入框中的鼠标点击位置插入字符"><span class="toc-number">2.</span> <span class="toc-text">在input输入框中的鼠标点击位置插入字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在富文本编辑器中的鼠标点击位置插入字符"><span class="toc-number">3.</span> <span class="toc-text">在富文本编辑器中的鼠标点击位置插入字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在可编辑的div中的鼠标点击位置插入字符"><span class="toc-number">4.</span> <span class="toc-text">在可编辑的div中的鼠标点击位置插入字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#替换选中区域的内容"><span class="toc-number">5.</span> <span class="toc-text">替换选中区域的内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插入dom到光标位置"><span class="toc-number">6.</span> <span class="toc-text">插入dom到光标位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据加工后复制到粘贴板思路"><span class="toc-number">7.</span> <span class="toc-text">数据加工后复制到粘贴板思路</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -498,11 +506,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -510,11 +514,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -522,7 +522,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,11 +534,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -542,11 +542,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -554,7 +558,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -570,10 +582,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vscode</a>
               </li>
              
@@ -582,7 +590,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -590,15 +598,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -607,6 +607,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">

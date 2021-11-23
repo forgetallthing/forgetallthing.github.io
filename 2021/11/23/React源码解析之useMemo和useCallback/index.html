@@ -6,23 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>移动页面点击事件穿透问题解决方案 | 张伯伯的BLOG</title>
+  <title>React源码解析之useMemo和useCallback | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在移动端页面上，点击蒙层（mask）上的关闭按钮，蒙层消失后发现触发了按钮下面元素的click事件，这就是标题中的点击事件穿透问题。我的mask层是审核错误的列表，当点击相关错误会立即隐藏蒙版并定位到问卷的某个题目，所以事件穿透会导致点击错误列表的时候误修改了问卷上用户的选择，也就是触发了input或select的click事件。在参考了以下两篇博客后使用pointer-events 解决了问题，">
-<meta name="keywords" content="web">
+  <meta name="description" content="本文来自xmas投稿，稿费0元~  梳理hooks源码时，看到了useMemo、useCallback，我将在这里记录一下这两个hook在源码中的实现方式，以及React.memo如何实现组件缓存来提高性能表现。 React版本号本文以React v17.0.2版本为基础，进行源码分析。 概述react源码中通过current（当前页面对应的fiber）是否为null来判断当前是首次渲染moun">
+<meta name="keywords" content="react">
 <meta property="og:type" content="article">
-<meta property="og:title" content="移动页面点击事件穿透问题解决方案">
-<meta property="og:url" content="http://yoursite.com/2018/04/27/移动页面点击事件穿透问题解决方案/index.html">
+<meta property="og:title" content="React源码解析之useMemo和useCallback">
+<meta property="og:url" content="http://yoursite.com/2021/11/23/React源码解析之useMemo和useCallback/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="在移动端页面上，点击蒙层（mask）上的关闭按钮，蒙层消失后发现触发了按钮下面元素的click事件，这就是标题中的点击事件穿透问题。我的mask层是审核错误的列表，当点击相关错误会立即隐藏蒙版并定位到问卷的某个题目，所以事件穿透会导致点击错误列表的时候误修改了问卷上用户的选择，也就是触发了input或select的click事件。在参考了以下两篇博客后使用pointer-events 解决了问题，">
+<meta property="og:description" content="本文来自xmas投稿，稿费0元~  梳理hooks源码时，看到了useMemo、useCallback，我将在这里记录一下这两个hook在源码中的实现方式，以及React.memo如何实现组件缓存来提高性能表现。 React版本号本文以React v17.0.2版本为基础，进行源码分析。 概述react源码中通过current（当前页面对应的fiber）是否为null来判断当前是首次渲染moun">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/180822/aA4BLh9iKl.png?imageslim">
-<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/180822/HDiDdBDmA0.png?imageslim">
-<meta property="og:updated_time" content="2018-12-05T08:40:42.000Z">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211119161438.png">
+<meta property="og:updated_time" content="2021-11-23T08:59:32.789Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="移动页面点击事件穿透问题解决方案">
-<meta name="twitter:description" content="在移动端页面上，点击蒙层（mask）上的关闭按钮，蒙层消失后发现触发了按钮下面元素的click事件，这就是标题中的点击事件穿透问题。我的mask层是审核错误的列表，当点击相关错误会立即隐藏蒙版并定位到问卷的某个题目，所以事件穿透会导致点击错误列表的时候误修改了问卷上用户的选择，也就是触发了input或select的click事件。在参考了以下两篇博客后使用pointer-events 解决了问题，">
-<meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog/180822/aA4BLh9iKl.png?imageslim">
+<meta name="twitter:title" content="React源码解析之useMemo和useCallback">
+<meta name="twitter:description" content="本文来自xmas投稿，稿费0元~  梳理hooks源码时，看到了useMemo、useCallback，我将在这里记录一下这两个hook在源码中的实现方式，以及React.memo如何实现组件缓存来提高性能表现。 React版本号本文以React v17.0.2版本为基础，进行源码分析。 概述react源码中通过current（当前页面对应的fiber）是否为null来判断当前是首次渲染moun">
+<meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211119161438.png">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -176,114 +175,82 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-移动页面点击事件穿透问题解决方案" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-React源码解析之useMemo和useCallback" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      移动页面点击事件穿透问题解决方案
+      React源码解析之useMemo和useCallback
     </h1>
   
 
         
-        <a href="/2018/04/27/移动页面点击事件穿透问题解决方案/" class="archive-article-date">
-  	<time datetime="2018-04-27T09:08:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-27</time>
+        <a href="/2021/11/23/React源码解析之useMemo和useCallback/" class="archive-article-date">
+  	<time datetime="2021-11-23T08:53:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在移动端页面上，点击蒙层（mask）上的关闭按钮，蒙层消失后发现触发了按钮下面元素的click事件，这就是标题中的点击事件穿透问题。我的mask层是审核错误的列表，当点击相关错误会立即隐藏蒙版并定位到问卷的某个题目，所以事件穿透会导致点击错误列表的时候误修改了问卷上用户的选择，也就是触发了input或select的click事件。在参考了以下两篇博客后使用<code>pointer-events</code> 解决了问题，链接如下：</p>
-<ol>
-<li><a href="http://www.cnblogs.com/xiaoxingyiyi/p/5447378.html" target="_blank" rel="noopener">移动端h5页面touch事件与点击穿透问题</a></li>
-<li><a href="https://blog.csdn.net/helloxiaoliang/article/details/51362107" target="_blank" rel="noopener">移动页面点击穿透问题解决方案</a></li>
-</ol>
-<p>内容整理如下：</p>
-<h2 id="touch事件的来源"><a href="#touch事件的来源" class="headerlink" title="touch事件的来源"></a>touch事件的来源</h2><p>PC网页上的大部分操作都是用鼠标的，即响应的是鼠标事件，包括<code>mousedown</code>、<code>mouseup</code>、<code>mousemove</code>和<code>click</code>事件。一次点击行为，可被拆解成：<code>mousedown</code> -&gt; <code>click</code> -&gt; <code>mouseup</code>三步。</p>
-<p>手机上没有鼠标，所以就用触摸事件去实现类似的功能。touch事件包含<code>touchstart</code>、<code>touchmove</code>、<code>touchend</code>，注意手机上并没有<code>tap</code>事件。手指触发触摸事件的过程为：<code>touchstart</code> -&gt; <code>touchmove</code> -&gt; <code>touchend</code>。</p>
+        <blockquote>
+<p>本文来自xmas投稿，稿费0元~</p>
+</blockquote>
+<p>梳理hooks源码时，看到了useMemo、useCallback，我将在这里记录一下这两个hook在源码中的实现方式，以及React.memo如何实现组件缓存来提高性能表现。</p>
+<h2 id="React版本号"><a href="#React版本号" class="headerlink" title="React版本号"></a>React版本号</h2><p>本文以React v17.0.2版本为基础，进行源码分析。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>react源码中通过current（当前页面对应的fiber）是否为null来判断当前是首次渲染mount状态还是更新update状态，不同状态使用不同dispatch对象中的hook。</p>
 <a id="more"></a>
-<p>手机上没有鼠标，但不代表手机不能响应mouse事件（其实是借助touch去触发mouse事件）。有人在PC和手机上对事件做了对比实验，以说明手机对touch事件相应速度快于mouse事件。</p>
-<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/180822/aA4BLh9iKl.png?imageslim" alt="mark"></p>
-<p>可以看到在手机上，当我们手触碰屏幕时，要过300ms左右才会触发<code>mousedown</code>事件，所以<code>click</code>事件在手机上看起来就像慢半拍一样。</p>
-<h3 id="touch事件中可以获取以下参数"><a href="#touch事件中可以获取以下参数" class="headerlink" title="touch事件中可以获取以下参数"></a>touch事件中可以获取以下参数</h3><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>touches</td>
-<td>屏幕中每根手指信息列表</td>
-</tr>
-<tr>
-<td>targetTouches</td>
-<td>和touches类似，把同一节点的手指信息过滤掉</td>
-</tr>
-<tr>
-<td>changedTouches</td>
-<td>响应当前事件的每根手指的信息列表</td>
-</tr>
-</tbody>
-</table>
-<h2 id="tap是怎么来的"><a href="#tap是怎么来的" class="headerlink" title="tap是怎么来的"></a>tap是怎么来的</h2><p>用过Zepto或KISSY等移动端js库的人肯定对<code>tap</code>事件不陌生，我们做PC页面时绑定<code>click</code>，相应地手机页面就绑定<code>tap</code>。但原生的touch事件本身是没有tap的，js库里提供的tap事件都是模拟出来的。</p>
-<p>我们在上面看到，手机上响应 click 事件会有300ms的延迟，那么这300ms到底是干嘛了？浏览器在 touchend 后会等待约300ms，原因是判断用户是否有双击（double tap）行为。如果没有 tap 行为，则触发 click 事件，而双击过程中就不适合触发 click 事件了。由此可以看出 click 事件触发代表一轮触摸事件的结束。</p>
-<p>既然说tap事件是模拟出来的，我们可以看下Zepto对 singleTap 事件的处理。<a href="https://github.com/madrobby/zepto/blob/master/src/touch.js#L136-L143" target="_blank" rel="noopener">见源码 136-143 行</a>，可以看出在 touchend 响应 250ms 无操作后，则触发singleTap。</p>
-<h2 id="点击穿透的场景"><a href="#点击穿透的场景" class="headerlink" title="点击穿透的场景"></a>点击穿透的场景</h2><p>有了以上的基础，我们就可以理解为什么会出现<em>点击穿透</em>现象了。我们经常会看到“弹窗/浮层”这种东西，我做个了个demo。</p>
-<p><img src="http://qiniuyun.ipromiseyourlife.com/blog/180822/HDiDdBDmA0.png?imageslim" alt="mark"></p>
-<p>整个容器里有一个底层元素的div，和一个弹出层div，为了让弹出层有模态框的效果，我又加了一个遮罩层。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"container"</span>&gt;</span><br><span class="line">    &lt;div id=<span class="string">"underLayer"</span>&gt;底层元素&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &lt;div id="popupLayer"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;div class="layer-title"&gt;弹出层&lt;/</span>div&gt;</span><br><span class="line">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"layer-action"</span>&gt;</span><br><span class="line">            &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">"btn"</span> id=<span class="string">"closePopup"</span>&gt;关闭&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br><span class="line">&lt;div id=<span class="string">"bgMask"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<p>然后为底层元素绑定 click 事件，而弹出层的关闭按钮绑定 tap 事件。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#closePopup'</span>).on(<span class="string">'tap'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    $(<span class="string">'#popupLayer'</span>).hide();</span><br><span class="line">    $(<span class="string">'#bgMask'</span>).hide();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="string">'#underLayer'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(<span class="string">'underLayer clicked'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>点击关闭按钮，touchend首先触发tap，弹出层和遮罩就被隐藏了。touchend后继续等待300ms发现没有其他行为了，则继续触发click，由于这时弹出层已经消失，所以当前click事件的target就在底层元素上，于是就alert内容。整个事件触发过程为 touchend -&gt; tap -&gt; click。</p>
-<p>而由于click事件的滞后性（300ms），在这300ms内上层元素隐藏或消失了，下层同样位置的DOM元素触发了click事件（如果是input框则会触发focus事件），看起来就像点击的target“穿透”到下层去了。</p>
-<p>另一种跨页面点击穿透问题：这次没有mask了，直接点击页内按钮跳转至新页，然后发现新页面中对应位置元素的click事件被触发了，原理同上。</p>
-<h3 id="结合Zepto源码的解释"><a href="#结合Zepto源码的解释" class="headerlink" title="结合Zepto源码的解释"></a>结合Zepto源码的解释</h3><p><a href="https://github.com/madrobby/zepto/blob/master/src/touch.js" target="_blank" rel="noopener">zepto</a>中的 tap 通过兼听绑定在 document 上的 touch 事件来完成 tap 事件的模拟的，是通过事件冒泡实现的。在点击完成时（touchstart / touchend）的 tap 事件需要冒泡到 document 上才会触发。而在冒泡到 document 之前，手指接触和离开屏幕（touchstart / touchend）是会触发 click 事件的。</p>
-<p>因为 click 事件有延迟（大概是300ms，为了实现safari的双击事件的设计），所以在执行完 tap 事件之后，弹出层立马就隐藏了，此时 click 事件还在延迟的 300ms 之中。当 300ms 到来的时候，click 到的其实是隐藏元素下方的元素。</p>
-<p>如果正下方的元素有绑定 click 事件，此时便会触发，如果没有绑定 click 事件的话就当没发生。如果正下方的是 input 输入框（或是 select / radio / checkbox），点击默认 focus 而弹出输入键盘，也就出现了上面的“点透”现象。</p>
-<h2 id="穿透的解决办法"><a href="#穿透的解决办法" class="headerlink" title="穿透的解决办法"></a>穿透的解决办法</h2><h3 id="1-不要混用touch和click"><a href="#1-不要混用touch和click" class="headerlink" title="1.不要混用touch和click"></a>1.不要混用touch和click</h3><p>既然touch之后300ms会触发click，只用touch或者只用click就自然不会存在问题了</p>
-<ol>
-<li><p>只用touch</p>
-<p>最简单的解决方案，完美解决点击穿透问题</p>
-<p>把页面内所有click全部换成touch事件（ <code>touchstart</code> 、’touchend’、’tap’）;</p>
-<p>ps：此方法不适用我的项目，因为穿透触发的都是input、select等的click事件。</p>
-</li>
-<li><p>只用click</p>
-<p><em>下下策</em> ，因为会带来300ms延迟，页面内任何一个自定义交互都将增加300毫秒延迟，想想都慢</p>
-<p>不用touch就不会存在touch之后300ms触发click的问题，如果交互性要求不高可以这么做， <em>强烈不推荐</em> ，快一点总是好的</p>
-</li>
+<h2 id="mount状态"><a href="#mount状态" class="headerlink" title="mount状态"></a>mount状态</h2><h4 id="useMemo"><a href="#useMemo" class="headerlink" title="useMemo"></a>useMemo</h4><p>首次触发useMemo，源码中会调用HooksDispatcherOnMount对象中的mountMemo函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mountMemo</span>(<span class="params">nextCreate, deps</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> hook = mountWorkInProgressHook();</span><br><span class="line">    <span class="keyword">var</span> nextDeps = deps === <span class="literal">undefined</span> ? <span class="literal">null</span> : deps;</span><br><span class="line">    <span class="keyword">var</span> nextValue = nextCreate();</span><br><span class="line">    hook.memoizedState = [nextValue, nextDeps];</span><br><span class="line">    <span class="keyword">return</span> nextValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
+<li>mountWorkInProgressHook函数用于创建hook，并返回hook对象。</li>
+<li>调用nextCreate获取计算后的值，将nextValue返回，并将nextValue和依赖项存到数组中保存到hook.memoizedState上。</li>
 </ol>
-<h3 id="2-遮挡"><a href="#2-遮挡" class="headerlink" title="2. 遮挡"></a>2. 遮挡</h3><p>由于 click 事件的滞后性，在这段时间内原来点击的元素消失了，于是便“穿透”了。因此我们顺着这个思路就想到，可以给元素的消失做一个fade效果，类似jQuery里的<code>fadeOut</code>，并设置动画duration大于300ms，这样当延迟的 click 触发时，就不会“穿透”到下方的元素了。</p>
-<p>同样的道理，不用延时动画，我们还可以动态地在触摸位置生成一个透明的元素，这样当上层元素消失而延迟的click来到时，它点击到的是那个透明的元素，也不会“穿透”到底下。在一定的timeout后再将生成的透明元素移除。</p>
-<h3 id="3-pointer-events"><a href="#3-pointer-events" class="headerlink" title="3. pointer-events"></a>3. pointer-events</h3><p><code>pointer-events</code>是CSS3中的属性，它有很多取值，有用的主要是<code>auto</code>和<code>none</code>，其他属性值为SVG服务。</p>
-<table>
-<thead>
-<tr>
-<th>取值</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>auto</td>
-<td>效果和没有定义 pointer-events 属性相同，鼠标不会穿透当前层。</td>
-</tr>
-<tr>
-<td>none</td>
-<td>元素不再是鼠标事件的目标，鼠标不再监听当前层而去监听下面的层中的元素。但是如果它的子元素设置了pointer-events为其它值，比如auto，鼠标还是会监听这个子元素的。</td>
-</tr>
-</tbody>
-</table>
-<p>因此解决“穿透”的办法就很简单，demo如下:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#closePopup'</span>).on(<span class="string">'tap'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    $(<span class="string">'#popupLayer'</span>).hide();</span><br><span class="line">    $(<span class="string">'#bgMask'</span>).hide();</span><br><span class="line"></span><br><span class="line">    $(<span class="string">'#underLayer'</span>).css(<span class="string">'pointer-events'</span>, <span class="string">'none'</span>);</span><br><span class="line"></span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        $(<span class="string">'#underLayer'</span>).css(<span class="string">'pointer-events'</span>, <span class="string">'auto'</span>);</span><br><span class="line">    &#125;, <span class="number">400</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="4-fastclick"><a href="#4-fastclick" class="headerlink" title="4. fastclick"></a>4. fastclick</h3><p>使用<a href="https://github.com/ftlabs/fastclick" target="_blank" rel="noopener">fastclick</a>库，其实现思路是，取消 click 事件（<a href="https://github.com/ftlabs/fastclick/blob/master/lib/fastclick.js#L164-L173" target="_blank" rel="noopener">参看源码 164-173 行</a>），用 touchend 模拟快速点击行为（<a href="https://github.com/ftlabs/fastclick/blob/master/lib/fastclick.js#L521-L610" target="_blank" rel="noopener">参看源码 521-610 行</a>）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FastClick.attach(document.body);</span><br></pre></td></tr></table></figure>
-<p>从此所有点击事件都使用<code>click</code>，不会出现“穿透”的问题，并且没有300ms的延迟。</p>
-<p>有人（叶小钗）对事件机制做了详细的剖析，循循善诱，并剖析了fastclick的源码以自己模拟事件的创建。<a href="http://www.cnblogs.com/yexiaochai/p/3462657.html" target="_blank" rel="noopener">请看这篇文章，看完后一定会对移动端的事件有更深的了解</a></p>
+<h4 id="useCallback"><a href="#useCallback" class="headerlink" title="useCallback"></a>useCallback</h4><p>首次触发useCallback，源码中会调用HooksDispatcherOnMount对象中的mountCallback函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mountCallback</span>(<span class="params">callback, deps</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> hook = mountWorkInProgressHook();</span><br><span class="line">    <span class="keyword">var</span> nextDeps = deps === <span class="literal">undefined</span> ? <span class="literal">null</span> : deps;</span><br><span class="line">    hook.memoizedState = [callback, nextDeps];</span><br><span class="line">    <span class="keyword">return</span> callback;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="代码解析-1"><a href="#代码解析-1" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
+<li>函数中会将回调函数作为value，保存到hook.memoizedState中。</li>
+</ol>
+<h2 id="update状态"><a href="#update状态" class="headerlink" title="update状态"></a>update状态</h2><h4 id="useMemo-1"><a href="#useMemo-1" class="headerlink" title="useMemo"></a>useMemo</h4><p>更新时会调用HooksDispatcherOnUpdate对象中的updateMemo函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateMemo</span>(<span class="params">nextCreate, deps</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> hook = updateWorkInProgressHook();</span><br><span class="line">    <span class="keyword">var</span> nextDeps = deps === <span class="literal">undefined</span> ? <span class="literal">null</span> : deps;</span><br><span class="line">    <span class="keyword">var</span> prevState = hook.memoizedState;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (prevState !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nextDeps !== <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> prevDeps = prevState[<span class="number">1</span>];</span><br><span class="line">		   <span class="comment">//判断依赖是否有变化</span></span><br><span class="line">            <span class="keyword">if</span> (areHookInputsEqual(nextDeps, prevDeps)) &#123;</span><br><span class="line">                <span class="keyword">return</span> prevState[<span class="number">0</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> nextValue = nextCreate();</span><br><span class="line">    hook.memoizedState = [nextValue, nextDeps];</span><br><span class="line">    <span class="keyword">return</span> nextValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="代码解析-2"><a href="#代码解析-2" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
+<li>获取保存在hook上的依赖值，和本次依赖值进行比较。</li>
+<li>如果相等，返回上次的值；如果不相等，返回计算后的新值，并将hook.memoizedState的值替换成新值。</li>
+</ol>
+<h4 id="useCallback-1"><a href="#useCallback-1" class="headerlink" title="useCallback"></a>useCallback</h4><p>更新时会调用HooksDispatcherOnUpdate对象中的updateCallback函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateCallback</span>(<span class="params">callback, deps</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> hook = updateWorkInProgressHook();</span><br><span class="line">    <span class="keyword">var</span> nextDeps = deps === <span class="literal">undefined</span> ? <span class="literal">null</span> : deps;</span><br><span class="line">    <span class="keyword">var</span> prevState = hook.memoizedState;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (prevState !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nextDeps !== <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> prevDeps = prevState[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (areHookInputsEqual(nextDeps, prevDeps)) &#123;</span><br><span class="line">                <span class="keyword">return</span> prevState[<span class="number">0</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    hook.memoizedState = [callback, nextDeps];</span><br><span class="line">    <span class="keyword">return</span> callback;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="代码解析-3"><a href="#代码解析-3" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
+<li>可以看出，useCallback和useMemo的处理函数基本相同，都会进行依赖值的比较，区别在于useMemo将回调函数的结果作为value存储，而useCallback将回调函数作为值存储。</li>
+</ol>
+<h2 id="React-memo"><a href="#React-memo" class="headerlink" title="React.memo"></a>React.memo</h2><h4 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> MyComponent = React.memo(<span class="function"><span class="keyword">function</span> <span class="title">MyComponent</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>如果组件在相同的props的情况下渲染相同的结果，那么可以将其包装在React.memo中调用，以此通过记忆组件渲染结果的方式来提高组件的性能表现。</p>
+<p>React.memo仅检查props的变更，如果函数组件被 React.memo 包裹，且其实现中拥有useState，useReducer 或 useContext 的 Hook，当 state 或 context 发生变化时，它仍会重新渲染。</p>
+<p>默认情况下其只会对复杂对象做浅层对比，如果你想要控制对比过程，那么请将自定义的比较函数通过第二个参数传入来实现。</p>
+<h4 id="实现函数"><a href="#实现函数" class="headerlink" title="实现函数"></a>实现函数</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">memo</span>(<span class="params">type, compare</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//省略...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> elementType = &#123;</span><br><span class="line">        $$<span class="keyword">typeof</span>: REACT_MEMO_TYPE,</span><br><span class="line">        type: type,</span><br><span class="line">        compare: compare === <span class="literal">undefined</span> ? <span class="literal">null</span> : compare</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//省略...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> elementType;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="代码解析-4"><a href="#代码解析-4" class="headerlink" title="代码解析"></a>代码解析</h6><p>被memo函数包装的组件返回一个elementType对象，最终绑定在react.element元素的type属性上，如下图：</p>
+<p><img src="http://qiniuyun.ipromiseyourlife.com/blog20211119161438.png" alt></p>
+<p>其中，</p>
+<p>​    $$typeof：元素类型；</p>
+<p>​    type：react的函数组件；</p>
+<p>​    compare：自定义的比较函数；</p>
+<h4 id="updateMemoComponent"><a href="#updateMemoComponent" class="headerlink" title="updateMemoComponent"></a>updateMemoComponent</h4><p>updateMemoComponent是被memo包装组件的处理函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateMemoComponent</span>(<span class="params">current, workInProgress, Component, nextProps, updateLanes, renderLanes</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//mount</span></span><br><span class="line">    <span class="keyword">if</span> (current === <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">var</span> type = Component.type;</span><br><span class="line">	 <span class="comment">//函数组件类型，使用默认的浅层比较，没有传递默认属性</span></span><br><span class="line">      <span class="keyword">if</span> (isSimpleFunctionComponent(type) &amp;&amp; Component.compare === <span class="literal">null</span> &amp;&amp; </span><br><span class="line">      Component.defaultProps === <span class="literal">undefined</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> resolvedType = type;</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">          resolvedType = resolveFunctionForHotReloading(type);</span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        workInProgress.tag = SimpleMemoComponent;</span><br><span class="line">        workInProgress.type = resolvedType;</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">          validateFunctionComponentInDev(workInProgress, type);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> updateSimpleMemoComponent(current, workInProgress, resolvedType, nextProps, updateLanes, renderLanes);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">//省略...</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">var</span> child = createFiberFromTypeAndProps(Component.type, <span class="literal">null</span>, nextProps, workInProgress, workInProgress.mode, renderLanes);</span><br><span class="line">      child.ref = workInProgress.ref;</span><br><span class="line">      child.return = workInProgress;</span><br><span class="line">      workInProgress.child = child;</span><br><span class="line">      <span class="keyword">return</span> child;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//update</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//省略...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> currentChild = current.child; </span><br><span class="line">   </span><br><span class="line">    <span class="keyword">if</span> (!includesSomeLane(updateLanes, renderLanes)) &#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">var</span> prevProps = currentChild.memoizedProps; </span><br><span class="line"></span><br><span class="line">      <span class="keyword">var</span> compare = Component.compare;</span><br><span class="line">      compare = compare !== <span class="literal">null</span> ? compare : shallowEqual;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (compare(prevProps, nextProps) &amp;&amp; current.ref === workInProgress.ref) &#123;</span><br><span class="line">        <span class="keyword">return</span> bailoutOnAlreadyFinishedWork(current, workInProgress, renderLanes);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    workInProgress.flags |= PerformedWork;</span><br><span class="line">    <span class="keyword">var</span> newChild = createWorkInProgress(currentChild, nextProps);</span><br><span class="line">    newChild.ref = workInProgress.ref;</span><br><span class="line">    newChild.return = workInProgress;</span><br><span class="line">    workInProgress.child = newChild;</span><br><span class="line">    <span class="keyword">return</span> newChild;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>可见，在该函数中也会通过current来判断当前是mount还是update。</p>
+<p>mount时：</p>
+<ol>
+<li>isSimpleFunctionComponent函数会根据组件的prototype上是否有isReactComponent属性来确定组件类型，如果有是ClassComponent，没有则是是FunctionComponent。</li>
+<li>如果是函数组件，没有手动向组件传递defaultProps，并且使用默认的浅层比较，则给fiber的tag属性添加SimpleMemoComponent标签，执行updateSimpleMemoComponent函数。</li>
+<li>updateSimpleMemoComponent内部的关键函数是updateFunctionComponent。</li>
+<li>否则，通过createFiberFromTypeAndProps函数创建新的fiber节点。</li>
+</ol>
+<p>update时：</p>
+<ol>
+<li>比较属性值是否变化。</li>
+<li>如果没变，执行bailoutOnAlreadyFinishedWork函数，复用上次创建好的fiber。</li>
+<li>如果改变，使用新的属性调用createWorkInProgress方法，更新workInProgress。</li>
+</ol>
 
       
 
@@ -328,7 +295,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
         		</li>
       		
 		</ul>
@@ -384,7 +351,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2018/04/27/移动页面点击事件穿透问题解决方案/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2021/11/23/React源码解析之useMemo和useCallback/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -398,18 +365,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2018/05/20/git指北/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          git指北
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/03/30/win10家庭版关闭自动更新/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">win10家庭版关闭自动更新</div>
+    <a href="/2021/11/17/React源码解析之事件系统/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">React源码解析之事件系统</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -436,7 +394,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#touch事件的来源"><span class="toc-number">1.</span> <span class="toc-text">touch事件的来源</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#touch事件中可以获取以下参数"><span class="toc-number">1.1.</span> <span class="toc-text">touch事件中可以获取以下参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tap是怎么来的"><span class="toc-number">2.</span> <span class="toc-text">tap是怎么来的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#点击穿透的场景"><span class="toc-number">3.</span> <span class="toc-text">点击穿透的场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#结合Zepto源码的解释"><span class="toc-number">3.1.</span> <span class="toc-text">结合Zepto源码的解释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#穿透的解决办法"><span class="toc-number">4.</span> <span class="toc-text">穿透的解决办法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-不要混用touch和click"><span class="toc-number">4.1.</span> <span class="toc-text">1.不要混用touch和click</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-遮挡"><span class="toc-number">4.2.</span> <span class="toc-text">2. 遮挡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-pointer-events"><span class="toc-number">4.3.</span> <span class="toc-text">3. pointer-events</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-fastclick"><span class="toc-number">4.4.</span> <span class="toc-text">4. fastclick</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#React版本号"><span class="toc-number">1.</span> <span class="toc-text">React版本号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mount状态"><span class="toc-number">3.</span> <span class="toc-text">mount状态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#useMemo"><span class="toc-number">3.0.1.</span> <span class="toc-text">useMemo</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析"><span class="toc-number">3.0.1.0.1.</span> <span class="toc-text">代码解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#useCallback"><span class="toc-number">3.0.2.</span> <span class="toc-text">useCallback</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-1"><span class="toc-number">3.0.2.0.1.</span> <span class="toc-text">代码解析</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#update状态"><span class="toc-number">4.</span> <span class="toc-text">update状态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#useMemo-1"><span class="toc-number">4.0.1.</span> <span class="toc-text">useMemo</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-2"><span class="toc-number">4.0.1.0.1.</span> <span class="toc-text">代码解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#useCallback-1"><span class="toc-number">4.0.2.</span> <span class="toc-text">useCallback</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-3"><span class="toc-number">4.0.2.0.1.</span> <span class="toc-text">代码解析</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-memo"><span class="toc-number">5.</span> <span class="toc-text">React.memo</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用方式"><span class="toc-number">5.0.1.</span> <span class="toc-text">使用方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实现函数"><span class="toc-number">5.0.2.</span> <span class="toc-text">实现函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#代码解析-4"><span class="toc-number">5.0.2.0.1.</span> <span class="toc-text">代码解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#updateMemoComponent"><span class="toc-number">5.0.3.</span> <span class="toc-text">updateMemoComponent</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>

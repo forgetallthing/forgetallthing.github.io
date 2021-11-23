@@ -383,7 +383,7 @@ var _hmt = _hmt || [];
 <li>将index.html中的路径全部修改：<code>=&quot;/</code>替换成<code>=&quot;/yourPath/</code></li>
 <li>资源中有个app-3a7d55c5aa0bcdcc6d68.js的文件，通常非常大，建议实用记事本打开，在该文件中搜索<code>page-data.json</code>，此处可查看url路径的拼接代码，在最前方加上你需要的路径即可。</li>
 </ol>
-<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><h4 id="1-pm2常用命令"><a href="#1-pm2常用命令" class="headerlink" title="1.pm2常用命令"></a>1.pm2常用命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> pm2 start app.js              # 启动app.js应用程序</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 start app.js -i 4         # cluster mode 模式启动4个app.js的应用实例     # 4个应用程序会自动进行负载均衡</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 start app.js --name="api" # 启动应用程序并命名为 "api"</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 start app.js --watch      # 当文件变化时自动重启应用</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 start script.sh           # 启动 bash 脚本</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 list                      # 列表 PM2 启动的所有的应用程序</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 monit                     # 显示每个应用程序的CPU和内存占用情况</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 show [app-name]           # 显示应用程序的所有信息</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 logs                      # 显示所有应用程序的日志</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 logs [app-name]           # 显示指定应用程序的日志</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 flush</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 stop all                  # 停止所有的应用程序</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 stop 0                    # 停止 id为 0的指定应用程序</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 restart all               # 重启所有应用</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 reload all                # 重启 cluster mode下的所有应用</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 gracefulReload all        # Graceful reload all apps in cluster mode</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 delete all                # 关闭并删除所有应用</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 delete 0                  # 删除指定应用 id 0</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 scale api 10              # 把名字叫api的应用扩展到10个实例</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 reset [app-name]          # 重置重启数量</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 startup                   # 创建开机自启动命令</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 save                      # 保存当前应用列表</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> pm2 resurrect                 # 重新加载保存的应用列表</span><br></pre></td></tr></table></figure>
+<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><h4 id="1-pm2常用命令"><a href="#1-pm2常用命令" class="headerlink" title="1.pm2常用命令"></a>1.pm2常用命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> pm2 start app.js              <span class="comment"># 启动app.js应用程序</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 start app.js -i 4         <span class="comment"># cluster mode 模式启动4个app.js的应用实例     # 4个应用程序会自动进行负载均衡</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 start app.js --name=<span class="string">"api"</span> <span class="comment"># 启动应用程序并命名为 "api"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 start app.js --watch      <span class="comment"># 当文件变化时自动重启应用</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 start script.sh           <span class="comment"># 启动 bash 脚本</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 list                      <span class="comment"># 列表 PM2 启动的所有的应用程序</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 monit                     <span class="comment"># 显示每个应用程序的CPU和内存占用情况</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 show [app-name]           <span class="comment"># 显示应用程序的所有信息</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 logs                      <span class="comment"># 显示所有应用程序的日志</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 logs [app-name]           <span class="comment"># 显示指定应用程序的日志</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 flush</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 stop all                  <span class="comment"># 停止所有的应用程序</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 stop 0                    <span class="comment"># 停止 id为 0的指定应用程序</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 restart all               <span class="comment"># 重启所有应用</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 reload all                <span class="comment"># 重启 cluster mode下的所有应用</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 gracefulReload all        <span class="comment"># Graceful reload all apps in cluster mode</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 delete all                <span class="comment"># 关闭并删除所有应用</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 delete 0                  <span class="comment"># 删除指定应用 id 0</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 scale api 10              <span class="comment"># 把名字叫api的应用扩展到10个实例</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 reset [app-name]          <span class="comment"># 重置重启数量</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 startup                   <span class="comment"># 创建开机自启动命令</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 save                      <span class="comment"># 保存当前应用列表</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> pm2 resurrect                 <span class="comment"># 重新加载保存的应用列表</span></span></span><br></pre></td></tr></table></figure>
 <h4 id="2-pm2启动配置文件"><a href="#2-pm2启动配置文件" class="headerlink" title="2.pm2启动配置文件"></a>2.pm2启动配置文件</h4><p>有时候pm2的watch命令会失效,使用配置文件启动是避免失效的最佳方案:</p>
 <p>添加一个processes.json在你的项目根目录,我直接放在了home下,为了避免切换路径,我这里直接使用了绝对路径:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">      <span class="string">"apps"</span> : [&#123;</span><br><span class="line">        <span class="string">"name"</span>        : <span class="string">"update"</span>,</span><br><span class="line">        <span class="string">"script"</span>      : <span class="string">"/home/update/update.js"</span>,</span><br><span class="line">        <span class="string">"watch"</span>       : <span class="string">"/home/update/"</span>,</span><br><span class="line">        <span class="string">"log_date_format"</span>  : <span class="string">"YYYY-MM-DD HH:mm Z"</span>,</span><br><span class="line">      &#125;,&#123;</span><br><span class="line">        <span class="string">"name"</span>        : <span class="string">"web"</span>,</span><br><span class="line">        <span class="string">"script"</span>      : <span class="string">"/home/web/gn/bin/www"</span>,</span><br><span class="line">        <span class="string">"watch"</span>       : <span class="string">"/home/web/gn"</span>,</span><br><span class="line">        <span class="string">"log_date_format"</span>  : <span class="string">"YYYY-MM-DD HH:mm Z"</span>,</span><br><span class="line">      &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -674,6 +674,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
@@ -682,19 +686,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -710,23 +710,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -738,11 +730,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -750,11 +746,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vscode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -766,23 +770,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">quiz</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -790,11 +778,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">something</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
             
             <div class="clearfix"></div>

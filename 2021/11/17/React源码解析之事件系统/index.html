@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>React源码解析之事件系统 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。">
+  <meta name="description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。">
 <meta name="keywords" content="react">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React源码解析之事件系统">
 <meta property="og:url" content="http://yoursite.com/2021/11/17/React源码解析之事件系统/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。">
+<meta property="og:description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blogibrahim-boran-P7z3tdMcLzk-unsplash.jpg">
-<meta property="og:updated_time" content="2021-11-18T03:24:37.511Z">
+<meta property="og:updated_time" content="2021-11-23T09:20:58.754Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React源码解析之事件系统">
-<meta name="twitter:description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。 React版本号本文以React v17.0.2版本为基础，进行源码分析。">
+<meta name="twitter:description" content="本文来自xmas投稿，稿费0元~  近期梳理React源码看到了React的事件系统，这里记录一下。">
 <meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blogibrahim-boran-P7z3tdMcLzk-unsplash.jpg">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
@@ -200,8 +200,8 @@ var _hmt = _hmt || [];
 <p>本文来自xmas投稿，稿费0元~</p>
 </blockquote>
 <p>近期梳理React源码看到了React的事件系统，这里记录一下。</p>
-<h2 id="React版本号"><a href="#React版本号" class="headerlink" title="React版本号"></a>React版本号</h2><p>本文以React v17.0.2版本为基础，进行源码分析。</p>
 <a id="more"></a>
+<h2 id="React版本号"><a href="#React版本号" class="headerlink" title="React版本号"></a>React版本号</h2><p>本文以React v17.0.2版本为基础，进行源码分析。</p>
 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>react根据W3C规范来定义自己的事件系统，其事件被称之为合成事件（SyntheticEvent）。</p>
 <p>react事件分为委托事件（delegatedEvents）和非委托事件（nonDelegatedEvents），nonDelegatedEvents只注册捕获事件。</p>
 <p>同时，react将事件分为3种类型——discreteEvent、userBlockingEvent、continuousEvent，它们拥有不同的优先级，在绑定事件处理函数时会使用不同的回调函数。</p>
@@ -564,11 +564,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -576,11 +576,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -588,11 +588,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -624,6 +624,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
@@ -636,19 +640,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vscode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -656,7 +648,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -672,19 +676,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">something</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">something</a>
               </li>
             
             <div class="clearfix"></div>

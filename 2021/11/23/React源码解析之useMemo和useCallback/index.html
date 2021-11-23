@@ -8,20 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>React源码解析之useMemo和useCallback | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文来自xmas投稿，稿费0元~  梳理hooks源码时，看到了useMemo、useCallback，我将在这里记录一下这两个hook在源码中的实现方式，以及React.memo如何实现组件缓存来提高性能表现。 React版本号本文以React v17.0.2版本为基础，进行源码分析。 概述react源码中通过current（当前页面对应的fiber）是否为null来判断当前是首次渲染moun">
+  <meta name="description" content="本文来自xmas投稿，稿费0元~  梳理hooks源码时，看到了useMemo、useCallback，我将在这里记录一下这两个hook在源码中的实现方式，以及React.memo如何实现组件缓存来提高性能表现。">
 <meta name="keywords" content="react">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React源码解析之useMemo和useCallback">
 <meta property="og:url" content="http://yoursite.com/2021/11/23/React源码解析之useMemo和useCallback/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="本文来自xmas投稿，稿费0元~  梳理hooks源码时，看到了useMemo、useCallback，我将在这里记录一下这两个hook在源码中的实现方式，以及React.memo如何实现组件缓存来提高性能表现。 React版本号本文以React v17.0.2版本为基础，进行源码分析。 概述react源码中通过current（当前页面对应的fiber）是否为null来判断当前是首次渲染moun">
+<meta property="og:description" content="本文来自xmas投稿，稿费0元~  梳理hooks源码时，看到了useMemo、useCallback，我将在这里记录一下这两个hook在源码中的实现方式，以及React.memo如何实现组件缓存来提高性能表现。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog1.jpg">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211119161438.png">
-<meta property="og:updated_time" content="2021-11-23T08:59:32.789Z">
+<meta property="og:updated_time" content="2021-11-23T09:20:32.647Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React源码解析之useMemo和useCallback">
-<meta name="twitter:description" content="本文来自xmas投稿，稿费0元~  梳理hooks源码时，看到了useMemo、useCallback，我将在这里记录一下这两个hook在源码中的实现方式，以及React.memo如何实现组件缓存来提高性能表现。 React版本号本文以React v17.0.2版本为基础，进行源码分析。 概述react源码中通过current（当前页面对应的fiber）是否为null来判断当前是首次渲染moun">
-<meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog20211119161438.png">
+<meta name="twitter:description" content="本文来自xmas投稿，稿费0元~  梳理hooks源码时，看到了useMemo、useCallback，我将在这里记录一下这两个hook在源码中的实现方式，以及React.memo如何实现组件缓存来提高性能表现。">
+<meta name="twitter:image" content="http://qiniuyun.ipromiseyourlife.com/blog1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -195,13 +196,14 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
+        <p><img src="http://qiniuyun.ipromiseyourlife.com/blog1.jpg" alt></p>
+<blockquote>
 <p>本文来自xmas投稿，稿费0元~</p>
 </blockquote>
 <p>梳理hooks源码时，看到了useMemo、useCallback，我将在这里记录一下这两个hook在源码中的实现方式，以及React.memo如何实现组件缓存来提高性能表现。</p>
+<a id="more"></a>
 <h2 id="React版本号"><a href="#React版本号" class="headerlink" title="React版本号"></a>React版本号</h2><p>本文以React v17.0.2版本为基础，进行源码分析。</p>
 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>react源码中通过current（当前页面对应的fiber）是否为null来判断当前是首次渲染mount状态还是更新update状态，不同状态使用不同dispatch对象中的hook。</p>
-<a id="more"></a>
 <h2 id="mount状态"><a href="#mount状态" class="headerlink" title="mount状态"></a>mount状态</h2><h4 id="useMemo"><a href="#useMemo" class="headerlink" title="useMemo"></a>useMemo</h4><p>首次触发useMemo，源码中会调用HooksDispatcherOnMount对象中的mountMemo函数。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mountMemo</span>(<span class="params">nextCreate, deps</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> hook = mountWorkInProgressHook();</span><br><span class="line">    <span class="keyword">var</span> nextDeps = deps === <span class="literal">undefined</span> ? <span class="literal">null</span> : deps;</span><br><span class="line">    <span class="keyword">var</span> nextValue = nextCreate();</span><br><span class="line">    hook.memoizedState = [nextValue, nextDeps];</span><br><span class="line">    <span class="keyword">return</span> nextValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h6 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h6><ol>
@@ -522,11 +524,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -534,11 +536,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -546,11 +548,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -582,6 +584,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
@@ -594,19 +600,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vscode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -614,7 +608,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -630,19 +636,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">something</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">something</a>
               </li>
             
             <div class="clearfix"></div>

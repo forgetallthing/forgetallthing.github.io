@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/6 | 张伯伯的BLOG</title>
+  <title>React源码解析之Diff算法 | 张伯伯的BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="哪里有幸福可借">
-<meta property="og:type" content="website">
-<meta property="og:title" content="张伯伯的BLOG">
-<meta property="og:url" content="http://yoursite.com/archives/2017/06/index.html">
+  <meta name="description" content="本文将梳理一下react的diff算法。">
+<meta name="keywords" content="react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React源码解析之Diff算法">
+<meta property="og:url" content="http://yoursite.com/2021/11/25/React源码解析之Diff算法/index.html">
 <meta property="og:site_name" content="张伯伯的BLOG">
-<meta property="og:description" content="哪里有幸福可借">
+<meta property="og:description" content="本文将梳理一下react的diff算法。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-11-25T08:18:10.313Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="张伯伯的BLOG">
-<meta name="twitter:description" content="哪里有幸福可借">
+<meta name="twitter:title" content="React源码解析之Diff算法">
+<meta name="twitter:description" content="本文将梳理一下react的diff算法。">
   
     <link rel="alternative" href="/atom.xml" title="张伯伯的BLOG" type="application/atom+xml">
   
@@ -171,174 +173,278 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-React源码解析之Diff算法" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React源码解析之Diff算法
+    </h1>
+  
+
+        
+        <a href="/2021/11/25/React源码解析之Diff算法/" class="archive-article-date">
+  	<time datetime="2021-11-25T08:17:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-25</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文将梳理一下react的diff算法。</p>
+<a id="more"></a>
+<h2 id="React版本号"><a href="#React版本号" class="headerlink" title="React版本号"></a>React版本号</h2><p>本文以React v17.0.2版本为基础，进行源码分析。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>react文档中提到，生成将一棵树转换成另一棵树的最小操作数，即使使用最优的算法，算法的复杂程度仍为O(n^3 )，其中n是树中元素的数量。</p>
+<p>如果使用该算法，那么展示1000个元素则需要10亿次的比较，这个开销太过昂贵。</p>
+<p>所以，为了降低算法复杂度，react中的diff会预设三个规则：</p>
+<ol>
+<li>只会对同级元素进行比较。如果一个dom节点在前后两次更新中存在跨级，则该节点不会被复用。</li>
+<li>两个不同类型的元素会产生不同的树。例如元素由div变成span，会将div及其子元素全部销毁，重新创建span及其子元素。</li>
+<li>开发者通过设置key属性，来告知哪些子元素在不同的渲染下保持不变。</li>
+</ol>
+<h2 id="diff算法的实现方式"><a href="#diff算法的实现方式" class="headerlink" title="diff算法的实现方式"></a>diff算法的实现方式</h2><p>入口函数是<code>reconcileChildFibers</code>，该函数会根据<code>newChild</code>的类型，调用不同的处理函数。其中，<code>newChild</code>为jsx对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reconcileChildFibers</span>(<span class="params">returnFiber, currentFirstChild, newChild, lanes</span>) </span>&#123;</span><br><span class="line">   <span class="comment">//省略...</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> isObject = <span class="keyword">typeof</span> newChild === <span class="string">'object'</span> &amp;&amp; newChild !== <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">//单节点</span></span><br><span class="line">    <span class="keyword">if</span> (isObject) &#123;</span><br><span class="line">        <span class="keyword">switch</span> (newChild.$$<span class="keyword">typeof</span>) &#123;</span><br><span class="line">            <span class="keyword">case</span> REACT_ELEMENT_TYPE:</span><br><span class="line">                <span class="keyword">return</span> placeSingleChild(reconcileSingleElement(returnFiber, currentFirstChild, newChild, lanes));</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> REACT_PORTAL_TYPE:</span><br><span class="line">               <span class="comment">//省略...</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> REACT_LAZY_TYPE:</span><br><span class="line">               <span class="comment">//省略...</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//单节点</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> newChild === <span class="string">'string'</span> || <span class="keyword">typeof</span> newChild === <span class="string">'number'</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> placeSingleChild(reconcileSingleTextNode(returnFiber, currentFirstChild, <span class="string">''</span> + newChild, lanes));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//多节点</span></span><br><span class="line">    <span class="keyword">if</span> (isArray$<span class="number">1</span>(newChild)) &#123;</span><br><span class="line">        <span class="keyword">return</span> reconcileChildrenArray(returnFiber, currentFirstChild, newChild, lanes);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//一些其它类型的处理函数</span></span><br><span class="line">    <span class="comment">//省略...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//以上情况都没命中，则删除该节点</span></span><br><span class="line">    <span class="keyword">return</span> deleteRemainingChildren(returnFiber, currentFirstChild);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由源码中可见，会根据同级节点中的数量分成两类：</p>
+<ul>
+<li>当<code>newChild</code>的类型是<code>object</code>、<code>string</code>、<code>number</code>时，代表同级只有一个节点。</li>
+<li>当<code>newChild</code>的类型是<code>Array</code>时，代表同级有多个节点。</li>
+</ul>
+<h2 id="单节点diff"><a href="#单节点diff" class="headerlink" title="单节点diff"></a>单节点diff</h2><p>我们以类型<code>object</code>为例，关键的处理函数是<code>reconcileSingleElement</code>，函数内部会根据新元素对应的上次更新的同级的fiber节点是否存在，进行不同的处理。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reconcileSingleElement</span>(<span class="params">returnFiber, currentFirstChild, element, lanes</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> key = element.key;</span><br><span class="line">    <span class="keyword">var</span> child = currentFirstChild;</span><br><span class="line">	<span class="comment">//判断对应的fiber节点是否存在</span></span><br><span class="line">    <span class="keyword">while</span> (child !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">//判断key是否相同</span></span><br><span class="line">        <span class="keyword">if</span> (child.key === key) &#123;</span><br><span class="line">            <span class="keyword">switch</span> (child.tag) &#123;</span><br><span class="line">                <span class="keyword">case</span> Fragment:</span><br><span class="line">                    <span class="comment">//省略...</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">case</span> Block:</span><br><span class="line">                    <span class="comment">//省略...</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="comment">//判断元素类型是否相同</span></span><br><span class="line">                        <span class="keyword">if</span> (child.elementType === element.type || ( isCompatibleFamilyForHotReloading(child, element) )) &#123;</span><br><span class="line">                            <span class="comment">//元素类型相同，删除该fiber的兄弟节点</span></span><br><span class="line">                            deleteRemainingChildren(returnFiber, child.sibling);</span><br><span class="line">						  <span class="comment">//将上次更新生成的fiber节点的副本作为本次新生成的fiber并返回</span></span><br><span class="line">                            <span class="keyword">var</span> _existing3 = useFiber(child, element.props);</span><br><span class="line"></span><br><span class="line">                            _existing3.ref = coerceRef(returnFiber, child, element);</span><br><span class="line">                            _existing3.return = returnFiber;</span><br><span class="line"></span><br><span class="line">                            &#123;</span><br><span class="line">                                _existing3._debugSource = element._source;</span><br><span class="line">                                _existing3._debugOwner = element._owner;</span><br><span class="line">                            &#125;</span><br><span class="line"></span><br><span class="line">                            <span class="keyword">return</span> _existing3;</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">            &#125; </span><br><span class="line"></span><br><span class="line">		   <span class="comment">//元素类型不相同，删除该fiber及其兄弟节点</span></span><br><span class="line">            deleteRemainingChildren(returnFiber, child);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//key不相同，删除该fiber</span></span><br><span class="line">            deleteChild(returnFiber, child);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        child = child.sibling;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//根据element.type创建fiber节点</span></span><br><span class="line">    <span class="keyword">if</span> (element.type === REACT_FRAGMENT_TYPE) &#123;</span><br><span class="line">        <span class="comment">//省略...</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> _created4 = createFiberFromElement(element, returnFiber.mode, lanes);</span><br><span class="line"></span><br><span class="line">        _created4.ref = coerceRef(returnFiber, currentFirstChild, element);</span><br><span class="line">        _created4.return = returnFiber;</span><br><span class="line">        <span class="keyword">return</span> _created4;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>分析源码可知：</p>
+<ul>
+<li>当<strong>child !== null</strong>且<strong>key相同</strong>且<strong>type相同</strong>时，执行<code>deleteRemainingChildren</code>将<strong>child的兄弟fiber</strong>都标记删除，将child的副本作为本次新生成的 fiber节点返回并更新节点的属性值。</li>
+<li>当<strong>child !== null</strong>且<strong>key相同</strong>且<strong>type不同</strong>时，执行<code>deleteRemainingChildren</code>将<strong>child及其兄弟fiber</strong>都标记删除。</li>
+<li>当<strong>child !== null</strong>且<strong>key不同</strong>时，执行<code>deleteChild</code>将<strong>child</strong>标记删除,继续遍历其兄弟节点。</li>
+<li>当<strong>child === null</strong>时，会根据element创建新的fiber节点并返回。</li>
+</ul>
+<p>考虑如下例子：</p>
+<p>当前页面有三个<code>li</code>，现在我们要全部删除，再插入一个<code>p</code>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//当前页面显示的元素</span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line">//本次更新后的</span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>由于本次更新只有一个p元素，执行单节点diff的逻辑。</p>
+<p>在<code>reconcileSingleElement</code>中遍历之前的3个<code>fiber</code>（对应的<code>DOM</code>为3个<code>li</code>），寻找本次更新的<code>p</code>是否可以复用之前的3个<code>fiber</code>中某个的<code>DOM</code>。</p>
+<p>当<code>key相同</code>且<code>type相同</code>时，代表我们已经找到本次更新的<code>p</code>对应的上次的<code>fiber</code>，并且<code>p</code>与<code>li</code>的<code>type</code>相同，可以复用上次的fiber，所以将其兄弟节点标记删除。</p>
+<p>当<code>key相同</code>且<code>type不同</code>时，代表我们已经找到本次更新的<code>p</code>对应的上次的<code>fiber</code>，但是<code>p</code>与<code>li</code> <code>type</code>不同，不能复用。既然唯一的可能性已经不能复用，则剩下的<code>fiber</code>都没有机会了，所以都需要标记删除。</p>
+<p>当<code>key不同</code>时只代表遍历到的该<code>fiber</code>不能被<code>p</code>复用，后面还有兄弟<code>fiber</code>还没有遍历到。所以仅仅标记该<code>fiber</code>删除。</p>
+<h2 id="多节点diff"><a href="#多节点diff" class="headerlink" title="多节点diff"></a>多节点diff</h2><h4 id="节点变化类型"><a href="#节点变化类型" class="headerlink" title="节点变化类型"></a>节点变化类型</h4><p>首先，我们先来归纳一下节点变化的几种情况。</p>
+<p>1、节点更新</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//更新之前</span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"0"</span> <span class="attr">className</span>=<span class="string">"before"</span>&gt;</span>0<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"1"</span>&gt;</span>1<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line">//更新之后  情况1---节点属性更新</span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"0"</span> <span class="attr">className</span>=<span class="string">"after"</span>&gt;</span>0<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"1"</span>&gt;</span>1<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line">//更新之后  情况2---节点类型更新</span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">key</span>=<span class="string">"0"</span>&gt;</span>0<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"1"</span>&gt;</span>1<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>2、节点新增或删除</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//更新之前</span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"0"</span>&gt;</span>0<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"1"</span>&gt;</span>1<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line">//更新之前 情况1---增加节点</span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"0"</span>&gt;</span>0<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"1"</span>&gt;</span>1<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"2"</span>&gt;</span>2<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line">//更新之前 情况2---删除节点</span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"0"</span>&gt;</span>0<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>3、节点位置移动</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//更新之前</span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"0"</span>&gt;</span>0<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"1"</span>&gt;</span>1<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line">//更新之后</span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"1"</span>&gt;</span>1<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"0"</span>&gt;</span>0<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>同级多节点的diff，一定属于上面三种情况中的一种或多种。</p>
+<h4 id="关键处理函数"><a href="#关键处理函数" class="headerlink" title="关键处理函数"></a>关键处理函数</h4><p>多节点的关键处理函数是<code>reconcileChildrenArray</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reconcileChildrenArray</span>(<span class="params">returnFiber, currentFirstChild, newChildren, lanes</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//省略...</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> resultingFirstChild = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">var</span> previousNewFiber = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">var</span> oldFiber = currentFirstChild;</span><br><span class="line">    <span class="keyword">var</span> lastPlacedIndex = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> newIdx = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> nextOldFiber = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//第一轮的遍历</span></span><br><span class="line">    <span class="comment">//当oldFiber遍历完(oldFiber === null)或者newChildren遍历完(newIdx === newChildren.length-1)时，跳出循环。</span></span><br><span class="line">    <span class="keyword">for</span> (; oldFiber !== <span class="literal">null</span> &amp;&amp; newIdx &lt; newChildren.length; newIdx++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (oldFiber.index &gt; newIdx) &#123;</span><br><span class="line">            nextOldFiber = oldFiber;</span><br><span class="line">            oldFiber = <span class="literal">null</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            nextOldFiber = oldFiber.sibling;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//判断oldFiber是否可复用 </span></span><br><span class="line">        <span class="comment">//当oldFiber和newChildren的key不相等时，newFiber=null，不可复用，会立即跳出循环</span></span><br><span class="line">        <span class="keyword">var</span> newFiber = updateSlot(returnFiber, oldFiber, newChildren[newIdx], lanes);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (newFiber === <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (oldFiber === <span class="literal">null</span>) &#123;</span><br><span class="line">                oldFiber = nextOldFiber;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (shouldTrackSideEffects) &#123;</span><br><span class="line">            <span class="comment">//key相同，type不同，不能复用，会创建newFiber，将oldFiber节点标记删除。</span></span><br><span class="line">            <span class="keyword">if</span> (oldFiber &amp;&amp; newFiber.alternate === <span class="literal">null</span>) &#123;</span><br><span class="line">                deleteChild(returnFiber, oldFiber);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//将newFiber打上Placement标记。</span></span><br><span class="line">        lastPlacedIndex = placeChild(newFiber, lastPlacedIndex, newIdx);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (previousNewFiber === <span class="literal">null</span>) &#123;</span><br><span class="line">            resultingFirstChild = newFiber;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            previousNewFiber.sibling = newFiber;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        previousNewFiber = newFiber;</span><br><span class="line">        oldFiber = nextOldFiber;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//第二轮的遍历</span></span><br><span class="line">    <span class="comment">//newChildren遍历完成，oldFiber没遍历完，意味着本次更新比之前的节点数量少，需要将剩下的oldFiber标记删除。</span></span><br><span class="line">    <span class="keyword">if</span> (newIdx === newChildren.length) &#123;</span><br><span class="line">        deleteRemainingChildren(returnFiber, oldFiber);</span><br><span class="line">        <span class="keyword">return</span> resultingFirstChild;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//oldFiber遍历完成，newChildren没有遍历完，意味着已有的fiber都被复用了，本次更新有新节点插入，需要遍历剩下的newChildren，创建新的fiber，依次标记Placement。</span></span><br><span class="line">    <span class="keyword">if</span> (oldFiber === <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (; newIdx &lt; newChildren.length; newIdx++) &#123;</span><br><span class="line">            <span class="comment">//创建fiber</span></span><br><span class="line">            <span class="keyword">var</span> _newFiber = createChild(returnFiber, newChildren[newIdx], lanes);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (_newFiber === <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//为fiber节点打上Placement标记。</span></span><br><span class="line">            lastPlacedIndex = placeChild(_newFiber, lastPlacedIndex, newIdx);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (previousNewFiber === <span class="literal">null</span>) &#123;</span><br><span class="line">                resultingFirstChild = _newFiber;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                previousNewFiber.sibling = _newFiber;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            previousNewFiber = _newFiber;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> resultingFirstChild;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//oldFiber和newChildren都没有遍历完，意味着本次更新有节点改变了位置，将oldFiber及其兄弟节点保存到Map对象中，fiber的key当作key，fiber当作value，key为null时，fiber的index作为key</span></span><br><span class="line">    <span class="keyword">var</span> existingChildren = mapRemainingChildren(returnFiber, oldFiber); </span><br><span class="line">   </span><br><span class="line">    <span class="keyword">for</span> (; newIdx &lt; newChildren.length; newIdx++) &#123;</span><br><span class="line">        <span class="comment">//获取更新后的fiber节点</span></span><br><span class="line">        <span class="keyword">var</span> _newFiber2 = updateFromMap(existingChildren, returnFiber, newIdx, newChildren[newIdx], lanes);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (_newFiber2 !== <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (shouldTrackSideEffects) &#123;</span><br><span class="line">                <span class="comment">//节点被复用后，将它从existingChildren对象中移除</span></span><br><span class="line">                <span class="keyword">if</span> (_newFiber2.alternate !== <span class="literal">null</span>) &#123;</span><br><span class="line">                    existingChildren.delete(_newFiber2.key === <span class="literal">null</span> ? newIdx : _newFiber2.key);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//为移动的节点打标记 Placement</span></span><br><span class="line">            lastPlacedIndex = placeChild(_newFiber2, lastPlacedIndex, newIdx);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (previousNewFiber === <span class="literal">null</span>) &#123;</span><br><span class="line">                resultingFirstChild = _newFiber2;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                previousNewFiber.sibling = _newFiber2;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            previousNewFiber = _newFiber2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (shouldTrackSideEffects) &#123;</span><br><span class="line">        existingChildren.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">child</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> deleteChild(returnFiber, child);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> resultingFirstChild;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可见，源码中会执行两轮遍历。</p>
+<p>第一轮遍历处理节点的更新。</p>
+<p>第二轮遍历是对不需要更新的节点的处理。</p>
+<h4 id="第一轮遍历"><a href="#第一轮遍历" class="headerlink" title="第一轮遍历"></a>第一轮遍历</h4><p>var newIdx = 0，遍历<code>newChildren</code>，比较<code>newChildren</code>[newIdx ]和<code>oldFiber</code>，判断<code>oldFiber</code>是否可以复用。</p>
+<p>如果可以复用，newIdx ++，克隆出一份oldFiber的副本并对属性进行更新，执行<code>oldFiber = nextOldFiber</code>(<code>nextOldFiber = oldFiber.sibling</code>)继续遍历。</p>
+<p>如果不能复用，分为以下两种情况。</p>
+<ul>
+<li>当<code>oldFiber</code>和<code>newChildren</code>的<code>key</code>不相等时，不可复用，立即跳出循环。</li>
+<li>当<code>oldFiber</code>和<code>newChildren</code>的<code>key</code>相同，<code>type</code>不同时，不能复用，会创建新fiber，将<code>oldFiber</code>节点标记删除。</li>
+</ul>
+<p>当<code>oldFiber</code>遍历完(oldFiber === null)或者<code>newChildren</code>遍历完(newIdx === newChildren.length-1)时，跳出循环。</p>
+<h4 id="第二轮遍历"><a href="#第二轮遍历" class="headerlink" title="第二轮遍历"></a>第二轮遍历</h4><p>在第一轮遍历结束后：</p>
+<p>如果<code>oldFiber</code>和<code>newChildren</code>同时遍历完成，则节点的更新操作结束。</p>
+<p>如果<code>newChildren</code>遍历完成，<code>oldFiber</code>没遍历完，意味着本次更新比之前的节点数量少，需要将剩下的oldFiber标记删除。</p>
+<p>如果<code>oldFiber</code>遍历完成，<code>newChildren</code>没有遍历完，意味着已有的fiber都被复用了，本次更新有新节点插入，需要遍历剩下的<code>newChildren</code>，创建新的fiber，为fiber依次标记Placement。</p>
+<p>如果<code>oldFiber</code>和<code>newChildren</code>都没有遍历完，意味着节点的位置有改变。</p>
+<h4 id="节点位置移动"><a href="#节点位置移动" class="headerlink" title="节点位置移动"></a>节点位置移动</h4><p>由源码中可知，首先会遍历oldFiber，将剩余的oldFiber及其兄弟节点保存到一个Map对象中，fiber的key为key（key是null时，index为key），oldFiber为value，具体实现函数如下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mapRemainingChildren</span>(<span class="params">returnFiber, currentFirstChild</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> existingChildren = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">var</span> existingChild = currentFirstChild;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (existingChild !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">//key为null时，使用index代替</span></span><br><span class="line">        <span class="keyword">if</span> (existingChild.key !== <span class="literal">null</span>) &#123;</span><br><span class="line">            existingChildren.set(existingChild.key, existingChild);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            existingChildren.set(existingChild.index, existingChild);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        existingChild = existingChild.sibling;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> existingChildren;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>之后，遍历newChildren，如果existingChildren.get(newChild[key])存在，代表可以复用oldFiber。</p>
+<h4 id="标记移动的节点"><a href="#标记移动的节点" class="headerlink" title="标记移动的节点"></a>标记移动的节点</h4><p>为节点打标记的关键函数是<code>placeChild</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">placeChild</span>(<span class="params">newFiber, lastPlacedIndex, newIndex</span>) </span>&#123;</span><br><span class="line">    newFiber.index = newIndex;</span><br><span class="line">    <span class="keyword">var</span> current = newFiber.alternate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (current !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> oldIndex = current.index;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (oldIndex &lt; lastPlacedIndex) &#123;</span><br><span class="line">            <span class="comment">//节点位置需要移动</span></span><br><span class="line">            newFiber.flags = Placement;</span><br><span class="line">            <span class="keyword">return</span> lastPlacedIndex;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//当前节点位置不变</span></span><br><span class="line">            <span class="keyword">return</span> oldIndex;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        newFiber.flags = Placement;</span><br><span class="line">        <span class="keyword">return</span> lastPlacedIndex;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>lastPlacedIndex：本次更新中最后一个可复用节点在oldFiber中的位置索引，初始值为0，也是节点移动的参照物。</p>
+<p>newIndex：<code>newChildren</code>[newIdx ]对应新节点的索引。</p>
+<p>oldIndex ：遍历到的可复用节点在oldFiber中的位置索引。</p>
+<p>在本次更新中，节点是按<code>newChildren</code>的顺序排列，在遍历<code>newChildren</code>过程中，每个遍历到的可复用节点一定是当前遍历到的所有可复用节点中最靠右的那个，一定在lastPlacedIndex对应的可复用的节点在本次更新中位置的后面。</p>
+<p>那么，我们只需要判断本次遍历到的可复用节点的位置索引oldIndex是否小于lastPlacedIndex，就能知道节点的位置是否改变。</p>
+<p>如果<code>oldIndex &lt; lastPlacedIndex</code>，意味着该节点的位置需要改变，为该节点打上Placement标记。</p>
+<p>如果<code>oldIndex &gt;= lastPlacedIndex</code>，则节点位置保持不变，将oldIndex 赋值给lastPlacedIndex。</p>
+<h4 id="练习Demo"><a href="#练习Demo" class="headerlink" title="练习Demo"></a>练习Demo</h4><p>如果只看文字描述，可能比较枯涩难懂，下面通过一个案例，帮助我们更深入的理解diff及节点的移动过程。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//更新之前---oldFiber</span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"a"</span>&gt;</span>a<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"b"</span>&gt;</span>b<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"c"</span>&gt;</span>c<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"d"</span>&gt;</span>d<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line">//更新之后---newChildren</span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"a"</span>&gt;</span>a<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"c"</span>&gt;</span>cc<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"d"</span>&gt;</span>dd<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"b"</span>&gt;</span>d<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>第一轮遍历：</strong></p>
+<p>遍历newChildren，比较newChildren和oldFiber的第一个li节点，由于两个节点的key相同都是a，type相同，可以复用，此时key为a的节点在oldFiber中的索引位置是0，所以lastPlacedIndex=0。</p>
+<p>继续遍历，newIdx ++，比较newChildren和oldFiber的第二个li节点，key不同，不可复用，第一轮遍历结束。</p>
+<p><strong>第二轮遍历：</strong></p>
+<p>第一轮遍历结束后，oldFiber和newChildren都没有遍历完，oldFiber中还剩key为b、c、d的三个li节点，newChildren中还剩key为c、d、b的三个li节点需要遍历。</p>
+<p>将oldFiber中剩余的三个节点保存到一个Map对象中（变量名是existingChildren），oldFiber的key为key，oldFiber为value。</p>
+<p>遍历newChildren，可以看到existingChildren中包含key为c的节点，获取c在oldFiber中的位置索引oldIndex=2。</p>
+<p>比较oldIndex和lastPlacedIndex：</p>
+<p>如果oldIndex &lt; lastPlacedIndex，表示节点需要向右移动；</p>
+<p>如果oldIndex &gt;= lastPlacedIndex，表示节点位置保持不变，执行lastPlacedIndex = oldIndex ；</p>
+<p>在本例中，oldIndex = 2，lastPlacedIndex = 0，oldIndex &gt; lastPlacedIndex ，所以不需要移动，lastPlacedIndex = 2。</p>
+<p>遍历key为d的节点，可以看到在existingChildren中存在这个节点，获取d在oldFiber中的位置索引oldIndex = 3。</p>
+<p>此时oldIndex = 3，lastPlacedIndex = 2，oldIndex &gt; lastPlacedIndex ，所以不需要移动，lastPlacedIndex = 3。</p>
+<p>遍历key为b的节点，可以看到在existingChildren中存在这个节点，获取b在oldFiber中的位置索引oldIndex = 1。</p>
+<p>此时oldIndex = 1，lastPlacedIndex = 3，oldIndex &lt; lastPlacedIndex ，所以key为b的节点需要向右移动，打上Placement标记。</p>
+<p>第二轮遍历结束，可以看到在本例中，key为a、c、d的三个节点都没有移动，只有key是b的节点被打上移动的标记。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>你转给我的不是钱，只是数字<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/26/网卡版本回退/" class="archive-article-date">
-  	<time datetime="2017-06-26T03:22:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/26/网卡版本回退/">网卡版本回退</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">windows</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ipromiseyourlife.com/2021/11/25/React源码解析之Diff算法/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/22/H5plus软键盘弹出问题/" class="archive-article-date">
-  	<time datetime="2017-06-22T08:20:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-22</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/11/23/React源码解析之useMemo和useCallback/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">React源码解析之useMemo和useCallback</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/22/H5plus软键盘弹出问题/">H5plus软键盘弹出问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">mui</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#React版本号"><span class="toc-number">1.</span> <span class="toc-text">React版本号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#diff算法的实现方式"><span class="toc-number">3.</span> <span class="toc-text">diff算法的实现方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单节点diff"><span class="toc-number">4.</span> <span class="toc-text">单节点diff</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多节点diff"><span class="toc-number">5.</span> <span class="toc-text">多节点diff</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#节点变化类型"><span class="toc-number">5.0.1.</span> <span class="toc-text">节点变化类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关键处理函数"><span class="toc-number">5.0.2.</span> <span class="toc-text">关键处理函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第一轮遍历"><span class="toc-number">5.0.3.</span> <span class="toc-text">第一轮遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第二轮遍历"><span class="toc-number">5.0.4.</span> <span class="toc-text">第二轮遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#节点位置移动"><span class="toc-number">5.0.5.</span> <span class="toc-text">节点位置移动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#标记移动的节点"><span class="toc-number">5.0.6.</span> <span class="toc-text">标记移动的节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#练习Demo"><span class="toc-number">5.0.7.</span> <span class="toc-text">练习Demo</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/21/Eslint入门/" class="archive-article-date">
-  	<time datetime="2017-06-21T08:19:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-21</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/21/Eslint入门/">Eslint入门</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Eslint</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/10/js获取表单数组/" class="archive-article-date">
-  	<time datetime="2017-06-10T11:31:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/10/js获取表单数组/">js获取表单数组</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -373,8 +479,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

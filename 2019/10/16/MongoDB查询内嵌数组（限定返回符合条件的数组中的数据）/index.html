@@ -17,7 +17,7 @@
 <meta property="og:description" content="mongoDB相关操作：  mongo查询内嵌数组（限定返回符合条件的数组中的数据） 使用mongoexport导出数据 mongostat查看mongodb运行状态使用命令">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog/20191022/P7sr653iL2gH.jpg">
-<meta property="og:updated_time" content="2021-11-10T07:16:48.201Z">
+<meta property="og:updated_time" content="2022-05-16T10:26:39.536Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB相关操作记录">
 <meta name="twitter:description" content="mongoDB相关操作：  mongo查询内嵌数组（限定返回符合条件的数组中的数据） 使用mongoexport导出数据 mongostat查看mongodb运行状态使用命令">
@@ -207,6 +207,13 @@ var _hmt = _hmt || [];
 <h4 id="获取所有集合名称"><a href="#获取所有集合名称" class="headerlink" title="获取所有集合名称"></a>获取所有集合名称</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> list = <span class="keyword">await</span> db.listCollections().toArray(); <span class="comment">// node</span></span><br><span class="line"><span class="keyword">let</span> list = db.getCollectionInfos() <span class="comment">// mongo原生</span></span><br></pre></td></tr></table></figure>
 <h4 id="获取所有集合所有索引"><a href="#获取所有集合所有索引" class="headerlink" title="获取所有集合所有索引"></a>获取所有集合所有索引</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> indexList = <span class="keyword">await</span> db.collection(<span class="string">'user'</span>).indexes(); <span class="comment">// nodes</span></span><br></pre></td></tr></table></figure>
 <h4 id="设置索引"><a href="#设置索引" class="headerlink" title="设置索引"></a>设置索引</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">index = &#123; <span class="attr">name</span>: <span class="number">1</span>, <span class="attr">age</span>: <span class="number">1</span>&#125;;</span><br><span class="line"><span class="keyword">await</span> db.collection(<span class="string">'user'</span>).createIndex(index, &#123;<span class="attr">background</span>: <span class="literal">true</span>&#125;) <span class="comment">// nodes</span></span><br></pre></td></tr></table></figure>
+<h4 id="指定使用特定的索引"><a href="#指定使用特定的索引" class="headerlink" title="指定使用特定的索引"></a>指定使用特定的索引</h4><p>虽然MongoDB查询优化器一般工作的很不错，但是也可以使用hint()来强迫MongoDB使用一个特定的索引。在这种方法下某些情形下会提升性能。一个有索引的collection并且执行一个多字段的查询。传入一个制定的索引，强迫查询使用该索引。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.find(&#123;<span class="string">"username"</span>:<span class="string">"user1000"</span>, <span class="string">"age"</span>:<span class="number">30</span>&#125;).hint(&#123;<span class="string">"username"</span>:<span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
+<p>注意：请确定你已经创建了相应的索引。</p>
+<p>假设在users上有个{“a”: 1, “b”: 1}的索引，名称是”a_1_b_1”，则如下两种方式等价：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.users.find(&#123;<span class="string">"a"</span>: <span class="number">4</span>, <span class="string">"b"</span>: <span class="number">5</span>, <span class="string">"c"</span>: <span class="number">6</span>&#125;).hint(&#123;<span class="string">"a"</span>: <span class="number">1</span>, <span class="string">"b"</span>: <span class="number">1</span>&#125;)</span><br><span class="line">db.users.find(&#123;<span class="string">"a"</span>: <span class="number">4</span>, <span class="string">"b"</span>: <span class="number">5</span>, <span class="string">"c"</span>: <span class="number">6</span>&#125;).hint(<span class="string">"a_1_b_1"</span>)</span><br></pre></td></tr></table></figure>
+<p>也可以强迫查询不适用索引，做表扫描：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.find().hint(&#123;<span class="string">"$natural"</span>:<span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
 <h3 id="mongo查询内嵌数组（限定返回符合条件的数组中的数据）"><a href="#mongo查询内嵌数组（限定返回符合条件的数组中的数据）" class="headerlink" title="mongo查询内嵌数组（限定返回符合条件的数组中的数据）"></a>mongo查询内嵌数组（限定返回符合条件的数组中的数据）</h3><p>当一个doucument中包含一个内嵌数组，其中存储了Object，那么如何只返回特定的数组，而不是返回内嵌数组的所有数据。</p>
 <p>原始数据：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5aab3460353df3bd352e0e15"</span>),</span><br><span class="line">    <span class="string">"addTime"</span> : ISODate(<span class="string">"2018-03-16T03:05:04.363Z"</span>),</span><br><span class="line">    <span class="string">"tag"</span> : <span class="string">"test"</span>,</span><br><span class="line">    <span class="string">"userInfo"</span> : [ </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"cj"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"江苏"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">24.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"stu"</span></span><br><span class="line">        &#125;, </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"hj"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"江苏"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">26.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"stu"</span></span><br><span class="line">        &#125;, </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span> : <span class="string">"lbl"</span>,</span><br><span class="line">            <span class="string">"address"</span> : <span class="string">"美国"</span>,</span><br><span class="line">            <span class="string">"age"</span> : <span class="number">22.0</span>,</span><br><span class="line">            <span class="string">"userTag"</span> : <span class="string">"teach"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -329,6 +336,14 @@ var _hmt = _hmt || [];
 <p>conn:连接到mongodb到连接数量;</p>
 <p><strong>重要字段</strong></p>
 <p>对于性能，我们比较关心的是，qr,读队列，如果读队列比较多，说明系统的读请求负载比较高，会出现比较严重的性能问题，qw，写队列，这两个一般能直观的反应系统的性能状况，如果他们的数字大幅度提高，mongodb会立刻遇到问题</p>
+<h3 id="mongo中girdFs读取大文件报sort使用的内存超出32MB"><a href="#mongo中girdFs读取大文件报sort使用的内存超出32MB" class="headerlink" title="mongo中girdFs读取大文件报sort使用的内存超出32MB"></a>mongo中girdFs读取大文件报sort使用的内存超出32MB</h3><p>有一次从mongo的fs.files表读取一个八十多mb的文件时，给我报了这个错误：</p>
+<p><code>sort operation used more than the maximum 33554432 bytes</code> </p>
+<p>而我的写法是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> gfs = <span class="keyword">new</span> girdFs(mongodb);</span><br><span class="line"><span class="keyword">let</span> data = <span class="string">''</span>;</span><br><span class="line"><span class="keyword">let</span> stream = gfs.openDownloadStream(fileId);</span><br><span class="line">stream.on(<span class="string">'data'</span>, (chunk) =&gt; (data += chunk));</span><br><span class="line">stream.on(<span class="string">'end'</span>, c);</span><br></pre></td></tr></table></figure>
+<p>我这里使用的仅仅是openDownloadStream API，缺报了sort的错误，最后怀疑是因为文件较大，会在fs.chunks表里存放为多个chunk，取出时会进行排序操作，此时出的问题。</p>
+<p>于是查看了下fs.chunks的结构：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// collection: fs.chunks</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"_id"</span> : ObjectId(<span class="string">"628215edda817b095cc31620"</span>),</span><br><span class="line">	<span class="string">"files_id"</span> : ObjectId(<span class="string">"628215d8da817b095cc314d0"</span>),</span><br><span class="line">	<span class="string">"n"</span> : <span class="number">335</span>,</span><br><span class="line">	<span class="string">"data"</span> : BinData(<span class="number">0</span>,<span class="string">"UmlnaHQiOnsiY29sb3IiOiIjMDAwMDAw...   (11,165 bytes)"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>发现索引中只有_id索引，于是我添加了files_id和n的联合索引，果然不再报错了~</p>
 
       
 
@@ -481,7 +496,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#node-mongodb-native相关操作"><span class="toc-number">1.</span> <span class="toc-text">node-mongodb-native相关操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#获取所有集合名称"><span class="toc-number">1.1.</span> <span class="toc-text">获取所有集合名称</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取所有集合所有索引"><span class="toc-number">1.2.</span> <span class="toc-text">获取所有集合所有索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置索引"><span class="toc-number">1.3.</span> <span class="toc-text">设置索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongo查询内嵌数组（限定返回符合条件的数组中的数据）"><span class="toc-number">2.</span> <span class="toc-text">mongo查询内嵌数组（限定返回符合条件的数组中的数据）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更多mongo查询内嵌数组方式"><span class="toc-number">3.</span> <span class="toc-text">更多mongo查询内嵌数组方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、数组元素模糊匹配"><span class="toc-number">3.1.</span> <span class="toc-text">1、数组元素模糊匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、数组元素精确-全-匹配"><span class="toc-number">3.2.</span> <span class="toc-text">2、数组元素精确(全)匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、通过数组下标返回指定的文档"><span class="toc-number">3.3.</span> <span class="toc-text">3、通过数组下标返回指定的文档</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、范围条件任意元素匹配查询"><span class="toc-number">3.4.</span> <span class="toc-text">4、范围条件任意元素匹配查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、数组内嵌文档查询"><span class="toc-number">3.5.</span> <span class="toc-text">5、数组内嵌文档查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、数组元素操作符-elemMatch"><span class="toc-number">3.6.</span> <span class="toc-text">6、数组元素操作符$elemMatch</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、数组元素操作符-all"><span class="toc-number">3.7.</span> <span class="toc-text">7、数组元素操作符$all</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8、数组元素操作符-size"><span class="toc-number">3.8.</span> <span class="toc-text">8、数组元素操作符$size</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9、数组元素操作符-slice"><span class="toc-number">3.9.</span> <span class="toc-text">9、数组元素操作符$slice</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10、-占位符，返回数组中第一个匹配的数组元素值-子集"><span class="toc-number">3.10.</span> <span class="toc-text">10、$占位符，返回数组中第一个匹配的数组元素值(子集)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、小结"><span class="toc-number">3.11.</span> <span class="toc-text">三、小结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongoexport导出数据"><span class="toc-number">4.</span> <span class="toc-text">mongoexport导出数据</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#打开csv乱码解决办法"><span class="toc-number">4.0.1.</span> <span class="toc-text">打开csv乱码解决办法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongostat查看mongodb运行状态使用命令"><span class="toc-number">5.</span> <span class="toc-text">mongostat查看mongodb运行状态使用命令</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#node-mongodb-native相关操作"><span class="toc-number">1.</span> <span class="toc-text">node-mongodb-native相关操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#获取所有集合名称"><span class="toc-number">1.1.</span> <span class="toc-text">获取所有集合名称</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取所有集合所有索引"><span class="toc-number">1.2.</span> <span class="toc-text">获取所有集合所有索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置索引"><span class="toc-number">1.3.</span> <span class="toc-text">设置索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#指定使用特定的索引"><span class="toc-number">1.4.</span> <span class="toc-text">指定使用特定的索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongo查询内嵌数组（限定返回符合条件的数组中的数据）"><span class="toc-number">2.</span> <span class="toc-text">mongo查询内嵌数组（限定返回符合条件的数组中的数据）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更多mongo查询内嵌数组方式"><span class="toc-number">3.</span> <span class="toc-text">更多mongo查询内嵌数组方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、数组元素模糊匹配"><span class="toc-number">3.1.</span> <span class="toc-text">1、数组元素模糊匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、数组元素精确-全-匹配"><span class="toc-number">3.2.</span> <span class="toc-text">2、数组元素精确(全)匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、通过数组下标返回指定的文档"><span class="toc-number">3.3.</span> <span class="toc-text">3、通过数组下标返回指定的文档</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、范围条件任意元素匹配查询"><span class="toc-number">3.4.</span> <span class="toc-text">4、范围条件任意元素匹配查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、数组内嵌文档查询"><span class="toc-number">3.5.</span> <span class="toc-text">5、数组内嵌文档查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、数组元素操作符-elemMatch"><span class="toc-number">3.6.</span> <span class="toc-text">6、数组元素操作符$elemMatch</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、数组元素操作符-all"><span class="toc-number">3.7.</span> <span class="toc-text">7、数组元素操作符$all</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8、数组元素操作符-size"><span class="toc-number">3.8.</span> <span class="toc-text">8、数组元素操作符$size</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9、数组元素操作符-slice"><span class="toc-number">3.9.</span> <span class="toc-text">9、数组元素操作符$slice</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10、-占位符，返回数组中第一个匹配的数组元素值-子集"><span class="toc-number">3.10.</span> <span class="toc-text">10、$占位符，返回数组中第一个匹配的数组元素值(子集)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、小结"><span class="toc-number">3.11.</span> <span class="toc-text">三、小结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongoexport导出数据"><span class="toc-number">4.</span> <span class="toc-text">mongoexport导出数据</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#打开csv乱码解决办法"><span class="toc-number">4.0.1.</span> <span class="toc-text">打开csv乱码解决办法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongostat查看mongodb运行状态使用命令"><span class="toc-number">5.</span> <span class="toc-text">mongostat查看mongodb运行状态使用命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mongo中girdFs读取大文件报sort使用的内存超出32MB"><span class="toc-number">6.</span> <span class="toc-text">mongo中girdFs读取大文件报sort使用的内存超出32MB</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -605,15 +620,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -621,7 +628,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -633,11 +652,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -645,15 +664,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -665,18 +688,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
@@ -685,7 +696,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -693,7 +704,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">vscode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,7 +716,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -713,19 +732,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">babel</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">

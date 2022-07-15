@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20220630181336.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog1656637808927.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20220701092043.png">
-<meta property="og:updated_time" content="2022-07-01T02:11:15.122Z">
+<meta property="og:updated_time" content="2022-07-01T03:36:01.920Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spread优化记录">
 <meta name="twitter:description" content="随着深度使用葡萄城家的spread.js，终会遇到一些需要优化的点，在此记录一下">
@@ -215,7 +215,7 @@ var _hmt = _hmt || [];
 <p>官方没有优化方案的只好从我们自己的代码入手：展示sheet中存在23处需要插入行的情况，为了方便，我们选择从最下方的行开始拓展，逐渐到最上面，因为这样不影响待拓展行的行号。</p>
 <p>但当下方先拓展出大量行，上方在进行addRows时，下方所有行上的公式都需要变更。</p>
 <p>如第六行存在公式时：SUM(F6+E6)，当你在第五行插入行，当前的第六行会变为第七行，公式也需要变为SUM(F7+E7)。</p>
-<p>所以第一个优化点就是改成从上往下插入行，因为下方插入行时需要更新上方行公式的情况最少（当然跨列公式也需要更新）。</p>
+<p>所以第一个优化点就是改成从上往下插入行，因为下方插入行时需要更新上方行公式的情况最少（当然跨行公式也需要更新）。</p>
 <p>果然，时间提升了约三分之一，35s左右可以完成所有sheet中拓展行的渲染，但这个速度也很不理想，特别是当用户选择重新加载数据源sheet时，需要把当前拓展的行删除，此时调用了删除行列方法，又要花费10s左右~（此处的设计是用户需要可以编辑并保存拓展之后的excel，所以不能简单地恢复原来的spreadJson，必须标记并删除自动拓展的行列）。</p>
 <p>反复梳理优化同事代码，测试耗时之后，没有取得其他进展，本以为只能接受现实了，但我突然发现，当excel未拓展时，切换多个不同的sheet再进行拓展，耗时会疯狂增加！</p>
 <p>难道说，sheet只要没显示过，就只加载了sheet的数据模型？而显示过一次的，sheet的视图模型就已生成了，而不管是否停止渲染，视图模型都会影响增删行列的耗时？</p>
@@ -223,7 +223,7 @@ var _hmt = _hmt || [];
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.spread.addSheet(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">this</span>.spread.setActiveSheetIndex(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">let</span> json = <span class="keyword">this</span>.spread.toJSON()</span><br><span class="line"><span class="keyword">this</span>.spread.fromJSON(json)</span><br></pre></td></tr></table></figure>
 <p>上面的思路是添加一张空白sheet，然后toJSON和fromJSON清除视图模型。</p>
 <p>好家伙，加载完只要5s！！！</p>
-<p>到此性能优化就大结局了，剩下的就是优化插入空白页的体验问题了，如切换到空白sheet后，可以把原sheet页的内容复制过来（但不参与拓展），excel拓展完再删除新增的空白sheet，定位会原sheet页的位置等。</p>
+<p>到此性能优化就大结局了，剩下的就是优化插入空白页的体验问题了，如切换到空白sheet后，可以把原sheet页的内容复制过来（但不参与拓展），excel拓展完再删除新增的空白sheet，定位回原sheet页的位置等。</p>
 
       
 
@@ -491,23 +491,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -519,7 +511,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -531,7 +527,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -543,23 +551,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -571,11 +571,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spread</a>
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
+                <a href="javascript:void(0)" class="js-tag color2">spread</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,11 +587,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -607,7 +607,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -615,7 +615,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog1646723737.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20220308151845.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20220308153726.png">
-<meta property="og:updated_time" content="2022-03-08T08:08:36.428Z">
+<meta property="og:updated_time" content="2022-07-15T01:52:50.935Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何在老一代项目中启用webpack">
 <meta name="twitter:description" content="这一系列文章已来到第三篇，本篇将记录如何配置一个适用多页面打包的webpack。">
@@ -237,6 +237,19 @@ var _hmt = _hmt || [];
 <h4 id="动态生成html内容"><a href="#动态生成html内容" class="headerlink" title="动态生成html内容"></a>动态生成html内容</h4><p>这个其实很简单，我们已引入了HtmlWebpackPlugin，这个插件提供这样的语法：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>多维分析<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"&lt;%=process.env.NODE_ENV==='development' ? '' : '../'%&gt;../../../common/SpreadJS/js/spreadlicensenWebpack.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">multi-dim-query</span> <span class="attr">id</span>=<span class="string">"multiDimQuery"</span>&gt;</span><span class="tag">&lt;/<span class="name">multi-dim-query</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>看上面的script标签，可以根据环境的不同动态拼接脚本目录。</p>
+<h4 id="打包时报JavaScript-heap-out-of-memory-的解决办法"><a href="#打包时报JavaScript-heap-out-of-memory-的解决办法" class="headerlink" title="打包时报JavaScript heap out of memory 的解决办法"></a>打包时报JavaScript heap out of memory 的解决办法</h4><p>这种原因是项目太大，node分配的内存不足导致的，只需放开node的内存限制即可：</p>
+<p>找到你的webpack所在的node_modules文件夹，内部有.bin目录，这个文件夹是最终的可执行文件的位置，在这里你可以手动把webpack相关的文件都修改下，如下方webpack文件，在node命令后加上了–max-old-space-size=10240：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line">basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")</span><br><span class="line"></span><br><span class="line">case `uname` in</span><br><span class="line">    *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w "$basedir"`;;</span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line">if [ -x "$basedir/node" ]; then</span><br><span class="line">  "$basedir/node --max-old-space-size=10240"  "$basedir/../webpack/bin/webpack.js" "$@"</span><br><span class="line">  ret=$?</span><br><span class="line">else </span><br><span class="line">  node --max-old-space-size=10240  "$basedir/../webpack/bin/webpack.js" "$@"</span><br><span class="line">  ret=$?</span><br><span class="line">fi</span><br><span class="line">exit $ret</span><br></pre></td></tr></table></figure>
+<p>如果你的懒得一个一个加，或者防止遗漏和加错，可以使用<a href="https://github.com/endel/increase-memory-limit" target="_blank" rel="noopener">increase-memory-limit</a>包：</p>
+<ol>
+<li>npm install -g increase-memory-limit</li>
+<li>项目根目录执行：increase-memory-limit</li>
+</ol>
+<p>这个包会找到你的项目的node_modules.bin文件夹下的所有可执行文件，将node 后面补充上–max-old-space-size=10240。</p>
+<p>这个包加好之后再次打包，可能会报个错误node –max-old-space-size=10240不是启动命令之类的，这个错误出自webpack.cmd:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@ECHO off</span><br><span class="line">SETLOCAL</span><br><span class="line">CALL :find_dp0</span><br><span class="line"></span><br><span class="line">IF EXIST "%dp0%\node.exe --max-old-space-size=10240" (</span><br><span class="line">  SET "_prog=%dp0%\node.exe --max-old-space-size=10240"</span><br><span class="line">) ELSE (</span><br><span class="line">  SET "_prog=node --max-old-space-size=10240"</span><br><span class="line">  SET PATHEXT=%PATHEXT:;.JS;=;%</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">"%_prog%"  "%dp0%\..\webpack\bin\webpack.js" %*</span><br><span class="line">ENDLOCAL</span><br><span class="line">EXIT /b %errorlevel%</span><br><span class="line">:find_dp0</span><br><span class="line">SET dp0=%~dp0</span><br><span class="line">EXIT /b</span><br></pre></td></tr></table></figure>
+<p>上面代码的倒数第六行有问题，去掉%_prog%两边的双引号即可正常打包。</p>
+<p>如果此时还是报node内存不足，那可能是电脑的可用内存不够了，我的情况是16G的电脑，webstorm+vscode+chrome占了80%以上，关掉webstorm+vscode，即可打包成功~</p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://github.com/deepred5/webpack4-boilerplate" target="_blank" rel="noopener">webpack4 多页面打包模板</a></p>
 
       
@@ -390,7 +403,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现的效果"><span class="toc-number">1.</span> <span class="toc-text">实现的效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack配置"><span class="toc-number">2.</span> <span class="toc-text">webpack配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#package-json"><span class="toc-number">2.1.</span> <span class="toc-text">package.json</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#customPages-js"><span class="toc-number">2.2.</span> <span class="toc-text">customPages.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#webpack-base-js和Utils-js"><span class="toc-number">2.3.</span> <span class="toc-text">webpack.base.js和Utils.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#webpack-dev-js"><span class="toc-number">2.4.</span> <span class="toc-text">webpack.dev.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#webpack-prod-js"><span class="toc-number">2.5.</span> <span class="toc-text">webpack.prod.js</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拓展"><span class="toc-number">3.</span> <span class="toc-text">拓展</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#externals的简单使用"><span class="toc-number">3.1.</span> <span class="toc-text">externals的简单使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#动态生成html内容"><span class="toc-number">3.2.</span> <span class="toc-text">动态生成html内容</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">4.</span> <span class="toc-text">参考</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现的效果"><span class="toc-number">1.</span> <span class="toc-text">实现的效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack配置"><span class="toc-number">2.</span> <span class="toc-text">webpack配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#package-json"><span class="toc-number">2.1.</span> <span class="toc-text">package.json</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#customPages-js"><span class="toc-number">2.2.</span> <span class="toc-text">customPages.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#webpack-base-js和Utils-js"><span class="toc-number">2.3.</span> <span class="toc-text">webpack.base.js和Utils.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#webpack-dev-js"><span class="toc-number">2.4.</span> <span class="toc-text">webpack.dev.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#webpack-prod-js"><span class="toc-number">2.5.</span> <span class="toc-text">webpack.prod.js</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拓展"><span class="toc-number">3.</span> <span class="toc-text">拓展</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#externals的简单使用"><span class="toc-number">3.1.</span> <span class="toc-text">externals的简单使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#动态生成html内容"><span class="toc-number">3.2.</span> <span class="toc-text">动态生成html内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#打包时报JavaScript-heap-out-of-memory-的解决办法"><span class="toc-number">3.3.</span> <span class="toc-text">打包时报JavaScript heap out of memory 的解决办法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">4.</span> <span class="toc-text">参考</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -514,23 +527,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -542,7 +547,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -554,7 +563,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">system</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -566,23 +587,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">system</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">centos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -594,11 +607,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spread</a>
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
+                <a href="javascript:void(0)" class="js-tag color2">spread</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -610,11 +623,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -630,7 +643,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -638,7 +651,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color2">eslint</a>
               </li>
              
               <li class="article-tag-list-item">

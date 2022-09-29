@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20220630181336.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog1656637808927.png">
 <meta property="og:image" content="http://qiniuyun.ipromiseyourlife.com/blog20220701092043.png">
-<meta property="og:updated_time" content="2022-07-01T03:36:01.920Z">
+<meta property="og:updated_time" content="2022-09-25T01:48:48.493Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spread优化记录">
 <meta name="twitter:description" content="随着深度使用葡萄城家的spread.js，终会遇到一些需要优化的点，在此记录一下">
@@ -224,6 +224,8 @@ var _hmt = _hmt || [];
 <p>上面的思路是添加一张空白sheet，然后toJSON和fromJSON清除视图模型。</p>
 <p>好家伙，加载完只要5s！！！</p>
 <p>到此性能优化就大结局了，剩下的就是优化插入空白页的体验问题了，如切换到空白sheet后，可以把原sheet页的内容复制过来（但不参与拓展），excel拓展完再删除新增的空白sheet，定位回原sheet页的位置等。</p>
+<p><strong>注：上述切换sheet也导致耗时增加的问题似乎可通过spread.suspendEvent()暂停事件监听来修复。</strong></p>
+<h3 id="doNotRecalculateAfterLoad"><a href="#doNotRecalculateAfterLoad" class="headerlink" title="doNotRecalculateAfterLoad"></a><em>doNotRecalculateAfterLoad</em></h3><p>spread.fromJSON的参数中有一个<em>doNotRecalculateAfterLoad</em>，这个可以优化含有大量公式的excel的加载时间。</p>
 
       
 
@@ -338,6 +340,15 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
+    <a href="/2022/09/29/Excel三板斧/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Excel三板斧
+        
+      </div>
+    </a>
+  
   
     <a href="/2022/03/08/如何在老一代项目中启用webpack/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">如何在老一代项目中启用webpack</div>
@@ -367,7 +378,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#多sheet页时增加行列和删除行列的耗时问题"><span class="toc-number">1.</span> <span class="toc-text">多sheet页时增加行列和删除行列的耗时问题</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#多sheet页时增加行列和删除行列的耗时问题"><span class="toc-number">1.</span> <span class="toc-text">多sheet页时增加行列和删除行列的耗时问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#doNotRecalculateAfterLoad"><span class="toc-number">2.</span> <span class="toc-text">doNotRecalculateAfterLoad</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -491,23 +502,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -515,15 +510,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -531,11 +530,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">excel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -551,19 +566,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -571,7 +578,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -583,7 +594,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -591,11 +602,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -603,11 +614,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -616,6 +627,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">

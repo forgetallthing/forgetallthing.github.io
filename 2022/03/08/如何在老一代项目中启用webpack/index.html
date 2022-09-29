@@ -239,7 +239,7 @@ var _hmt = _hmt || [];
 <p>看上面的script标签，可以根据环境的不同动态拼接脚本目录。</p>
 <h4 id="打包时报JavaScript-heap-out-of-memory-的解决办法"><a href="#打包时报JavaScript-heap-out-of-memory-的解决办法" class="headerlink" title="打包时报JavaScript heap out of memory 的解决办法"></a>打包时报JavaScript heap out of memory 的解决办法</h4><p>这种原因是项目太大，node分配的内存不足导致的，只需放开node的内存限制即可：</p>
 <p>找到你的webpack所在的node_modules文件夹，内部有.bin目录，这个文件夹是最终的可执行文件的位置，在这里你可以手动把webpack相关的文件都修改下，如下方webpack文件，在node命令后加上了–max-old-space-size=10240：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line">basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")</span><br><span class="line"></span><br><span class="line">case `uname` in</span><br><span class="line">    *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w "$basedir"`;;</span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line">if [ -x "$basedir/node" ]; then</span><br><span class="line">  "$basedir/node --max-old-space-size=10240"  "$basedir/../webpack/bin/webpack.js" "$@"</span><br><span class="line">  ret=$?</span><br><span class="line">else </span><br><span class="line">  node --max-old-space-size=10240  "$basedir/../webpack/bin/webpack.js" "$@"</span><br><span class="line">  ret=$?</span><br><span class="line">fi</span><br><span class="line">exit $ret</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")</span><br><span class="line"></span><br><span class="line">case `uname` in</span><br><span class="line">    *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w "$basedir"`;;</span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line">if [ -x "$basedir/node" ]; then</span><br><span class="line">  "$basedir/node --max-old-space-size=10240"  "$basedir/../webpack/bin/webpack.js" "$@"</span><br><span class="line">  ret=$?</span><br><span class="line">else </span><br><span class="line">  node --max-old-space-size=10240  "$basedir/../webpack/bin/webpack.js" "$@"</span><br><span class="line">  ret=$?</span><br><span class="line">fi</span><br><span class="line">exit $ret</span><br></pre></td></tr></table></figure>
 <p>如果你的懒得一个一个加，或者防止遗漏和加错，可以使用<a href="https://github.com/endel/increase-memory-limit" target="_blank" rel="noopener">increase-memory-limit</a>包：</p>
 <ol>
 <li>npm install -g increase-memory-limit</li>
@@ -527,23 +527,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -551,15 +535,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eslint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,11 +555,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">excel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ts</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,19 +591,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">auto.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">centos</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color3">ts</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -607,7 +603,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -619,7 +619,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">websql</a>
+                <a href="javascript:void(0)" class="js-tag color1">sourcetree</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -627,11 +627,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">win</a>
+                <a href="javascript:void(0)" class="js-tag color2">websql</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
+                <a href="javascript:void(0)" class="js-tag color4">win</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -639,11 +639,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color5">quiz</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -652,6 +652,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
